@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0B0616;
+  --foreground: #ffffff;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.liquid-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* Top-left rounded corner glare and bottom-right depth shadow */
+  box-shadow:
+    inset 2px 3px 6px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 6px rgba(0, 0, 0, 0.2),
+    0 10px 40px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: translateX(-150%);
+  transition: transform 0.7s ease-in-out;
+}
+
+.liquid-glass:hover::before {
+  transform: translateX(150%);
+}
+
+.liquid-glass:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  box-shadow:
+    inset 2px 3px 8px rgba(255, 255, 255, 0.5),
+    inset -2px -2px 8px rgba(0, 0, 0, 0.3),
+    0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+.liquid-solid {
+  background: linear-gradient(135deg, #7134E5, #4B1A9D);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  /* Glassy thick edge around the solid purple */
+  box-shadow:
+    inset 2px 3px 6px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 8px rgba(0, 0, 0, 0.4),
+    0 10px 30px rgba(106, 39, 212, 0.4);
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.liquid-solid::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: translateX(-150%);
+  transition: transform 0.7s ease-in-out;
+}
+
+.liquid-solid:hover::before {
+  transform: translateX(150%);
+}
+
+.liquid-solid:hover {
+  background: linear-gradient(135deg, #7E40F2, #531FD1);
+  box-shadow:
+    inset 2px 3px 8px rgba(255, 255, 255, 0.5),
+    inset -2px -2px 8px rgba(0, 0, 0, 0.4),
+    0 15px 40px rgba(106, 39, 212, 0.5);
+}
+
+.gradient-text-os {
+  background: linear-gradient(to right, #B28BFF, #D1B8FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
