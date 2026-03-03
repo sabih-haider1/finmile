@@ -10,9 +10,9 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "solid", size = "default", ...props }, ref) => {
 
-    // Meticulously sized sizes as per the image
+    // Standardized button sizes - lg is now 180x48
     const szClass = size === "lg"
-      ? "px-10 py-[16px] text-[15px] sm:w-auto min-w-[200px]"
+      ? "w-[180px] h-[48px] text-[15px]"
       : size === "sm"
         ? "px-5 py-[10px] text-[13px]"
         : "px-6 py-2.5 text-[14px]"

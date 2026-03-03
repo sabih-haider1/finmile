@@ -11,7 +11,7 @@ export const TrustSection = () => {
 
   return (
     <section className='w-full py-8 bg-white flex flex-col items-center px-6'>
-      <h3 className='text-[#5E44FF] font-black text-[11px] tracking-[0.2em] uppercase mb-6 text-center'>
+      <h3 className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-6 text-center leading-[15px]'>
         TRUSTED BY THE WORLD'S BIGGEST BRANDS
       </h3>
 
@@ -23,7 +23,7 @@ export const TrustSection = () => {
         ))}
       </div>
 
-      <p className='text-[#9CA3AF] text-[15px] font-medium text-center'>
+      <p className='text-[#9CA3AF] text-[16px] font-medium text-center leading-[20px] tracking-[0px]'>
         Finmile powers deliveries for <span className='text-[#111827]'>JD.com, TikTok Shop, ILG</span>, and other global leaders.
       </p>
     </section>
@@ -32,59 +32,59 @@ export const TrustSection = () => {
 
 export const FeaturesSection = () => {
   return (
-    <section className='w-full py-16 lg:py-20 bg-white flex flex-col items-center px-6 lg:px-20 overflow-hidden'>
-      <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-24 items-start'>
+    <section className='w-full py-16 lg:py-20 bg-white flex flex-col items-center px-6 lg:px-20 relative'>
+      <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-24 gap-y-32 items-start'>
 
         {/* Left Column: Precise Typography Match */}
         <div className='flex flex-col space-y-12 pt-4'>
-          <h2 className='text-[#2F1C8C] text-[48px] md:text-[62px] font-bold leading-[1.1] tracking-tight'>
+          <h2 className='text-[#2F1C8C] text-[48px] font-semibold leading-[1.1] tracking-tight'>
             Stop Managing <br className='hidden md:block' />
             Software and Start <br className='hidden md:block' />
             Directing Outcomes.
           </h2>
 
           <div className='space-y-10'>
-            <p className='text-[#848DA0] text-[18px] md:text-[20px] leading-relaxed font-normal'>
+            <p className='text-[#848DA0] text-[16px] font-medium leading-relaxed'>
               Finmile replaces fragmented logistics tools with autonomous agents that plan, execute, and continuously improve delivery operations in real time.
             </p>
 
-            <p className='text-[#2F1C8C] font-semibold text-[18px] md:text-[20px]'>
+            <p className='text-[#2F1C8C] text-[16px] font-medium'>
               You define the objective. The system handles the complexity.
             </p>
 
-            <p className='text-[#848DA0] text-[18px] md:text-[20px] leading-relaxed font-normal'>
+            <p className='text-[#848DA0] text-[16px] font-medium leading-relaxed'>
               Unlike static route planners, Finmile's AI constantly learns.
             </p>
 
-            <p className='text-[#848DA0] text-[18px] md:text-[20px] leading-relaxed font-normal'>
+            <p className='text-[#848DA0] text-[16px] font-medium leading-relaxed'>
               It adapts to real-world conditions such as traffic, weather, and driver patterns to create routes that get faster and cheaper every day.
             </p>
           </div>
         </div>
 
         {/* Right Column: Single Image with Overlays */}
-        <div className='relative w-full flex items-center justify-center py-20 lg:py-0'>
+        <div className='relative w-full flex items-center justify-center py-20 lg:py-32 px-4 lg:px-0 min-h-[600px] lg:min-h-[700px]'>
 
           {/* Background Highlight Glow */}
           <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none' />
 
-          <div className='relative z-20 w-full max-w-[800px]'>
+          <div className='relative z-10 w-full max-w-[800px]'>
             <img
               src='/assets/images/features/app-screen.png'
               alt='Finmile Dashboard and Mobile App'
-              className='w-full h-auto drop-shadow-[0_45px_90px_rgba(0,0,0,0.12)] object-contain'
+              className='w-full h-auto drop-shadow-[0_45px_90px_rgba(0,0,0,0.12)] object-contain relative z-10'
             />
 
             {/* 42% Card - Top Left */}
-            <div className='absolute -top-10 -left-6 md:-left-24 z-40 bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white w-[260px] md:w-[320px]'>
-              <div className='text-[#2F1C8C] text-[42px] font-bold leading-none mb-1.5'>42%</div>
-              <div className='text-[#6B7280] text-[15px] font-medium leading-tight'>Fewer routes with AI optimisation</div>
+            <div className='absolute -top-4 left-0 md:-top-10 md:-left-24 z-20 bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white w-[220px] md:w-[320px]'>
+              <div className='text-[#2F1C8C] text-[36px] md:text-[40px] font-bold leading-none mb-1.5'>42%</div>
+              <div className='text-[#6B7280] text-[13px] md:text-[14px] font-medium leading-tight'>Fewer routes with AI optimisation</div>
             </div>
 
             {/* 91% Card - Bottom Right (Wider width) */}
-            <div className='absolute -bottom-16 right-0 md:-right-12 z-40 bg-[#2D1B69] rounded-[24px] p-6 w-[260px] md:w-[320px]'>
-              <div className='text-white text-[56px] font-bold leading-none mb-1.5'>91%</div>
-              <div className='text-white/80 text-[16px] font-medium leading-tight'>Reduction in WISMO inquiries</div>
+            <div className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-20 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px]'>
+              <div className='text-white text-[36px] md:text-[40px] font-bold leading-none mb-1.5'>91%</div>
+              <div className='text-white/80 text-[13px] md:text-[14px] font-medium leading-tight'>Reduction in WISMO inquiries</div>
             </div>
           </div>
 
