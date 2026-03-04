@@ -20,22 +20,22 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
   }, []);
 
   // Calculate dynamic top positioning for the stacked scroll effect
-  const stickyTop = `calc(80px + ${index * 30}px)`;
+  const stickyTop = `calc(80px + ${index * 20}px)`;
 
-  // Z-index ensures later cards overlap earlier ones correctly
-  const zIndex = index * 10;
+  // Z-index ensures later cards overlap earlier ones correctly - higher index = higher z-index
+  const zIndex = (index + 1) * 10;
 
   // Slight scaling effect for underlying cards to simulate depth
-  const scale = 1 - ((total - index - 1) * 0.015);
+  const scale = 1 - ((total - index - 1) * 0.02);
 
   return (
     <div
-      className='lg:sticky w-[98%] max-w-[1440px] min-h-[650px] lg:min-h-[800px] bg-[#F8F7FF] rounded-[48px] md:rounded-[40px] px-8 md:px-10 lg:px-12 pt-2 md:pt-2.5 lg:pt-3 pb-4 md:pb-5 lg:pb-6 shadow-[0_20px_60px_rgba(47,28,140,0.06)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-18 lg:gap-24 transform-gpu transition-all duration-500 mb-8 lg:mb-0'
+      className='lg:sticky w-[98%] max-w-[1440px] min-h-[650px] lg:min-h-[800px] bg-[#F8F7FF] rounded-[48px] md:rounded-[40px] px-8 md:px-10 lg:px-12 pt-2 md:pt-2.5 lg:pt-3 pb-4 md:pb-5 lg:pb-6 shadow-[0_20px_60px_rgba(47,28,140,0.06)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-18 lg:gap-24 transform-gpu transition-all duration-500 mb-8 lg:mb-0 overflow-hidden'
       style={{
         top: isLargeScreen ? stickyTop : 'auto',
         zIndex: isLargeScreen ? zIndex : 'auto',
         marginTop: isLargeScreen ? (index === 0 ? '40px' : '0px') : '0px',
-        marginBottom: isLargeScreen ? (index === total - 1 ? '40px' : '200px') : '32px',
+        marginBottom: isLargeScreen ? (index === total - 1 ? '40px' : '180px') : '32px',
         transform: isLargeScreen ? `scale(${scale})` : 'none',
         transformOrigin: 'top center'
       }}
