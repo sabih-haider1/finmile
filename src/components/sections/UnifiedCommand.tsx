@@ -24,7 +24,7 @@ export const UnifiedCommand = () => {
         setCurrentSlide(index);
     };
 
-    // Auto-slide every 2 seconds
+    // Auto-slide every 5 seconds
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -56,32 +56,41 @@ export const UnifiedCommand = () => {
                 />
             </div>
 
-            {/* Bottom Pagination controls */}
-            <div className="mt-6 md:mt-10 flex items-center justify-center gap-6 z-20">
-                <button 
-                    onClick={prevSlide}
-                    className="w-14 h-14 rounded-full bg-white shadow-[0_10px_30px_rgba(47,28,140,0.06)] border border-indigo-50 flex items-center justify-center text-[#2D1B69] hover:text-[#2F1C8C] hover:bg-slate-50 transition-colors"
+            {/* Bottom Pagination controls with gradient background */}
+            <div className="mt-6 md:mt-10 flex items-center justify-center z-20">
+                <div 
+                    className="flex items-center gap-4 px-2 py-2 rounded-[32px]"
+                    style={{
+                        background: 'linear-gradient(208.41deg, #F5F3FF -9.69%, #FAF9FF 100.08%)'
+                    }}
                 >
-                    <ArrowLeft className="w-6 h-6" strokeWidth={2} />
-                </button>
-                <div className="flex items-center gap-3">
-                    {slides.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => goToSlide(index)}
-                            className={`w-2.5 h-2.5 rounded-full transition-colors cursor-pointer ${
-                                currentSlide === index ? 'bg-[#2F1C8C]' : 'bg-[#E2DFF5] hover:bg-[#2F1C8C]/50'
-                            }`}
-                            aria-label={`Go to slide ${index + 1}`}
-                        />
-                    ))}
+                    <button 
+                        onClick={prevSlide}
+                        className="w-12 h-12 rounded-full bg-white shadow-[0_4px_12px_rgba(47,28,140,0.08)] flex items-center justify-center text-[#0A1B33] hover:bg-[#2F1C8C] hover:text-white transition-all duration-300 group"
+                    >
+                        <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
+                    </button>
+                    
+                    <div className="flex items-center gap-1">
+                        {slides.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => goToSlide(index)}
+                                className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                                    currentSlide === index ? 'bg-[#2F1C8C] opacity-100' : 'bg-[#2F1C8C] opacity-20 hover:opacity-50'
+                                }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+                    
+                    <button 
+                        onClick={nextSlide}
+                        className="w-12 h-12 rounded-full bg-[#2F1C8C] text-white shadow-[0_4px_12px_rgba(47,28,140,0.2)] flex items-center justify-center hover:bg-[#5821B0] transition-all duration-300 group"
+                    >
+                        <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
+                    </button>
                 </div>
-                <button 
-                    onClick={nextSlide}
-                    className="w-14 h-14 rounded-full bg-white shadow-[0_10px_30px_rgba(47,28,140,0.06)] border border-indigo-50 flex items-center justify-center text-[#2D1B69] hover:text-[#2F1C8C] hover:bg-slate-50 transition-colors"
-                >
-                    <ArrowRight className="w-6 h-6" strokeWidth={2} />
-                </button>
             </div>
 
         </section>
