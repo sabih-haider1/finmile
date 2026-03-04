@@ -15,7 +15,7 @@ export const TrustSection = () => {
         TRUSTED BY THE WORLD'S BIGGEST BRANDS
       </h3>
 
-      <div className='flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-12 max-w-[1600px] w-full'>
+      <div className='flex flex-wrap justify-center items-center gap-4 md:gap-10 mb-12 max-w-[1600px] w-full'>
         {brands.map((brand) => (
           <div key={brand.name} className='bg-[#F6F8FA] rounded-[16px] p-6 flex items-center justify-center w-[180px] h-[100px] md:w-[220px] md:h-[120px]'>
             <img src={brand.logo} alt={brand.name} className='max-h-[50px] w-auto object-contain' />
