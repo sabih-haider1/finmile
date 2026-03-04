@@ -19,30 +19,25 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // Calculate dynamic top positioning for the stacked scroll effect
   const stickyTop = `calc(80px + ${index * 20}px)`;
-
-  // Z-index ensures later cards overlap earlier ones correctly - higher index = higher z-index
   const zIndex = (index + 1) * 10;
-
-  // Slight scaling effect for underlying cards to simulate depth
   const scale = 1 - ((total - index - 1) * 0.02);
 
   return (
     <div
-      className='lg:sticky w-[98%] max-w-[1440px] min-h-[650px] lg:min-h-[800px] bg-[#F8F7FF] rounded-[48px] md:rounded-[40px] px-8 md:px-10 lg:px-12 pt-2 md:pt-2.5 lg:pt-3 pb-4 md:pb-5 lg:pb-6 shadow-[0_20px_60px_rgba(47,28,140,0.06)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-18 lg:gap-24 transform-gpu transition-all duration-500 mb-8 lg:mb-0 overflow-hidden'
+      className='lg:sticky w-[98%] max-w-[1440px] min-h-[580px] lg:min-h-[660px] rounded-[32px] md:rounded-[32px] px-8 md:px-10 lg:px-12 shadow-[0_4px_4px_rgba(0,0,0,0.25)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-18 lg:gap-24 transform-gpu transition-all duration-500 overflow-hidden'
       style={{
+        background: 'linear-gradient(208.41deg, #F5F3FF -9.69%, #FAF9FF 100.08%)',
         top: isLargeScreen ? stickyTop : 'auto',
         zIndex: isLargeScreen ? zIndex : 'auto',
-        marginTop: isLargeScreen ? (index === 0 ? '40px' : '0px') : '0px',
-        marginBottom: isLargeScreen ? (index === total - 1 ? '40px' : '180px') : '32px',
+        marginTop: isLargeScreen ? (index === 0 ? '30px' : '20px') : '32px',
+        marginBottom: isLargeScreen ? (index === total - 1 ? '40px' : '80px') : '32px',
         transform: isLargeScreen ? `scale(${scale})` : 'none',
         transformOrigin: 'top center'
       }}
     >
-
       {/* Left: Text Content */}
-      <div className='flex flex-col flex-1 space-y-8 text-left items-start z-10 w-full pt-2'>
+      <div className='flex flex-col flex-1 space-y-8 text-left items-start z-10 w-full'>
         <h3 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight'>
           {title}
         </h3>
@@ -70,7 +65,6 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
       {/* Right: Dashboard Image */}
       <div className='flex-1 relative w-full flex justify-end items-center'>
         <div className='w-full max-w-[800px]'>
-          {/* Dashboard Image Only */}
           <img
             src='/assets/images/agents/dashboard-v2.png'
             alt={`${title} Finmile Dashboard`}
@@ -103,8 +97,6 @@ export const AIAgentsSection = () => {
 
   return (
     <section className={`w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-20 ${montserrat.className}`}>
-
-      {/* Centered Main Section Header */}
       <div className='text-center mb-10 w-full max-w-[1400px]'>
         <h2 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold mb-8 tracking-tight leading-[1] text-center'>
           Meet Your Specialized AI Agents
@@ -116,7 +108,6 @@ export const AIAgentsSection = () => {
         </div>
       </div>
 
-      {/* Cards Container - The relative wrapper for sticky context */}
       <div className='w-full flex flex-col items-center relative max-w-[1440px] pb-6'>
         {agents.map((agent, index) => (
           <AgentCard
@@ -128,7 +119,6 @@ export const AIAgentsSection = () => {
         ))}
       </div>
 
-      {/* Re-added Footer Conclusion per screenshot */}
       <div className='mt-6 text-center space-y-12 w-full max-w-[1200px]'>
         <p className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-[16px] mx-auto px-4 text-center'>
           All agents operate through a single control layer, sharing context and learning from every parcel that moves through the system.
@@ -141,7 +131,6 @@ export const AIAgentsSection = () => {
           </h4>
         </div>
       </div>
-
     </section>
   );
 };
