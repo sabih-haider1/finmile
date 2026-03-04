@@ -10,14 +10,14 @@ export const TrustSection = () => {
   ];
 
   return (
-    <section className='w-full py-8 bg-white flex flex-col items-center px-6 lg:px-20'>
-      <h3 className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-6 text-center leading-[15px]'>
+    <section className='w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20'>
+      <h3 className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px]'>
         TRUSTED BY THE WORLD'S BIGGEST BRANDS
       </h3>
 
-      <div className='flex flex-wrap justify-center items-center gap-4 md:gap-10 mb-12 max-w-[1600px] w-full'>
+      <div className='flex flex-wrap justify-center items-center gap-6 md:gap-11 mb-12 max-w-[1600px] w-full'>
         {brands.map((brand) => (
-          <div key={brand.name} className='bg-[#F6F8FA] rounded-[16px] p-6 flex items-center justify-center w-[180px] h-[100px] md:w-[220px] md:h-[120px]'>
+          <div key={brand.name} className='bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-[180px] h-[100px] md:w-[220px] md:h-[120px]'>
             <img src={brand.logo} alt={brand.name} className='max-h-[50px] w-auto object-contain' />
           </div>
         ))}
