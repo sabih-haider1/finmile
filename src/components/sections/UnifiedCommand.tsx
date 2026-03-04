@@ -38,10 +38,10 @@ export const UnifiedCommand = () => {
 
             {/* Section Header */}
             <div className="text-center mb-5 md:mb-8 w-full flex flex-col items-center z-20">
-                <h2 className="text-[#2F1C8C] text-[48px] font-semibold tracking-tight mb-6 leading-tight">
+                <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-6 leading-tight">
                     One Unified Command Interface
                 </h2>
-                <p className="text-[#848DA0] text-[16px] font-medium leading-relaxed px-4">
+                <p className="text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed px-4">
                     All agents operate through a single control layer with full visibility across planning, live execution, and outcomes.
                 </p>
             </div>

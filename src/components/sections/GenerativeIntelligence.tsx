@@ -23,17 +23,17 @@ export const GenerativeIntelligence = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col space-y-8 pl-0 lg:pl-10">
-                    <h2 className="text-white text-[48px] font-semibold leading-[1.05] tracking-tight">
+                    <h2 className="text-white text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight">
                         Generative Intelligence
                     </h2>
 
-                    <p className="text-[#C4C9D4] text-[16px] font-medium leading-relaxed opacity-90">
+                    <p className="text-[#C4C9D4] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed opacity-90">
                         Next-generation email solutions with HandleMail and Orbit Mail for
                         enhanced engagement. Query live data, dispatch agents, and resolve
                         exceptions without touching a dashboard.
                     </p>
 
-                    <p className="text-white text-[16px] font-medium leading-relaxed mt-2">
+                    <p className="text-white text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed mt-2">
                         Logistics you can talk to. Execution that responds.
                     </p>
 

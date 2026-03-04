@@ -8,7 +8,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 const AgentCard = ({ title, description, benefits, index, total }) => {
   // Calculate dynamic top positioning for the stacked scroll effect
-  const stickyTop = `calc(40px + ${index * 25}px)`;
+  const stickyTop = `calc(80px + ${index * 30}px)`;
 
   // Z-index ensures later cards overlap earlier ones correctly
   const zIndex = index * 10;
@@ -18,12 +18,12 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
 
   return (
     <div
-      className='sticky w-[98%] max-w-[1440px] min-h-[650px] lg:min-h-[800px] bg-[#F8F7FF] rounded-[48px] md:rounded-[40px] px-8 md:px-10 lg:px-12 pt-2 md:pt-2.5 lg:pt-3 pb-4 md:pb-5 lg:pb-6 shadow-[0_20px_60px_rgba(47,28,140,0.06)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transform-gpu transition-all duration-500'
+      className='sticky w-[98%] max-w-[1440px] min-h-[650px] lg:min-h-[800px] bg-[#F8F7FF] rounded-[48px] md:rounded-[40px] px-8 md:px-10 lg:px-12 pt-2 md:pt-2.5 lg:pt-3 pb-4 md:pb-5 lg:pb-6 shadow-[0_20px_60px_rgba(47,28,140,0.06)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-18 lg:gap-24 transform-gpu transition-all duration-500'
       style={{
         top: stickyTop,
         zIndex: zIndex,
-        marginTop: '40px',
-        marginBottom: index === total - 1 ? '40px' : '240px', /* Space between cards unless it's the last one */
+        marginTop: index === 0 ? '40px' : '0px',
+        marginBottom: index === total - 1 ? '40px' : '200px', /* Space between cards unless it's the last one */
         transform: `scale(${scale})`,
         transformOrigin: 'top center'
       }}
@@ -31,11 +31,11 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
 
       {/* Left: Text Content */}
       <div className='flex flex-col flex-1 space-y-8 text-left items-start z-10 w-full pt-2'>
-        <h3 className='text-[#2F1C8C] text-[48px] font-semibold leading-[1.05] tracking-tight'>
+        <h3 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight'>
           {title}
         </h3>
 
-        <p className='text-[#64748B] text-[16px] font-medium leading-relaxed max-w-[550px] opacity-90'>
+        <p className='text-[#64748B] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-[550px] opacity-90'>
           {description}
         </p>
 
@@ -94,11 +94,11 @@ export const AIAgentsSection = () => {
 
       {/* Centered Main Section Header */}
       <div className='text-center mb-10 w-full max-w-[1400px]'>
-        <h2 className='text-[#2F1C8C] text-[48px] font-semibold mb-8 tracking-tight leading-[1] text-center'>
+        <h2 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold mb-8 tracking-tight leading-[1] text-center'>
           Meet Your Specialized AI Agents
         </h2>
         <div className='max-w-3xl mx-auto'>
-          <p className='text-[#64748B] text-[16px] font-medium leading-relaxed opacity-90'>
+          <p className='text-[#64748B] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed opacity-100'>
             Stop managing software and start directing outcomes. Our autonomous agents work 24/7 to solve bottlenecks before they appear.
           </p>
         </div>
@@ -117,8 +117,8 @@ export const AIAgentsSection = () => {
       </div>
 
       {/* Re-added Footer Conclusion per screenshot */}
-      <div className='mt-12 text-center space-y-12 w-full max-w-[1200px]'>
-        <p className='text-[#848DA0] text-[16px] font-medium leading-[16px] mx-auto px-4 text-center'>
+      <div className='mt-6 text-center space-y-12 w-full max-w-[1200px]'>
+        <p className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-[16px] mx-auto px-4 text-center'>
           All agents operate through a single control layer, sharing context and learning from every parcel that moves through the system.
         </p>
 

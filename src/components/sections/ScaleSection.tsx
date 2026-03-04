@@ -22,15 +22,15 @@ export const ScaleSection = () => {
       >
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-14 w-full z-10 flex flex-col items-center">
-          <h2 className="text-[#2F1C8C] text-[48px] font-semibold tracking-tight mb-6 leading-tight">
+          <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-6 leading-tight">
             Built for scale. Designed for reality.
           </h2>
-          <p className="text-[#848DA0] text-[16px] font-medium mx-auto px-4">
+          <p className="text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium mx-auto px-4">
             As delivery volume grows, Finmile removes complexity instead of adding headcount.
           </p>
         </div>
 
-        <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-stretch gap-12 lg:gap-[10px] z-10 relative">
+        <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-stretch lg:items-start gap-12 lg:gap-[10px] z-10 relative">
           {/* Left Side */}
           <div className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start">
             <div className="w-full h-full flex items-center">
@@ -44,10 +44,10 @@ export const ScaleSection = () => {
 
           {/* Right Side */}
           <div className="w-full lg:w-1/2 flex items-stretch">
-            <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col">
+            <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 pb-6 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col">
               <div>
                 {/* Logo Chip */}
-                <div className="bg-white rounded-[24px] py-4 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-8 border border-slate-50">
+                <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-14 border border-slate-50">
                   <img
                     src="/assets/logos/logo-blue.png"
                     alt="Finmile Logo"
@@ -55,12 +55,12 @@ export const ScaleSection = () => {
                   />
                 </div>
 
-                <h3 className="text-black font-semibold text-[18px] md:text-[20px] mb-6 leading-tight">
+                <h3 className="text-black font-semibold text-[18px] md:text-[20px] mb-10 leading-tight">
                   Just predictable execution at scale.
                 </h3>
 
                 {/* Features */}
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 mb-10">
                   <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]">
                     <Layers
                       className="text-[#6A27D4] w-6 h-6 shrink-0"
