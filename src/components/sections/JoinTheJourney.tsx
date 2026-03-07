@@ -6,7 +6,25 @@ import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-export const JoinTheJourney = () => {
+interface JoinTheJourneyProps {
+    heading?: React.ReactNode;
+    text1?: React.ReactNode;
+    text2?: React.ReactNode;
+    secondaryButtonText?: string;
+}
+
+export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
+    heading = "Join the Journey",
+    text1 = "Finmile is powering the future of intelligent logistics.",
+    text2 = (
+        <>
+            From global e-commerce brands to last-mile startups, we’re<br className="hidden md:block" />
+            helping businesses deliver more efficiently, more transparently,<br className="hidden md:block" />
+            and more sustainably.
+        </>
+    ),
+    secondaryButtonText = "Calculate your route savings"
+}) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     return (
@@ -44,20 +62,22 @@ export const JoinTheJourney = () => {
                                     />
                                 </div>
 
-                                <h1 className="text-black font-semibold text-[32px] md:text-[40px] mb-6 mt-16 leading-tight">
-                                    Join the Journey
-                                </h1>
+                                <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] mb-6 mt-16 leading-tight">
+                                    {heading}
+                                </h2>
 
                                 {/* Paragraphs */}
                                 <div className="mb-14 pt-6">
-                                    <p className="text-[#6C757D] font-medium text-[16px] md:text-[18px] leading-relaxed mb-6">
-                                        Finmile is powering the future of intelligent logistics.
-                                    </p>
-                                    <p className="text-[#6C757D] font-medium text-[16px] md:text-[18px] leading-relaxed">
-                                        From global e-commerce brands to last-mile startups, we’re<br className="hidden md:block" />
-                                        helping businesses deliver more efficiently, more transparently,<br className="hidden md:block" />
-                                        and more sustainably.
-                                    </p>
+                                    {text1 && (
+                                        <p className="text-[#6C757D] font-medium text-[16px] md:text-[18px] leading-relaxed mb-6">
+                                            {text1}
+                                        </p>
+                                    )}
+                                    {text2 && (
+                                        <p className="text-[#6C757D] font-medium text-[16px] md:text-[18px] leading-relaxed">
+                                            {text2}
+                                        </p>
+                                    )}
                                 </div>
                             </div>
 
@@ -71,7 +91,7 @@ export const JoinTheJourney = () => {
                                     className="w-full sm:flex-1 px-4 lg:px-6 py-3 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-[80px] text-[14px] font-medium whitespace-normal sm:whitespace-nowrap transition-all hover:bg-[#2F1C8C] hover:text-white leading-snug"
                                     onClick={() => setIsPopupOpen(true)}
                                 >
-                                    Calculate your route savings
+                                    {secondaryButtonText}
                                 </button>
                             </div>
                         </div>
