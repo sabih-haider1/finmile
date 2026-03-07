@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "../ui/Button";
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,7 +38,7 @@ export const Header = () => {
   return (
     <>
       <header
-        className={`fixed left-[30px] right-[30px] z-[100] max-w-[1500px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 ${
+        className={`fixed left-[30px] right-[30px] z-[100] max-w-[1500px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 ${montserrat.className} ${
           isMobileMenuOpen && 'xl:hidden' 
             ? 'bg-transparent border-transparent' 
             : isScrolled 

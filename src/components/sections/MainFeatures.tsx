@@ -1,4 +1,7 @@
 ﻿import React from 'react';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const TrustSection = () => {
   const brands = [
@@ -10,7 +13,7 @@ export const TrustSection = () => {
   ];
 
   return (
-    <section className='w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20'>
+    <section className={`w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20 ${montserrat.className}`}>
       <h3 className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px]'>
         TRUSTED BY THE WORLD'S BIGGEST BRANDS
       </h3>
@@ -32,7 +35,7 @@ export const TrustSection = () => {
 
 export const FeaturesSection = () => {
   return (
-    <section className='w-full py-6 lg:py-10 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative'>
+    <section className={`w-full py-6 lg:py-10 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative ${montserrat.className}`}>
       <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start'>
 
         {/* Left Column: Precise Typography Match */}

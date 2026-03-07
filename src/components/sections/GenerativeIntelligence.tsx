@@ -1,8 +1,11 @@
 import React from 'react';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const GenerativeIntelligence = () => {
     return (
-        <section className="w-full bg-[#0B0616] py-20 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden">
+        <section className={`w-full bg-[#0B0616] py-20 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Matching Hero style) */}
             <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none" />

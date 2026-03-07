@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const UnifiedCommand = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -34,7 +37,7 @@ export const UnifiedCommand = () => {
     }, [slides.length]);
 
     return (
-        <section className="w-full bg-white flex flex-col items-center px-4 md:px-6 py-16 lg:py-24 overflow-hidden">
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 py-16 lg:py-24 overflow-hidden ${montserrat.className}`}>
 
             {/* Section Header */}
             <div className="text-center mb-5 md:mb-8 w-full flex flex-col items-center z-20">

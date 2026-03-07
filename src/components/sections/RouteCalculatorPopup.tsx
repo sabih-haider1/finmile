@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 interface RouteCalculatorPopupProps {
   isOpen: boolean;
@@ -156,7 +159,7 @@ export const RouteCalculatorPopup: React.FC<RouteCalculatorPopupProps> = ({ isOp
       `}</style>
 
       <div
-        className="fixed inset-0 w-screen h-screen bg-black/60 z-[999999] overflow-y-auto flex items-center justify-center p-5"
+        className={`fixed inset-0 w-screen h-screen bg-black/60 z-[999999] overflow-y-auto flex items-center justify-center p-5 ${montserrat.className}`}
         onClick={(e) => {
           if (e.target === e.currentTarget) {
             handleClose();
