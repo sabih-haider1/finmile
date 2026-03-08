@@ -25,7 +25,7 @@ export const Footer = () => {
                     background: #8247E5;
                 }
             `}</style>
-            <footer className={`w-full bg-[#1b0a4a] text-white pt-20 pb-4 px-6 lg:px-16 overflow-hidden relative ${montserrat.className}`}>
+            <footer className={`w-full bg-[#0B0616] text-white pt-20 pb-4 px-6 lg:px-16 overflow-hidden relative ${montserrat.className}`}>
 
                 {/* Background Glow Effects (Hero-style gradients) */}
                 <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none" />
