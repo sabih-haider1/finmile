@@ -11,54 +11,36 @@ const teamMembers = [
         name: 'Chris Sargeant',
         role: 'Co-Founder & COO',
         bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/placeholder.jpg'
+        image: '/assets/images/chris.png'
     },
     {
         name: 'Rich Pleeth',
         role: 'Co-Founder & CEO',
         bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/placeholder.jpg'
+        image: '/assets/images/rich.png'
     },
     {
         name: 'Alex Chindris',
         role: 'Chief Technology Officer',
         bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/placeholder.jpg'
+        image: '/assets/images/alex.png'
     },
     {
-        name: 'Amelia Smith',
+        name: 'Andrei Chirila',
         role: 'Head of Product',
         bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/placeholder.jpg'
+        image: '/assets/images/andrei.png'
     },
     {
-        name: 'Sarah Jenkins',
-        role: 'VP of Engineering',
-        bio: 'Ex-Amazon logistics. Scales our backend and route optimization algorithms.',
-        image: '/assets/images/placeholder.jpg'
-    },
-    {
-        name: 'Michael Chen',
-        role: 'Head of Data Science',
-        bio: 'PhD in Operations Research. Builds our predictive dispatch models.',
-        image: '/assets/images/placeholder.jpg'
-    },
-    {
-        name: 'Elena Rodriguez',
-        role: 'Director of Customer Success',
-        bio: 'Ensures seamless onboarding and continuous value delivery for all partners.',
-        image: '/assets/images/placeholder.jpg'
-    },
-    {
-        name: 'David Okafor',
-        role: 'Head of Marketing',
-        bio: 'Passionate about sustainable supply chains and global brand expansion.',
-        image: '/assets/images/placeholder.jpg'
+        name: 'Hiren Solanki',
+        role: 'Co-Founder & CEO',
+        bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
+        image: '/assets/images/hiren.png'
     }
 ];
 
 export const OurLeadership = () => {
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(4);
 
     // Responsive items per page
@@ -81,32 +63,29 @@ export const OurLeadership = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const totalPages = Math.ceil(teamMembers.length / itemsPerPage);
-
-    // Ensure we don't land on an empty page after resize
-    useEffect(() => {
-        if (currentPage >= totalPages && totalPages > 0) {
-            setCurrentPage(totalPages - 1);
-        }
-    }, [totalPages, currentPage]);
-
     const nextPage = () => {
-        setCurrentPage((prev) => (prev + 1) % totalPages);
+        setCurrentIndex((prev) => (prev + 1) % teamMembers.length);
     };
 
     const prevPage = () => {
-        setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+        setCurrentIndex((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
     };
 
-    const goToPage = (index: number) => {
-        setCurrentPage(index);
+    const goToIndex = (index: number) => {
+        setCurrentIndex(index);
     };
 
-    // Calculate which members to show
-    const pages = [];
-    for (let i = 0; i < totalPages; i++) {
-        pages.push(teamMembers.slice(i * itemsPerPage, (i + 1) * itemsPerPage));
-    }
+    // Get current visible members with wrapping
+    const getVisibleMembers = () => {
+        const members = [];
+        for (let i = 0; i < itemsPerPage; i++) {
+            const index = (currentIndex + i) % teamMembers.length;
+            members.push({ ...teamMembers[index], uniqueKey: `${index}-${currentIndex}` });
+        }
+        return members;
+    };
+
+    const visibleMembers = getVisibleMembers();
 
     return (
         <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-20 overflow-hidden relative ${montserrat.className}`}>
@@ -119,63 +98,56 @@ export const OurLeadership = () => {
             </div>
 
             {/* Leadership Cards Grid / Container */}
-            <div className="w-full max-w-[1440px] mb-16 z-10 relative items-start min-h-[500px] overflow-hidden">
-                <div
-                    className="flex transition-transform duration-500 ease-in-out w-full"
-                    style={{ transform: `translateX(-${currentPage * 100}%)` }}
-                >
-                    {pages.map((page, pageIndex) => (
-                        <div key={pageIndex} className="w-full shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {page.map((member, index) => (
-                                <div
-                                    key={`${pageIndex}-${member.name}`}
-                                    className="bg-white rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col border border-gray-100 h-full"
-                                >
+            <div className="w-full max-w-[1440px] mb-8 z-10 relative items-start min-h-[500px]">
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {visibleMembers.map((member) => (
+                        <div
+                            key={member.uniqueKey}
+                            className="bg-white rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col border border-gray-100 h-full animate-[fadeIn_0.5s_ease-in-out]"
+                        >
 
-                                    {/* Image Placeholder */}
-                                    <div className="w-full h-[280px] bg-gray-200 shrink-0">
-                                        <img
-                                            src={member.image}
-                                            alt={member.name}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
+                            {/* Image Placeholder */}
+                            <div className="w-full h-[280px] bg-gray-200 shrink-0">
+                                <img
+                                    src={member.image}
+                                    alt={member.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
 
-                                    {/* Content Area */}
-                                    <div className="p-6 flex flex-col flex-grow">
+                            {/* Content Area */}
+                            <div className="p-6 flex flex-col flex-grow">
 
-                                        <div className="flex justify-between items-start mb-4">
-                                            <div>
-                                                <h3 className="text-[#0A1B33] font-bold text-[20px] mb-1">
-                                                    {member.name}
-                                                </h3>
-                                                <p className="text-[#2F1C8C] font-semibold text-[13px] tracking-wide">
-                                                    {member.role}
-                                                </p>
-                                            </div>
-                                            <a
-                                                href="#"
-                                                className="w-8 h-8 rounded-full bg-[#3B257E] text-white flex items-center justify-center shrink-0 hover:bg-[#5821B0] transition-colors"
-                                                aria-label={`LinkedIn for ${member.name}`}
-                                            >
-                                                <Linkedin className="w-4 h-4" fill="currentColor" strokeWidth={0.5} />
-                                            </a>
-                                        </div>
-
-                                        <p className="text-[#6C757D] text-[14px] leading-relaxed font-medium mt-auto">
-                                            {member.bio}
+                                <div className="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 className="text-[#0A1B33] font-bold text-[20px] mb-1">
+                                            {member.name}
+                                        </h3>
+                                        <p className="text-[#2F1C8C] font-semibold text-[13px] tracking-wide">
+                                            {member.role}
                                         </p>
                                     </div>
+                                    <a
+                                        href="#"
+                                        className="w-8 h-8 rounded-full bg-[#3B257E] text-white flex items-center justify-center shrink-0 hover:bg-[#5821B0] transition-colors"
+                                        aria-label={`LinkedIn for ${member.name}`}
+                                    >
+                                        <Linkedin className="w-4 h-4" fill="currentColor" strokeWidth={0.5} />
+                                    </a>
                                 </div>
-                            ))}
+
+                                <p className="text-[#6C757D] text-[14px] leading-relaxed font-medium mt-auto">
+                                    {member.bio}
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
 
             {/* Bottom Pagination Controls */}
-            {totalPages > 1 && (
-                <div className="mt-2 flex items-center justify-center z-20">
+            {teamMembers.length > itemsPerPage && (
+                <div className="flex items-center justify-center z-20">
                     <div
                         className="flex items-center gap-4 px-2 py-2 rounded-[32px]"
                         style={{ background: 'linear-gradient(208.41deg, #F5F3FF -9.69%, #FAF9FF 100.08%)' }}
@@ -189,13 +161,13 @@ export const OurLeadership = () => {
                         </button>
 
                         <div className="flex items-center gap-1">
-                            {Array.from({ length: totalPages }).map((_, index) => (
+                            {teamMembers.map((_, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => goToPage(index)}
-                                    className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${currentPage === index ? 'bg-[#2F1C8C] opacity-100' : 'bg-[#2F1C8C] opacity-20 hover:opacity-50'
+                                    onClick={() => goToIndex(index)}
+                                    className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === index ? 'bg-[#2F1C8C] opacity-100' : 'bg-[#2F1C8C] opacity-20 hover:opacity-50'
                                         }`}
-                                    aria-label={`Go to slide ${index + 1}`}
+                                    aria-label={`Go to member ${index + 1}`}
                                 />
                             ))}
                         </div>

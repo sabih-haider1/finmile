@@ -1,4 +1,7 @@
 import React from 'react';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 interface PageHeroProps {
   title: string;
@@ -6,7 +9,7 @@ interface PageHeroProps {
 
 export function PageHero({ title }: PageHeroProps) {
   return (
-    <section className="relative w-full overflow-hidden pt-40 pb-32 flex items-center justify-center bg-[#0B0616] min-h-[392px]">
+    <section className={`relative w-full overflow-hidden pt-40 pb-32 flex items-center justify-center bg-[#0B0616] min-h-[392px] ${montserrat.className}`}>
 
       {/* Ambient background glows inspired by landing page */}
       <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none" />
@@ -15,9 +18,9 @@ export function PageHero({ title }: PageHeroProps) {
 
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 flex items-center justify-center">
         <h1
-          className="text-white font-bold tracking-tight text-center leading-[1.1] z-10 text-[40px] md:text-[52px] lg:text-[64px]"
+          className="text-white font-text tracking-tight text-center leading-[1.1] z-10 text-[40px] md:text-[52px] lg:text-[64px]"
         >
-          {title} <span className="text-white/90">Finmile</span>
+          {title} <span className="text-white/100">Finmile</span>
         </h1>
       </div>
     </section>
