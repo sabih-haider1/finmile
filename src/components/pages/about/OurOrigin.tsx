@@ -1,6 +1,6 @@
 import React from 'react';
 import { Montserrat } from 'next/font/google';
-import { GlassButton } from '../ui/glass-button';
+import { GlassButton } from '../../ui/glass-button';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 

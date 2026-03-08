@@ -1,16 +1,16 @@
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { PageHero } from "../../components/layout/PageHero";
-import { AboutContent } from "../../components/sections/AboutContent";
-import { StoryVision } from "../../components/sections/StoryVision";
-import { OurOrigin } from "../../components/sections/OurOrigin";
-import { OurMission } from "../../components/sections/OurMission";
-import { OurPlatform } from "../../components/sections/OurPlatform";
-import { OurValues } from "../../components/sections/OurValues";
-import { OurLeadership } from "../../components/sections/OurLeadership";
-import { OurCollectiveEdge } from "../../components/sections/OurCollectiveEdge";
-import { PressAndAwards } from "../../components/sections/PressAndAwards";
-import { JoinTheJourney } from "../../components/sections/JoinTheJourney";
+import { AboutContent } from "../../components/pages/about/AboutContent";
+import { StoryVision } from "../../components/pages/about/StoryVision";
+import { OurOrigin } from "../../components/pages/about/OurOrigin";
+import { OurMission } from "../../components/pages/about/OurMission";
+import { OurPlatform } from "../../components/pages/about/OurPlatform";
+import { OurValues } from "../../components/pages/about/OurValues";
+import { OurLeadership } from "../../components/pages/about/OurLeadership";
+import { OurCollectiveEdge } from "../../components/pages/about/OurCollectiveEdge";
+import { PressAndAwards } from "../../components/pages/about/PressAndAwards";
+import { JoinTheJourney } from "../../components/shared/JoinTheJourney";
 
 export const metadata = {
     title: 'About | Finmile',

@@ -1,0 +1,62 @@
+import React from 'react';
+import { GitMerge, Share2, Workflow } from 'lucide-react';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
+
+export const AIVisibilityInAction = () => {
+    const rows = [
+        { metric: "Predictive ETA AI", capability: "±2 minutes", impact: "Fewer missed deliveries" },
+        { metric: "AI POD Verification", capability: "92% auto-approved", impact: "3x faster billing" },
+        { metric: "Exception Automation", capability: "<3 minutes", impact: "35% fewer failures" },
+        { metric: "CO₂ & Sustainability Metrics", capability: "98% verified", impact: "Trusted reporting" }
+    ];
+
+    return (
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-10 md:py-14 lg:py-16 overflow-hidden relative gap-0 -mt-4 md:-mt-8 ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] z-10 relative flex flex-col items-center">
+
+                {/* Header Content */}
+                <h2 className="font-semibold text-[30px] md:text-[40px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-10 lg:mb-12 text-center">
+                    AI Visibility in Action
+                </h2>
+
+                {/* Table Layout Grid */}
+                <div className="w-full">
+                    {/* Header Row */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div className="hidden md:flex bg-white px-6 py-4 rounded-xl items-center border-b border-white">
+                            <span className="text-[#2F1C8C] font-semibold text-[15px]">Metric</span>
+                        </div>
+                        <div className="bg-[#2F1C8C] rounded-xl px-6 py-4 flex items-center justify-between">
+                            <span className="text-white font-semibold text-[15px]">Capability</span>
+                            <GitMerge className="w-5 h-5 text-white/70" />
+                        </div>
+                        <div className="bg-[#2F1C8C] rounded-xl px-6 py-4 flex items-center justify-between">
+                            <span className="text-white font-semibold text-[15px]">Impact</span>
+                            <Workflow className="w-5 h-5 text-white/70" />
+                        </div>
+                    </div>
+
+                    {/* Data Rows */}
+                    <div className="flex flex-col gap-2">
+                        {rows.map((row, idx) => (
+                            <div key={idx} className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
+                                <div className="bg-white px-6 py-5 rounded-xl flex items-center border border-gray-50 shadow-[0_2px_10px_rgba(0,0,0,0.015)]">
+                                    <span className="text-[#0A1B33] font-semibold text-[14px]">{row.metric}</span>
+                                </div>
+                                <div className="bg-[#F8F7FF] px-6 py-5 rounded-xl flex items-center">
+                                    <span className="text-[#6A27D4] font-semibold text-[14px]">{row.capability}</span>
+                                </div>
+                                <div className="bg-[#F8F9FA] px-6 py-5 rounded-xl flex items-center">
+                                    <span className="text-[#6C757D] font-semibold text-[14px]">{row.impact}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    );
+};

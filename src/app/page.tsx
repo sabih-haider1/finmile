@@ -1,10 +1,10 @@
 import { Header } from "../components/layout/Header";
-import { Hero } from "../components/sections/Hero";
-import { TrustSection, FeaturesSection } from "../components/sections/MainFeatures";
-import { AIAgentsSection } from "../components/sections/AIAgents";
-import { GenerativeIntelligence } from "../components/sections/GenerativeIntelligence";
-import { UnifiedCommand } from "../components/sections/UnifiedCommand";
-import { ScaleSection } from "../components/sections/ScaleSection";
+import { Hero } from "../components/pages/home/Hero";
+import { TrustSection, FeaturesSection } from "../components/pages/home/MainFeatures";
+import { AIAgentsSection } from "../components/pages/home/AIAgents";
+import { GenerativeIntelligence } from "../components/pages/home/GenerativeIntelligence";
+import { UnifiedCommand } from "../components/pages/home/UnifiedCommand";
+import { ScaleSection } from "../components/pages/home/ScaleSection";
 import { Footer } from "../components/layout/Footer";
 
 export default function Home() {
