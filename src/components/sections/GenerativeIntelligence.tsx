@@ -14,7 +14,7 @@ export const GenerativeIntelligence = () => {
             <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center z-10">
 
                 {/* Left Side: Command Prompt Graphic */}
-                <div className="w-full flex justify-center lg:justify-start relative">
+                <div className="w-full flex flex-col items-center lg:items-start justify-center lg:justify-start relative gap-8">
                     <div className="w-full max-w-[800px]">
                         <img
                             src="/assets/images/agents/AI-CommandPrompt.png"
@@ -22,6 +22,11 @@ export const GenerativeIntelligence = () => {
                             className="w-full h-auto drop-shadow-[0_40px_100px_rgba(83,31,209,0.25)] rounded-2xl"
                         />
                     </div>
+                    
+                    {/* Mobile Button - Shows after image on mobile only */}
+                    <button className="lg:hidden liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit transition-colors">
+                        Get In Touch
+                    </button>
                 </div>
 
                 {/* Right Side: Text Content */}
@@ -40,7 +45,8 @@ export const GenerativeIntelligence = () => {
                         Logistics you can talk to. Execution that responds.
                     </p>
 
-                    <button className="liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit mt-10 transition-colors">
+                    {/* Desktop Button - Shows with text on desktop only */}
+                    <button className="hidden lg:flex liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit mt-10 transition-colors">
                         Get In Touch
                     </button>
                 </div>
