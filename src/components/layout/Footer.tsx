@@ -28,8 +28,8 @@ export const Footer = () => {
             <footer className={`w-full bg-[#0B0616] text-white pt-20 pb-4 px-6 lg:px-16 overflow-hidden relative ${montserrat.className}`}>
 
                 {/* Background Glow Effects (Hero-style gradients) */}
-                <div className="absolute -top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none" />
-                <div className="absolute bottom-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-30 pointer-events-none" />
+                <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none" />
+                <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#3B257E] rounded-[100%] blur-[200px] opacity-40 pointer-events-none" />
 
                 <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 z-10 relative">
 
@@ -42,7 +42,7 @@ export const Footer = () => {
 
                         {/* Email Chip */}
                         <div className="flex items-center gap-4">
-                            <div className="w-14 h-14 rounded-full liquid-glass flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-full liquid-glass flex items-center justify-center">
                                 <Mail className="w-6 h-6 text-white" />
                             </div>
                             <a href="mailto:hello@finmile.co" className="text-white text-[14px] xl:text-[16px] font-medium hover:text-[#D8C7FF] transition-colors tracking-wide">
@@ -52,7 +52,7 @@ export const Footer = () => {
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                            <button className="bg-[#6A27D4] text-white w-[160px] h-[48px] rounded-full text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.4)] hover:bg-[#5a21b5] transition-all whitespace-nowrap">
+                            <button className="bg-[#6A27D4] text-white w-[160px] h-[48px] rounded-full text-[14px] font-bold hover:bg-[#5a21b5] transition-all whitespace-nowrap">
                                 Request A Demo
                             </button>
                             <button className="liquid-glass text-white w-[160px] h-[48px] rounded-full text-[16px] transition-all whitespace-nowrap">
@@ -98,8 +98,10 @@ export const Footer = () => {
                             <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
                         </nav>
 
-                        <div className="w-12 h-12 mt-6 rounded-full liquid-glass flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer">
-                            <Linkedin className="w-5 h-5 text-white" />
+                        <div className="pt-10"> {/* Changed from mt-10 to pt-10 and wrapped */}
+                            <div className="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer">
+                                <Linkedin className="w-5 h-5 text-white" />
+                            </div>
                         </div>
                     </div>
 
