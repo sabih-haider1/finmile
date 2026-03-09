@@ -37,7 +37,7 @@ export const OurMission = () => {
                     <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 pb-8 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col">
                         <div>
                             {/* Coil Icon filling the glowing box perfectly */}
-                            <div className="bg-white rounded-[24px] shadow-[0_10px_40px_rgba(106,39,212,0.12)] inline-flex items-center justify-center mb-10 lg:mb-20 border border-white w-[100px] h-[100px] overflow-hidden">
+                            <div className="bg-white rounded-[24px] inline-flex items-center justify-center mb-10 lg:mb-20 border border-white w-[100px] h-[100px] overflow-hidden" style={{ boxShadow: '0 0 40px 8px rgba(106, 39, 212, 0.2)' }}>
                                 <img
                                     src="/assets/images/features/coil-icon.png"
                                     alt="Finmile Coil Icon"

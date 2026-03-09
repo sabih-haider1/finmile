@@ -37,11 +37,11 @@ export const UnifiedCommand = () => {
     }, [slides.length]);
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 py-16 lg:py-24 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-24 overflow-hidden ${montserrat.className}`}>
 
             {/* Section Header */}
-            <div className="text-center mb-5 md:mb-8 w-full flex flex-col items-center z-20">
-                <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-6 leading-tight">
+            <div className="text-center mb-3 md:mb-8 w-full flex flex-col items-center z-20">
+                <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-3 md:mb-6 leading-tight">
                     One Unified Command Interface
                 </h2>
                 <p className="text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed px-4">
@@ -50,7 +50,7 @@ export const UnifiedCommand = () => {
             </div>
 
             {/* Center Complete Graphic (contains phone, cards, arrows, circles) */}
-            <div className="w-full max-w-[1240px] h-[500px] flex items-center justify-center relative z-10 px-4 overflow-hidden">
+            <div className="w-full max-w-[1240px] h-[350px] md:h-[500px] flex items-center justify-center relative z-10 px-4 overflow-hidden">
                 <img
                     key={currentSlide}
                     src={slides[currentSlide]}
@@ -60,7 +60,7 @@ export const UnifiedCommand = () => {
             </div>
 
             {/* Bottom Pagination controls with gradient background */}
-            <div className="mt-6 md:mt-10 flex items-center justify-center z-20">
+            <div className="mt-3 md:mt-10 flex items-center justify-center z-20">
                 <div 
                     className="flex items-center gap-4 px-2 py-2 rounded-[32px]"
                     style={{

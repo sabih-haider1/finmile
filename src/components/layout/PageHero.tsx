@@ -1,4 +1,7 @@
 import React from 'react';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 interface PageHeroProps {
   title: string;
@@ -7,7 +10,7 @@ interface PageHeroProps {
 
 export function PageHero({ title, hideLogo }: PageHeroProps) {
   return (
-    <section className="relative w-full overflow-hidden pt-40 pb-32 flex items-center justify-center bg-[#0B0616] min-h-[392px]">
+    <section className={`relative w-full overflow-hidden pt-40 pb-32 flex items-center justify-center bg-[#0B0616] min-h-[392px] ${montserrat.className}`}>
 
       {/* Ambient background glows inspired by landing page */}
       <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none" />

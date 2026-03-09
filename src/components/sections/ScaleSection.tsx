@@ -63,7 +63,7 @@ export const ScaleSection = () => {
                 <div className="space-y-3 mb-10">
                   <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]">
                     <Layers
-                      className="text-[#6A27D4] w-6 h-6 shrink-0"
+                      className="text-[#2F1C8C] w-6 h-6 shrink-0"
                       strokeWidth={2}
                     />
                     <span className="text-gray-900 font-semibold text-[16px]">
@@ -73,7 +73,7 @@ export const ScaleSection = () => {
 
                   <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]">
                     <Navigation
-                      className="text-[#6A27D4] w-6 h-6 shrink-0 rotate-45"
+                      className="text-[#2F1C8C] w-6 h-6 shrink-0 rotate-45"
                       strokeWidth={2}
                     />
                     <span className="text-gray-900 font-semibold text-[16px]">
@@ -83,7 +83,7 @@ export const ScaleSection = () => {
 
                   <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]">
                     <Clock
-                      className="text-[#6A27D4] w-6 h-6 shrink-0"
+                      className="text-[#2F1C8C] w-6 h-6 shrink-0"
                       strokeWidth={2}
                     />
                     <span className="text-gray-900 font-semibold text-[16px]">
