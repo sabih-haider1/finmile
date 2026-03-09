@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { Button } from "../ui/Button";
 import { Montserrat } from 'next/font/google';
 
@@ -11,7 +12,13 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const links = [
-    "Solutions", "Deliveries", "Features", "About", "Resources", "Whitepapers", "Delivery Software"
+    { name: "Solutions", href: "#solutions" },
+    { name: "Deliveries", href: "#deliveries" },
+    { name: "Features", href: "#features" },
+    { name: "About", href: "/about" },
+    { name: "AI Agents", href: "/ai-agents" },
+    { name: "Resources", href: "#resources" },
+    { name: "Whitepapers", href: "#whitepapers" },
   ];
 
   useEffect(() => {
@@ -61,13 +68,23 @@ export const Header = () => {
         {/* Center Nav Links - Desktop */}
         <nav className="hidden xl:flex items-center justify-center flex-1 gap-5 2xl:gap-8 mx-2 overflow-hidden">
           {links.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase().replace(/ /g, "-")}`}
-              className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
-            >
-              {link}
-            </a>
+            link.href.startsWith('/') ? (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
+              >
+                {link.name}
+              </a>
+            )
           ))}
         </nav>
 
@@ -129,14 +146,25 @@ export const Header = () => {
           {/* Mobile Navigation Links */}
           <nav className="flex flex-col gap-4 mb-8">
             {links.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase().replace(/ /g, "-")}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
-              >
-                {link}
-              </a>
+              link.href.startsWith('/') ? (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
+                >
+                  {link.name}
+                </a>
+              )
             ))}
           </nav>
 
