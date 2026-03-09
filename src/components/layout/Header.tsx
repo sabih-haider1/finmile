@@ -70,6 +70,14 @@ export const Header = () => {
               >
                 {link}
               </Link>
+            ) : link === "Whitepapers" ? (
+              <Link
+                key={link}
+                href="/whitepapers"
+                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
+              >
+                {link}
+              </Link>
             ) : (
               <a
                 key={link}
@@ -144,6 +152,15 @@ export const Header = () => {
                 <Link
                   key={link}
                   href="/about"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
+                >
+                  {link}
+                </Link>
+              ) : link === "Whitepapers" ? (
+                <Link
+                  key={link}
+                  href="/whitepapers"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
                 >
