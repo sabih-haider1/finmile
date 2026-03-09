@@ -12,13 +12,7 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const links = [
-    { name: "Solutions", href: "#solutions" },
-    { name: "Deliveries", href: "#deliveries" },
-    { name: "Features", href: "#features" },
-    { name: "About", href: "/about" },
-    { name: "AI Agents", href: "/ai-agents" },
-    { name: "Resources", href: "#resources" },
-    { name: "Whitepapers", href: "#whitepapers" },
+    "Solutions", "Deliveries", "Features", "About", "Resources", "Whitepapers", "Delivery Software"
   ];
 
   useEffect(() => {
@@ -68,21 +62,21 @@ export const Header = () => {
         {/* Center Nav Links - Desktop */}
         <nav className="hidden xl:flex items-center justify-center flex-1 gap-5 2xl:gap-8 mx-2 overflow-hidden">
           {links.map((link) => (
-            link.href.startsWith('/') ? (
+            link === "About" ? (
               <Link
-                key={link.name}
-                href={link.href}
+                key={link}
+                href="/about"
                 className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
               >
-                {link.name}
+                {link}
               </Link>
             ) : (
               <a
-                key={link.name}
-                href={link.href}
+                key={link}
+                href={`#${link.toLowerCase().replace(/ /g, "-")}`}
                 className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
               >
-                {link.name}
+                {link}
               </a>
             )
           ))}
@@ -146,23 +140,23 @@ export const Header = () => {
           {/* Mobile Navigation Links */}
           <nav className="flex flex-col gap-4 mb-8">
             {links.map((link) => (
-              link.href.startsWith('/') ? (
+              link === "About" ? (
                 <Link
-                  key={link.name}
-                  href={link.href}
+                  key={link}
+                  href="/about"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
                 >
-                  {link.name}
+                  {link}
                 </Link>
               ) : (
                 <a
-                  key={link.name}
-                  href={link.href}
+                  key={link}
+                  href={`#${link.toLowerCase().replace(/ /g, "-")}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
                 >
-                  {link.name}
+                  {link}
                 </a>
               )
             ))}
