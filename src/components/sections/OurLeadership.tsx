@@ -77,7 +77,7 @@ export const OurLeadership = () => {
 
     // Get current visible members with wrapping
     const getVisibleMembers = () => {
-        const members = [];
+        const members: Array<typeof teamMembers[0] & { uniqueKey: string }> = [];
         for (let i = 0; i < itemsPerPage; i++) {
             const index = (currentIndex + i) % teamMembers.length;
             members.push({ ...teamMembers[index], uniqueKey: `${index}-${currentIndex}` });
