@@ -66,7 +66,7 @@ export const Footer = () => {
                         <h4 className="font-bold text-[18px] tracking-wide mb-2">Quick Links</h4>
                         <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[200px] overflow-y-auto pr-2 custom-scrollbar">
                             <Link href="/about" className="hover:text-white transition-colors">About</Link>
-                            <Link href="/agents" className="hover:text-white transition-colors">Ai Agents</Link>
+                            <Link href="/ai-agents" className="hover:text-white transition-colors">AI Agents</Link>
                             <Link href="/control-tower" className="hover:text-white transition-colors">Control Tower</Link>
                             <Link href="/deliveries" className="hover:text-white transition-colors">Deliveries</Link>
                             <Link href="/delivery-software" className="hover:text-white transition-colors">Delivery Software</Link>
