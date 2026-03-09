@@ -22,9 +22,9 @@ export function PageHero({ title, hideLogo }: PageHeroProps) {
 
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 flex items-center justify-center">
         <h1
-          className="text-white font-bold tracking-tight text-center leading-[1.15] md:leading-[1.1] z-10 text-[36px] md:text-[52px] lg:text-[64px]"
+          className="text-white font-text tracking-tight text-center leading-[1.15] md:leading-[1.1] z-10 text-[36px] md:text-[52px] lg:text-[64px]"
         >
-          {title} {!hideLogo && <span className="text-white/90">Finmile</span>}
+          {title} {!hideLogo && <span className="text-white/100">Finmile</span>}
         </h1>
       </div>
     </section>
