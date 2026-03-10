@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { supabase } from '../../supabaseClient';
+import { supabase } from '@/supabaseClient';
 import { WhitepaperCard, WhitepaperCardSkeleton } from './WhitepaperCard';
 import { WhitepaperSearchBar } from './WhitepaperSearchBar';
 
