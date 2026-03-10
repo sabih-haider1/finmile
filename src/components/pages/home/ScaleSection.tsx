@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Layers, Navigation, Clock } from 'lucide-react';
-import { RouteCalculatorPopup } from './RouteCalculatorPopup';
+import { RouteCalculatorPopup } from '../../shared/RouteCalculatorPopup';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });

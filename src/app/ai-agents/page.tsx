@@ -1,14 +1,14 @@
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { PageHero } from "../../components/layout/PageHero";
-import { AutonomousAgentsFeature } from "../../components/sections/AutonomousAgentsFeature";
-import { TheAIOperatingLayer } from "../../components/sections/TheAIOperatingLayer";
-import { ConfidenceScoring } from "../../components/sections/ConfidenceScoring";
-import { AutonomousExecution } from "../../components/sections/AutonomousExecution";
-import { WhatAIAgentsMean } from "../../components/sections/WhatAIAgentsMean";
-import { MeetTheSuite } from "../../components/sections/MeetTheSuite";
-import { OutcomesAtScale } from "../../components/sections/OutcomesAtScale";
-import { JoinTheJourney } from "../../components/sections/JoinTheJourney";
+import { AutonomousAgentsFeature } from "../../components/pages/ai-agents/AutonomousAgentsFeature";
+import { TheAIOperatingLayer } from "../../components/pages/ai-agents/TheAIOperatingLayer";
+import { ConfidenceScoring } from "../../components/pages/ai-agents/ConfidenceScoring";
+import { AutonomousExecution } from "../../components/pages/ai-agents/AutonomousExecution";
+import { WhatAIAgentsMean } from "../../components/pages/ai-agents/WhatAIAgentsMean";
+import { MeetTheSuite } from "../../components/pages/ai-agents/MeetTheSuite";
+import { OutcomesAtScale } from "../../components/pages/ai-agents/OutcomesAtScale";
+import { JoinTheJourney } from "../../components/shared/JoinTheJourney";
 
 export const metadata = {
     title: 'AI Agents | Finmile',
