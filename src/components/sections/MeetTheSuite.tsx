@@ -16,8 +16,8 @@ export const MeetTheSuite = () => {
             id: 0,
             title: "Live Operations Agent",
             icon: <Target className="w-4 h-4" strokeWidth={2} />,
-            subtitle: "The Live Operations Agent constantly evaluates live performance.",
-            p1: "If traffic spikes or drivers deviate from routes, it triggers adjustments automatically. No waiting for a dispatcher to notice the issue. No manual rebuilding. The system adapts in real time.",
+            subtitle: "The Live Operations Agent monitors SLA risk at parcel level.",
+            p1: "If a delivery is likely to miss its window, the agent proposes and executes interventions such as re sequencing stops, moving a stop to another route, or reallocating capacity. Instead of reacting after failure, you prevent it.",
             bullets: ["Automated dispatching", "Real-time rerouting", "Proactive delay alerts"],
             image: "/assets/images/features/app-dashboard.png" // Placeholder image for tabs 0, 2, 3
         },
@@ -34,8 +34,8 @@ export const MeetTheSuite = () => {
             id: 2,
             title: "Customer Agent",
             icon: <Users className="w-4 h-4" strokeWidth={2} />,
-            subtitle: "The Customer Agent constantly handles inbound inquiries and WISMOs.",
-            p1: "If a customer asks 'where is my order?', it instantly cross-references live tracking data and replies automatically. No waiting for support agents to investigate. The system handles it in real time.",
+            subtitle: "The Customer Agent handles proactive communication.",
+            p1: "If a delay occurs, customers are informed automatically. If an address is incorrect, the system resolves it using data intelligence before the driver arrives. This reduces WISMO volume and protects NPS without expanding support teams.",
             bullets: ["Instant WISMO resolution", "Predictive ETA updates", "Multilingual support"],
             image: "/assets/images/features/app-dashboard.png"
         },
@@ -43,8 +43,8 @@ export const MeetTheSuite = () => {
             id: 3,
             title: "Finance Agent",
             icon: <BarChart className="w-4 h-4" strokeWidth={2} />,
-            subtitle: "The Finance Agent constantly audits driver pay and invoice accuracy.",
-            p1: "If a route takes longer than expected or fuel prices fluctuate, it calculates fair compensation automatically. No waiting for manual reconciliation at month-end. The system audits in real time.",
+            subtitle: "The Finance Agent validates billing events against real delivery telemetry.",
+            p1: "Proof of delivery, timestamps, route data, and SLA compliance are cross checked automatically. This eliminates revenue leakage, reduces disputes, and ensures every completed delivery is accurately captured and billed.",
             bullets: ["Automated driver payouts", "Real-time cost tracking", "Instant invoice generation"],
             image: "/assets/images/features/app-dashboard.png"
         }
