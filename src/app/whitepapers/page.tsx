@@ -1,8 +1,8 @@
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { PageHero } from "../../components/layout/PageHero";
-import { WhitepaperGrid } from "../../components/sections/WhitepaperGrid";
-import { AiDataSustainability } from "@/components/sections/AIDataSustainability"; 
+import { WhitepaperGrid } from "../../components/pages/about/WhitepaperGrid";
+import { AiDataSustainability } from "@/components/pages/about/AIDataSustainability"; 
 
 export const metadata = {
     title: 'Research & Whitepapers | Finmile',
