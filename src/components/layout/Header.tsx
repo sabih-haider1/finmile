@@ -49,15 +49,18 @@ export const Header = () => {
         style={{ top: '24px' }}
       >
         {/* Logo */}
-        <div className={`flex items-center justify-center shrink-0 mr-4 transition-opacity duration-300 self-center translate-y-[5px] ${
-          isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'
-        }`}>
+        <Link 
+          href="/"
+          className={`flex items-center justify-center shrink-0 mr-4 transition-opacity duration-300 self-center translate-y-[5px] cursor-pointer ${
+            isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'
+          }`}
+        >
           <img
             src="/assets/logos/logo-white.png"
             alt="Finmile Logo"
             className="h-10 md:h-12 lg:h-14 object-contain drop-shadow-lg align-middle"
           />
-        </div>
+        </Link>
 
         {/* Center Nav Links - Desktop */}
         <nav className="hidden xl:flex items-center justify-center flex-1 gap-5 2xl:gap-8 mx-2 overflow-hidden">
