@@ -52,10 +52,10 @@ export const Footer = () => {
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                            <button className="bg-[#6A27D4] text-white w-[160px] h-[48px] rounded-full text-[14px] font-bold hover:bg-[#5a21b5] transition-all whitespace-nowrap">
+                            <button className="bg-[#6A27D4] text-white w-[160px] h-[48px] rounded-full text-[14px] font-semibold tracking-wide hover:bg-[#5a21b5] transition-all whitespace-nowrap">
                                 Request A Demo
                             </button>
-                            <button className="liquid-glass text-white w-[160px] h-[48px] rounded-full text-[16px] transition-all whitespace-nowrap">
+                            <button className="liquid-glass text-white w-[160px] h-[48px] rounded-full text-[14px] font-semibold tracking-wide transition-all whitespace-nowrap">
                                 Track Parcel
                             </button>
                         </div>

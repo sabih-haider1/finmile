@@ -16,7 +16,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        {/* SVG Filter for Liquid Glass Effect */}
+        <svg className="hidden" aria-hidden="true">
+          <defs>
+            <filter id="liquid-goo" colorInterpolationFilters="sRGB">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+              <feColorMatrix 
+                in="blur" 
+                type="matrix" 
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" 
+                result="goo" 
+              />
+              <feBlend in="SourceGraphic" in2="goo" mode="normal"/>
+            </filter>
+          </defs>
+        </svg>
+        {children}
+      </body>
     </html>
   )
 }
