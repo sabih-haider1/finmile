@@ -18,17 +18,14 @@ export const DspsIntegrations = () => {
                 </h2>
             </div>
 
-            {/* Changed flex-wrap to flex-nowrap and ensured justify-center */}
-            <div
-                className="w-full max-w-[1240px] z-10 flex flex-nowrap justify-center gap-6 md:gap-8 mb-8 md:mb-10 pb-4 md:pb-0 overflow-x-auto"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
+            {/* Changed from Flex to Grid for exact container-edge alignment to match RetailersIntegrations */}
+            <div className="w-full max-w-[1240px] z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5 mb-10 md:mb-12">
                 {integrations.map((integration, idx) => (
                     <div
                         key={idx}
-                        className="bg-[#F8F9FA] px-6 md:px-10 py-3 md:py-5 rounded-[20px] flex items-center justify-center min-w-max shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#F0F2F5] transition-transform hover:-translate-y-1 shrink-0"
+                        className="bg-[#FAFAFB] border border-[#F0F2F5] py-4 md:py-[22px] rounded-[24px] flex items-center justify-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-transform hover:-translate-y-1"
                     >
-                        <span className="text-[#8E8B99] font-bold italic text-[14px] md:text-[18px] tracking-tight">
+                        <span className="text-[#8E8B99] font-bold italic text-[15px] md:text-[17px] tracking-tight">
                             {integration}
                         </span>
                     </div>

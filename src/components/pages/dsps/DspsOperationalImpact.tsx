@@ -24,31 +24,35 @@ export const DspsOperationalImpact = () => {
     ];
 
     return (
-        <section className={`w-full relative flex flex-col items-center pt-12 md:pt-16 ${montserrat.className}`}>
+        // MOVED PADDING: px-4 md:px-6 lg:px-24 is now on the outer section, exactly matching DspsIntegrations
+        <section className={`w-full relative flex flex-col items-center pt-12 md:pt-16 px-4 md:px-6 lg:px-24 ${montserrat.className}`}>
             
             {/* Dark background spanning top section */}
             <div className="absolute top-0 left-0 w-full h-[calc(100%-120px)] md:h-[calc(100%-150px)] bg-[#0A0318] z-0 overflow-hidden">
-                {/* Smooth purple glow to match the image gradient */}
                 <div className="absolute top-[-30%] left-[-10%] w-[80%] h-[150%] bg-[radial-gradient(ellipse_at_center,_rgba(75,35,170,0.45)_0%,_rgba(10,3,24,0)_70%)] blur-[60px]" />
             </div>
 
             {/* White background bottom section to create the overlap effect */}
             <div className="absolute bottom-0 left-0 w-full h-[120px] md:h-[150px] bg-white z-0" />
 
-            <div className="w-full max-w-[1240px] z-10 relative px-4 md:px-6 lg:px-24">
+            {/* REMOVED PADDING FROM HERE: Now it spans exactly 1240px like the Integrations wrapper */}
+            <div className="w-full max-w-[1240px] z-10 relative">
                 
                 {/* Header */}
-                <div className="text-center mb-8 md:mb-10">
+                <div className="text-center mb-8 md:mb-10 w-full flex flex-col items-center">
                     <h2 className="font-bold text-[32px] md:text-[40px] text-white tracking-tight leading-[1.2]">
                         Operational Impact
                     </h2>
                 </div>
 
-                {/* Metrics Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">
+                {/* Metrics Cards - NOW PERFECTLY ALIGNED TO INTEGRATIONS BOUNDARIES */}
+                <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-12">
                     {metrics.map((metric, idx) => (
-                        <div key={idx} className="bg-transparent border border-white/10 rounded-[20px] py-10 px-6 text-center">
-                            <div className="font-bold text-[38px] md:text-[42px] text-white mb-3 flex items-center justify-center">
+                        <div 
+                            key={idx} 
+                            className="bg-transparent border border-white/10 py-4 md:py-[22px] rounded-[24px] flex flex-col items-center justify-center text-center transition-transform hover:-translate-y-1"
+                        >
+                            <div className="font-bold text-[38px] md:text-[42px] text-white mb-1 md:mb-2 flex items-center justify-center">
                                 {metric.value}
                             </div>
                             <div className="text-white/80 font-medium text-[14px] md:text-[15px]">
@@ -62,7 +66,6 @@ export const DspsOperationalImpact = () => {
                 <div className="max-w-[950px] mx-auto text-center w-full">
                     <div className="bg-[#311E8F] rounded-[20px] px-8 py-10 md:px-16 md:py-14 shadow-2xl relative">
                         
-                        {/* Centered Quote Icon */}
                         <div className="flex justify-center mb-6">
                             <span className="text-white text-[60px] md:text-[72px] font-serif leading-[0.4]">
                                 “
