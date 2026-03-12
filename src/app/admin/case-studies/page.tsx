@@ -9,7 +9,7 @@ import SearchBar from '@/components/admin/SearchBar';
 import FilterToggle from '@/components/admin/FilterToggle';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { uploadFile } from '@/lib/upload';
+import { uploadFile, generateSlug } from '@/lib/upload';
 
 export default function CaseStudiesPage() {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
@@ -83,6 +83,7 @@ export default function CaseStudiesPage() {
 
       const caseStudyData = {
         ...formData,
+        slug: generateSlug(formData.slug || formData.title),
         cover_image_url: coverImageUrl || null,
         industry: formData.industry && formData.industry.trim() !== '' ? formData.industry : null,
         company_name: formData.company_name && formData.company_name.trim() !== '' ? formData.company_name : null,

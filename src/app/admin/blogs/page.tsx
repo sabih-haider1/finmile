@@ -9,7 +9,7 @@ import SearchBar from '@/components/admin/SearchBar';
 import FilterToggle from '@/components/admin/FilterToggle';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { uploadFile } from '@/lib/upload';
+import { uploadFile, generateSlug } from '@/lib/upload';
 
 export default function BlogsPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -83,6 +83,7 @@ export default function BlogsPage() {
 
       const blogData = {
         ...formData,
+        slug: generateSlug(formData.slug || formData.title),
         cover_image_url: coverImageUrl || null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };

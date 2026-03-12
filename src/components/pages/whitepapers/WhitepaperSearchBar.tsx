@@ -199,7 +199,7 @@ export function WhitepaperSearchBar({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="AI route optimization, EV delivery, last-mile ROI..."
-              className="w-full h-12 pl-12 pr-4 rounded-full bg-[#EEF1F7] border border-transparent focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/20 outline-none text-sm placeholder:text-gray-400 transition-all"
+              className="w-full h-12 pl-12 pr-4 rounded-full bg-[#EEF1F7] border border-transparent focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/20 outline-none text-sm text-gray-900 placeholder:text-gray-400 transition-all"
             />
           </div>
 

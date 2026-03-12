@@ -30,8 +30,12 @@ export async function uploadFile({ bucket, folder, file }: UploadOptions): Promi
 }
 
 export function generateSlug(title: string): string {
+  if (!title) return '';
+  
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric with hyphens
+    .replace(/-+/g, '-')            // Replace multiple consecutive hyphens with single hyphen
+    .replace(/^-|-$/g, '');         // Remove leading/trailing hyphens
 }

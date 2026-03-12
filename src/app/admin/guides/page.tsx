@@ -8,7 +8,7 @@ import DataTable from '@/components/admin/DataTable';
 import SearchBar from '@/components/admin/SearchBar';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { uploadFile } from '@/lib/upload';
+import { uploadFile, generateSlug } from '@/lib/upload';
 
 export default function GuidesPage() {
   const [guides, setGuides] = useState<Guide[]>([]);
@@ -74,6 +74,7 @@ export default function GuidesPage() {
 
       const guideData = {
         ...formData,
+        slug: generateSlug(formData.slug || formData.title),
         pdf_url: pdfUrl,
       };
 

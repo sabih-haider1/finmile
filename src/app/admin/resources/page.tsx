@@ -9,7 +9,7 @@ import SearchBar from '@/components/admin/SearchBar';
 import FilterToggle from '@/components/admin/FilterToggle';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { uploadFile } from '@/lib/upload';
+import { uploadFile, generateSlug } from '@/lib/upload';
 
 export default function ResourcesPage() {
   const [resources, setResources] = useState<Resource[]>([]);
@@ -93,6 +93,7 @@ export default function ResourcesPage() {
 
       const resourceData = {
         ...formData,
+        slug: generateSlug(formData.slug || formData.title),
         file_url: fileUrl,
         thumbnail_url: thumbnailUrl || null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],

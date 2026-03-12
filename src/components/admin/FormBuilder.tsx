@@ -38,12 +38,21 @@ export default function FormBuilder({
   const [files, setFiles] = useState<Record<string, File | null>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
   const handleChange = (name: string, value: any) => {
+    // If editing slug field directly, mark it as manually edited
+    if (name === 'slug') {
+      setSlugManuallyEdited(true);
+      // Still format the slug even when manually edited
+      setFormData((prev) => ({ ...prev, [name]: generateSlug(value) }));
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Auto-generate slug from title
-    if (name === 'title' && !initialData?.id) {
+    // Auto-generate slug from title if not manually edited
+    if (name === 'title' && !slugManuallyEdited) {
       setFormData((prev) => ({ ...prev, slug: generateSlug(value) }));
     }
   };
