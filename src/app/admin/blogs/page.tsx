@@ -54,6 +54,10 @@ export default function BlogsPage() {
   };
 
   const handleDelete = async (blog: Blog) => {
+    if (!window.confirm(`Are you sure you want to delete "${blog.title}"?`)) {
+      return;
+    }
+    
     try {
       const { error } = await supabase.from('blogs').delete().eq('id', blog.id);
       if (error) throw error;
@@ -85,18 +89,20 @@ export default function BlogsPage() {
 
       if (editingBlog) {
         // Update existing blog
+        const { id, created_at, ...updateData } = blogData;
         const { error } = await supabase
           .from('blogs')
-          .update({ ...blogData, updated_at: new Date().toISOString() })
+          .update({ ...updateData, updated_at: new Date().toISOString() })
           .eq('id', editingBlog.id);
         if (error) throw error;
         alert('Blog updated successfully!');
       } else {
         // Create new blog
         const now = new Date().toISOString();
+        const { id, created_at, updated_at, ...insertData } = blogData;
         const { error } = await supabase.from('blogs').insert([{
-          ...blogData,
-          published_at: blogData.is_published ? now : null,
+          ...insertData,
+          published_at: insertData.is_published ? now : null,
           created_at: now,
           updated_at: now,
         }]);

@@ -67,9 +67,9 @@ export const WhyFinmileLeads = () => {
 
                 {/* Table Layout Grid */}
                 <div className="w-full bg-white">
-                    {/* Header Row */}
-                    <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr] gap-4 mb-4">
-                        <div className="hidden md:flex px-6 py-4 items-center border-b border-gray-100">
+                    {/* Header Row - Desktop Only */}
+                    <div className="hidden md:grid md:grid-cols-[1fr_1fr_1fr] gap-4 mb-4">
+                        <div className="px-6 py-4 flex items-center border-b border-gray-100">
                             <span className="text-[#2F1C8C] font-semibold text-[16px]">Features</span>
                         </div>
                         <div className="bg-[#6C757D] rounded-xl px-6 py-4 flex items-center justify-between">
@@ -83,19 +83,46 @@ export const WhyFinmileLeads = () => {
                     </div>
 
                     {/* Data Rows */}
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-4">
                         {rows.map((row, idx) => (
-                            <div key={idx} className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr] gap-2 md:gap-4">
-                                <div className="bg-white px-6 py-4 flex items-center border-b border-gray-50">
-                                    <span className="text-[#0A1B33] font-bold text-[14px]">{row.feature}</span>
+                            <div key={idx}>
+                                {/* Mobile Card Layout */}
+                                <div className="md:hidden bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex flex-col gap-3">
+                                    <div className="flex flex-col gap-1 pb-3 border-b border-gray-100">
+                                        <span className="text-[#6C757D] text-[11px] font-semibold uppercase tracking-wider">Feature</span>
+                                        <span className="text-[#0A1B33] font-bold text-[15px]">{row.feature}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center gap-4">
+                                        <div className="flex flex-col gap-1.5 flex-1">
+                                            <span className="text-[#6C757D] text-[11px] font-semibold uppercase tracking-wider">Others</span>
+                                            <div className="flex items-center">
+                                                {getIcon(row.othersStatus)}
+                                                <span className="text-[#6C757D] font-medium text-[13px]">{row.others}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col gap-1.5 flex-1">
+                                            <span className="text-[#2F1C8C] text-[11px] font-semibold uppercase tracking-wider">Finmile</span>
+                                            <div className="flex items-center">
+                                                {getIcon(row.finmileStatus)}
+                                                <span className="text-[#2F1C8C] font-medium text-[13px]">{row.finmile}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="bg-[#F8F9FA] px-6 py-4 rounded-xl flex items-center">
-                                    {getIcon(row.othersStatus)}
-                                    <span className="text-[#6C757D] font-medium text-[14px]">{row.others}</span>
-                                </div>
-                                <div className="bg-[#F8F7FF] px-6 py-4 rounded-xl flex items-center">
-                                    {getIcon(row.finmileStatus)}
-                                    <span className="text-[#6C757D] font-medium text-[14px]">{row.finmile}</span>
+
+                                {/* Desktop Table Layout */}
+                                <div className="hidden md:grid md:grid-cols-[1fr_1fr_1fr] gap-4">
+                                    <div className="bg-white px-6 py-4 flex items-center border-b border-gray-50">
+                                        <span className="text-[#0A1B33] font-bold text-[14px]">{row.feature}</span>
+                                    </div>
+                                    <div className="bg-[#F8F9FA] px-6 py-4 rounded-xl flex items-center">
+                                        {getIcon(row.othersStatus)}
+                                        <span className="text-[#6C757D] font-medium text-[14px]">{row.others}</span>
+                                    </div>
+                                    <div className="bg-[#F8F7FF] px-6 py-4 rounded-xl flex items-center">
+                                        {getIcon(row.finmileStatus)}
+                                        <span className="text-[#6C757D] font-medium text-[14px]">{row.finmile}</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}

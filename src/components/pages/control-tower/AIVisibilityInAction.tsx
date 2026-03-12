@@ -23,9 +23,9 @@ export const AIVisibilityInAction = () => {
 
                 {/* Table Layout Grid */}
                 <div className="w-full">
-                    {/* Header Row */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                        <div className="hidden md:flex bg-white px-6 py-4 rounded-xl items-center border-b border-white">
+                    {/* Header Row - Desktop Only */}
+                    <div className="hidden md:grid md:grid-cols-3 gap-4 mb-4">
+                        <div className="bg-white px-6 py-4 rounded-xl flex items-center border-b border-white">
                             <span className="text-[#2F1C8C] font-semibold text-[15px]">Metric</span>
                         </div>
                         <div className="bg-[#2F1C8C] rounded-xl px-6 py-4 flex items-center justify-between">
@@ -39,17 +39,38 @@ export const AIVisibilityInAction = () => {
                     </div>
 
                     {/* Data Rows */}
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-4">
                         {rows.map((row, idx) => (
-                            <div key={idx} className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
-                                <div className="bg-white px-6 py-5 rounded-xl flex items-center border border-gray-50 shadow-[0_2px_10px_rgba(0,0,0,0.015)]">
-                                    <span className="text-[#0A1B33] font-semibold text-[14px]">{row.metric}</span>
+                            <div key={idx}>
+                                {/* Mobile Card Layout */}
+                                <div className="md:hidden bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex flex-col gap-3">
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-[#6C757D] text-[11px] font-semibold uppercase tracking-wider">Metric</span>
+                                        <span className="text-[#0A1B33] font-semibold text-[15px]">{row.metric}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center gap-4 pt-2 border-t border-gray-100">
+                                        <div className="flex flex-col gap-1">
+                                            <span className="text-[#6C757D] text-[11px] font-semibold uppercase tracking-wider">Capability</span>
+                                            <span className="text-[#6A27D4] font-semibold text-[14px]">{row.capability}</span>
+                                        </div>
+                                        <div className="flex flex-col gap-1 text-right">
+                                            <span className="text-[#6C757D] text-[11px] font-semibold uppercase tracking-wider">Impact</span>
+                                            <span className="text-[#6C757D] font-semibold text-[14px]">{row.impact}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="bg-[#F8F7FF] px-6 py-5 rounded-xl flex items-center">
-                                    <span className="text-[#6A27D4] font-semibold text-[14px]">{row.capability}</span>
-                                </div>
-                                <div className="bg-[#F8F9FA] px-6 py-5 rounded-xl flex items-center">
-                                    <span className="text-[#6C757D] font-semibold text-[14px]">{row.impact}</span>
+
+                                {/* Desktop Table Layout */}
+                                <div className="hidden md:grid md:grid-cols-3 gap-4">
+                                    <div className="bg-white px-6 py-5 rounded-xl flex items-center border border-gray-50 shadow-[0_2px_10px_rgba(0,0,0,0.015)]">
+                                        <span className="text-[#0A1B33] font-semibold text-[14px]">{row.metric}</span>
+                                    </div>
+                                    <div className="bg-[#F8F7FF] px-6 py-5 rounded-xl flex items-center">
+                                        <span className="text-[#6A27D4] font-semibold text-[14px]">{row.capability}</span>
+                                    </div>
+                                    <div className="bg-[#F8F9FA] px-6 py-5 rounded-xl flex items-center">
+                                        <span className="text-[#6C757D] font-semibold text-[14px]">{row.impact}</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}

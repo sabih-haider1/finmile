@@ -54,6 +54,10 @@ export default function WhitepapersPage() {
   };
 
   const handleDelete = async (whitepaper: Whitepaper) => {
+    if (!window.confirm(`Are you sure you want to delete "${whitepaper.title}"?`)) {
+      return;
+    }
+
     try {
       const { error } = await supabase.from('whitepapers').delete().eq('id', whitepaper.id);
       if (error) throw error;
@@ -96,18 +100,20 @@ export default function WhitepapersPage() {
 
       if (editingWhitepaper) {
         // Update existing whitepaper
+        const { id, created_at, ...updateData } = whitepaperData;
         const { error } = await supabase
           .from('whitepapers')
-          .update({ ...whitepaperData, updated_at: new Date().toISOString() })
+          .update({ ...updateData, updated_at: new Date().toISOString() })
           .eq('id', editingWhitepaper.id);
         if (error) throw error;
         alert('Whitepaper updated successfully!');
       } else {
         // Create new whitepaper
         const now = new Date().toISOString();
+        const { id, created_at, updated_at, ...insertData } = whitepaperData;
         const { error } = await supabase.from('whitepapers').insert([{
-          ...whitepaperData,
-          published_at: whitepaperData.is_published ? now : null,
+          ...insertData,
+          published_at: insertData.is_published ? now : null,
           created_at: now,
           updated_at: now,
         }]);

@@ -79,7 +79,7 @@ export const MeetTheSuite = () => {
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`relative inline-flex items-center justify-center w-full h-[60px] rounded-[16px] font-semibold text-[13px] md:text-[14px] transition-all duration-300 group outline-none ${isActive ? "text-white scale-[1.02]" : "text-white/70 hover:text-white"
+                            className={`relative inline-flex items-center justify-center w-full h-[60px] rounded-[16px] font-semibold text-[11px] md:text-[14px] transition-all duration-300 group outline-none ${isActive ? "text-white scale-[1.02]" : "text-white/70 hover:text-white"
                                 }`}
                         >
                             {/* Glass Shadow & Border Layer */}

@@ -54,6 +54,10 @@ export default function ResourcesPage() {
   };
 
   const handleDelete = async (resource: Resource) => {
+    if (!window.confirm(`Are you sure you want to delete "${resource.title}"?`)) {
+      return;
+    }
+
     try {
       const { error } = await supabase.from('resources').delete().eq('id', resource.id);
       if (error) throw error;
@@ -96,17 +100,19 @@ export default function ResourcesPage() {
 
       if (editingResource) {
         // Update existing resource
+        const { id, created_at, ...updateData } = resourceData;
         const { error } = await supabase
           .from('resources')
-          .update({ ...resourceData, updated_at: new Date().toISOString() })
+          .update({ ...updateData, updated_at: new Date().toISOString() })
           .eq('id', editingResource.id);
         if (error) throw error;
         alert('Resource updated successfully!');
       } else {
         // Create new resource
         const now = new Date().toISOString();
+        const { id, created_at, updated_at, ...insertData } = resourceData;
         const { error } = await supabase.from('resources').insert([{
-          ...resourceData,
+          ...insertData,
           created_at: now,
           updated_at: now,
         }]);

@@ -45,6 +45,10 @@ export default function GuidesPage() {
   };
 
   const handleDelete = async (guide: Guide) => {
+    if (!window.confirm(`Are you sure you want to delete "${guide.title}"?`)) {
+      return;
+    }
+
     try {
       const { error } = await supabase.from('guides').delete().eq('id', guide.id);
       if (error) throw error;
@@ -86,17 +90,19 @@ export default function GuidesPage() {
 
       if (editingGuide) {
         // Update existing guide
+        const { id, created_at, ...updateData } = guideData;
         const { error } = await supabase
           .from('guides')
-          .update({ ...guideData, updated_at: new Date().toISOString() })
+          .update({ ...updateData, updated_at: new Date().toISOString() })
           .eq('id', editingGuide.id);
         if (error) throw error;
         alert('Guide updated successfully!');
       } else {
         // Create new guide
         const now = new Date().toISOString();
+        const { id, created_at, updated_at, ...insertData } = guideData;
         const { error } = await supabase.from('guides').insert([{
-          ...guideData,
+          ...insertData,
           created_at: now,
           updated_at: now,
         }]);

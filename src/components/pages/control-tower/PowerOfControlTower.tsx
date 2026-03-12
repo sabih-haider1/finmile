@@ -1,13 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const PowerOfControlTower = () => {
-    const [activeTab, setActiveTab] = useState(2); // Default to AI-Powered POD Management based on screenshot
-
     const tabs = [
         "Real-Time Delivery\nTracking",
         "Predictive ETA\nEngine",
@@ -33,19 +31,12 @@ export const PowerOfControlTower = () => {
             {/* Tab Navigation Grid */}
             <div className="w-full max-w-[1240px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3 mb-10 md:mb-12 z-10">
                 {tabs.map((tab, index) => (
-                    <button
+                    <div
                         key={index}
-                        onClick={() => setActiveTab(index)}
-                        className={`
-                            py-4 px-2 rounded-[12px] font-semibold text-[13px] md:text-[14px] leading-tight transition-all text-center flex items-center justify-center min-h-[70px]
-                            ${activeTab === index
-                                ? 'bg-[#6A27D4] text-white shadow-[0_10px_30px_rgba(106,39,212,0.3)] border border-[#5821B0]'
-                                : 'bg-white text-[#2F1C8C] border border-gray-100 shadow-[0_4px_15px_rgba(0,0,0,0.02)] hover:border-[#d6d0ff] hover:shadow-[0_4px_20px_rgba(106,39,212,0.08)]'
-                            }
-                        `}
+                        className="py-4 px-2 rounded-[12px] font-semibold text-[13px] md:text-[14px] leading-tight transition-all text-center flex items-center justify-center min-h-[70px] bg-white text-[#2F1C8C] border border-gray-100 shadow-[0_4px_15px_rgba(0,0,0,0.02)] hover:bg-[#6A27D4] hover:text-white hover:border-[#5821B0] hover:shadow-[0_10px_30px_rgba(106,39,212,0.3)] cursor-default"
                     >
                         <span className="whitespace-pre-line">{tab}</span>
-                    </button>
+                    </div>
                 ))}
             </div>
 
