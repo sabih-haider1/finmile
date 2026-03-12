@@ -1,4 +1,27 @@
+/**
+ * Case Studies API Routes
+ * 
+ * Security features:
+ * - Authentication required for write operations
+ * - Input validation with Zod schemas
+ * - Rate limiting
+ * - Sanitized error responses
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
+import { supabaseAdmin } from '@/lib/supabase-server';
+import { verifyAdminAuth } from '@/lib/auth';
+import { caseStudySchema, validateInput } from '@/lib/validation';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import {
+  handleApiError,
+  successResponse,
+  authErrorResponse,
+  rateLimitResponse,
+  errorResponse,
+} from '@/lib/errors';
+import { sanitizeHtml } from '@/lib/security';
+import { isSlugUnique } from '@/lib/upload';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -9,6 +32,13 @@ const supabase = createClient(
 // GET /api/case-studies - List all case studies with optional filters
 export async function GET(request: NextRequest) {
   try {
+    const ip = getClientIp(request);
+    const rateLimit = checkRateLimit(`case-studies-get-${ip}`, { maxRequests: 100, windowMs: 60000 });
+    
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(rateLimit.resetTime);
+    }
+
     const { searchParams } = new URL(request.url);
     const search = searchParams.get('search');
     const featured = searchParams.get('featured');
@@ -21,7 +51,6 @@ export async function GET(request: NextRequest) {
       .select('*')
       .order('created_at', { ascending: false });
 
-    // Apply filters
     if (search) {
       query = query.ilike('title', `%${search}%`);
     }
@@ -35,10 +64,17 @@ export async function GET(request: NextRequest) {
       query = query.eq('is_published', false);
     }
     if (limit) {
-      query = query.limit(parseInt(limit));
+      const limitNum = parseInt(limit);
+      if (limitNum > 0 && limitNum <= 100) {
+        query = query.limit(limitNum);
+      }
     }
     if (offset) {
-      query = query.range(parseInt(offset), parseInt(offset) + parseInt(limit || '10') - 1);
+      const offsetNum = parseInt(offset);
+      const limitNum = parseInt(limit || '10');
+      if (offsetNum >= 0) {
+        query = query.range(offsetNum, offsetNum + limitNum - 1);
+      }
     }
 
     const { data, error } = await query;
@@ -47,50 +83,64 @@ export async function GET(request: NextRequest) {
       throw error;
     }
 
-    return NextResponse.json({ data, count: data?.length || 0 }, { status: 200 });
-  } catch (error: any) {
-    console.error('Error fetching case studies:', error);
-    return NextResponse.json(
-      { error: error.message || 'Failed to fetch case studies' },
-      { status: 500 }
-    );
+    return successResponse({ items: data, count: data?.length || 0 });
+  } catch (error) {
+    return handleApiError(error, 'Failed to fetch case studies');
   }
 }
 
 // POST /api/case-studies - Create a new case study
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-
-    // Validate required fields
-    if (!body.title || !body.slug || !body.content) {
-      return NextResponse.json(
-        { error: 'Missing required fields: title, slug, content' },
-        { status: 400 }
-      );
+    const ip = getClientIp(request);
+    const rateLimit = checkRateLimit(`case-studies-post-${ip}`, { maxRequests: 10, windowMs: 60000 });
+    
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(rateLimit.resetTime);
     }
+
+    const authResult = await verifyAdminAuth(request);
+    if (!authResult.authenticated) {
+      return authErrorResponse(authResult.error);
+    }
+
+    const body = await request.json();
+    const validation = validateInput(caseStudySchema, body);
+
+    if (!validation.success) {
+      return errorResponse(validation.error || 'Invalid input', 400, 'VALIDATION_ERROR');
+    }
+
+    const validatedData = validation.data!;
+
+    const slugIsUnique = await isSlugUnique('case_studies', validatedData.slug);
+    if (!slugIsUnique) {
+      return errorResponse('A case study with this slug already exists', 409, 'DUPLICATE_SLUG');
+    }
+
+    const sanitizedContent = sanitizeHtml(validatedData.content);
 
     const now = new Date().toISOString();
     const caseStudyData = {
-      title: body.title,
-      slug: body.slug,
-      summary: body.summary || '',
-      content: body.content,
-      cover_image_url: body.cover_image_url || null,
-      company_name: body.company_name || null,
-      industry: body.industry || null,
-      challenge: body.challenge || null,
-      solution: body.solution || null,
-      results: body.results || null,
-      tags: body.tags || null,
-      is_featured: body.is_featured || false,
-      is_published: body.is_published || true,
-      published_at: body.is_published ? now : null,
+      title: validatedData.title,
+      slug: validatedData.slug,
+      summary: validatedData.summary || '',
+      content: sanitizedContent,
+      cover_image_url: validatedData.cover_image_url || null,
+      company_name: validatedData.company_name || null,
+      industry: validatedData.industry || null,
+      challenge: validatedData.challenge || null,
+      solution: validatedData.solution || null,
+      results: validatedData.results || null,
+      tags: validatedData.tags || null,
+      is_featured: validatedData.is_featured || false,
+      is_published: validatedData.is_published ?? true,
+      published_at: validatedData.is_published ? now : null,
       created_at: now,
       updated_at: now,
     };
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('case_studies')
       .insert([caseStudyData])
       .select()
@@ -100,12 +150,8 @@ export async function POST(request: NextRequest) {
       throw error;
     }
 
-    return NextResponse.json({ data }, { status: 201 });
-  } catch (error: any) {
-    console.error('Error creating case study:', error);
-    return NextResponse.json(
-      { error: error.message || 'Failed to create case study' },
-      { status: 500 }
-    );
+    return successResponse(data, 201);
+  } catch (error) {
+    return handleApiError(error, 'Failed to create case study');
   }
 }

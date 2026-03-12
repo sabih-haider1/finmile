@@ -33,6 +33,7 @@ export default function AIAgentsPage() {
                     text1={<>AI Agents aren't suggestions — they're execution engines that<br className="hidden lg:block" /> improve with data. Start your autonomous journey today.</>}
                     text2={null}
                     secondaryButtonText="See Finmile in Action"
+                    secondaryButtonHref="#"
                 />
             </div>
             <Footer />

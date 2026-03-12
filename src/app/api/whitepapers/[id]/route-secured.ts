@@ -1,12 +1,14 @@
 /**
- * Guide by ID API Routes - SECURED
+ * Whitepaper by ID API Routes - SECURED
+ * 
+ * Security: Authentication required for write operations
  */
 
 import { NextRequest } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { verifyAdminAuth } from '@/lib/auth';
-import { guideUpdateSchema, validateInput } from '@/lib/validation';
+import { whitepaperUpdateSchema, validateInput } from '@/lib/validation';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 import {
   handleApiError,
@@ -24,13 +26,11 @@ const supabase = createClient(
 
 export async function GET(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const params = await context.params;
-    
     const ip = getClientIp(request);
-    const rateLimit = checkRateLimit(`guides-get-${ip}`, { maxRequests: 100, windowMs: 60000 });
+    const rateLimit = checkRateLimit(`whitepapers-get-${ip}`, { maxRequests: 100, windowMs: 60000 });
     
     if (!rateLimit.allowed) {
       return rateLimitResponse(rateLimit.resetTime);
@@ -38,41 +38,39 @@ export async function GET(
 
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(params.id)) {
-      return errorResponse('Invalid guide ID format', 400, 'INVALID_ID');
+      return errorResponse('Invalid whitepaper ID format', 400, 'INVALID_ID');
     }
 
     const { data, error } = await supabase
-      .from('guides')
+      .from('whitepapers')
       .select('*')
       .eq('id', params.id)
       .single();
 
     if (error) {
       if (error.code === 'PGRST116') {
-        return errorResponse('Guide not found', 404, 'NOT_FOUND');
+        return errorResponse('Whitepaper not found', 404, 'NOT_FOUND');
       }
       throw error;
     }
 
     if (!data) {
-      return errorResponse('Guide not found', 404, 'NOT_FOUND');
+      return errorResponse('Whitepaper not found', 404, 'NOT_FOUND');
     }
 
     return successResponse(data);
   } catch (error) {
-    return handleApiError(error, 'Failed to fetch guide');
+    return handleApiError(error, 'Failed to fetch whitepaper');
   }
 }
 
 export async function PUT(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const params = await context.params;
-    
     const ip = getClientIp(request);
-    const rateLimit = checkRateLimit(`guides-put-${ip}`, { maxRequests: 20, windowMs: 60000 });
+    const rateLimit = checkRateLimit(`whitepapers-put-${ip}`, { maxRequests: 20, windowMs: 60000 });
     
     if (!rateLimit.allowed) {
       return rateLimitResponse(rateLimit.resetTime);
@@ -85,11 +83,11 @@ export async function PUT(
 
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(params.id)) {
-      return errorResponse('Invalid guide ID format', 400, 'INVALID_ID');
+      return errorResponse('Invalid whitepaper ID format', 400, 'INVALID_ID');
     }
 
     const body = await request.json();
-    const validation = validateInput(guideUpdateSchema, body);
+    const validation = validateInput(whitepaperUpdateSchema, body);
 
     if (!validation.success) {
       return errorResponse(validation.error || 'Invalid input', 400, 'VALIDATION_ERROR');
@@ -97,20 +95,20 @@ export async function PUT(
 
     const validatedData = validation.data!;
 
-    const { data: existingGuide, error: fetchError } = await supabaseAdmin
-      .from('guides')
+    const { data: existingWhitepaper, error: fetchError } = await supabaseAdmin
+      .from('whitepapers')
       .select('id, slug')
       .eq('id', params.id)
       .single();
 
-    if (fetchError || !existingGuide) {
-      return errorResponse('Guide not found', 404, 'NOT_FOUND');
+    if (fetchError || !existingWhitepaper) {
+      return errorResponse('Whitepaper not found', 404, 'NOT_FOUND');
     }
 
-    if (validatedData.slug && validatedData.slug !== existingGuide.slug) {
-      const slugIsUnique = await isSlugUnique('guides', validatedData.slug, params.id);
+    if (validatedData.slug && validatedData.slug !== existingWhitepaper.slug) {
+      const slugIsUnique = await isSlugUnique('whitepapers', validatedData.slug, params.id);
       if (!slugIsUnique) {
-        return errorResponse('A guide with this slug already exists', 409, 'DUPLICATE_SLUG');
+        return errorResponse('A whitepaper with this slug already exists', 409, 'DUPLICATE_SLUG');
       }
     }
 
@@ -123,7 +121,7 @@ export async function PUT(
     delete updateData.created_at;
 
     const { data, error } = await supabaseAdmin
-      .from('guides')
+      .from('whitepapers')
       .update(updateData)
       .eq('id', params.id)
       .select()
@@ -135,19 +133,17 @@ export async function PUT(
 
     return successResponse(data);
   } catch (error) {
-    return handleApiError(error, 'Failed to update guide');
+    return handleApiError(error, 'Failed to update whitepaper');
   }
 }
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const params = await context.params;
-    
     const ip = getClientIp(request);
-    const rateLimit = checkRateLimit(`guides-delete-${ip}`, { maxRequests: 10, windowMs: 60000 });
+    const rateLimit = checkRateLimit(`whitepapers-delete-${ip}`, { maxRequests: 10, windowMs: 60000 });
     
     if (!rateLimit.allowed) {
       return rateLimitResponse(rateLimit.resetTime);
@@ -160,21 +156,21 @@ export async function DELETE(
 
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(params.id)) {
-      return errorResponse('Invalid guide ID format', 400, 'INVALID_ID');
+      return errorResponse('Invalid whitepaper ID format', 400, 'INVALID_ID');
     }
 
-    const { data: existingGuide, error: fetchError } = await supabaseAdmin
-      .from('guides')
+    const { data: existingWhitepaper, error: fetchError } = await supabaseAdmin
+      .from('whitepapers')
       .select('id')
       .eq('id', params.id)
       .single();
 
-    if (fetchError || !existingGuide) {
-      return errorResponse('Guide not found', 404, 'NOT_FOUND');
+    if (fetchError || !existingWhitepaper) {
+      return errorResponse('Whitepaper not found', 404, 'NOT_FOUND');
     }
 
     const { error } = await supabaseAdmin
-      .from('guides')
+      .from('whitepapers')
       .delete()
       .eq('id', params.id);
 
@@ -182,8 +178,8 @@ export async function DELETE(
       throw error;
     }
 
-    return successResponse({ message: 'Guide deleted successfully' });
+    return successResponse({ message: 'Whitepaper deleted successfully' });
   } catch (error) {
-    return handleApiError(error, 'Failed to delete guide');
+    return handleApiError(error, 'Failed to delete whitepaper');
   }
 }

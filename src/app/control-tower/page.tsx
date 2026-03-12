@@ -43,6 +43,7 @@ export default function ControlTowerPage() {
                 text1={<>Stop reacting and start predicting. With Finmile's Control <br className="hidden md:block" /> Tower, every delivery becomes transparent, measurable, and <br className="hidden md:block" /> optimised.</>}
                 text2={null}
                 secondaryButtonText="Request a Live Walkthrough"
+                secondaryButtonHref="#"
             />
 
             <Footer />

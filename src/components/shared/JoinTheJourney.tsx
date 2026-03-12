@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { RouteCalculatorPopup } from './RouteCalculatorPopup';
+import React from 'react';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -11,6 +11,7 @@ interface JoinTheJourneyProps {
     text1?: React.ReactNode;
     text2?: React.ReactNode;
     secondaryButtonText?: string;
+    secondaryButtonHref?: string;
 }
 
 export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
@@ -23,18 +24,13 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
             and more sustainably.
         </>
     ),
-    secondaryButtonText = "Calculate your route savings"
+    secondaryButtonText = "Calculate your route savings",
+    secondaryButtonHref
 }) => {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const secondaryButtonClass = "w-full sm:flex-1 px-4 lg:px-6 py-3 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-[80px] text-[14px] font-medium whitespace-normal sm:whitespace-nowrap transition-all hover:bg-[#2F1C8C] hover:text-white leading-snug text-center";
 
     return (
-        <>
-            <RouteCalculatorPopup
-                isOpen={isPopupOpen}
-                onClose={() => setIsPopupOpen(false)}
-            />
-
-            <section
+        <section
                 className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-16 lg:py-24 overflow-hidden relative ${montserrat.className}`}
             >
                 <div className="w-full max-w-[1440px] flex flex-col lg:flex-row items-stretch lg:items-center xl:items-start gap-12 lg:gap-[10px] z-10 relative">
@@ -87,17 +83,19 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                                     Book A Demo
                                 </button>
 
-                                <button
-                                    className="w-full sm:flex-1 px-4 lg:px-6 py-3 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-[80px] text-[14px] font-medium whitespace-normal sm:whitespace-nowrap transition-all hover:bg-[#2F1C8C] hover:text-white leading-snug"
-                                    onClick={() => setIsPopupOpen(true)}
-                                >
-                                    {secondaryButtonText}
-                                </button>
+                                {secondaryButtonHref ? (
+                                    <Link href={secondaryButtonHref} className={secondaryButtonClass}>
+                                        {secondaryButtonText}
+                                    </Link>
+                                ) : (
+                                    <button className={secondaryButtonClass}>
+                                        {secondaryButtonText}
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-        </>
     );
 };
