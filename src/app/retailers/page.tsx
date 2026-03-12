@@ -10,6 +10,7 @@ import {PredictiveEtasTracking} from "../../components/pages/retailers/Predictiv
 import {AiRouteOptimization} from "../../components/pages/retailers/AiRouteOptimization";
 import {RetailersWhyChoose} from "../../components/pages/retailers/RetailersWhyChoose";
 import { RetailersModernDelivery } from "../../components/pages/retailers/RetailersModernDelivery";
+import { RetailersAIOperatingSystem } from "../../components/pages/retailers/RetailersAIOperatingSystem";
 
 export const metadata = {
     title: 'Retailers | Finmile',
@@ -30,6 +31,7 @@ export default function RetailersPage() {
                 gradientFrom="#2F1C8C"
                 gradientTo="#6A27D4"
             />
+            <RetailersAIOperatingSystem/>
             <RetailersModernDelivery/>
             <RetailersWhyChoose/>
             <AiRouteOptimization/>

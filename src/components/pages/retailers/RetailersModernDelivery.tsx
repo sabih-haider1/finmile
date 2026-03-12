@@ -1,79 +1,105 @@
 import React from 'react';
 import Image from 'next/image';
-import { Box, Monitor, TrendingUp } from 'lucide-react';
+import { Database, Monitor, TrendingUp } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const RetailersModernDelivery = () => {
     return (
-        <section className={`w-full relative flex flex-col items-center py-16 md:py-24 px-4 md:px-6 lg:px-24 bg-white ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] z-10 relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                {/* Left Section - Text Content */}
-                <div className="flex flex-col items-start text-left">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight mb-6">
-                        Meet Modern Delivery<br />Expectations — Without<br />Breaking Margins
+        <section className={`w-full bg-[#F8F9FC] flex flex-col items-center px-4 md:px-8 lg:px-24 py-16 lg:py-24 overflow-hidden relative ${montserrat.className}`}>
+            
+            {/* Soft background glow exactly behind the left text section */}
+            <div className="absolute left-[-5%] top-[25%] w-[800px] h-[700px] bg-white rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center z-10 relative">
+
+                {/* Left Side: Text Content */}
+                <div className="flex flex-col items-start text-left w-full">
+                    
+                    {/* Exact Title Line Breaks */}
+                    <h2 className="text-[#2F1C8C] font-bold text-[36px] md:text-[42px] leading-[1.25] tracking-tight mb-6">
+                        Meet Modern Delivery<br className="hidden sm:block" />
+                        Expectations — Without<br className="hidden sm:block" />
+                        Breaking Margins
                     </h2>
-                    <p className="text-gray-600 text-base md:text-lg mb-8">
-                        The retail delivery landscape has changed. Customer patience is gone, and
+
+                    {/* Exact Main Paragraph Line Breaks */}
+                    <p className="text-[#8B8B9B] font-medium text-[15px] leading-[1.6] mb-12">
+                        The retail delivery landscape has changed. Customer patience is gone, and<br className="hidden xl:block" />
                         logistics costs are rising. Finmile helps you meet these challenges head-on.
                     </p>
 
-                    <div className="space-y-6">
-                        <div className="flex items-start">
-                            <div className="p-3 rounded-full bg-[#FAFAFF] text-[#6A27D4] mr-4 shadow-sm">
-                                <Box className="w-6 h-6" />
+                    <div className="flex flex-col gap-9 w-full">
+                        
+                        {/* Item 1 */}
+                        <div className="flex items-start gap-6">
+                            <div className="w-[64px] h-[64px] bg-white rounded-full flex items-center justify-center shrink-0 shadow-[0_16px_40px_rgba(47,28,140,0.06)] relative z-10">
+                                <Database className="w-[24px] h-[24px] text-[#5630D4]" strokeWidth={2} />
                             </div>
-                            <div>
-                                <h3 className="font-semibold text-lg text-[#0A1B33] mb-1">Precision ETAs</h3>
-                                <p className="text-gray-600 text-base">
-                                    Customers expect live tracking and absolute certainty on when
+                            <div className="flex flex-col pt-1">
+                                <h4 className="text-[#1A1A24] font-bold text-[16px] mb-1.5">Precision ETAs</h4>
+                                {/* Exact Paragraph Line Breaks */}
+                                <p className="text-[#8B8B9B] font-medium text-[14px] leading-[1.6]">
+                                    Customers expect live tracking and absolute certainty on when<br className="hidden xl:block" />
                                     their order arrives.
                                 </p>
                             </div>
                         </div>
 
-                        <div className="flex items-start">
-                            <div className="p-3 rounded-full bg-[#FAFAFF] text-[#6A27D4] mr-4 shadow-sm">
-                                <Monitor className="w-6 h-6" />
+                        {/* Item 2 */}
+                        <div className="flex items-start gap-6">
+                            <div className="w-[64px] h-[64px] bg-white rounded-full flex items-center justify-center shrink-0 shadow-[0_16px_40px_rgba(47,28,140,0.06)] relative z-10">
+                                <Monitor className="w-[24px] h-[24px] text-[#5630D4]" strokeWidth={2} />
                             </div>
-                            <div>
-                                <h3 className="font-semibold text-lg text-[#0A1B33] mb-1">Rising Costs</h3>
-                                <p className="text-gray-600 text-base">
-                                    Every mile and driver matters. Waste is the enemy of retail
+                            <div className="flex flex-col pt-1">
+                                <h4 className="text-[#1A1A24] font-bold text-[16px] mb-1.5">Rising Costs</h4>
+                                {/* Exact Paragraph Line Breaks */}
+                                <p className="text-[#8B8B9B] font-medium text-[14px] leading-[1.6]">
+                                    Every mile and driver matters. Waste is the enemy of retail<br className="hidden xl:block" />
                                     margins.
                                 </p>
                             </div>
                         </div>
 
-                        <div className="flex items-start">
-                            <div className="p-3 rounded-full bg-[#FAFAFF] text-[#6A27D4] mr-4 shadow-sm">
-                                <TrendingUp className="w-6 h-6" />
+                        {/* Item 3 */}
+                        <div className="flex items-start gap-6">
+                            <div className="w-[64px] h-[64px] bg-white rounded-full flex items-center justify-center shrink-0 shadow-[0_16px_40px_rgba(47,28,140,0.06)] relative z-10">
+                                <TrendingUp className="w-[24px] h-[24px] text-[#5630D4]" strokeWidth={2} />
                             </div>
-                            <div>
-                                <h3 className="font-semibold text-lg text-[#0A1B33] mb-1">Experience = Loyalty</h3>
-                                <p className="text-gray-600 text-base">
-                                    A poor delivery experience loses customers instantly. Perfection is
+                            <div className="flex flex-col pt-1">
+                                <h4 className="text-[#1A1A24] font-bold text-[16px] mb-1.5">Experience = Loyalty</h4>
+                                {/* Exact Paragraph Line Breaks */}
+                                <p className="text-[#8B8B9B] font-medium text-[14px] leading-[1.6]">
+                                    A poor delivery experience loses customers instantly. Perfection is<br className="hidden xl:block" />
                                     the baseline.
                                 </p>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
-                {/* Right Section - Image */}
-                <div className="flex justify-center md:justify-end">
-                    <div className="relative w-full max-w-lg">
-                        <Image
-                            src="/assets/images/features/laptop-route.png"
-                            alt="Route optimization interface showing modern delivery management"
-                            width={600}
-                            height={400}
-                            className="w-full h-auto object-contain rounded-lg shadow-lg"
-                            priority
-                        />
+                {/* Right Side: Image Container */}
+                <div className="flex justify-center lg:justify-end w-full mt-10 lg:mt-0">
+                    {/* UPDATED: Exact bg-[#6A27D4] applied here */}
+                    <div className="relative w-full max-w-[480px] h-[400px] sm:h-[500px] bg-[#6A27D4] rounded-[32px] overflow-hidden flex items-end justify-center shadow-md">
+                        
+                        {/* The container for the laptop image. 
+                            Anchored perfectly to the bottom of the purple box. */}
+                        <div className="absolute bottom-0 w-[92%] h-[92%]">
+                            <Image
+                                src="/assets/images/features/laptop-route.png"
+                                alt="Route optimization interface on a laptop"
+                                fill
+                                style={{ objectFit: 'contain', objectPosition: 'bottom center' }}
+                                priority
+                            />
+                        </div>
+                        
                     </div>
                 </div>
+
             </div>
         </section>
     );
