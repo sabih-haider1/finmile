@@ -39,12 +39,15 @@ export default function AdminLoginPage() {
         throw error;
       }
 
-      console.log('Login successful:', data);
-      router.push('/admin/dashboard');
+      if (data.session) {
+        console.log('Login successful:', data);
+        // Use replace instead of push to prevent back button issues
+        router.replace('/admin/dashboard');
+        router.refresh(); // Refresh to ensure session is recognized
+      }
     } catch (error: any) {
       console.error('Login error:', error);
       setError(error.message || 'Failed to login. Please check your credentials.');
-    } finally {
       setLoading(false);
     }
   };

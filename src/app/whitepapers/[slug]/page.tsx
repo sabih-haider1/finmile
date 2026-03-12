@@ -58,9 +58,9 @@ export default async function WhitepaperDetailPage({ params }: Props) {
           <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
             
             <div className="mb-6 flex gap-3 justify-center flex-wrap">
-               <Badge label="Research & Insights" />
+               <Badge label="Research & Insights" showNew={false} />
                {whitepaper.tags?.map((tag: string) => (
-                  <Badge key={tag} label={tag} />
+                  <Badge key={tag} label={tag} showNew={false} />
                ))}
             </div>
             

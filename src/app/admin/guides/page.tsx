@@ -62,7 +62,6 @@ export default function GuidesPage() {
   const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
     try {
       let pdfUrl = formData.pdf_url;
-      let coverImageUrl = formData.cover_image_url;
 
       // Upload PDF if provided
       if (files.pdf_url) {
@@ -73,19 +72,9 @@ export default function GuidesPage() {
         });
       }
 
-      // Upload cover image if provided
-      if (files.cover_image_url) {
-        coverImageUrl = await uploadFile({
-          bucket: 'guides',
-          folder: 'covers',
-          file: files.cover_image_url,
-        });
-      }
-
       const guideData = {
         ...formData,
         pdf_url: pdfUrl,
-        cover_image_url: coverImageUrl || null,
       };
 
       if (editingGuide) {
@@ -123,7 +112,6 @@ export default function GuidesPage() {
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'description', label: 'Description', type: 'textarea', rows: 4, placeholder: 'Guide description...' },
     { name: 'pdf_url', label: 'PDF File', type: 'file', required: true, accept: '.pdf', bucket: 'guides', folder: 'pdfs' },
-    { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'guides', folder: 'covers' },
   ];
 
   const columns = [

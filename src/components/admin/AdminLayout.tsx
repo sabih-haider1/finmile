@@ -19,7 +19,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     checkAuth();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT') {
+      if (event === 'SIGNED_IN' && session) {
+        setUser(session.user);
+        setLoading(false);
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
         router.push('/admin/login');
       }
     });
@@ -30,13 +34,19 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }, [router]);
 
   const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (session) {
-      setUser(session.user);
-      setLoading(false);
-    } else {
-      // No session - redirect to login
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user);
+      } else {
+        // No session - redirect to login
+        router.push('/admin/login');
+      }
+    } catch (error) {
+      console.error('Auth check error:', error);
       router.push('/admin/login');
+    } finally {
+      setLoading(false);
     }
   };
 

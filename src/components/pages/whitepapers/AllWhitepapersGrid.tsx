@@ -14,14 +14,15 @@ interface Whitepaper {
   pdf_url?: string;
   published_at: string;
   is_featured: boolean;
+  topic: string | null;
+  industry: string | null;
   tags: string[];
 }
 
-export function WhitepaperGrid() {
+export function AllWhitepapersGrid() {
   const [whitepapers, setWhitepapers] = useState<Whitepaper[]>([]);
   const [filteredWhitepapers, setFilteredWhitepapers] = useState<Whitepaper[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showAll, setShowAll] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
@@ -34,7 +35,7 @@ export function WhitepaperGrid() {
       try {
         const { data, error } = await supabase
           .from('whitepapers')
-          .select('*')
+          .select('id, title, slug, summary, cover_image_url, pdf_url, published_at, is_featured, topic, industry, tags')
           .eq('is_published', true);
 
         if (error) {
@@ -43,6 +44,7 @@ export function WhitepaperGrid() {
         }
 
         if (data) {
+          console.log('All Whitepapers - Fetched:', data);
           setWhitepapers(data as Whitepaper[]);
         }
       } catch (error) {
@@ -72,16 +74,26 @@ export function WhitepaperGrid() {
 
     // Apply topic filter
     if (selectedTopic) {
-      filtered = filtered.filter((wp) => 
-        wp.tags?.some(tag => tag.toLowerCase().includes(selectedTopic.toLowerCase()))
-      );
+      console.log('All Page - Filtering by topic:', selectedTopic);
+      filtered = filtered.filter((wp) => {
+        const wpTopic = wp.topic?.trim();
+        const match = wpTopic && wpTopic.toLowerCase() === selectedTopic.toLowerCase();
+        console.log(`Whitepaper "${wp.title}" topic: "${wp.topic}" - Match: ${match}`);
+        return match;
+      });
+      console.log('All Page - After topic filter:', filtered.length, 'whitepapers');
     }
 
     // Apply industry filter
     if (selectedIndustry) {
-      filtered = filtered.filter((wp) => 
-        wp.tags?.some(tag => tag.toLowerCase().includes(selectedIndustry.toLowerCase()))
-      );
+      console.log('All Page - Filtering by industry:', selectedIndustry);
+      filtered = filtered.filter((wp) => {
+        const wpIndustry = wp.industry?.trim();
+        const match = wpIndustry && wpIndustry.toLowerCase() === selectedIndustry.toLowerCase();
+        console.log(`Whitepaper "${wp.title}" industry: "${wp.industry}" - Match: ${match}`);
+        return match;
+      });
+      console.log('All Page - After industry filter:', filtered.length, 'whitepapers');
     }
 
     // Apply sorting
@@ -102,10 +114,6 @@ export function WhitepaperGrid() {
     setFilteredWhitepapers(filtered);
   }, [whitepapers, searchQuery, selectedTopic, selectedIndustry, sortBy]);
 
-  // Determine which whitepapers to display
-  const displayedWhitepapers = showAll ? filteredWhitepapers : filteredWhitepapers.slice(0, 6);
-  const hasMore = filteredWhitepapers.length > 6;
-
   return (
     <div className="bg-white">
       {/* Search & Filter Bar */}
@@ -119,23 +127,13 @@ export function WhitepaperGrid() {
         currentSort={sortBy}
       />
 
-      {/* Recent White Papers Section */}
       <div className="py-16 px-6 md:px-12 xl:px-20">
         <div className="max-w-7xl mx-auto">
           {/* Header Row */}
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl md:text-3xl font-semibold text-[#2F1C8C]">
-              Recent White Papers
+              All Whitepapers
             </h2>
-            
-            {hasMore && !showAll && (
-              <button
-                onClick={() => setShowAll(true)}
-                className="px-6 h-11 rounded-full bg-gradient-to-r from-[#5B52F3] to-[#7A73FF] text-white text-sm font-medium shadow-md shadow-indigo-200/40 hover:shadow-lg hover:-translate-y-[1px] transition-all"
-              >
-                View All
-              </button>
-            )}
           </div>
 
           {/* Loading State */}
@@ -161,33 +159,19 @@ export function WhitepaperGrid() {
           )}
 
           {/* Grid */}
-          {!loading && displayedWhitepapers.length > 0 && (
-            <>
-              <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                {displayedWhitepapers.map((whitepaper) => (
-                  <WhitepaperCard
-                    key={whitepaper.id}
-                    title={whitepaper.title}
-                    summary={whitepaper.summary}
-                    coverImageUrl={whitepaper.cover_image_url}
-                    slug={whitepaper.slug}
-                    pdfUrl={whitepaper.pdf_url}
-                  />
-                ))}
-              </div>
-
-              {/* Show Less Button */}
-              {showAll && hasMore && (
-                <div className="mt-12 text-center">
-                  <button
-                    onClick={() => setShowAll(false)}
-                    className="px-8 py-3 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200 transition-all"
-                  >
-                    Show Less
-                  </button>
-                </div>
-              )}
-            </>
+          {!loading && filteredWhitepapers.length > 0 && (
+            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredWhitepapers.map((whitepaper) => (
+                <WhitepaperCard
+                  key={whitepaper.id}
+                  title={whitepaper.title}
+                  summary={whitepaper.summary}
+                  coverImageUrl={whitepaper.cover_image_url}
+                  slug={whitepaper.slug}
+                  pdfUrl={whitepaper.pdf_url}
+                />
+              ))}
+            </div>
           )}
         </div>
       </div>

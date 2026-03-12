@@ -1,8 +1,11 @@
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { PageHero } from "../../components/layout/PageHero";
-import { WhitepaperGrid } from "../../components/pages/about/WhitepaperGrid";
 import { AiDataSustainability } from "@/components/pages/about/AIDataSustainability"; 
+import { CaseStudiesGrid } from "@/components/pages/resources/CaseStudiesGrid";
+import { GuideGrid } from "@/components/pages/guides/GuideGrid";
+import { BlogGrid } from "@/components/pages/blog/BlogGrid";
+import { WhitepaperSection } from "@/components/pages/whitepapers/WhitepaperSection";
 
 export const metadata = {
     title: 'Research & Whitepapers | Finmile',
@@ -16,7 +19,10 @@ export default function WhitepapersPage() {
             <div className="flex-grow">
                 <PageHero title="Research & Whitepapers" />
                 <AiDataSustainability />
-                <WhitepaperGrid />
+                <WhitepaperSection />
+                <CaseStudiesGrid />
+                <GuideGrid />
+                <BlogGrid />
             </div>
             <Footer />
         </main>

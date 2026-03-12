@@ -63,7 +63,7 @@ export function WhitepaperCard({
           >
             Read Summary
           </a>
-          
+
           {pdfUrl && (
             <a
               href={pdfUrl}
