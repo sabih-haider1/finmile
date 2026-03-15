@@ -71,9 +71,9 @@ export const Footer = () => {
                             <Link href="/deliveries" className="hover:text-white transition-colors">Deliveries</Link>
                             <Link href="/delivery-software" className="hover:text-white transition-colors">Delivery Software</Link>
                             <Link href="/driver-app" className="hover:text-white transition-colors">Driver App</Link>
-                            <Link href="/3pl-networks" className="hover:text-white transition-colors">3PL & Networks</Link>
+                            <Link href="/3pl-networks" className="hover:text-white transition-colors">3PL Networks</Link>
                             <Link href="/dsps" className="hover:text-white transition-colors">DSPs</Link>
-                            <Link href="/retailers" className="hover:text-white transition-colors">Finmile for Retailers</Link>
+                            <Link href="/retailers" className="hover:text-white transition-colors">Retailers</Link>
                             <Link href="/optimization" className="hover:text-white transition-colors">Optimization</Link>
                             <Link href="/return-optimization" className="hover:text-white transition-colors">Return Optimization</Link>
                             <Link href="/sustainable" className="hover:text-white transition-colors">Sustainable Delivery</Link>

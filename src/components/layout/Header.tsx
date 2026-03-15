@@ -39,7 +39,7 @@ export const Header = () => {
   return (
     <>
       <header
-        className={`fixed left-[30px] right-[30px] z-[100] max-w-[1500px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 ${montserrat.className} ${
+        className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 ${montserrat.className} ${
           isMobileMenuOpen && 'xl:hidden' 
             ? 'bg-transparent border-transparent' 
             : isScrolled 
@@ -63,7 +63,7 @@ export const Header = () => {
         </Link>
 
         {/* Center Nav Links - Desktop */}
-        <nav className="hidden xl:flex items-center justify-center flex-1 gap-5 2xl:gap-8 mx-2 overflow-hidden">
+        <nav className="hidden xl:flex items-center justify-center min-w-0 flex-1 gap-5 2xl:gap-8 mx-2">
           {links.map((link) => (
             link === "About" ? (
               <Link
@@ -85,6 +85,14 @@ export const Header = () => {
               <Link
                 key={link}
                 href="/deliveries"
+                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
+              >
+                {link}
+              </Link>
+            ) : link === "Delivery Software" ? (
+              <Link
+                key={link}
+                href="/delivery-software"
                 className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
               >
                 {link}
@@ -181,6 +189,15 @@ export const Header = () => {
                 <Link
                   key={link}
                   href="/deliveries"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
+                >
+                  {link}
+                </Link>
+              ) : link === "Delivery Software" ? (
+                <Link
+                  key={link}
+                  href="/delivery-software"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
                 >

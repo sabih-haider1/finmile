@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body suppressHydrationWarning className={montserrat.className}>
         {/* SVG Filter for Liquid Glass Effect */}
         <svg className="hidden" aria-hidden="true">
           <defs>
