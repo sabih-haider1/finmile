@@ -1,24 +1,23 @@
-"use client";
-
 import React from 'react';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-export const DspsIntegrations = () => {
+export const RetailersIntegrations = () => {
     const integrations = [
         "Shopify", "TikTok Shop", "JD.com", "Temu", "Power BI", "Zapier"
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 overflow-hidden relative ${montserrat.className}`}>
-            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1240px] mx-auto mb-8 md:mb-10">
+        <section className={`w-full bg-white flex flex-col items-center px-6 md:px-12 lg:px-24 py-12 md:py-16 overflow-hidden relative ${montserrat.className}`}>
+            
+            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1240px] mx-auto mb-10 md:mb-12">
                 <h2 className="font-semibold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.3]">
-                    Integrate Seamlessly with<br />Your Existing Systems
+                    Integrate Seamlessly with<br />Your Tech Stack
                 </h2>
             </div>
 
-            {/* Changed from Flex to Grid for exact container-edge alignment to match RetailersIntegrations */}
+            {/* Changed from Flex to Grid for exact container-edge alignment */}
             <div className="w-full max-w-[1240px] z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5 mb-10 md:mb-12">
                 {integrations.map((integration, idx) => (
                     <div
@@ -32,9 +31,11 @@ export const DspsIntegrations = () => {
                 ))}
             </div>
 
-            <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 z-10">
+            {/* Button styling updated with accurate purple glow shadow */}
+            <button className="bg-[#612BDE] text-white px-8 py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_24px_rgba(97,43,222,0.3)] hover:bg-[#5222C0] transition-all hover:-translate-y-0.5 active:translate-y-0 z-10">
                 Explore All Integrations
             </button>
+            
         </section>
     );
 };

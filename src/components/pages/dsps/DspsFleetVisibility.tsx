@@ -6,7 +6,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsFleetVisibility = () => {
     return (
-        <section className={`w-full bg-[#FAFAFF] py-12 md:py-16 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden ${montserrat.className}`}>
+        // CHANGED: py-12 md:py-16 is now py-6 md:py-8 to reduce top and bottom spacing
+        <section className={`w-full bg-[#FAFAFF] py-6 md:py-8 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 
                 {/* Left Side: Text Content */}
@@ -44,7 +45,8 @@ export const DspsFleetVisibility = () => {
                 </div>
 
                 {/* Right Side: Image Content */}
-                <div className="relative w-full flex items-center justify-center h-[450px] md:h-[600px] lg:h-[750px] order-1 lg:order-2">
+                {/* CHANGED: slightly reduced max heights to prevent excess empty space around the image */}
+                <div className="relative w-full flex items-center justify-center h-[400px] md:h-[500px] lg:h-[650px] order-1 lg:order-2">
                     <div className="relative w-full h-full">
                         <Image 
                             src="/assets/images/features/app-screen-blue-full.png" 
