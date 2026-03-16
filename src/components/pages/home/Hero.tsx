@@ -1,13 +1,11 @@
 import React from "react";
+import Image from 'next/image';
 import { Badge } from "../../ui/Badge";
 import { Button } from "../../ui/Button";
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const Hero = () => {
   return (
-    <section className={`relative w-full min-h-screen flex flex-col items-center justify-start pt-[140px] px-4 overflow-hidden bg-[#0B0616] ${montserrat.className}`}>
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-start pt-[140px] px-4 overflow-hidden bg-[#0B0616]">
 
       {/* Upper Subtle Glow behind text */}
       <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#3B257E] rounded-full blur-[140px] opacity-30 pointer-events-none" />
@@ -45,9 +43,14 @@ export const Hero = () => {
 
       {/* Dashboard Mockup Image */}
       <div className="relative z-10 mt-12 w-full max-w-[1200px] mx-auto px-2 md:px-8">
-        <img
+        <Image
           src="/assets/images/hero-dashboard.png"
           alt="Finmile Dashboard"
+          width={1200}
+          height={720}
+          priority
+          fetchPriority="high"
+          sizes="(max-width: 768px) 96vw, (max-width: 1280px) 90vw, 1200px"
           className="w-full h-auto object-contain"
         />
       </div>

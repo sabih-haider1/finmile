@@ -2,10 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from 'next/image';
 import { Button } from "../ui/Button";
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,12 +14,23 @@ export const Header = () => {
   ];
 
   useEffect(() => {
+    let rafId = 0;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 50);
+        rafId = 0;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
   }, []);
 
   // Close mobile menu when clicking outside
@@ -39,7 +48,7 @@ export const Header = () => {
   return (
     <>
       <header
-        className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 ${montserrat.className} ${
+        className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 ${
           isMobileMenuOpen && 'xl:hidden' 
             ? 'bg-transparent border-transparent' 
             : isScrolled 
@@ -55,9 +64,12 @@ export const Header = () => {
             isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'
           }`}
         >
-          <img
+          <Image
             src="/assets/logos/logo-white.png"
             alt="Finmile Logo"
+            width={224}
+            height={56}
+            sizes="(max-width: 768px) 140px, 224px"
             className="h-10 md:h-12 lg:h-14 object-contain drop-shadow-lg align-middle"
           />
         </Link>

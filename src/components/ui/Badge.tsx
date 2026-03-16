@@ -1,8 +1,5 @@
 import * as React from "react"
-import { Inter } from "next/font/google"
 import { cn } from "../../lib/utils"
-
-const inter = Inter({ subsets: ['latin'] })
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
@@ -15,7 +12,6 @@ export function Badge({ label, showNew = true, className, ...props }: BadgeProps
       className={cn(
         "inline-flex items-center rounded-full border border-white/10 bg-[#160E2A]/90 backdrop-blur-md transition-colors hover:bg-white/10",
         showNew ? "pl-1.5 pr-4 py-1.5" : "px-4 py-1.5",
-        inter.className,
         className
       )}
       {...props}

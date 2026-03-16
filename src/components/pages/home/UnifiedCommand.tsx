@@ -1,19 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+const slides = [
+    '/assets/images/slider/slide1.png',
+    '/assets/images/slider/slide2.webp',
+    '/assets/images/slider/slide3.png'
+];
 
 export const UnifiedCommand = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    
-    const slides = [
-        '/assets/images/slider/slide1.png',
-        '/assets/images/slider/slide2.webp',
-        '/assets/images/slider/slide3.png'
-    ];
 
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -37,7 +35,7 @@ export const UnifiedCommand = () => {
     }, [slides.length]);
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-24 overflow-hidden ${montserrat.className}`}>
+        <section className="w-full bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-24 overflow-hidden">
 
             {/* Section Header */}
             <div className="text-center mb-3 md:mb-8 w-full flex flex-col items-center z-20">
@@ -51,10 +49,13 @@ export const UnifiedCommand = () => {
 
             {/* Center Complete Graphic (contains phone, cards, arrows, circles) */}
             <div className="w-full max-w-[1240px] h-[350px] md:h-[500px] flex items-center justify-center relative z-10 px-4 overflow-hidden">
-                <img
+                <Image
                     key={currentSlide}
                     src={slides[currentSlide]}
                     alt={`Finmile Unified Command Interface - Slide ${currentSlide + 1}`}
+                    width={1240}
+                    height={500}
+                    sizes="(max-width: 768px) 92vw, (max-width: 1280px) 86vw, 1240px"
                     className="max-w-full max-h-full object-contain drop-shadow-[0_20px_40px_rgba(45,27,105,0.05)] animate-[slideIn_0.5s_ease-out]"
                 />
             </div>

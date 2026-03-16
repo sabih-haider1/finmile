@@ -1,7 +1,5 @@
 ﻿import React from 'react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import Image from 'next/image';
 
 export const TrustSection = () => {
   const brands = [
@@ -13,7 +11,7 @@ export const TrustSection = () => {
   ];
 
   return (
-    <section className={`w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20 ${montserrat.className}`}>
+    <section className="w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20">
       <h3 className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px]'>
         TRUSTED BY THE WORLD'S BIGGEST BRANDS
       </h3>
@@ -21,7 +19,14 @@ export const TrustSection = () => {
       <div className='flex flex-wrap justify-center items-center gap-6 md:gap-11 mb-12 max-w-[1600px] w-full'>
         {brands.map((brand) => (
           <div key={brand.name} className='bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-[180px] h-[100px] md:w-[220px] md:h-[120px]'>
-            <img src={brand.logo} alt={brand.name} className='max-h-[50px] w-auto object-contain' />
+            <Image
+              src={brand.logo}
+              alt={brand.name}
+              width={160}
+              height={50}
+              sizes="(max-width: 768px) 120px, 160px"
+              className="max-h-[50px] w-auto object-contain"
+            />
           </div>
         ))}
       </div>
@@ -35,7 +40,7 @@ export const TrustSection = () => {
 
 export const FeaturesSection = () => {
   return (
-    <section className={`w-full py-6 lg:py-10 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative ${montserrat.className}`}>
+    <section className="w-full py-6 lg:py-10 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative">
       <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start'>
 
         {/* Left Column: Precise Typography Match */}
@@ -72,9 +77,12 @@ export const FeaturesSection = () => {
           <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none' />
 
           <div className='relative z-10 w-full max-w-[800px]'>
-            <img
+            <Image
               src='/assets/images/features/app-screen.png'
               alt='Finmile Dashboard and Mobile App'
+              width={800}
+              height={640}
+              sizes="(max-width: 1024px) 90vw, 800px"
               className='w-full h-auto drop-shadow-[0_45px_90px_rgba(0,0,0,0.12)] object-contain relative z-10'
             />
 

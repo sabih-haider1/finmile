@@ -1,38 +1,23 @@
 ﻿'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 const AgentCard = ({ title, description, benefits, index, total }) => {
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024);
-    };
-    
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
   const stickyTop = `calc(80px + ${index * 20}px)`;
   const zIndex = (index + 1) * 10;
-  const scale = 1 - ((total - index - 1) * 0.02);
 
   return (
     <div
       className='lg:sticky w-[98%] max-w-[1440px] min-h-[580px] lg:min-h-[660px] rounded-[32px] md:rounded-[32px] px-8 md:px-10 lg:px-12 py-8 md:py-6 lg:py-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-18 lg:gap-24 transform-gpu transition-all duration-500 overflow-hidden'
       style={{
         background: 'linear-gradient(208.41deg, #F5F3FF -9.69%, #FAF9FF 100.08%)',
-        top: isLargeScreen ? stickyTop : 'auto',
-        zIndex: isLargeScreen ? zIndex : 'auto',
-        marginTop: isLargeScreen ? (index === 0 ? '30px' : '20px') : '32px',
-        marginBottom: isLargeScreen ? (index === total - 1 ? '40px' : '80px') : '32px',
-        transform: isLargeScreen ? `scale(${scale})` : 'none',
+        top: stickyTop,
+        zIndex,
+        marginTop: '32px',
+        marginBottom: '32px',
+        transform: 'none',
         transformOrigin: 'top center'
       }}
     >
@@ -65,9 +50,12 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
       {/* Right: Dashboard Image */}
       <div className='flex-1 relative w-full flex justify-end items-center'>
         <div className='w-full max-w-[800px]'>
-          <img
+          <Image
             src='/assets/images/agents/dashboard-v2.png'
             alt={`${title} Finmile Dashboard`}
+            width={800}
+            height={520}
+            sizes="(max-width: 1024px) 92vw, 800px"
             className="w-full h-auto rounded-xl drop-shadow-[0_20px_40px_rgba(47,28,140,0.08)]"
           />
         </div>
@@ -96,7 +84,7 @@ export const AIAgentsSection = () => {
   ];
 
   return (
-    <section className={`w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-20 ${montserrat.className}`}>
+    <section className="w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-20">
       <div className='text-center mb-10 w-full max-w-[1400px]'>
         <h2 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold mb-8 tracking-tight leading-[1] text-center'>
           Meet Your Specialized AI Agents

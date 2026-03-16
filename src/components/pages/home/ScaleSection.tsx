@@ -1,24 +1,29 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { Layers, Navigation, Clock } from 'lucide-react';
-import { RouteCalculatorPopup } from '../../shared/RouteCalculatorPopup';
-import { Montserrat } from 'next/font/google';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+const RouteCalculatorPopup = dynamic(
+  () => import('../../shared/RouteCalculatorPopup').then((mod) => mod.RouteCalculatorPopup),
+  { ssr: false }
+);
 
 export const ScaleSection = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   return (
     <>
-      <RouteCalculatorPopup
-        isOpen={isPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
-      />
+      {isPopupOpen && (
+        <RouteCalculatorPopup
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+        />
+      )}
 
       <section
-        className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 py-10 lg:py-12 overflow-hidden relative ${montserrat.className}`}
+        className="w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 py-10 lg:py-12 overflow-hidden relative"
       >
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-14 w-full z-10 flex flex-col items-center">
@@ -34,9 +39,12 @@ export const ScaleSection = () => {
           {/* Left Side */}
           <div className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start">
             <div className="w-full h-full flex items-center">
-              <img
+              <Image
                 src="/assets/images/half-dashboard.png"
                 alt="Finmile Scale Dashboard"
+                width={620}
+                height={620}
+                sizes="(max-width: 1024px) 92vw, 620px"
                 className="w-full h-full object-cover mix-blend-multiply"
               />
             </div>
@@ -48,9 +56,12 @@ export const ScaleSection = () => {
               <div>
                 {/* Logo Chip */}
                 <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-14 border border-slate-50">
-                  <img
+                  <Image
                     src="/assets/logos/logo-blue.png"
                     alt="Finmile Logo"
+                    width={168}
+                    height={40}
+                    sizes="168px"
                     className="h-8 md:h-10 w-auto object-contain"
                   />
                 </div>

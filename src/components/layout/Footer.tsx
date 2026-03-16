@@ -1,31 +1,12 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Mail, Linkedin } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const Footer = () => {
     return (
         <>
-            <style jsx>{`
-                .custom-scrollbar::-webkit-scrollbar {
-                    width: 6px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-track {
-                    background: transparent;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: #6A27D4;
-                    border-radius: 3px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                    background: #8247E5;
-                }
-            `}</style>
-            <footer className={`w-full bg-[#0B0616] text-white pt-20 pb-4 px-6 lg:px-16 overflow-hidden relative ${montserrat.className}`}>
+            <footer className="w-full bg-[#0B0616] text-white pt-20 pb-4 px-6 lg:px-16 overflow-hidden relative">
 
                 {/* Background Glow Effects (Hero-style gradients) */}
                 <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none" />
@@ -37,7 +18,7 @@ export const Footer = () => {
                     <div className="flex flex-col space-y-10 md:col-span-4 lg:col-span-5">
                         {/* Brand Logo */}
                         <div className="mb-2">
-                            <img src="/assets/logos/logo-white.png" alt="Finmile Logo" className="w-[180px] h-[50px] object-contain" />
+                            <Image src="/assets/logos/logo-white.png" alt="Finmile Logo" width={180} height={50} sizes="180px" className="w-[180px] h-[50px] object-contain" />
                         </div>
 
                         {/* Email Chip */}

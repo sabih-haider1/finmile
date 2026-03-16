@@ -2,7 +2,12 @@ import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import '../styles/globals.css'
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-montserrat',
+})
 
 export const metadata: Metadata = {
   title: 'Finmile - The OS for Modern Logistics',
@@ -16,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning className={montserrat.className}>
+      <body className={`${montserrat.className} ${montserrat.variable}`}>
         {/* SVG Filter for Liquid Glass Effect */}
         <svg className="hidden" aria-hidden="true">
           <defs>
