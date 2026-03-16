@@ -1,9 +1,11 @@
 'use client';
 
 import React from "react";
+import { motion } from 'framer-motion';
 import { Badge } from "../../ui/Badge";
 import { Button } from "../../ui/Button";
 import { Montserrat } from 'next/font/google';
+import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -18,41 +20,69 @@ export const Hero = () => {
       <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-40 pointer-events-none" />
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center text-center max-w-[900px] mx-auto space-y-6">
+      <motion.div
+        className="relative z-10 flex flex-col items-center text-center max-w-[900px] mx-auto space-y-6"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
 
         {/* Top Badge */}
-        <Badge label="An operating system for execution, not another logistics tool" />
+        <motion.div variants={fadeInUp}>
+          <Badge label="An operating system for execution, not another logistics tool" />
+        </motion.div>
 
         {/* Headline */}
-        <h1 className="text-white text-[44px] md:text-[60px] lg:text-[64px] md:whitespace-nowrap font-bold tracking-tight leading-[1.05] pb-2">
+        <motion.h1
+          className="text-white text-[44px] md:text-[60px] lg:text-[64px] md:whitespace-nowrap font-bold tracking-tight leading-[1.05] pb-2"
+          variants={fadeInUp}
+        >
           The <span className="gradient-text-os px-1">OS</span> for Modern Logistics
-        </h1>
+        </motion.h1>
 
         {/* Sub-headline */}
-        <p className="text-[#9CA3AF] text-[16px] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mt-2">
+        <motion.p
+          className="text-[#9CA3AF] text-[16px] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mt-2"
+          variants={fadeInUp}
+        >
           Finmile AI automates delivery operations end to end, using agentic AI to optimise multi drop routes in
           seconds and deliver full operational visibility through a unified command interface.
-        </p>
+        </motion.p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-6 w-full sm:w-auto">
-          <Button variant="solid" size="lg">
-            See How It Works
-          </Button>
-          <Button variant="liquid-glass" size="lg">
-            Get In Touch
-          </Button>
-        </div>
-      </div>
+        <motion.div
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-6 w-full sm:w-auto"
+          variants={fadeInUp}
+        >
+          <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button variant="solid" size="lg">
+              See How It Works
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button variant="liquid-glass" size="lg">
+              Get In Touch
+            </Button>
+          </motion.div>
+        </motion.div>
+      </motion.div>
 
       {/* Dashboard Mockup Image */}
-      <div className="relative z-10 mt-12 w-full max-w-[1200px] mx-auto px-2 md:px-8">
+      <motion.div
+        className="relative z-10 mt-12 w-full max-w-[1200px] mx-auto px-2 md:px-8"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        viewport={{ once: true, amount: 0.3 }}
+        whileTap={{ scale: 0.995 }}
+      >
         <img
           src="/assets/images/hero-dashboard.png"
           alt="Finmile Dashboard"
           className="w-full h-auto object-contain"
         />
-      </div>
+      </motion.div>
 
     </section>
   );
