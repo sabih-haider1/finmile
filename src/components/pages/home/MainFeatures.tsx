@@ -1,5 +1,10 @@
-﻿import React from 'react';
+﻿'use client';
+
+import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { fadeInUp, fadeInLeft, fadeInRight, scaleIn, staggerContainer } from '@/lib/animations';
+import { AnimatedCard } from '@/components/animated/AnimatedCard';
 
 export const TrustSection = () => {
   const brands = [
@@ -11,20 +16,37 @@ export const TrustSection = () => {
   ];
 
   return (
-    <section className="w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20">
-      <h3 
+    <motion.section 
+      className="w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <motion.h3 
         className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px]'
-        style={{ animation: 'fadeIn 0.6s ease-out' }}
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
       >
         TRUSTED BY THE WORLD'S BIGGEST BRANDS
-      </h3>
+      </motion.h3>
 
-      <div className='flex flex-wrap justify-center items-center gap-6 md:gap-11 mb-12 max-w-[1600px] w-full'>
-        {brands.map((brand, idx) => (
-          <div 
+      <motion.div 
+        className='flex flex-wrap justify-center items-center gap-6 md:gap-11 mb-12 max-w-[1600px] w-full'
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        {brands.map((brand) => (
+          <AnimatedCard 
             key={brand.name} 
             className='bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-[180px] h-[100px] md:w-[220px] md:h-[120px]'
-            style={{ animation: `fadeInUp 0.6s ease-out ${0.1 * idx}s both` }}
+            variant={fadeInUp}
+            index={brands.findIndex((b) => b.name === brand.name)}
+            hoverEffect='lift'
           >
             <Image
               src={brand.logo}
@@ -34,14 +56,20 @@ export const TrustSection = () => {
               sizes="(max-width: 768px) 120px, 160px"
               className="max-h-[50px] w-auto object-contain"
             />
-          </div>
+          </AnimatedCard>
         ))}
-      </div>
+      </motion.div>
 
-      <p className='text-[#9CA3AF] text-[16px] font-medium text-center leading-[20px] tracking-[0px]'>
+      <motion.p 
+        className='text-[#9CA3AF] text-[16px] font-medium text-center leading-[20px] tracking-[0px]'
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
         Finmile powers deliveries for <span className='text-[#111827]'>JD.com, TikTok Shop, ILG</span>, and other global leaders.
-      </p>
-    </section>
+      </motion.p>
+    </motion.section>
   );
 };
 
@@ -50,75 +78,102 @@ export const FeaturesSection = () => {
     <section className="w-full py-6 lg:py-10 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative">
       <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start'>
 
-        {/* Left Column: Precise Typography Match */}
-        <div 
+        {/* Left Column */}
+        <motion.div 
           className='flex flex-col space-y-12 pt-4'
-          style={{ animation: 'fadeInLeft 0.7s ease-out' }}
+          initial="hidden"
+          whileInView="visible"
+          variants={staggerContainer}
+          viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight'>
+          <motion.h2
+            variants={fadeInLeft}
+            className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight'
+          >
             Stop Managing <br className='hidden md:block' />
             Software and Start <br className='hidden md:block' />
             Directing Outcomes.
-          </h2>
+          </motion.h2>
 
-          <div className='space-y-10'>
-            <p className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'>
+          <motion.div className='space-y-10' variants={staggerContainer}>
+            <motion.p
+              variants={fadeInLeft}
+              className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'
+            >
               Finmile replaces fragmented logistics tools with autonomous agents that plan, execute, and continuously improve delivery operations in real time.
-            </p>
+            </motion.p>
 
-            <p className='text-[#2F1C8C] text-[14px] md:text-[15px] lg:text-[16px] font-medium'>
+            <motion.p variants={fadeInLeft} className='text-[#2F1C8C] text-[14px] md:text-[15px] lg:text-[16px] font-medium'>
               You define the objective. The system handles the complexity.
-            </p>
+            </motion.p>
 
-            <p className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'>
+            <motion.p
+              variants={fadeInLeft}
+              className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'
+            >
               Unlike static route planners, Finmile's AI constantly learns.
-            </p>
+            </motion.p>
 
-            <p className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'>
+            <motion.p
+              variants={fadeInLeft}
+              className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'
+            >
               It adapts to real-world conditions such as traffic, weather, and driver patterns to create routes that get faster and cheaper every day.
-            </p>
-          </div>
-        </div>
+            </motion.p>
+          </motion.div>
+        </motion.div>
 
-        {/* Right Column: Single Image with Overlays */}
-        <div 
+        {/* Right Column */}
+        <motion.div 
           className='relative w-full flex items-center justify-center pt-0 lg:pt-0 px-4 lg:px-0 min-h-[500px] lg:min-h-[600px]'
-          style={{ animation: 'fadeInRight 0.7s ease-out' }}
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInRight}
+          viewport={{ once: true, amount: 0.3 }}
         >
-
           {/* Background Highlight Glow */}
           <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none' />
 
           <div className='relative z-10 w-full max-w-[800px]'>
-            <Image
-              src='/assets/images/features/app-screen.png'
-              alt='Finmile Dashboard and Mobile App'
-              width={800}
-              height={640}
-              sizes="(max-width: 1024px) 90vw, 800px"
-              className='w-full h-auto drop-shadow-[0_45px_90px_rgba(0,0,0,0.12)] object-contain relative z-10'
-            />
+            <motion.div variants={scaleIn}>
+              <Image
+                src='/assets/images/features/app-screen.png'
+                alt='Finmile Dashboard and Mobile App'
+                width={800}
+                height={640}
+                sizes="(max-width: 1024px) 90vw, 800px"
+                className='w-full h-auto drop-shadow-[0_45px_90px_rgba(0,0,0,0.12)] object-contain relative z-10'
+              />
+            </motion.div>
 
             {/* 42% Card - Top Left */}
-            <div 
+            <motion.div 
               className='absolute -top-4 left-0 md:-top-10 md:-left-24 z-20 bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white w-[220px] md:w-[320px]'
-              style={{ animation: 'scaleIn 0.6s ease-out 0.2s both' }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover={{ y: -6, scale: 1.02 }}
             >
               <div className='text-[#2F1C8C] text-[36px] md:text-[40px] font-bold leading-none mb-1.5'>42%</div>
               <div className='text-[#6B7280] text-[13px] md:text-[14px] font-medium leading-tight'>Fewer routes with AI optimisation</div>
-            </div>
+            </motion.div>
 
-            {/* 91% Card - Bottom Right (Wider width) */}
-            <div 
+            {/* 91% Card - Bottom Right */}
+            <motion.div 
               className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-20 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px]'
-              style={{ animation: 'scaleIn 0.6s ease-out 0.3s both' }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover={{ y: -6, scale: 1.02 }}
             >
               <div className='text-white text-[36px] md:text-[40px] font-bold leading-none mb-1.5'>91%</div>
               <div className='text-white/80 text-[13px] md:text-[14px] font-medium leading-tight'>Reduction in WISMO inquiries</div>
-            </div>
+            </motion.div>
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

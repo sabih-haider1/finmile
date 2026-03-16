@@ -17,13 +17,13 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
         zIndex,
         marginTop: '32px',
         marginBottom: '32px',
-        transform: 'none',
         transformOrigin: 'top center',
-        animation: `fadeInUp 0.7s ease-out ${0.15 * index}s both`
       }}
     >
       {/* Left: Text Content */}
-      <div className='flex flex-col flex-1 space-y-8 text-left items-start z-10 w-full'>
+      <div
+        className='flex flex-col flex-1 space-y-8 text-left items-start z-10 w-full'
+      >
         <h3 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight'>
           {title}
         </h3>
@@ -32,12 +32,13 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
           {description}
         </p>
 
-        <div className='space-y-4 w-full pt-2'>
+        <div 
+          className='space-y-4 w-full pt-2'
+        >
           {benefits.map((benefit, i) => (
             <div 
               key={i} 
               className='bg-white rounded-full px-6 md:px-8 py-4 flex items-center gap-4 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-[#F0F0F8] w-full max-w-[500px]'
-              style={{ animation: `slideUpStaggered 0.5s ease-out ${0.25 + i * 0.08}s both` }}
             >
               <div className='flex items-center justify-center border-[1.5px] border-[#2F1C8C] rounded-full w-6 h-6 shrink-0'>
                 <CheckCircle2 className='text-[#2F1C8C] w-4 h-4' strokeWidth={3} />
@@ -47,13 +48,17 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
           ))}
         </div>
 
-        <button className='bg-[#6A27D4] text-white px-10 py-3.5 rounded-full font-semibold text-[16px] w-fit hover:bg-[#5821B0] transition-colors mt-6 mx-auto lg:mx-0'>
+        <button 
+          className='bg-[#6A27D4] text-white px-10 py-3.5 rounded-full font-semibold text-[16px] w-fit hover:bg-[#5821B0] transition-colors mt-6 mx-auto lg:mx-0'
+        >
           Learn More
         </button>
       </div>
 
       {/* Right: Dashboard Image */}
-      <div className='flex-1 relative w-full flex justify-end items-center'>
+      <div
+        className='flex-1 relative w-full flex justify-end items-center'
+      >
         <div className='w-full max-w-[800px]'>
           <Image
             src='/assets/images/agents/dashboard-v2.png'
@@ -89,12 +94,18 @@ export const AIAgentsSection = () => {
   ];
 
   return (
-    <section className="w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-20">
+    <section 
+      className="w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-20"
+    >
       <div className='text-center mb-10 w-full max-w-[1400px]'>
-        <h2 className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold mb-8 tracking-tight leading-[1] text-center'>
+        <h2 
+          className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold mb-8 tracking-tight leading-[1] text-center'
+        >
           Meet Your Specialized AI Agents
         </h2>
-        <div className='max-w-3xl mx-auto'>
+        <div 
+          className='max-w-3xl mx-auto'
+        >
           <p className='text-[#64748B] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed opacity-100'>
             Stop managing software and start directing outcomes. Our autonomous agents work 24/7 to solve bottlenecks before they appear.
           </p>
@@ -113,12 +124,16 @@ export const AIAgentsSection = () => {
       </div>
 
       <div className='mt-6 text-center space-y-12 w-full max-w-[1200px]'>
-        <p className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-[16px] mx-auto px-4 text-center'>
+        <p 
+          className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-[16px] mx-auto px-4 text-center'
+        >
           All agents operate through a single control layer, sharing context and learning from every parcel that moves through the system.
         </p>
 
         <div className='flex flex-col items-center gap-6'>
-          <h4 className='text-[#2F1C8C] text-[12px] md:text-[14px] lg:text-[16px] tracking-tight flex flex-col md:flex-row items-center gap-2 justify-center'>
+          <h4 
+            className='text-[#2F1C8C] text-[12px] md:text-[14px] lg:text-[16px] tracking-tight flex flex-col md:flex-row items-center gap-2 justify-center'
+          >
             <span className='font-semibold opacity-90 text-[#2F1C8C]'>This is not automation.</span>
             <span className='font-semibold text-[#2F1C8C]'>This is autonomous execution.</span>
           </h4>

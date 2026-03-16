@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { Layers, Navigation, Clock } from 'lucide-react';
+import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
 
 const RouteCalculatorPopup = dynamic(
   () => import('../../shared/RouteCalculatorPopup').then((mod) => mod.RouteCalculatorPopup),
@@ -22,13 +24,20 @@ export const ScaleSection = () => {
         />
       )}
 
-      <section
+      <motion.section
         className="w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 py-10 lg:py-12 overflow-hidden relative"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true, amount: 0.3 }}
       >
         {/* Section Header */}
-        <div 
+        <motion.div 
           className="text-center mb-10 md:mb-14 w-full z-10 flex flex-col items-center"
-          style={{ animation: 'fadeIn 0.6s ease-out' }}
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
+          viewport={{ once: true, amount: 0.5 }}
         >
           <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-6 leading-tight">
             Built for scale. Designed for reality.
@@ -36,15 +45,19 @@ export const ScaleSection = () => {
           <p className="text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium mx-auto px-4">
             As delivery volume grows, Finmile removes complexity instead of adding headcount.
           </p>
-        </div>
+        </motion.div>
 
         <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-stretch lg:items-start gap-12 lg:gap-[10px] z-10 relative">
           {/* Left Side */}
-          <div 
+          <motion.div 
             className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start"
-            style={{ animation: 'fadeInLeft 0.7s ease-out' }}
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInLeft}
+            viewport={{ once: true, amount: 0.3 }}
+            whileHover={{ y: -4 }}
           >
-            <div className="w-full h-full flex items-center">
+            <motion.div className="w-full h-full flex items-center" whileHover={{ scale: 1.01 }}>
               <Image
                 src="/assets/images/half-dashboard.png"
                 alt="Finmile Scale Dashboard"
@@ -53,15 +66,22 @@ export const ScaleSection = () => {
                 sizes="(max-width: 1024px) 92vw, 620px"
                 className="w-full h-full object-cover mix-blend-multiply"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Side */}
-          <div 
+          <motion.div 
             className="w-full lg:w-1/2 flex items-stretch"
-            style={{ animation: 'fadeInRight 0.7s ease-out' }}
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInRight}
+            viewport={{ once: true, amount: 0.3 }}
+            whileHover={{ y: -4 }}
           >
-            <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 pb-6 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col">
+            <motion.div
+              className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 pb-6 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col"
+              whileHover={{ scale: 1.005 }}
+            >
               <div>
                 {/* Logo Chip */}
                 <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-14 border border-slate-50">
@@ -80,10 +100,19 @@ export const ScaleSection = () => {
                 </h3>
 
                 {/* Features */}
-                <div className="space-y-3 mb-10">
-                  <div 
+                <motion.div 
+                  className="space-y-3 mb-10"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={staggerContainer}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <motion.div 
                     className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
-                    style={{ animation: 'slideUpStaggered 0.5s ease-out 0.1s both' }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
                   >
                     <Layers
                       className="text-[#2F1C8C] w-6 h-6 shrink-0"
@@ -92,11 +121,14 @@ export const ScaleSection = () => {
                     <span className="text-gray-900 font-semibold text-[16px]">
                       Fewer Tools
                     </span>
-                  </div>
+                  </motion.div>
 
-                  <div 
+                  <motion.div 
                     className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
-                    style={{ animation: 'slideUpStaggered 0.5s ease-out 0.2s both' }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    whileHover={{ scale: 1.02 }}
                   >
                     <Navigation
                       className="text-[#2F1C8C] w-6 h-6 shrink-0 rotate-45"
@@ -105,11 +137,14 @@ export const ScaleSection = () => {
                     <span className="text-gray-900 font-semibold text-[16px]">
                       Fewer Manual Decisions
                     </span>
-                  </div>
+                  </motion.div>
 
-                  <div 
+                  <motion.div 
                     className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
-                    style={{ animation: 'slideUpStaggered 0.5s ease-out 0.3s both' }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    whileHover={{ scale: 1.02 }}
                   >
                     <Clock
                       className="text-[#2F1C8C] w-6 h-6 shrink-0"
@@ -118,28 +153,40 @@ export const ScaleSection = () => {
                     <span className="text-gray-900 font-semibold text-[16px]">
                       Fewer Operational Surprises
                     </span>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               </div>
 
               {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
-                <button className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] lg:text-[15px] whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors">
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 items-center w-full"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                <motion.button 
+                  className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] lg:text-[15px] whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   Book A Demo
-                </button>
+                </motion.button>
 
-                <button
+                <motion.button
                   id="Calculate"
                   className="w-full sm:flex-1 px-4 lg:px-6 py-3 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-[80px] text-[14px] font-medium whitespace-nowrap transition-all hover:bg-[#2F1C8C] hover:text-white"
                   onClick={() => setIsPopupOpen(true)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Calculate your route savings
-                </button>
-              </div>
-            </div>
-          </div>
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 };

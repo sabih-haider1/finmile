@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${montserrat.className} ${montserrat.variable}`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${montserrat.className} ${montserrat.variable}`} suppressHydrationWarning>
         {/* SVG Filter for Liquid Glass Effect */}
         <svg className="hidden" aria-hidden="true">
           <defs>

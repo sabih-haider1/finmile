@@ -1,63 +1,89 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Montserrat } from 'next/font/google';
+import { fadeInLeft, fadeInRight, fadeInUp, staggerContainer } from '@/lib/animations';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const GenerativeIntelligence = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-20 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
+        <motion.section
+            className={`w-full bg-[#0B0616] py-20 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: 0.3 }}
+        >
 
-            {/* Background Glow Effects (Matching Hero style) */}
+            {/* Background Glow Effects */}
             <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none" />
             <div className="absolute bottom-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-30 pointer-events-none" />
 
             <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center z-10">
 
                 {/* Left Side: Command Prompt Graphic */}
-                <div 
+                <motion.div
                   className="w-full flex flex-col items-center lg:items-start justify-center lg:justify-start relative gap-8"
-                  style={{ animation: 'fadeInLeft 0.7s ease-out' }}
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={staggerContainer}
+                  viewport={{ once: true, amount: 0.3 }}
                 >
-                    <div className="w-full max-w-[800px]">
+                    <motion.div className="w-full max-w-[800px]" variants={fadeInLeft}>
                         <img
                             src="/assets/images/agents/AI-CommandPrompt.png"
                             alt="Finmile AI Command Interface"
                             className="w-full h-auto drop-shadow-[0_40px_100px_rgba(83,31,209,0.25)] rounded-2xl"
                         />
-                    </div>
+                    </motion.div>
                     
-                    {/* Mobile Button - Shows after image on mobile only */}
-                    <button className="lg:hidden liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit transition-colors">
+                    {/* Mobile Button */}
+                    <motion.button
+                        className="lg:hidden liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit transition-colors"
+                        variants={fadeInUp}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.96 }}
+                    >
                         Get In Touch
-                    </button>
-                </div>
+                    </motion.button>
+                </motion.div>
 
                 {/* Right Side: Text Content */}
-                <div 
+                <motion.div
                   className="flex flex-col space-y-8 pl-0 lg:pl-10"
-                  style={{ animation: 'fadeInRight 0.7s ease-out' }}
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={staggerContainer}
+                  viewport={{ once: true, amount: 0.3 }}
                 >
-                    <h2 className="text-white text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight">
+                    <motion.h2 variants={fadeInRight} className="text-white text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight">
                         Generative Intelligence
-                    </h2>
+                    </motion.h2>
 
-                    <p className="text-[#C4C9D4] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed opacity-90">
+                    <motion.p variants={fadeInRight} className="text-[#C4C9D4] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed opacity-90">
                         Next-generation email solutions with HandleMail and Orbit Mail for
                         enhanced engagement. Query live data, dispatch agents, and resolve
                         exceptions without touching a dashboard.
-                    </p>
+                    </motion.p>
 
-                    <p className="text-white text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed mt-2">
+                    <motion.p variants={fadeInRight} className="text-white text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed mt-2">
                         Logistics you can talk to. Execution that responds.
-                    </p>
+                    </motion.p>
 
-                    {/* Desktop Button - Shows with text on desktop only */}
-                    <button className="hidden lg:flex liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit mt-10 transition-colors">
+                    {/* Desktop Button */}
+                    <motion.button
+                        className="hidden lg:flex liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit mt-10 transition-colors"
+                        variants={fadeInRight}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.96 }}
+                    >
                         Get In Touch
-                    </button>
-                </div>
+                    </motion.button>
+                </motion.div>
 
             </div>
-        </section>
+        </motion.section>
     );
 };
