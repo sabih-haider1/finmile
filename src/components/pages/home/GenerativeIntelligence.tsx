@@ -14,7 +14,10 @@ export const GenerativeIntelligence = () => {
             <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center z-10">
 
                 {/* Left Side: Command Prompt Graphic */}
-                <div className="w-full flex flex-col items-center lg:items-start justify-center lg:justify-start relative gap-8">
+                <div 
+                  className="w-full flex flex-col items-center lg:items-start justify-center lg:justify-start relative gap-8"
+                  style={{ animation: 'fadeInLeft 0.7s ease-out' }}
+                >
                     <div className="w-full max-w-[800px]">
                         <img
                             src="/assets/images/agents/AI-CommandPrompt.png"
@@ -30,7 +33,10 @@ export const GenerativeIntelligence = () => {
                 </div>
 
                 {/* Right Side: Text Content */}
-                <div className="flex flex-col space-y-8 pl-0 lg:pl-10">
+                <div 
+                  className="flex flex-col space-y-8 pl-0 lg:pl-10"
+                  style={{ animation: 'fadeInRight 0.7s ease-out' }}
+                >
                     <h2 className="text-white text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight">
                         Generative Intelligence
                     </h2>

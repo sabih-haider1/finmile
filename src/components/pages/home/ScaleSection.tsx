@@ -26,7 +26,10 @@ export const ScaleSection = () => {
         className="w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 py-10 lg:py-12 overflow-hidden relative"
       >
         {/* Section Header */}
-        <div className="text-center mb-10 md:mb-14 w-full z-10 flex flex-col items-center">
+        <div 
+          className="text-center mb-10 md:mb-14 w-full z-10 flex flex-col items-center"
+          style={{ animation: 'fadeIn 0.6s ease-out' }}
+        >
           <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-6 leading-tight">
             Built for scale. Designed for reality.
           </h2>
@@ -37,7 +40,10 @@ export const ScaleSection = () => {
 
         <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-stretch lg:items-start gap-12 lg:gap-[10px] z-10 relative">
           {/* Left Side */}
-          <div className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start">
+          <div 
+            className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start"
+            style={{ animation: 'fadeInLeft 0.7s ease-out' }}
+          >
             <div className="w-full h-full flex items-center">
               <Image
                 src="/assets/images/half-dashboard.png"
@@ -51,7 +57,10 @@ export const ScaleSection = () => {
           </div>
 
           {/* Right Side */}
-          <div className="w-full lg:w-1/2 flex items-stretch">
+          <div 
+            className="w-full lg:w-1/2 flex items-stretch"
+            style={{ animation: 'fadeInRight 0.7s ease-out' }}
+          >
             <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 pb-6 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col">
               <div>
                 {/* Logo Chip */}
@@ -72,7 +81,10 @@ export const ScaleSection = () => {
 
                 {/* Features */}
                 <div className="space-y-3 mb-10">
-                  <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]">
+                  <div 
+                    className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
+                    style={{ animation: 'slideUpStaggered 0.5s ease-out 0.1s both' }}
+                  >
                     <Layers
                       className="text-[#2F1C8C] w-6 h-6 shrink-0"
                       strokeWidth={2}
@@ -82,7 +94,10 @@ export const ScaleSection = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]">
+                  <div 
+                    className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
+                    style={{ animation: 'slideUpStaggered 0.5s ease-out 0.2s both' }}
+                  >
                     <Navigation
                       className="text-[#2F1C8C] w-6 h-6 shrink-0 rotate-45"
                       strokeWidth={2}
@@ -92,7 +107,10 @@ export const ScaleSection = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]">
+                  <div 
+                    className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
+                    style={{ animation: 'slideUpStaggered 0.5s ease-out 0.3s both' }}
+                  >
                     <Clock
                       className="text-[#2F1C8C] w-6 h-6 shrink-0"
                       strokeWidth={2}

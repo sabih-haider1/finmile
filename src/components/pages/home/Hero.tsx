@@ -17,21 +17,32 @@ export const Hero = () => {
       <div className="relative z-10 flex flex-col items-center text-center max-w-[900px] mx-auto space-y-6">
 
         {/* Top Badge */}
-        <Badge label="An operating system for execution, not another logistics tool" />
+        <div style={{ animation: 'fadeInUp 0.6s ease-out' }}>
+          <Badge label="An operating system for execution, not another logistics tool" />
+        </div>
 
         {/* Headline */}
-        <h1 className="text-white text-[44px] md:text-[60px] lg:text-[64px] md:whitespace-nowrap font-bold tracking-tight leading-[1.05] pb-2">
+        <h1 
+          className="text-white text-[44px] md:text-[60px] lg:text-[64px] md:whitespace-nowrap font-bold tracking-tight leading-[1.05] pb-2"
+          style={{ animation: 'fadeInUp 0.6s ease-out 0.1s both' }}
+        >
           The <span className="gradient-text-os px-1">OS</span> for Modern Logistics
         </h1>
 
         {/* Sub-headline */}
-        <p className="text-[#9CA3AF] text-[16px] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mt-2">
+        <p 
+          className="text-[#9CA3AF] text-[16px] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mt-2"
+          style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}
+        >
           Finmile AI automates delivery operations end to end, using agentic AI to optimise multi drop routes in
           seconds and deliver full operational visibility through a unified command interface.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-6 w-full sm:w-auto">
+        <div 
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-6 w-full sm:w-auto"
+          style={{ animation: 'fadeInUp 0.6s ease-out 0.3s both' }}
+        >
           <Button variant="solid" size="lg">
             See How It Works
           </Button>
@@ -42,7 +53,10 @@ export const Hero = () => {
       </div>
 
       {/* Dashboard Mockup Image */}
-      <div className="relative z-10 mt-12 w-full max-w-[1200px] mx-auto px-2 md:px-8">
+      <div 
+        className="relative z-10 mt-12 w-full max-w-[1200px] mx-auto px-2 md:px-8"
+        style={{ animation: 'fadeInUp 0.8s ease-out 0.4s both' }}
+      >
         <Image
           src="/assets/images/hero-dashboard.png"
           alt="Finmile Dashboard"

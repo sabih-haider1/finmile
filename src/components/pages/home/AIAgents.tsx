@@ -18,7 +18,8 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
         marginTop: '32px',
         marginBottom: '32px',
         transform: 'none',
-        transformOrigin: 'top center'
+        transformOrigin: 'top center',
+        animation: `fadeInUp 0.7s ease-out ${0.15 * index}s both`
       }}
     >
       {/* Left: Text Content */}
@@ -33,7 +34,11 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
 
         <div className='space-y-4 w-full pt-2'>
           {benefits.map((benefit, i) => (
-            <div key={i} className='bg-white rounded-full px-6 md:px-8 py-4 flex items-center gap-4 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-[#F0F0F8] w-full max-w-[500px]'>
+            <div 
+              key={i} 
+              className='bg-white rounded-full px-6 md:px-8 py-4 flex items-center gap-4 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-[#F0F0F8] w-full max-w-[500px]'
+              style={{ animation: `slideUpStaggered 0.5s ease-out ${0.25 + i * 0.08}s both` }}
+            >
               <div className='flex items-center justify-center border-[1.5px] border-[#2F1C8C] rounded-full w-6 h-6 shrink-0'>
                 <CheckCircle2 className='text-[#2F1C8C] w-4 h-4' strokeWidth={3} />
               </div>

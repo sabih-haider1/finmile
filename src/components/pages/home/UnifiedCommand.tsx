@@ -38,7 +38,10 @@ export const UnifiedCommand = () => {
         <section className="w-full bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-24 overflow-hidden">
 
             {/* Section Header */}
-            <div className="text-center mb-3 md:mb-8 w-full flex flex-col items-center z-20">
+            <div 
+              className="text-center mb-3 md:mb-8 w-full flex flex-col items-center z-20"
+              style={{ animation: 'fadeIn 0.6s ease-out' }}
+            >
                 <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-3 md:mb-6 leading-tight">
                     One Unified Command Interface
                 </h2>
@@ -48,7 +51,10 @@ export const UnifiedCommand = () => {
             </div>
 
             {/* Center Complete Graphic (contains phone, cards, arrows, circles) */}
-            <div className="w-full max-w-[1240px] h-[350px] md:h-[500px] flex items-center justify-center relative z-10 px-4 overflow-hidden">
+            <div 
+              className="w-full max-w-[1240px] h-[350px] md:h-[500px] flex items-center justify-center relative z-10 px-4 overflow-hidden"
+              style={{ animation: 'fadeInUp 0.7s ease-out 0.1s both' }}
+            >
                 <Image
                     key={currentSlide}
                     src={slides[currentSlide]}
@@ -61,7 +67,10 @@ export const UnifiedCommand = () => {
             </div>
 
             {/* Bottom Pagination controls with gradient background */}
-            <div className="mt-3 md:mt-10 flex items-center justify-center z-20">
+            <div 
+              className="mt-3 md:mt-10 flex items-center justify-center z-20"
+              style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}
+            >
                 <div 
                     className="flex items-center gap-4 px-2 py-2 rounded-[32px]"
                     style={{

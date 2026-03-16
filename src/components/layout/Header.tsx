@@ -55,7 +55,7 @@ export const Header = () => {
             ? 'bg-[#1b0f3e]/40 backdrop-blur-xl border border-white/20 shadow-[0_15px_40px_rgba(0,0,0,0.3)]' 
             : 'bg-transparent border border-transparent'
         }`}
-        style={{ top: '24px' }}
+        style={{ top: '3px' }}
       >
         {/* Logo */}
         <Link 
