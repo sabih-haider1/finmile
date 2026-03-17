@@ -114,20 +114,32 @@ export default function WhitepapersPage() {
 
       // Upload cover image if provided
       if (files.cover_image_url) {
-        coverImageUrl = await uploadFile({
+        const coverUploadResult = await uploadFile({
           bucket: 'whitepaper-covers',
           folder: 'covers',
           file: files.cover_image_url,
         });
+
+        if (!coverUploadResult.success || !coverUploadResult.url) {
+          throw new Error(coverUploadResult.error || 'Failed to upload cover image.');
+        }
+
+        coverImageUrl = coverUploadResult.url;
       }
 
       // Upload PDF if provided
       if (files.pdf_url) {
-        pdfUrl = await uploadFile({
+        const pdfUploadResult = await uploadFile({
           bucket: 'whitepapers',
           folder: 'pdfs',
           file: files.pdf_url,
         });
+
+        if (!pdfUploadResult.success || !pdfUploadResult.url) {
+          throw new Error(pdfUploadResult.error || 'Failed to upload PDF.');
+        }
+
+        pdfUrl = pdfUploadResult.url;
       }
 
       if (!pdfUrl) {
