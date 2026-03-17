@@ -17,8 +17,8 @@ export const WhatAIAgentsMean = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-20 lg:py-28 overflow-hidden relative ${montserrat.className}`}>
-            <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 items-center gap-12 md:gap-16 lg:gap-24 z-10 relative">
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
+            <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 items-center gap-12 md:gap-8 lg:gap-12 z-10 relative">
 
                 {/* Left Side: Text & Checkmarks */}
                 <div className="flex flex-col items-start text-left">

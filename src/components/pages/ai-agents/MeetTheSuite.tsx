@@ -53,7 +53,7 @@ export const MeetTheSuite = () => {
     const currentTab = tabs[activeTab];
 
     return (
-        <section className={`w-full py-16 lg:py-24 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full py-16 lg:py-16 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Matched from OurOrigin) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-70 pointer-events-none" />
@@ -71,7 +71,7 @@ export const MeetTheSuite = () => {
             </div>
 
             {/* Glassmorphic Tabs Container - Even Full Width */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16 w-full max-w-[1200px] z-10">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 w-full max-w-[1200px] z-10">
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
 

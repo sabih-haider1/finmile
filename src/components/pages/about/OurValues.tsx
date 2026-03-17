@@ -7,7 +7,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OurValues = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-20 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-16 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Matched to OurOrigin/GenerativeIntelligence) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-70 pointer-events-none" />
@@ -32,7 +32,7 @@ export const OurValues = () => {
                 </h2>
             </div>
 
-            <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-start z-10">
+            <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-12 items-start z-10">
 
                 {/* Left Side: Card Grid */}
                 <div className="flex flex-col lg:pr-6 order-2 lg:order-1">

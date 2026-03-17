@@ -5,8 +5,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const AiDataSustainability = () => {
     return (
-        <section className={`w-full py-16 lg:py-24 bg-white flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
-            <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-12 lg:gap-20 items-center'>
+        <section className={`w-full py-16 lg:py-16 bg-white flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+            <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-12 lg:gap-12 items-center'>
 
                 {/* Left Column: Text Content */}
                 <div className='flex flex-col space-y-10 pt-4'>

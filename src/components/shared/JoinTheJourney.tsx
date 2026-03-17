@@ -31,7 +31,7 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
 
     return (
         <section
-                className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-16 lg:py-24 overflow-hidden relative ${montserrat.className}`}
+                className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}
             >
                 <div className="w-full max-w-[1440px] flex flex-col lg:flex-row items-stretch lg:items-center xl:items-start gap-12 lg:gap-[10px] z-10 relative">
                     {/* Left Side */}
@@ -58,7 +58,7 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                                     />
                                 </div>
 
-                                <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] mb-6 mt-16 leading-tight">
+                                <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] mb-6 mt-8 leading-tight">
                                     {heading}
                                 </h2>
 

@@ -21,10 +21,10 @@ export const PressAndAwards = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-6 lg:px-24 py-20 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-6 lg:px-24 py-16 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Header Area */}
-            <div className="text-center mb-16 w-full z-10 flex flex-col items-center max-w-[800px] mx-auto">
+            <div className="text-center mb-8 w-full z-10 flex flex-col items-center max-w-[800px] mx-auto">
                 <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight mb-6 leading-tight">
                     Press & Awards
                 </h2>
@@ -35,7 +35,7 @@ export const PressAndAwards = () => {
             </div>
 
             {/* Awards Columns */}
-            <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10 mb-16 z-10 relative">
+            <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10 mb-8 z-10 relative">
 
                 {/* 2025 Column */}
                 <div className="flex flex-col space-y-4">

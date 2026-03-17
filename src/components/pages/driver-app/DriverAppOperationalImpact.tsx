@@ -6,14 +6,14 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DriverAppOperationalImpact = () => {
     const rows = [
-        { metric: "POD Approval Time", before: "12-24 hours", after: "< 15 minutes", impact: "+98% faster" },
+        { metric: "POD Approval Time", before: "12-24 hours", after: "< 0.2 seconds", impact: "+98% faster" },
         { metric: "Delivery Accuracy", before: "89.2%", after: "99.4%", impact: "+10.2%" },
-        { metric: "Failed POD Rate", before: "12%", after: "1.2%", impact: "-90% reduction" },
-        { metric: "Support Tickets", before: "High (WISMO)", after: "Low (Auto-updates)", impact: "-85% reduction" }
+        { metric: "Failed POD Rate", before: "12%", after: "0.1%", impact: "-90% reduction" },
+        { metric: "Support Tickets", before: "High (WISMO)", after: "-91%", impact: "-85% reduction" }
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] z-10 relative flex flex-col items-center">
 
                 {/* Header Content */}
@@ -44,11 +44,11 @@ export const DriverAppOperationalImpact = () => {
                     <div className="flex flex-col gap-2">
                         {rows.map((row, idx) => (
                             <div key={idx} className="flex flex-col md:grid md:grid-cols-3 gap-2 md:gap-4 bg-white md:bg-transparent rounded-xl md:rounded-none p-4 md:p-0 border border-gray-100 md:border-none shadow-sm md:shadow-none mb-4 md:mb-0">
-                                
+
                                 <div className="md:bg-white md:px-6 md:py-5 flex items-center md:border-b border-gray-100 md:border-none mb-3 md:mb-0 justify-center md:justify-start">
                                     <span className="text-[#0A1B33] font-bold text-[16px] md:text-[14px]">{row.metric}</span>
                                 </div>
-                                
+
                                 <div className="grid grid-cols-2 gap-4 md:hidden mb-3">
                                     <div className="flex flex-col items-center justify-center p-3 bg-[#F8F9FA] rounded-[8px]">
                                         <span className="text-[11px] text-[#6C757D] uppercase font-bold tracking-wider mb-1 flex items-center gap-1">

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 import Image from 'next/image';
@@ -76,11 +76,11 @@ export const TrustSection = () => {
 export const FeaturesSection = () => {
   return (
     <section className="w-full py-6 lg:py-10 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative">
-      <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start'>
+      <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-start'>
 
         {/* Left Column */}
         <motion.div 
-          className='flex flex-col space-y-12 pt-4'
+          className='flex flex-col space-y-8 pt-4'
           initial="hidden"
           whileInView="visible"
           variants={staggerContainer}
@@ -132,7 +132,7 @@ export const FeaturesSection = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           {/* Background Highlight Glow */}
-          <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none' />
+          <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0 will-change-transform' />
 
           <div className='relative z-10 w-full max-w-[800px]'>
             <motion.div variants={scaleIn}>
@@ -148,7 +148,7 @@ export const FeaturesSection = () => {
 
             {/* 42% Card - Top Left */}
             <motion.div 
-              className='absolute -top-4 left-0 md:-top-10 md:-left-24 z-20 bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white w-[220px] md:w-[320px]'
+              className='absolute -top-4 left-0 md:-top-10 md:-left-24 z-20 bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white w-[220px] md:w-[320px] transform-gpu will-change-transform'
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -161,7 +161,7 @@ export const FeaturesSection = () => {
 
             {/* 91% Card - Bottom Right */}
             <motion.div 
-              className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-20 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px]'
+              className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-20 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px] transform-gpu will-change-transform'
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}

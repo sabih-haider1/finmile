@@ -6,10 +6,10 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OurMission = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-20 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-16 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Centered Mission Header */}
-            <div className="text-center mb-16 md:mb-20 w-full z-10 flex flex-col items-center">
+            <div className="text-center mb-8 md:mb-8 w-full z-10 flex flex-col items-center">
                 <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight mb-6 leading-tight">
                     Our Mission
                 </h2>
@@ -37,7 +37,7 @@ export const OurMission = () => {
                     <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 pb-8 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col">
                         <div>
                             {/* Coil Icon filling the glowing box perfectly */}
-                            <div className="bg-white rounded-[24px] inline-flex items-center justify-center mb-10 lg:mb-20 border border-white w-[100px] h-[100px] overflow-hidden" style={{ boxShadow: '0 0 40px 8px rgba(106, 39, 212, 0.2)' }}>
+                            <div className="bg-white rounded-[24px] inline-flex items-center justify-center mb-10 lg:mb-8 border border-white w-[100px] h-[100px] overflow-hidden" style={{ boxShadow: '0 0 40px 8px rgba(106, 39, 212, 0.2)' }}>
                                 <img
                                     src="/assets/images/features/coil-icon.png"
                                     alt="Finmile Coil Icon"

@@ -14,25 +14,21 @@ interface WhitepaperSearchBarProps {
 }
 
 const topics = [
+  'AI & Automation',
   'AI & Machine Learning',
-  'Route Optimization',
+  'Delivery Software',
   'Last-Mile Delivery',
-  'Sustainability',
-  'Fleet Management',
-  'Autonomous Vehicles',
-  'Data Analytics',
-  'Supply Chain'
+  'Logistics Software',
+  'Predictive Analytics',
+  'ROI & Economics'
 ];
 
 const industries = [
-  'E-Commerce',
-  'Retail',
-  'Food & Beverage',
-  'Healthcare',
-  'Manufacturing',
-  'Logistics',
-  'Technology',
-  'Transportation'
+  'E-commerce',
+  'EV Fleets',
+  'Field Service',
+  'Medical & Pharma',
+  'Retail & Brands'
 ];
 
 export function WhitepaperSearchBar({

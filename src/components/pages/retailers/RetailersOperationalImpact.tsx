@@ -28,7 +28,7 @@ export const RetailersOperationalImpact = () => {
     ];
 
     return (
-        <section className={`w-full relative flex flex-col items-center pt-16 md:pt-24 px-6 md:px-12 lg:px-24 ${montserrat.className}`}>
+        <section className={`w-full relative flex flex-col items-center pt-16 md:pt-16 px-6 md:px-12 lg:px-24 ${montserrat.className}`}>
             
             {/* Added px-6 md:px-12 lg:px-24 to the section above to match the Integrations component */}
             
@@ -54,7 +54,7 @@ export const RetailersOperationalImpact = () => {
                 </div>
 
                 {/* Metrics Cards - 4 columns */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-14 md:mb-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-14 md:mb-8">
                     {metrics.map((metric, idx) => (
                         <div key={idx} className="bg-transparent border border-white/10 rounded-[20px] py-8 px-4 text-center flex flex-col items-center justify-center">
                             <div className="font-bold text-[36px] md:text-[40px] text-white mb-4 leading-none">

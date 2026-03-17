@@ -6,17 +6,21 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import Image from 'next/image';
 import { Metadata } from 'next';
+import { getAuthorByName } from '@/data/authors';
+import { AuthorProfile } from '@/components/ui/AuthorProfile';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // Generate metadata dynamically
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
   const { data: whitepaper } = await supabase
     .from('whitepapers')
     .select('title, summary')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .single();
 
   if (!whitepaper) {
@@ -30,18 +34,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function WhitepaperDetailPage({ params }: Props) {
+  const { slug } = await params;
+
   const { data: whitepaper } = await supabase
     .from('whitepapers')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .single();
 
   if (!whitepaper) {
     notFound();
   }
 
+  const author = whitepaper.author || whitepaper.author_name;
   // Define date dynamically
-  const publishDate = whitepaper.published_at || whitepaper.created_at;
+  const publishDate = whitepaper.published_date || whitepaper.published_at || whitepaper.created_at;
+
+  const resolvedAuthor = getAuthorByName(whitepaper.author || whitepaper.author_name);
 
   return (
     <main className="min-h-screen bg-[#0B0616] text-[#ffffff] flex flex-col relative overflow-hidden">
@@ -54,7 +63,7 @@ export default async function WhitepaperDetailPage({ params }: Props) {
       <div className="flex-grow flex flex-col relative z-10 w-full max-w-[1440px] mx-auto">
         
         {/* Dynamic Hero Section */}
-        <section className="relative w-full pt-[140px] pb-16 md:pb-24 px-6 mt-10">
+        <section className="relative w-full pt-[140px] pb-16 md:pb-16 px-6 mt-10">
           <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
             
             <div className="mb-6 flex gap-3 justify-center flex-wrap">
@@ -73,12 +82,12 @@ export default async function WhitepaperDetailPage({ params }: Props) {
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-6 text-[#D1D5DB] text-[15px] font-medium mb-12">
-               {whitepaper.author_name && (
+               {(resolvedAuthor?.name || whitepaper.author_name || whitepaper.author) && (
                  <div className="flex items-center gap-3 bg-white/[0.04] border border-white/10 rounded-full py-1.5 px-4 backdrop-blur-md">
                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#6A27D4] to-[#A78BFA] flex items-center justify-center text-white font-bold text-xs">
-                     {whitepaper.author_name.charAt(0)}
+                     {author.charAt(0)}
                    </div>
-                   <span>By {whitepaper.author_name}</span>
+                   <span>Author: {author}</span>
                  </div>
                )}
                {publishDate && (
@@ -86,7 +95,7 @@ export default async function WhitepaperDetailPage({ params }: Props) {
                    <svg className="w-4 h-4 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                    </svg>
-                   <span>{new Date(publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                   <span>Published: {new Date(publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
                  </div>
                )}
             </div>
@@ -105,7 +114,7 @@ export default async function WhitepaperDetailPage({ params }: Props) {
 
         {/* Cover Image Section / Glassmorphic Empty State */}
         {whitepaper.cover_image_url ? (
-          <section className="relative z-10 max-w-[1000px] mx-auto px-6 pb-32 w-full">
+          <section className="relative z-10 max-w-[1000px] mx-auto px-6 pb-16 w-full">
             <div className="rounded-[24px] overflow-hidden border border-white/10 bg-white/[0.04] shadow-2xl p-2 liquid-glass">
               <div className="relative w-full aspect-[16/9] rounded-[16px] overflow-hidden bg-gradient-to-br from-purple-100/5 to-indigo-100/5">
                 <Image 
@@ -118,7 +127,7 @@ export default async function WhitepaperDetailPage({ params }: Props) {
             </div>
           </section>
         ) : (
-          <section className="relative z-10 max-w-[1000px] mx-auto px-6 pb-32 w-full mt-4">
+          <section className="relative z-10 max-w-[1000px] mx-auto px-6 pb-16 w-full mt-4">
             <div className="rounded-[24px] overflow-hidden border border-white/10 bg-white/[0.08] backdrop-blur-3xl shadow-2xl p-8 flex flex-col items-center justify-center min-h-[350px]">
               <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 shadow-[inset_0_2px_10px_rgba(255,255,255,0.1)]">
                 <svg className="w-10 h-10 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,6 +140,13 @@ export default async function WhitepaperDetailPage({ params }: Props) {
               </p>
             </div>
           </section>
+        )}
+
+        {/* Dynamic Author Profile Section */}
+        {resolvedAuthor && (
+          <div className="mb-16">
+            <AuthorProfile author={resolvedAuthor} />
+          </div>
         )}
       </div>
 

@@ -1,18 +1,22 @@
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DriverAppHero = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-24 relative overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20 z-10 relative">
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 relative overflow-hidden ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-12 z-10 relative">
                 
                 {/* Left Side: Image */}
                 <div className="flex justify-center w-full order-1 lg:order-1 pt-8 lg:pt-0">
-                    <img
+                    <Image
                         src="/assets/images/features/app-screen-mix.png"
                         alt="Finmile Driver App Interface"
+                        width={500}
+                        height={500}
+                        priority
                         className="w-full max-w-[400px] lg:max-w-[500px] h-auto rounded-[24px] relative z-10 object-contain"
                     />
                 </div>

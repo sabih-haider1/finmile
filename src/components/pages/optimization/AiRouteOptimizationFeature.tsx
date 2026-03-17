@@ -6,8 +6,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const AiRouteOptimizationFeature = () => {
     return (
-        <section className={`w-full bg-white flex justify-center px-4 md:px-8 lg:px-24 py-16 md:py-24 overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        <section className={`w-full bg-white flex justify-center px-4 md:px-8 lg:px-24 py-16 md:py-16 overflow-hidden ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
 
                 {/* Left Side: Mobile Phones UI */}
                 <div className="w-full lg:w-[45%] flex justify-center lg:justify-start">

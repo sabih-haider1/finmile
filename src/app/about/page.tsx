@@ -12,6 +12,8 @@ import { OurCollectiveEdge } from "../../components/pages/about/OurCollectiveEdg
 import { PressAndAwards } from "../../components/pages/about/PressAndAwards";
 import { JoinTheJourney } from "../../components/shared/JoinTheJourney";
 
+export const revalidate = 3600;
+
 export const metadata = {
     title: 'About | Finmile',
     description: 'Learn more about Finmile, the OS for Modern Logistics.',

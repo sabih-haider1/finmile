@@ -65,7 +65,7 @@ export const DeliverySolutions = () => {
     const currentTab = tabs[activeTab];
 
     return (
-        <section className={`w-full py-16 lg:py-28 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full py-16 lg:py-16 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Matched from OurOrigin) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-70 pointer-events-none" />
@@ -73,7 +73,7 @@ export const DeliverySolutions = () => {
             <div className="absolute bottom-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-5 pointer-events-none" />
 
             {/* Top Text Header */}
-            <div className="flex flex-col items-center text-center w-full z-10 mb-12 lg:mb-16">
+            <div className="flex flex-col items-center text-center w-full z-10 mb-12 lg:mb-8">
                 <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-white tracking-tight leading-tight mb-4">
                     Delivery Solutions for Every Business
                 </h2>
@@ -83,7 +83,7 @@ export const DeliverySolutions = () => {
             </div>
 
             {/* Glassmorphic Tabs Container - Even Full Width */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 md:gap-4 mb-12 lg:mb-16 w-full max-w-[1200px] z-10">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 md:gap-4 mb-12 lg:mb-8 w-full max-w-[1200px] z-10">
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
 

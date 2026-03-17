@@ -25,13 +25,13 @@ export const MultiFleetOptimization = () => {
     ];
 
     return (
-        <section className={`w-full bg-white py-12 md:py-20 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white py-12 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
             
             {/* The giant rounded background container matching the mockup */}
-            <div className="w-full max-w-[1240px] bg-[#F8F9FC] rounded-[32px] md:rounded-[48px] px-6 py-16 md:px-12 md:py-20 flex flex-col items-center">
+            <div className="w-full max-w-[1240px] bg-[#F8F9FC] rounded-[32px] md:rounded-[48px] px-6 py-16 md:px-12 md:py-16 flex flex-col items-center">
                 
                 {/* Header */}
-                <div className="text-center mb-12 md:mb-16">
+                <div className="text-center mb-12 md:mb-8">
                     <h2 className="font-bold text-[34px] md:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4">
                         Multi-Fleet & Multi-Mode Optimization
                     </h2>
@@ -41,7 +41,7 @@ export const MultiFleetOptimization = () => {
                 </div>
 
                 {/* Vehicle Cards */}
-                <div className="w-full max-w-[1050px] grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 md:mb-20">
+                <div className="w-full max-w-[1050px] grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 md:mb-8">
                     
                     {/* Van Card */}
                     <div className="bg-white rounded-[24px] p-5 shadow-[0_8px_30px_rgba(47,28,140,0.04)] flex flex-col items-start transition-transform hover:-translate-y-1 duration-300">
@@ -87,7 +87,7 @@ export const MultiFleetOptimization = () => {
                 </div>
 
                 {/* Features */}
-                <div className="w-full max-w-[950px] grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-14 md:mb-16">
+                <div className="w-full max-w-[950px] grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-14 md:mb-8">
                     {features.map((feature, idx) => (
                         <div key={idx} className="flex flex-col items-center text-center">
                             {/* Pure white circle with soft shadow to pop off the light gray background */}

@@ -38,7 +38,7 @@ export const UnifiedCommand = () => {
 
     return (
         <motion.section 
-          className="w-full bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-24 overflow-hidden"
+          className="w-full bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-16 overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}

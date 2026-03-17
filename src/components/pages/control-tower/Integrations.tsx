@@ -9,7 +9,7 @@ export const Integrations = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-20 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-8 md:mb-12">
                 <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2]">
                     Integrations for Full Visibility

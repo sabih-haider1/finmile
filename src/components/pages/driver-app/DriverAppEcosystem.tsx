@@ -24,11 +24,11 @@ export const DriverAppEcosystem = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 lg:py-24 border-t border-[#F0EDFF] ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 lg:py-16 border-t border-[#F0EDFF] ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] flex flex-col z-10 relative">
 
                 {/* Header Content - Two Column Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-center mb-12 lg:mb-16 text-center lg:text-left">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-12 lg:mb-8 text-center lg:text-left">
                     <div>
                         <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight">
                             Connect the Driver<br className="hidden lg:block"/>

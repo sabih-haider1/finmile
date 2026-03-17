@@ -7,7 +7,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 export const RetailersAIOperatingSystem = () => {
     return (
         <section className={`w-full bg-white py-12 md:py-16 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center">
                 
                 {/* Left Side: Raw Image Content with #F6F4FF background */}
                 <div className="relative w-full flex items-center justify-center h-[400px] md:h-[500px] lg:h-[600px] bg-[#F6F4FF] rounded-2xl">

@@ -7,12 +7,12 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const RetailersModernDelivery = () => {
     return (
-        <section className={`w-full bg-[#F8F9FC] flex flex-col items-center px-4 md:px-8 lg:px-24 py-16 lg:py-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#F8F9FC] flex flex-col items-center px-4 md:px-8 lg:px-24 py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Soft background glow exactly behind the left text section */}
             <div className="absolute left-[-5%] top-[25%] w-[800px] h-[700px] bg-white rounded-full blur-[100px] pointer-events-none z-0"></div>
 
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center z-10 relative">
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center z-10 relative">
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start text-left w-full">

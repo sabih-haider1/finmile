@@ -102,7 +102,7 @@ export function cleanupRateLimitRecords(): void {
   keysToDelete.forEach(key => rateLimitMap.delete(key));
 }
 
-// Cleanup every 5 minutes
-if (typeof setInterval !== 'undefined') {
-  setInterval(cleanupRateLimitRecords, 5 * 60 * 1000);
-}
+// Cleanup every 5 minutes (Disabled for Edge Runtime compatibility)
+// if (typeof setInterval !== 'undefined') {
+//   setInterval(cleanupRateLimitRecords, 5 * 60 * 1000);
+// }

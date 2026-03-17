@@ -6,8 +6,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DriverAppAiTracking = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 lg:py-24 overflow-hidden relative border-y border-[#F0EDFF] ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-20 items-center z-10 relative">
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 lg:py-16 overflow-hidden relative border-y border-[#F0EDFF] ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center z-10 relative">
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 mt-8 lg:mt-0">

@@ -6,10 +6,10 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OurPlatform = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-20 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-16 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Top Header & Context */}
-            <div className="text-center mb-16 w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto">
+            <div className="text-center mb-8 w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto">
                 <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight mb-6 leading-tight">
                     Our Platform: Intelligence That Delivers
                 </h2>
@@ -19,7 +19,7 @@ export const OurPlatform = () => {
             </div>
 
             {/* 4 Column Feature Grid */}
-            <div className="w-full max-w-[1440px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 z-10 relative">
+            <div className="w-full max-w-[1440px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 z-10 relative">
 
                 {/* Card 1 */}
                 <div className="bg-[#F8F7FF] rounded-[24px] p-8 flex flex-col items-center text-center transition-transform hover:-translate-y-1">

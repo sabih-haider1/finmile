@@ -6,7 +6,7 @@ import { uploadFile, generateSlug } from '@/lib/upload';
 export interface FormFieldConfig {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags';
+  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags' | 'date';
   required?: boolean;
   placeholder?: string;
   options?: { value: string; label: string }[];
@@ -193,6 +193,17 @@ export default function FormBuilder({
             }
             className={inputClassName}
             placeholder={field.placeholder || 'tag1, tag2, tag3'}
+          />
+        );
+
+      case 'date':
+        return (
+          <input
+            type="date"
+            value={value ? (typeof value === 'string' ? value.split('T')[0] : '') : ''}
+            onChange={(e) => handleChange(field.name, e.target.value ? new Date(e.target.value).toISOString() : '')}
+            className={inputClassName}
+            required={field.required}
           />
         );
 

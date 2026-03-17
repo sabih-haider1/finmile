@@ -1,20 +1,24 @@
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const ThreePLHero = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-24 relative overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-20 items-center z-10 relative">
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 relative overflow-hidden ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center z-10 relative">
                 
                 {/* Left Side: Image */}
                 <div className="flex justify-center w-full order-2 lg:order-1 relative mt-12 lg:mt-0">
                     {/* Subtle glow behind image */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#2F1C8C] rounded-full blur-[100px] opacity-10 pointer-events-none" />
-                    <img
+                    <Image
                         src="/assets/images/features/app-screen-full.png"
                         alt="Finmile OS Interface"
+                        width={650}
+                        height={650}
+                        priority
                         className="w-full max-w-[650px] h-auto rounded-[24px] relative z-10 object-contain drop-shadow-2xl mix-blend-multiply"
                     />
                 </div>

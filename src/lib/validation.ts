@@ -7,6 +7,32 @@
 
 import { z } from 'zod';
 
+const whitepaperAuthors = [
+  'Alex Chindris',
+  'Andrei Chirila',
+  'Chris Sargeant',
+  'Hiren Solanki',
+  'Rich Pleeth',
+] as const;
+
+function coerceUrlInput(value: unknown): unknown {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (value && typeof value === 'object') {
+    const keys = ['url', 'publicUrl', 'signedUrl', 'href', 'path'];
+    for (const key of keys) {
+      const candidate = (value as Record<string, unknown>)[key];
+      if (typeof candidate === 'string') {
+        return candidate;
+      }
+    }
+  }
+
+  return value;
+}
+
 // Common validation patterns
 const urlPattern = z.string().url().optional().nullable();
 const slugPattern = z.string().min(1).max(200).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
@@ -64,8 +90,15 @@ export const whitepaperSchema = z.object({
   slug: slugPattern,
   summary: z.string().max(1000).optional(),
   cover_image_url: urlPattern,
-  pdf_url: z.string().url('Valid PDF URL is required'),
+  pdf_url: z.preprocess(
+    coerceUrlInput,
+    z.string().url('Valid PDF URL is required')
+  ),
   author_name: z.string().max(200).optional().nullable(),
+  author: z.enum(whitepaperAuthors).optional().nullable(),
+  published_date: z.string().datetime().optional().nullable(),
+  topic: z.string().max(200).optional().nullable(),
+  industry: z.string().max(200).optional().nullable(),
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),

@@ -33,7 +33,7 @@ export const DriverAppRealWorld = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-12 py-16 md:py-24 border-t border-[#E9E4FF] ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-12 py-16 md:py-16 border-t border-[#E9E4FF] ${montserrat.className}`}>
 
             <div className="w-full max-w-[1240px] flex flex-col items-center">
 

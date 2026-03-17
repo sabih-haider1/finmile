@@ -8,6 +8,8 @@ import { DeliveryFeatures } from "../../components/pages/deliveries/DeliveryFeat
 import { WhatDeliveriesMean } from "../../components/pages/deliveries/WhatDeliveriesMean";
 import { JoinTheJourney } from "../../components/shared/JoinTheJourney";
 
+export const revalidate = 3600;
+
 export const metadata = {
     title: 'Deliveries | Finmile',
     description: 'Manage and optimize your deliveries with Finmile.',

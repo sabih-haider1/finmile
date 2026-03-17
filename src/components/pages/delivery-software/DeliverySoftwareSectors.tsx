@@ -57,7 +57,7 @@ export const DeliverySoftwareSectors = () => {
     const currentTab = tabs[activeTab];
 
     return (
-        <section className={`w-full py-12 md:py-16 lg:py-20 bg-white flex flex-col items-center px-4 md:px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full py-12 md:py-16 lg:py-16 bg-white flex flex-col items-center px-4 md:px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Top Text Header */}
             <div className="flex flex-col items-center text-center w-full z-10 mb-8 lg:mb-12">

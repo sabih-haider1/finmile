@@ -11,6 +11,8 @@ import { DeliverySoftwareLiveDashboard } from "../../components/pages/delivery-s
 import { DeliverySoftwareTestimonials } from "../../components/pages/delivery-software/DeliverySoftwareTestimonials";
 import { JoinTheJourney } from "../../components/shared/JoinTheJourney";
 
+export const revalidate = 3600;
+
 export const metadata = {
     title: 'Delivery Software | Finmile',
     description: 'Transform your logistics with Finmile Delivery Software.',

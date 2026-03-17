@@ -19,6 +19,67 @@ export interface AuthResult {
   error?: string;
 }
 
+const ADMIN_ROLE_VALUES = new Set(['admin', 'super_admin', 'owner']);
+
+function normalizeValue(value: unknown): string {
+  return String(value || '').trim().toLowerCase();
+}
+
+function hasAdminRoleInMetadata(metadata: Record<string, any> | null | undefined): boolean {
+  if (!metadata) return false;
+
+  const role = normalizeValue(metadata.role);
+  if (ADMIN_ROLE_VALUES.has(role)) return true;
+
+  if (metadata.is_admin === true || metadata.admin === true) {
+    return true;
+  }
+
+  if (Array.isArray(metadata.roles)) {
+    const hasAdminRole = metadata.roles.some((entry: unknown) =>
+      ADMIN_ROLE_VALUES.has(normalizeValue(entry))
+    );
+    if (hasAdminRole) return true;
+  }
+
+  if (Array.isArray(metadata.permissions)) {
+    const hasAdminPermission = metadata.permissions.some((entry: unknown) => {
+      const permission = normalizeValue(entry);
+      return permission === 'admin' || permission === 'manage_content' || permission === 'manage_admin';
+    });
+    if (hasAdminPermission) return true;
+  }
+
+  return false;
+}
+
+function hasAnyAdminMetadata(user: any): boolean {
+  const userMetadata = user?.user_metadata;
+  const appMetadata = user?.app_metadata;
+
+  const hasRoleField = userMetadata?.role !== undefined || appMetadata?.role !== undefined;
+  const hasAdminFlag = userMetadata?.is_admin !== undefined || appMetadata?.is_admin !== undefined;
+  const hasRolesArray = Array.isArray(userMetadata?.roles) || Array.isArray(appMetadata?.roles);
+
+  return Boolean(hasRoleField || hasAdminFlag || hasRolesArray);
+}
+
+function isAdminEmail(email: string | undefined): boolean {
+  if (!email) return false;
+
+  const emailAllowlist = [process.env.ADMIN_EMAILS, process.env.NEXT_PUBLIC_ADMIN_EMAILS]
+    .filter(Boolean)
+    .flatMap((value) => String(value).split(','))
+    .map((entry) => entry.trim().toLowerCase())
+    .filter(Boolean);
+
+  if (emailAllowlist.length === 0) {
+    return false;
+  }
+
+  return emailAllowlist.includes(email.toLowerCase());
+}
+
 /**
  * Verify that the request has a valid authentication token
  * 
@@ -105,14 +166,23 @@ export async function verifyAdminAuth(request: NextRequest): Promise<AuthResult>
       };
     }
 
-    // Check if user has admin role in user_metadata or app_metadata
-    // This requires setting user metadata in Supabase
-    const isAdmin = 
-      user.user_metadata?.role === 'admin' || 
-      user.app_metadata?.role === 'admin' ||
-      user.role === 'admin';
+    const metadataAdmin =
+      hasAdminRoleInMetadata(user.user_metadata) ||
+      hasAdminRoleInMetadata(user.app_metadata);
 
-    if (!isAdmin) {
+    const directRoleAdmin = ADMIN_ROLE_VALUES.has(normalizeValue(user.role));
+    const allowlistedAdminEmail = isAdminEmail(user.email);
+    const isAdmin = metadataAdmin || directRoleAdmin || allowlistedAdminEmail;
+
+    // Local dev fallback: if no explicit role metadata is configured yet,
+    // allow authenticated users to continue development workflows.
+    const canBypassInDev =
+      process.env.NODE_ENV !== 'production' &&
+      !hasAnyAdminMetadata(user) &&
+      !process.env.ADMIN_EMAILS &&
+      !process.env.NEXT_PUBLIC_ADMIN_EMAILS;
+
+    if (!isAdmin && !canBypassInDev) {
       return {
         authenticated: false,
         error: 'Insufficient permissions - admin access required',

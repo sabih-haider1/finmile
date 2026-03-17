@@ -6,38 +6,7 @@ import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-const teamMembers = [
-    {
-        name: 'Chris Sargeant',
-        role: 'Co-Founder & COO',
-        bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/chris.png'
-    },
-    {
-        name: 'Rich Pleeth',
-        role: 'Co-Founder & CEO',
-        bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/rich.png'
-    },
-    {
-        name: 'Alex Chindris',
-        role: 'Chief Technology Officer',
-        bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/alex.png'
-    },
-    {
-        name: 'Andrei Chirila',
-        role: 'Head of Product',
-        bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/andrei.png'
-    },
-    {
-        name: 'Hiren Solanki',
-        role: 'Co-Founder & CEO',
-        bio: 'Former Google & Bolt. Leads vision, partnerships, and GTM.',
-        image: '/assets/images/hiren.png'
-    }
-];
+import { authors } from '@/data/authors';
 
 export const OurLeadership = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,11 +33,11 @@ export const OurLeadership = () => {
     }, []);
 
     const nextPage = () => {
-        setCurrentIndex((prev) => (prev + 1) % teamMembers.length);
+        setCurrentIndex((prev) => (prev + 1) % authors.length);
     };
 
     const prevPage = () => {
-        setCurrentIndex((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
+        setCurrentIndex((prev) => (prev - 1 + authors.length) % authors.length);
     };
 
     const goToIndex = (index: number) => {
@@ -77,10 +46,10 @@ export const OurLeadership = () => {
 
     // Get current visible members with wrapping
     const getVisibleMembers = () => {
-        const members: Array<typeof teamMembers[0] & { uniqueKey: string }> = [];
+        const members: Array<typeof authors[0] & { uniqueKey: string }> = [];
         for (let i = 0; i < itemsPerPage; i++) {
-            const index = (currentIndex + i) % teamMembers.length;
-            members.push({ ...teamMembers[index], uniqueKey: `${index}-${currentIndex}` });
+            const index = (currentIndex + i) % authors.length;
+            members.push({ ...authors[index], uniqueKey: `${index}-${currentIndex}` });
         }
         return members;
     };
@@ -88,10 +57,10 @@ export const OurLeadership = () => {
     const visibleMembers = getVisibleMembers();
 
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-20 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-16 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Centered Header */}
-            <div className="text-center mb-16 w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto">
+            <div className="text-center mb-8 w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto">
                 <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight mb-6 leading-tight">
                     Meet the Leadership Team
                 </h2>
@@ -146,7 +115,7 @@ export const OurLeadership = () => {
             </div>
 
             {/* Bottom Pagination Controls */}
-            {teamMembers.length > itemsPerPage && (
+            {authors.length > itemsPerPage && (
                 <div className="flex items-center justify-center z-20">
                     <div
                         className="flex items-center gap-4 px-2 py-2 rounded-[32px]"
@@ -161,7 +130,7 @@ export const OurLeadership = () => {
                         </button>
 
                         <div className="flex items-center gap-1">
-                            {teamMembers.map((_, index) => (
+                            {authors.map((_, index) => (
                                 <button
                                     key={index}
                                     onClick={() => goToIndex(index)}

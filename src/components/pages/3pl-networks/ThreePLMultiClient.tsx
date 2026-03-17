@@ -75,14 +75,14 @@ export const ThreePLMultiClient = () => {
     const currentTab = tabs[activeTab];
 
     return (
-        <section className={`w-full py-16 lg:py-28 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full py-16 lg:py-16 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-60 pointer-events-none" />
             <div className="absolute top-1/2 left-[10%] -translate-y-1/2 w-[1000px] h-[600px] bg-[#2F1C8C] rounded-[100%] blur-[180px] opacity-70 pointer-events-none" />
             
             {/* Top Text Header */}
-            <div className="flex flex-col items-center text-center w-full z-10 mb-12 lg:mb-16">
+            <div className="flex flex-col items-center text-center w-full z-10 mb-12 lg:mb-8">
                 <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-white tracking-tight leading-[1.2] mb-4">
                     Built for Multi-Client Operations —<br className="hidden md:block"/> Unified by Finmile OS
                 </h2>
@@ -92,7 +92,7 @@ export const ThreePLMultiClient = () => {
             </div>
 
             {/* Glassmorphic Tabs Container */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 mb-12 lg:mb-16 w-full max-w-[1200px] z-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 mb-12 lg:mb-8 w-full max-w-[1200px] z-10">
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
 
@@ -129,7 +129,7 @@ export const ThreePLMultiClient = () => {
             </div>
 
             {/* Split Layout Content Area representing active tab */}
-            <div className='max-w-[1200px] w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center z-10'>
+            <div className='max-w-[1200px] w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center z-10'>
 
                 {/* Left Column: Text Content */}
                 <div className='lg:col-span-4 flex flex-col space-y-6 lg:pr-6 pt-0'>

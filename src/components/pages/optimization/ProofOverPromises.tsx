@@ -24,19 +24,19 @@ export const ProofOverPromises = () => {
     ];
 
     return (
-        <section className={`w-full bg-white py-16 md:py-24 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white py-16 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
             
             <div className="w-full max-w-[1240px] flex flex-col items-center">
                 
                 {/* Header */}
-                <div className="text-center mb-12 md:mb-16">
+                <div className="text-center mb-12 md:mb-8">
                     <h2 className="font-semibold text-[36px] md:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2]">
                         Proof Over Promises
                     </h2>
                 </div>
 
                 {/* Metrics Cards Grid - Stays the same full width */}
-                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     {metrics.map((metric, idx) => (
                         <div 
                             key={idx} 
@@ -62,7 +62,7 @@ export const ProofOverPromises = () => {
 
                 {/* Testimonial Block */}
                 {/* Increased width to max-w-[1000px] to better align with the cards above */}
-                <div className="w-full max-w-[1000px] bg-[#2F1C8C] rounded-[24px] px-10 py-12 md:py-16 md:px-12 flex flex-col items-center mb-16 relative overflow-hidden">
+                <div className="w-full max-w-[1000px] bg-[#2F1C8C] rounded-[24px] px-10 py-12 md:py-16 md:px-12 flex flex-col items-center mb-8 relative overflow-hidden">
                     
                     {/* Double Quote Icon replacing SVG */}
                     <div className="mb-4 flex justify-center h-[40px] items-center">

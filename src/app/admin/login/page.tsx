@@ -17,7 +17,6 @@ export default function AdminLoginPage() {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        console.log('User already logged in, redirecting to dashboard');
         router.push('/admin/dashboard');
       }
     };
@@ -40,13 +39,12 @@ export default function AdminLoginPage() {
       }
 
       if (data.session) {
-        console.log('Login successful:', data);
         // Use replace instead of push to prevent back button issues
         router.replace('/admin/dashboard');
         router.refresh(); // Refresh to ensure session is recognized
       }
     } catch (error: any) {
-      console.error('Login error:', error);
+      console.error('Login error:', error?.message || 'Unknown error');
       setError(error.message || 'Failed to login. Please check your credentials.');
       setLoading(false);
     }

@@ -1,19 +1,23 @@
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DeliverySoftwareHero = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-20 overflow-hidden relative ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-20 items-center z-10 relative">
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center z-10 relative">
 
                 {/* Left Side: Image */}
                 <div className="w-full flex justify-center lg:justify-start order-2 lg:order-1 relative mt-12 lg:mt-0">
                     <div className="w-full max-w-[550px] flex items-center justify-center">
-                        <img
+                        <Image
                             src="/assets/images/features/screen-live.png"
                             alt="Finmile Delivery Software Live Tracking"
+                            width={550}
+                            height={550}
+                            priority
                             className="w-full h-auto drop-shadow-2xl relative z-10 hover:scale-[1.02] transition-transform duration-500 object-contain"
                         />
                     </div>

@@ -11,8 +11,8 @@ export const ThreePLIntegrations = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-24 overflow-hidden relative ${montserrat.className}`}>
-            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-10 md:mb-16">
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-2 md:py-2 overflow-hidden relative ${montserrat.className}`}>
+            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-10 md:mb-8">
                 <h2 className="font-semibold text-[32px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.3]">
                     Integrate Seamlessly with<br />Your Existing Systems
                 </h2>
@@ -20,7 +20,7 @@ export const ThreePLIntegrations = () => {
 
             {/* Changed flex-wrap to flex-nowrap and ensured justify-center */}
             <div
-                className="w-full max-w-[1200px] z-10 flex flex-nowrap justify-center gap-3 md:gap-5 mb-12 md:mb-16 pb-4 md:pb-0 overflow-x-auto"
+                className="w-full max-w-[1200px] z-10 flex flex-nowrap justify-center gap-3 md:gap-5 mb-12 md:mb-8 pb-4 md:pb-0 overflow-x-auto"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {integrations.map((integration, idx) => (

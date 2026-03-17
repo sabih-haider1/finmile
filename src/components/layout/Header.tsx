@@ -3,34 +3,36 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { Button } from "../ui/Button";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const pathname = usePathname();
 
   const links = [
-    "Solutions", "Deliveries", "Features", "About", "Resources", "Whitepapers", "Delivery Software"
+    { name: "Solutions", href: "#solutions" },
+    { name: "Deliveries", href: "/deliveries" },
+    { name: "Features", href: "#features" },
+    { name: "About", href: "/about" },
+    { name: "Resources", href: "#resources" },
+    { name: "Whitepapers", href: "/whitepapers" },
+    { name: "Delivery Software", href: "/delivery-software" }
   ];
 
   useEffect(() => {
-    let rafId = 0;
-
     const handleScroll = () => {
-      if (rafId) return;
-      rafId = window.requestAnimationFrame(() => {
-        setIsScrolled(window.scrollY > 50);
-        rafId = 0;
-      });
+      setIsScrolled(window.scrollY > 20); // slightly more sensitive trigger
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafId) {
-        window.cancelAnimationFrame(rafId);
-      }
-    };
+    // Run once on mount to handle initial scroll position
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Close mobile menu when clicking outside
@@ -40,29 +42,47 @@ export const Header = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isMobileMenuOpen]);
+
+  // Framer Motion variants
+  const headerVariants: Variants = {
+    initial: { y: -100, opacity: 0 },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const navItemVariants: Variants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.05 + 0.3, duration: 0.4, ease: "easeOut" }
+    })
+  };
+
+  const mobileMenuVariants: Variants = {
+    closed: { x: '100%', transition: { type: 'spring', stiffness: 300, damping: 30 } },
+    open: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } }
+  };
 
   return (
     <>
-      <header
-        className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 ${
-          isMobileMenuOpen && 'xl:hidden' 
-            ? 'bg-transparent border-transparent' 
-            : isScrolled 
-            ? 'bg-[#1b0f3e]/40 backdrop-blur-xl border border-white/20 shadow-[0_15px_40px_rgba(0,0,0,0.3)]' 
-            : 'bg-transparent border border-transparent'
-        }`}
+      <motion.header
+        variants={headerVariants}
+        initial="initial"
+        animate="animate"
+        className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 rounded-full transition-all duration-500 ease-out ${isMobileMenuOpen && 'xl:hidden'
+            ? 'bg-transparent border-transparent py-3 lg:py-4'
+            : isScrolled
+              ? 'bg-slate-600/35 backdrop-blur-md border border-white/25 shadow-[0_8px_30px_rgba(15,23,42,0.35)] py-2.5 lg:py-3.5'
+              : 'bg-transparent border-transparent py-4 lg:py-5'
+          }`}
         style={{ top: '3px' }}
       >
         {/* Logo */}
-        <Link 
+        <Link
           href="/"
-          className={`flex items-center justify-center shrink-0 mr-4 transition-opacity duration-300 self-center translate-y-[5px] cursor-pointer ${
-            isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'
-          }`}
+          className={`relative z-[110] flex items-center justify-center shrink-0 mr-4 transition-opacity duration-300 self-center translate-y-[2px] cursor-pointer ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'
+            }`}
         >
           <Image
             src="/assets/logos/logo-white.png"
@@ -75,178 +95,187 @@ export const Header = () => {
         </Link>
 
         {/* Center Nav Links - Desktop */}
-        <nav className="hidden xl:flex items-center justify-center min-w-0 flex-1 gap-5 2xl:gap-8 mx-2">
-          {links.map((link) => (
-            link === "About" ? (
-              <Link
-                key={link}
-                href="/about"
-                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
+        <nav className="hidden xl:flex items-center justify-center min-w-0 flex-1 gap-1 2xl:gap-2 mx-2">
+          {links.map((link, i) => {
+            const isActive = pathname === link.href || pathname?.startsWith(link.href + '/');
+
+            return (
+              <motion.div
+                key={link.name}
+                custom={i}
+                variants={navItemVariants}
+                initial="hidden"
+                animate="visible"
+                className="relative px-3 py-2 cursor-pointer rounded-full"
+                onMouseEnter={() => setHoveredLink(link.name)}
+                onMouseLeave={() => setHoveredLink(null)}
               >
-                {link}
-              </Link>
-            ) : link === "Whitepapers" ? (
-              <Link
-                key={link}
-                href="/whitepapers"
-                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
-              >
-                {link}
-              </Link>
-            ) : link === "Deliveries" ? (
-              <Link
-                key={link}
-                href="/deliveries"
-                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
-              >
-                {link}
-              </Link>
-            ) : link === "Delivery Software" ? (
-              <Link
-                key={link}
-                href="/delivery-software"
-                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
-              >
-                {link}
-              </Link>
-            ) : (
-              <a
-                key={link}
-                href={`#${link.toLowerCase().replace(/ /g, "-")}`}
-                className="text-[13px] 2xl:text-[14px] font-bold text-white/90 tracking-wide hover:text-white transition-colors whitespace-nowrap"
-              >
-                {link}
-              </a>
-            )
-          ))}
+                {hoveredLink === link.name && (
+                  <motion.div
+                    layoutId="nav-hover"
+                    className="absolute inset-0 bg-white/10 rounded-full pointer-events-none"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+
+                {link.href.startsWith('/') ? (
+                  <Link
+                    href={link.href}
+                    className={`relative z-10 text-[13px] 2xl:text-[14px] font-[600] tracking-wide whitespace-nowrap transition-colors duration-200 ${isActive ? 'text-white drop-shadow-sm' : 'text-white hover:text-gray-400'
+                      }`}
+                  >
+                    {link.name}
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-active"
+                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-finmile-purple rounded-full"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                ) : (
+                  <a
+                    href={link.href}
+                    className="relative z-10 text-[13px] 2xl:text-[14px] font-[600] tracking-wide text-white hover:text-gray-400 whitespace-nowrap transition-colors duration-200"
+                  >
+                    {link.name}
+                  </a>
+                )}
+              </motion.div>
+            );
+          })}
         </nav>
 
         {/* Actions - Desktop */}
         <div className="hidden xl:flex items-center justify-center gap-3 shrink-0 ml-4">
-          <Button
-            variant="liquid-glass"
-            size="lg"
-          >
-            Track Parcel
-          </Button>
-          <Button
-            variant="solid"
-            size="lg"
-          >
-            Request A Demo
-          </Button>
+          <motion.div variants={navItemVariants} custom={links.length} initial="hidden" animate="visible" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="liquid-glass"
+              size="lg"
+            >
+              Track Parcel
+            </Button>
+          </motion.div>
+          <motion.div variants={navItemVariants} custom={links.length + 1} initial="hidden" animate="visible" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="solid"
+              size="lg"
+              className="shadow-[0_0_20px_rgba(106,39,212,0.4)] hover:shadow-[0_0_25px_rgba(106,39,212,0.6)]"
+            >
+              Request A Demo
+            </Button>
+          </motion.div>
         </div>
 
         {/* Hamburger Menu Button - Mobile */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="xl:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center ml-auto z-[110]"
+          className="xl:hidden relative flex flex-col gap-1.5 w-8 h-8 justify-center items-center ml-auto z-[110]"
           aria-label="Toggle menu"
         >
           <span
-            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-              isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
-            }`}
+            className={`w-6 h-0.5 bg-white rounded-full transition-transform duration-300 ease-out origin-center ${isMobileMenuOpen ? 'rotate-45 translate-y-[8px]' : ''
+              }`}
           />
           <span
-            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-              isMobileMenuOpen ? 'opacity-0' : ''
-            }`}
+            className={`w-6 h-0.5 bg-white rounded-full transition-opacity duration-300 ease-out ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
           />
           <span
-            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-              isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
-            }`}
+            className={`w-6 h-0.5 bg-white rounded-full transition-transform duration-300 ease-out origin-center ${isMobileMenuOpen ? '-rotate-45 -translate-y-[8px]' : ''
+              }`}
           />
         </button>
-      </header>
+      </motion.header>
 
       {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[95] xl:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-[#0B0616]/80 backdrop-blur-sm z-[95] xl:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Mobile Menu Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full w-[280px] bg-[#1b0f3e]/95 backdrop-blur-xl border-l border-white/20 z-[99] xl:hidden transition-transform duration-300 ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+      <motion.div
+        variants={mobileMenuVariants}
+        initial="closed"
+        animate={isMobileMenuOpen ? "open" : "closed"}
+        className="fixed top-0 right-0 h-full w-[300px] bg-[#0B0616]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl"
       >
-        <div className="flex flex-col h-full pt-24 px-6 pb-8">
+        <div className="flex flex-col h-full pt-20 px-6 pb-8 overflow-y-auto custom-scrollbar">
           {/* Mobile Navigation Links */}
-          <nav className="flex flex-col gap-4 mb-8">
-            {links.map((link) => (
-              link === "About" ? (
-                <Link
-                  key={link}
-                  href="/about"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
+          <nav className="flex flex-col gap-2 mb-8">
+            <AnimatePresence>
+              {isMobileMenuOpen && links.map((link, i) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
                 >
-                  {link}
-                </Link>
-              ) : link === "Whitepapers" ? (
-                <Link
-                  key={link}
-                  href="/whitepapers"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
-                >
-                  {link}
-                </Link>
-              ) : link === "Deliveries" ? (
-                <Link
-                  key={link}
-                  href="/deliveries"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
-                >
-                  {link}
-                </Link>
-              ) : link === "Delivery Software" ? (
-                <Link
-                  key={link}
-                  href="/delivery-software"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
-                >
-                  {link}
-                </Link>
-              ) : (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase().replace(/ /g, "-")}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[15px] font-bold text-white/90 hover:text-white transition-colors py-2 border-b border-white/10"
-                >
-                  {link}
-                </a>
-              )
-            ))}
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                    >
+                      {link.name}
+                    </a>
+                  )}
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </nav>
 
           {/* Mobile Action Buttons */}
           <div className="flex flex-col gap-3 mt-auto">
-            <Button
-              variant="liquid-glass"
-              size="lg"
-              className="w-full"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.5, duration: 0.3 }}
             >
-              Track Parcel
-            </Button>
-            <Button
-              variant="solid"
-              size="lg"
-              className="w-full"
+              <Button
+                variant="liquid-glass"
+                size="lg"
+                className="w-full justify-center"
+              >
+                Track Parcel
+              </Button>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.6, duration: 0.3 }}
             >
-              Request A Demo
-            </Button>
+              <Button
+                variant="solid"
+                size="lg"
+                className="w-full justify-center shadow-[0_0_15px_rgba(106,39,212,0.3)]"
+              >
+                Request A Demo
+              </Button>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -10,6 +10,9 @@ import FilterToggle from '@/components/admin/FilterToggle';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { uploadFile, generateSlug } from '@/lib/upload';
+import { authors } from '@/data/authors';
+
+const WHITEPAPER_AUTHORS = authors.map((author) => author.name);
 
 export default function WhitepapersPage() {
   const [whitepapers, setWhitepapers] = useState<Whitepaper[]>([]);
@@ -24,27 +27,36 @@ export default function WhitepapersPage() {
     fetchWhitepapers();
   }, [searchQuery, featuredFilter, publishedFilter]);
 
+  const getAuthHeader = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.access_token) {
+      throw new Error('Your admin session has expired. Please log in again.');
+    }
+
+    return { Authorization: `Bearer ${session.access_token}` };
+  };
+
   const fetchWhitepapers = async () => {
     setLoading(true);
     try {
-      let query = supabase
-        .from('whitepapers')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const params = new URLSearchParams();
+      if (searchQuery) params.set('search', searchQuery);
+      if (featuredFilter !== null) params.set('featured', String(featuredFilter));
+      if (publishedFilter !== null) params.set('published', String(publishedFilter));
 
-      if (searchQuery) {
-        query = query.ilike('title', `%${searchQuery}%`);
-      }
-      if (featuredFilter !== null) {
-        query = query.eq('is_featured', featuredFilter);
-      }
-      if (publishedFilter !== null) {
-        query = query.eq('is_published', publishedFilter);
+      const response = await fetch(`/api/whitepapers?${params.toString()}`, {
+        credentials: 'include',
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to fetch whitepapers');
       }
 
-      const { data, error } = await query;
-      if (error) throw error;
-      setWhitepapers(data || []);
+      setWhitepapers(result.data?.items || []);
     } catch (error: any) {
       console.error('Error fetching whitepapers:', error);
       alert('Failed to fetch whitepapers: ' + error.message);
@@ -59,8 +71,16 @@ export default function WhitepapersPage() {
     }
 
     try {
-      const { error } = await supabase.from('whitepapers').delete().eq('id', whitepaper.id);
-      if (error) throw error;
+      const authHeader = await getAuthHeader();
+      const response = await fetch(`/api/whitepapers/${whitepaper.id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: authHeader,
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to delete whitepaper');
+      }
       alert('Whitepaper deleted successfully!');
       fetchWhitepapers();
     } catch (error: any) {
@@ -70,8 +90,27 @@ export default function WhitepapersPage() {
 
   const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
     try {
-      let coverImageUrl = formData.cover_image_url;
-      let pdfUrl = formData.pdf_url;
+      const normalizeUrlValue = (value: unknown): string | null => {
+        if (typeof value === 'string') {
+          const trimmed = value.trim();
+          return trimmed.length > 0 ? trimmed : null;
+        }
+
+        if (value && typeof value === 'object') {
+          const candidateKeys = ['url', 'publicUrl', 'signedUrl', 'path', 'href'];
+          for (const key of candidateKeys) {
+            const candidate = (value as Record<string, unknown>)[key];
+            if (typeof candidate === 'string' && candidate.trim().length > 0) {
+              return candidate.trim();
+            }
+          }
+        }
+
+        return null;
+      };
+
+      let coverImageUrl = normalizeUrlValue(formData.cover_image_url);
+      let pdfUrl = normalizeUrlValue(formData.pdf_url);
 
       // Upload cover image if provided
       if (files.cover_image_url) {
@@ -91,36 +130,57 @@ export default function WhitepapersPage() {
         });
       }
 
+      if (!pdfUrl) {
+        throw new Error('Please upload a valid PDF file before saving.');
+      }
+
+      const selectedAuthor = WHITEPAPER_AUTHORS.includes(formData.author)
+        ? formData.author
+        : null;
+      const publishedDate = formData.published_date
+        ? new Date(formData.published_date).toISOString()
+        : new Date().toISOString();
+
       const whitepaperData = {
         ...formData,
         slug: generateSlug(formData.slug || formData.title),
         cover_image_url: coverImageUrl || null,
         pdf_url: pdfUrl,
+        author: selectedAuthor,
+        author_name: selectedAuthor,
+        published_date: publishedDate,
         topic: formData.topic && formData.topic.trim() !== '' ? formData.topic : null,
         industry: formData.industry && formData.industry.trim() !== '' ? formData.industry : null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };
 
       if (editingWhitepaper) {
-        // Update existing whitepaper
-        const { id, created_at, ...updateData } = whitepaperData;
-        const { error } = await supabase
-          .from('whitepapers')
-          .update({ ...updateData, updated_at: new Date().toISOString() })
-          .eq('id', editingWhitepaper.id);
-        if (error) throw error;
+        const { id, created_at, updated_at, ...updateData } = whitepaperData;
+        const authHeader = await getAuthHeader();
+        const response = await fetch(`/api/whitepapers/${editingWhitepaper.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(updateData),
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to update whitepaper');
+        }
         alert('Whitepaper updated successfully!');
       } else {
-        // Create new whitepaper
-        const now = new Date().toISOString();
         const { id, created_at, updated_at, ...insertData } = whitepaperData;
-        const { error } = await supabase.from('whitepapers').insert([{
-          ...insertData,
-          published_at: insertData.is_published ? now : null,
-          created_at: now,
-          updated_at: now,
-        }]);
-        if (error) throw error;
+        const authHeader = await getAuthHeader();
+        const response = await fetch('/api/whitepapers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(insertData),
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to create whitepaper');
+        }
         alert('Whitepaper created successfully!');
       }
 
@@ -138,21 +198,29 @@ export default function WhitepapersPage() {
     { name: 'summary', label: 'Summary', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
     { name: 'pdf_url', label: 'PDF File', type: 'file', required: true, accept: '.pdf', bucket: 'whitepapers', folder: 'pdfs' },
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'whitepaper-covers', folder: 'covers' },
-    { name: 'author_name', label: 'Author Name', type: 'text', placeholder: 'John Doe' },
+    { 
+      name: 'author', 
+      label: 'Author', 
+      type: 'select',
+      options: [
+        { value: '', label: 'Select an author' },
+        ...authors.map((a) => ({ value: a.name, label: a.name }))
+      ]
+    },
+    { name: 'published_date', label: 'Published Date', type: 'date', helpText: 'Custom publication date' },
     { 
       name: 'topic', 
       label: 'Topic', 
       type: 'select', 
       options: [
         { value: '', label: 'Select a topic' },
+        { value: 'AI & Automation', label: 'AI & Automation' },
         { value: 'AI & Machine Learning', label: 'AI & Machine Learning' },
-        { value: 'Route Optimization', label: 'Route Optimization' },
+        { value: 'Delivery Software', label: 'Delivery Software' },
         { value: 'Last-Mile Delivery', label: 'Last-Mile Delivery' },
-        { value: 'Sustainability', label: 'Sustainability' },
-        { value: 'Fleet Management', label: 'Fleet Management' },
-        { value: 'Autonomous Vehicles', label: 'Autonomous Vehicles' },
-        { value: 'Data Analytics', label: 'Data Analytics' },
-        { value: 'Supply Chain', label: 'Supply Chain' },
+        { value: 'Logistics Software', label: 'Logistics Software' },
+        { value: 'Predictive Analytics', label: 'Predictive Analytics' },
+        { value: 'ROI & Economics', label: 'ROI & Economics' },
       ]
     },
     { 
@@ -161,14 +229,11 @@ export default function WhitepapersPage() {
       type: 'select',
       options: [
         { value: '', label: 'Select an industry' },
-        { value: 'E-Commerce', label: 'E-Commerce' },
-        { value: 'Retail', label: 'Retail' },
-        { value: 'Food & Beverage', label: 'Food & Beverage' },
-        { value: 'Healthcare', label: 'Healthcare' },
-        { value: 'Manufacturing', label: 'Manufacturing' },
-        { value: 'Logistics', label: 'Logistics' },
-        { value: 'Technology', label: 'Technology' },
-        { value: 'Transportation', label: 'Transportation' },
+        { value: 'E-commerce', label: 'E-commerce' },
+        { value: 'EV Fleets', label: 'EV Fleets' },
+        { value: 'Field Service', label: 'Field Service' },
+        { value: 'Medical & Pharma', label: 'Medical & Pharma' },
+        { value: 'Retail & Brands', label: 'Retail & Brands' },
       ]
     },
     { name: 'tags', label: 'Tags', type: 'tags', placeholder: 'ai, fintech, technology' },
@@ -178,7 +243,7 @@ export default function WhitepapersPage() {
 
   const columns = [
     { key: 'title', label: 'Title' },
-    { key: 'author_name', label: 'Author', render: (wp: Whitepaper) => wp.author_name || '-' },
+    { key: 'author', label: 'Author', render: (wp: Whitepaper) => wp.author || wp.author_name || '-' },
     {
       key: 'is_featured',
       label: 'Featured',
@@ -196,6 +261,11 @@ export default function WhitepapersPage() {
           {wp.is_published ? 'Yes' : 'No'}
         </span>
       ),
+    },
+    {
+      key: 'published_date',
+      label: 'Published Date',
+      render: (wp: Whitepaper) => wp.published_date ? new Date(wp.published_date).toLocaleDateString() : '-',
     },
     {
       key: 'created_at',
@@ -230,7 +300,13 @@ export default function WhitepapersPage() {
           <FormBuilder
             title={editingWhitepaper ? 'Edit Whitepaper' : 'Create New Whitepaper'}
             fields={whitepaperFormFields}
-            initialData={editingWhitepaper || { is_featured: false, is_published: true }}
+            initialData={editingWhitepaper
+              ? {
+                  ...editingWhitepaper,
+                  author: editingWhitepaper.author || editingWhitepaper.author_name || '',
+                  published_date: editingWhitepaper.published_date || editingWhitepaper.published_at || editingWhitepaper.created_at,
+                }
+              : { is_featured: false, is_published: true }}
             onSubmit={handleFormSubmit}
             onCancel={() => {
               setShowCreateForm(false);

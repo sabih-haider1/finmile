@@ -123,6 +123,16 @@ export async function PUT(
       updated_at: new Date().toISOString(),
     };
 
+    if (validatedData.author !== undefined || validatedData.author_name !== undefined) {
+      const author = validatedData.author || validatedData.author_name || null;
+      updateData.author = author;
+      updateData.author_name = author;
+    }
+
+    if (validatedData.published_date === null) {
+      updateData.published_date = new Date().toISOString();
+    }
+
     delete updateData.id;
     delete updateData.created_at;
 

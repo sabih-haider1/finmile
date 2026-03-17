@@ -9,6 +9,8 @@ interface WhitepaperCardProps {
   coverImageUrl: string;
   slug: string;
   pdfUrl?: string;
+  author?: string | null;
+  publishedDate?: string | null;
 }
 
 export function WhitepaperCard({
@@ -16,7 +18,9 @@ export function WhitepaperCard({
   summary,
   coverImageUrl,
   slug,
-  pdfUrl
+  pdfUrl,
+  author,
+  publishedDate,
 }: WhitepaperCardProps) {
   const [imageError, setImageError] = useState(false);
 
@@ -54,6 +58,21 @@ export function WhitepaperCard({
         <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
           {summary}
         </p>
+
+        {(author || publishedDate) && (
+          <div className="flex flex-col gap-1 text-xs text-gray-500">
+            {author && <p>Author: {author}</p>}
+            {publishedDate && (
+              <p>
+                Published: {new Date(publishedDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Action Links */}
         <div className="flex items-center gap-6 mt-auto pt-2">

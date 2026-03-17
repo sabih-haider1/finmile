@@ -57,7 +57,7 @@ export const WhyFinmileLeads = () => {
     };
 
     return (
-        <section className={`w-full bg-[#fdfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-20 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fdfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] z-10 relative flex flex-col items-center">
 
                 {/* Header Content */}
@@ -129,7 +129,7 @@ export const WhyFinmileLeads = () => {
                     </div>
                 </div>
 
-                <div className="mt-16 text-center">
+                <div className="mt-8 text-center">
                     <p className="text-[#6C757D] text-[15px] font-medium">
                         <strong className="text-[#0A1B33]">Finmile</strong> doesn't just track — it understands.
                     </p>

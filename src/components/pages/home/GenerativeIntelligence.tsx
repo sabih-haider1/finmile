@@ -10,7 +10,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 export const GenerativeIntelligence = () => {
     return (
         <motion.section
-            className={`w-full bg-[#0B0616] py-20 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}
+            className={`w-full bg-[#0B0616] py-16 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -18,10 +18,10 @@ export const GenerativeIntelligence = () => {
         >
 
             {/* Background Glow Effects */}
-            <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-30 pointer-events-none" />
+            <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none transform-gpu translate-z-0 will-change-transform" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-30 pointer-events-none transform-gpu translate-z-0 will-change-transform" />
 
-            <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center z-10">
+            <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-center z-10">
 
                 {/* Left Side: Command Prompt Graphic */}
                 <motion.div

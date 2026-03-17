@@ -114,13 +114,19 @@ export async function POST(request: NextRequest) {
     }
 
     const now = new Date().toISOString();
+    const publishedDate = validatedData.published_date || now;
+    const author = validatedData.author || validatedData.author_name || null;
     const whitepaperData = {
       title: validatedData.title,
       slug: validatedData.slug,
       summary: validatedData.summary || '',
       cover_image_url: validatedData.cover_image_url || null,
       pdf_url: validatedData.pdf_url,
-      author_name: validatedData.author_name || null,
+      author_name: author,
+      author,
+      published_date: publishedDate,
+      topic: validatedData.topic || null,
+      industry: validatedData.industry || null,
       tags: validatedData.tags || null,
       is_featured: validatedData.is_featured || false,
       is_published: validatedData.is_published ?? true,

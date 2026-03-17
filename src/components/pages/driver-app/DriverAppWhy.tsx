@@ -6,8 +6,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DriverAppWhy = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-24 overflow-hidden relative ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 items-start gap-12 lg:gap-20 z-10 relative">
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 overflow-hidden relative ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 items-start gap-12 lg:gap-12 z-10 relative">
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start text-left">
@@ -48,10 +48,10 @@ export const DriverAppWhy = () => {
                 </div>
 
                 {/* Right Side: Comparison Cards */}
-                <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-end w-full lg:pt-12">
+                <div className="flex flex-col sm:flex-row gap-2 lg:gap-4 justify-center lg:justify-end w-full lg:pt-12">
 
                     {/* Before Finmile Card */}
-                    <div className="bg-[#F8F9FA] rounded-[24px] p-6 md:p-8 flex flex-col items-start w-full sm:w-[280px]">
+                    <div className="bg-[#F8F9FA] rounded-[24px] p-6 md:p-8 flex flex-col items-start w-full sm:w-[340px]">
                         <div className="bg-[#ADB5BD] p-3 rounded-[12px] mb-8">
                             <Target className="w-6 h-6 text-white" strokeWidth={2} />
                         </div>
@@ -78,11 +78,11 @@ export const DriverAppWhy = () => {
                     </div>
 
                     {/* With Finmile Card */}
-                    <div className="bg-[#F8F7FF] rounded-[24px] p-6 md:p-8 flex flex-col items-start w-full sm:w-[280px] border border-white shadow-[0_10px_40px_rgba(106,39,212,0.08)] relative overflow-hidden">
+                    <div className="bg-[#F8F7FF] rounded-[24px] p-6 md:p-8 flex flex-col items-start w-full sm:w-[300px] border border-white shadow-[0_10px_40px_rgba(106,39,212,0.08)] relative overflow-hidden">
                         {/* Subtle glow behind logo */}
                         <div className="absolute top-0 right-0 w-32 h-32 bg-[#6A27D4] rounded-full blur-[60px] opacity-10 pointer-events-none" />
 
-                        <div className="bg-white py-2 px-4 rounded-[8px] mb-8 shadow-sm border border-gray-50 flex items-center justify-center">
+                        <div className="bg-white py-4 px-4 rounded-[8px] mb-8 shadow-sm border border-gray-50 flex items-center justify-center">
                             <img src="/assets/logos/logo-blue.png" alt="Finmile Logo" className="h-4 object-contain" />
                         </div>
                         <h4 className="text-[#2F1C8C] font-semibold text-[16px] mb-6">With Finmile</h4>

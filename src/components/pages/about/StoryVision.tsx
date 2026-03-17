@@ -5,8 +5,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const StoryVision = () => {
     return (
-        <section className={`w-full py-16 lg:py-24 bg-[#F8FAFC] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
-            <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center'>
+        <section className={`w-full py-16 lg:py-16 bg-[#F8FAFC] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+            <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center'>
 
                 {/* Left Column: Image */}
                 <div className='w-full flex items-center justify-center lg:justify-start'>

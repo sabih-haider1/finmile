@@ -39,12 +39,12 @@ export const DriverAppWorkflow = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-12 py-16 md:py-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-12 py-16 md:py-16 overflow-hidden relative ${montserrat.className}`}>
 
             <div className="w-full max-w-[1240px] z-10 flex flex-col items-center">
 
                 {/* Header Content */}
-                <div className="text-center w-full z-10 flex flex-col items-center max-w-[900px] mx-auto mb-16 lg:mb-24">
+                <div className="text-center w-full z-10 flex flex-col items-center max-w-[900px] mx-auto mb-8 lg:mb-8">
                     <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2]">
                         Simple Workflow for<br />Maximum Performance
                     </h2>

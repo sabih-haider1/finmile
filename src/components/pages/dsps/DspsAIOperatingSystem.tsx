@@ -1,13 +1,14 @@
 import React from 'react';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsAIOperatingSystem = () => {
     return (
         <section className={`w-full bg-white py-12 md:py-16 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center">
                 
                 {/* Left Side: Raw Image Content (No extra UI wrapping or background) */}
                 <div className="relative w-full flex items-center justify-center h-[400px] md:h-[500px] lg:h-[600px]">
@@ -34,9 +35,11 @@ export const DspsAIOperatingSystem = () => {
                         Running a delivery business means constant pressure. Finmile gives DSPs the tools to run more efficient, profitable operations—from automated dispatch to real-time visibility.
                     </p>
 
-                    <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit">
-                        Book A Demo
-                    </button>
+                    <Link href="#contact" className="w-fit">
+                        <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit">
+                            Book A Demo
+                        </button>
+                    </Link>
                 </div>
 
             </div>

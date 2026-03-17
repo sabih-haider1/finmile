@@ -1,6 +1,7 @@
 'use client';
 
 import React from "react";
+import Image from "next/image";
 import { motion } from 'framer-motion';
 import { Badge } from "../../ui/Badge";
 import { Button } from "../../ui/Button";
@@ -14,10 +15,10 @@ export const Hero = () => {
     <section className={`relative w-full min-h-screen flex flex-col items-center justify-start pt-[140px] px-4 overflow-hidden bg-[#0B0616] ${montserrat.className}`}>
 
       {/* Upper Subtle Glow behind text */}
-      <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#3B257E] rounded-full blur-[140px] opacity-30 pointer-events-none" />
+      <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#3B257E] rounded-full blur-[140px] opacity-30 pointer-events-none transform-gpu translate-z-0 will-change-transform" />
 
       {/* Massive Lower Intense Gradient Glow (The sweeping purple glow behind the hero image) */}
-      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-40 pointer-events-none" />
+      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-40 pointer-events-none transform-gpu translate-z-0 will-change-transform" />
 
       {/* Hero Content */}
       <motion.div
@@ -77,10 +78,14 @@ export const Hero = () => {
         viewport={{ once: true, amount: 0.3 }}
         whileTap={{ scale: 0.995 }}
       >
-        <img
+        <Image
           src="/assets/images/hero-dashboard.png"
           alt="Finmile Dashboard"
+          width={1200}
+          height={750}
+          priority
           className="w-full h-auto object-contain"
+          sizes="(max-width: 1200px) 100vw, 1200px"
         />
       </motion.div>
 

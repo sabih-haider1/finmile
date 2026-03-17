@@ -34,7 +34,7 @@ export const HowAiEngineWorks = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#F8F9FC] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-24 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#F8F9FC] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 overflow-hidden ${montserrat.className}`}>
 
             <div className="w-full max-w-[1240px] flex flex-col items-center">
 

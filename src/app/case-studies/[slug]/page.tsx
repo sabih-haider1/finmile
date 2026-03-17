@@ -53,7 +53,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
       <div className="flex-grow flex flex-col relative z-10 w-full max-w-[1440px] mx-auto">
         
         {/* Hero Section */}
-        <section className="relative w-full pt-[140px] pb-16 md:pb-24 px-6 mt-10">
+        <section className="relative w-full pt-[140px] pb-16 md:pb-16 px-6 mt-10">
           <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
             
             <div className="mb-6 flex gap-3 justify-center flex-wrap">
@@ -127,7 +127,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
         {/* Case Study Sections */}
         <section className="relative z-10 max-w-[900px] mx-auto px-6 pb-16 w-full">
-          <div className="space-y-12">
+          <div className="space-y-8">
             
             {/* Challenge Section */}
             {caseStudy.challenge && (
@@ -181,7 +181,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
         </section>
 
         {/* CTA Section */}
-        <section className="relative z-10 max-w-[900px] mx-auto px-6 pb-32 w-full">
+        <section className="relative z-10 max-w-[900px] mx-auto px-6 pb-16 w-full">
           <div className="rounded-[24px] border border-white/10 bg-gradient-to-br from-[#6A27D4]/20 to-[#8B5CF6]/10 backdrop-blur-xl p-10 text-center">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Ready to Transform Your Operations?

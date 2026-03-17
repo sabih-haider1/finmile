@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 import Image from 'next/image';
@@ -10,7 +10,7 @@ const AgentCard = ({ title, description, benefits, index, total }) => {
 
   return (
     <div
-      className='lg:sticky w-[98%] max-w-[1440px] min-h-[580px] lg:min-h-[660px] rounded-[32px] md:rounded-[32px] px-8 md:px-10 lg:px-12 py-8 md:py-6 lg:py-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-18 lg:gap-24 transform-gpu transition-all duration-500 overflow-hidden'
+      className='lg:sticky w-[98%] max-w-[1440px] min-h-[580px] lg:min-h-[660px] rounded-[32px] md:rounded-[32px] px-8 md:px-10 lg:px-12 py-8 md:py-6 lg:py-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 transform-gpu overflow-hidden will-change-transform'
       style={{
         background: 'linear-gradient(208.41deg, #F5F3FF -9.69%, #FAF9FF 100.08%)',
         top: stickyTop,
@@ -95,7 +95,7 @@ export const AIAgentsSection = () => {
 
   return (
     <section 
-      className="w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-20"
+      className="w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-16"
     >
       <div className='text-center mb-10 w-full max-w-[1400px]'>
         <h2 
@@ -123,7 +123,7 @@ export const AIAgentsSection = () => {
         ))}
       </div>
 
-      <div className='mt-6 text-center space-y-12 w-full max-w-[1200px]'>
+      <div className='mt-6 text-center space-y-8 w-full max-w-[1200px]'>
         <p 
           className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-[16px] mx-auto px-4 text-center'
         >

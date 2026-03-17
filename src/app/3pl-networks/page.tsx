@@ -10,6 +10,8 @@ import { ThreePLOperationalImpact } from "../../components/pages/3pl-networks/Th
 import { ThreePLIntegrations } from "../../components/pages/3pl-networks/ThreePLIntegrations";
 import { ThreePLSustainability } from "../../components/pages/3pl-networks/ThreePLSustainability";
 
+export const revalidate = 3600;
+
 export const metadata = {
     title: '3PL & Networks | Finmile',
     description: 'Scale Your Network with AI Intelligence.',

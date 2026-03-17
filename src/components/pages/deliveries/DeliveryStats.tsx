@@ -5,11 +5,11 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DeliveryStats = () => {
     return (
-        <section className={`w-full bg-[#fdfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-20 lg:py-28 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fdfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] z-10 flex flex-col items-center">
 
                 {/* Header Content */}
-                <div className="text-center w-full z-10 flex flex-col items-center max-w-[900px] mx-auto mb-12 md:mb-16">
+                <div className="text-center w-full z-10 flex flex-col items-center max-w-[900px] mx-auto mb-12 md:mb-8">
                     <h2 className="font-semibold text-[32px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4 md:mb-6">
                         Why Finmile Delivery Solutions
                     </h2>

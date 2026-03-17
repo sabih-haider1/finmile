@@ -20,7 +20,7 @@ export const OptimizationObjectives = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#13072E] py-16 md:py-24 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#13072E] py-16 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Background Glow Effect to match the deep violet gradient lighting */}
             <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B1C8A] rounded-full blur-[150px] opacity-60 pointer-events-none z-0" />
@@ -28,7 +28,7 @@ export const OptimizationObjectives = () => {
             <div className="w-full max-w-[1240px] z-10 relative">
                 
                 {/* Header */}
-                <div className="text-center mb-12 md:mb-16">
+                <div className="text-center mb-12 md:mb-8">
                     <h2 className="font-semibold text-[48px] text-white tracking-tight leading-[1.2] mb-4">
                         Optimize for Every Objective
                     </h2>

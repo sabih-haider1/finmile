@@ -2,104 +2,114 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Linkedin } from 'lucide-react';
+import { Button } from '../ui/Button';
 
 export const Footer = () => {
     return (
-        <>
-            <footer className="w-full bg-[#0B0616] text-white pt-20 pb-4 px-6 lg:px-16 overflow-hidden relative">
+        <footer className="w-full bg-[#0B0616] text-white pt-12 pb-4 px-6 lg:px-16 overflow-hidden relative pointer-events-auto" style={{ isolation: 'isolate' }}>
 
-                {/* Background Glow Effects (Hero-style gradients) */}
-                <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none" />
-                <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#3B257E] rounded-[100%] blur-[200px] opacity-40 pointer-events-none" />
+            {/* Background Glow Effects (Hero-style gradients) */}
+            <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none -z-10" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#3B257E] rounded-[100%] blur-[200px] opacity-40 pointer-events-none -z-10" />
 
-                <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 z-10 relative">
+            <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 z-20 relative">
 
-                    {/* Column 1: Brand & Actions */}
-                    <div className="flex flex-col space-y-10 md:col-span-4 lg:col-span-5">
-                        {/* Brand Logo */}
-                        <div className="mb-2">
-                            <Image src="/assets/logos/logo-white.png" alt="Finmile Logo" width={180} height={50} sizes="180px" className="w-[180px] h-[50px] object-contain" />
+                {/* Column 1: Brand & Actions */}
+                <div className="flex flex-col space-y-10 md:col-span-4 lg:col-span-5">
+                    {/* Brand Logo */}
+                    <div className="mb-2">
+                        <Link href="/">
+                            <Image src="/assets/logos/logo-white.png" alt="Finmile Logo" width={180} height={50} sizes="180px" className="w-[180px] h-[50px] object-contain cursor-pointer" />
+                        </Link>
+                    </div>
+
+                    {/* Email Chip */}
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full liquid-glass flex items-center justify-center">
+                            <Mail className="w-6 h-6 text-white" />
                         </div>
+                        <a href="mailto:hello@finmile.co" className="text-white text-[14px] xl:text-[16px] font-medium hover:text-[#D8C7FF] transition-colors tracking-wide">
+                            hello@finmile.co
+                        </a>
+                    </div>
 
-                        {/* Email Chip */}
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-full liquid-glass flex items-center justify-center">
-                                <Mail className="w-6 h-6 text-white" />
-                            </div>
-                            <a href="mailto:hello@finmile.co" className="text-white text-[14px] xl:text-[16px] font-medium hover:text-[#D8C7FF] transition-colors tracking-wide">
-                                hello@finmile.co
-                            </a>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                            <button className="bg-[#6A27D4] text-white w-[160px] h-[48px] rounded-full text-[14px] font-semibold tracking-wide hover:bg-[#5a21b5] transition-all whitespace-nowrap">
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                        <Link href="#contact" className="w-fit">
+                            <Button variant="solid" size="lg" className="shadow-[0_0_20px_rgba(106,39,212,0.4)]">
                                 Request A Demo
-                            </button>
-                            <button className="liquid-glass text-white w-[160px] h-[48px] rounded-full text-[14px] font-semibold tracking-wide transition-all whitespace-nowrap">
+                            </Button>
+                        </Link>
+                        <Link href="#track" className="w-fit">
+                            <Button variant="liquid-glass" size="lg">
                                 Track Parcel
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Column 2: Quick Links */}
-                    <div className="flex flex-col space-y-6 md:col-span-4 lg:col-span-3 mt-2 md:mt-0">
-                        <h4 className="font-bold text-[18px] tracking-wide mb-2">Quick Links</h4>
-                        <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[200px] overflow-y-auto pr-2 custom-scrollbar">
-                            <Link href="/about" className="hover:text-white transition-colors">About</Link>
-                            <Link href="/ai-agents" className="hover:text-white transition-colors">AI Agents</Link>
-                            <Link href="/control-tower" className="hover:text-white transition-colors">Control Tower</Link>
-                            <Link href="/deliveries" className="hover:text-white transition-colors">Deliveries</Link>
-                            <Link href="/delivery-software" className="hover:text-white transition-colors">Delivery Software</Link>
-                            <Link href="/driver-app" className="hover:text-white transition-colors">Driver App</Link>
-                            <Link href="/3pl-networks" className="hover:text-white transition-colors">3PL Networks</Link>
-                            <Link href="/dsps" className="hover:text-white transition-colors">DSPs</Link>
-                            <Link href="/retailers" className="hover:text-white transition-colors">Retailers</Link>
-                            <Link href="/optimization" className="hover:text-white transition-colors">Optimization</Link>
-                            <Link href="/return-optimization" className="hover:text-white transition-colors">Return Optimization</Link>
-                            <Link href="/sustainable" className="hover:text-white transition-colors">Sustainable Delivery</Link>
-                        </nav>
-                    </div>
-
-                    {/* Column 3: Resources */}
-                    <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0">
-                        <h4 className="font-bold text-[18px] tracking-wide mb-2">Resources</h4>
-                        <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium">
-                            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
-                            <Link href="/whitepapers" className="hover:text-white transition-colors">Whitepapers</Link>
-                            <Link href="/faq" className="hover:text-white transition-colors">FAQ</Link>
-                            <Link href="/track" className="hover:text-white transition-colors">Track Delivery</Link>
-                        </nav>
-                    </div>
-
-                    {/* Column 4: Get in Touch */}
-                    <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0">
-                        <h4 className="font-bold text-[18px] tracking-wide mb-2">Get In Touch</h4>
-                        <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium">
-                            <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
-                        </nav>
-
-                        <div className="pt-10"> {/* Changed from mt-10 to pt-10 and wrapped */}
-                            <div className="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer">
-                                <Linkedin className="w-5 h-5 text-white" />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                {/* Bottom Legal Bar */}
-                <div className="max-w-[1440px] mx-auto mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-[#B8ADC9] text-[13px] font-medium z-10 relative">
-                    <p>© 2026 Finmile. All rights reserved.</p>
-                    <div className="flex gap-4 md:gap-6 mt-6 md:mt-0">
-                        <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <span className="hidden md:block">|</span>
-                        <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-                        <span className="hidden md:block">|</span>
-                        <Link href="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
+                            </Button>
+                        </Link>
                     </div>
                 </div>
-            </footer>
-        </>
+
+                {/* Column 2: Quick Links */}
+                <div className="flex flex-col space-y-6 md:col-span-4 lg:col-span-3 mt-2 md:mt-0">
+                    <h4 className="font-bold text-[18px] tracking-wide mb-2">Quick Links</h4>
+                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-2 custom-scrollbar">
+                        <Link href="/about" className="hover:text-white transition-colors">About</Link>
+                        <Link href="/ai-agents" className="hover:text-white transition-colors">AI Agents</Link>
+                        <Link href="/control-tower" className="hover:text-white transition-colors">Control Tower</Link>
+                        <Link href="/deliveries" className="hover:text-white transition-colors">Deliveries</Link>
+                        <Link href="/delivery-software" className="hover:text-white transition-colors">Delivery Software</Link>
+                        <Link href="/driver-app" className="hover:text-white transition-colors">Driver App</Link>
+                        <Link href="/3pl-networks" className="hover:text-white transition-colors">3PL Networks</Link>
+                        <Link href="/dsps" className="hover:text-white transition-colors">DSPs</Link>
+                        <Link href="/retailers" className="hover:text-white transition-colors">Retailers</Link>
+                        <Link href="/optimization" className="hover:text-white transition-colors">Optimization</Link>
+                        <Link href="/return-optimization" className="hover:text-white transition-colors">Return Optimization</Link>
+                        <Link href="/sustainable" className="hover:text-white transition-colors">Sustainable Delivery</Link>
+                    </nav>
+                </div>
+
+                {/* Column 3: Resources */}
+                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0">
+                    <h4 className="font-bold text-[18px] tracking-wide mb-2">Resources</h4>
+                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium">
+                        <Link href="/blog/all" className="hover:text-white transition-colors">Blog</Link>
+                        <Link href="/whitepapers/all" className="hover:text-white transition-colors">Whitepapers</Link>
+                        <Link href="/faq" className="hover:text-white transition-colors">FAQ</Link>
+                        <Link href="/track" className="hover:text-white transition-colors">Track Delivery</Link>
+                    </nav>
+                </div>
+
+                {/* Column 4: Get in Touch */}
+                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0">
+                    <h4 className="font-bold text-[18px] tracking-wide mb-2">Get In Touch</h4>
+                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium">
+                        <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+                    </nav>
+
+                    <div className="pt-10">
+                        <a 
+                            href="https://www.linkedin.com/company/finmile/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer block"
+                        >
+                            <Linkedin className="w-5 h-5 text-white" />
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            {/* Bottom Legal Bar */}
+            <div className="max-w-[1440px] mx-auto mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-[#B8ADC9] text-[13px] font-medium z-20 relative">
+                <p>© 2026 Finmile. All rights reserved.</p>
+                <div className="flex gap-4 md:gap-6 mt-6 md:mt-0">
+                    <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                    <span className="hidden md:block">|</span>
+                    <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                    <span className="hidden md:block">|</span>
+                    <Link href="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
+                </div>
+            </div>
+        </footer>
     );
 };

@@ -14,6 +14,8 @@ import { DriverAppTestimonials } from "../../components/pages/driver-app/DriverA
 import { DriverAppEcosystem } from "../../components/pages/driver-app/DriverAppEcosystem";
 import { JoinTheJourney } from "../../components/shared/JoinTheJourney";
 
+export const revalidate = 3600; // Cache for 1 hour
+
 export const metadata = {
     title: 'Driver App | Finmile',
     description: 'Empower your drivers with Finmile.',

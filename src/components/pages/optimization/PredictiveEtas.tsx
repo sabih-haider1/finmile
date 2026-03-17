@@ -26,9 +26,9 @@ export const PredictiveEtas = () => {
     ];
 
     return (
-        <section className={`w-full py-16 md:py-24 bg-white flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full py-16 md:py-16 bg-white flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
             {/* Changed items-center to items-stretch to match column heights exactly */}
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-stretch">
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-stretch">
                 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start w-full pr-0 lg:pr-8">

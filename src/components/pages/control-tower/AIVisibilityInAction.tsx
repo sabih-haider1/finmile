@@ -6,10 +6,9 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const AIVisibilityInAction = () => {
     const rows = [
-        { metric: "Predictive ETA AI", capability: "±2 minutes", impact: "Fewer missed deliveries" },
-        { metric: "AI POD Verification", capability: "92% auto-approved", impact: "3x faster billing" },
-        { metric: "Exception Automation", capability: "<3 minutes", impact: "35% fewer failures" },
-        { metric: "CO₂ & Sustainability Metrics", capability: "98% verified", impact: "Trusted reporting" }
+        { metric: "Predictive ETA AI", capability: "±0.2 seconds", impact: "Fewer missed deliveries" },
+        { metric: "AI POD Verification", capability: "99% auto-approved", impact: "99.9% DNR reduction" },
+        { metric: "Exception Automation", capability: "100%", impact: "91% WISMO reduction" },
     ];
 
     return (

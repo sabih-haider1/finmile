@@ -12,7 +12,11 @@ interface Whitepaper {
   summary: string;
   cover_image_url: string;
   pdf_url?: string;
+  author: string | null;
+  author_name: string | null;
+  published_date: string | null;
   published_at: string;
+  created_at: string;
   is_featured: boolean;
   topic: string | null;
   industry: string | null;
@@ -35,7 +39,7 @@ export function AllWhitepapersGrid() {
       try {
         const { data, error } = await supabase
           .from('whitepapers')
-          .select('id, title, slug, summary, cover_image_url, pdf_url, published_at, is_featured, topic, industry, tags')
+          .select('id, title, slug, summary, cover_image_url, pdf_url, author, author_name, published_date, published_at, created_at, is_featured, topic, industry, tags')
           .eq('is_published', true);
 
         if (error) {
@@ -44,7 +48,6 @@ export function AllWhitepapersGrid() {
         }
 
         if (data) {
-          console.log('All Whitepapers - Fetched:', data);
           setWhitepapers(data as Whitepaper[]);
         }
       } catch (error) {
@@ -98,16 +101,17 @@ export function AllWhitepapersGrid() {
 
     // Apply sorting
     filtered.sort((a, b) => {
+      const aDate = new Date(a.published_date || a.published_at || a.created_at).getTime();
+      const bDate = new Date(b.published_date || b.published_at || b.created_at).getTime();
+
       if (sortBy === 'featured') {
         if (a.is_featured && !b.is_featured) return -1;
         if (!a.is_featured && b.is_featured) return 1;
-        // If both featured or both not, sort by newest
-        return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+        return bDate - aDate;
       } else if (sortBy === 'oldest') {
-        return new Date(a.published_at).getTime() - new Date(b.published_at).getTime();
+        return aDate - bDate;
       } else {
-        // newest
-        return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+        return bDate - aDate;
       }
     });
 
@@ -169,6 +173,8 @@ export function AllWhitepapersGrid() {
                   coverImageUrl={whitepaper.cover_image_url}
                   slug={whitepaper.slug}
                   pdfUrl={whitepaper.pdf_url}
+                  author={whitepaper.author || whitepaper.author_name}
+                  publishedDate={whitepaper.published_date || whitepaper.published_at || whitepaper.created_at}
                 />
               ))}
             </div>

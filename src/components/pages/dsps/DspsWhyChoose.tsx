@@ -1,6 +1,7 @@
 import React from 'react';
 import { Settings } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
+import Image from 'next/image';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -49,7 +50,13 @@ export const DspsWhyChoose = () => {
                         </div>
                         <div className="bg-[#2F1C8C] rounded-lg px-6 py-4 flex items-center justify-between shadow-sm">
                             <span className="font-semibold text-white text-[15px] md:text-[16px]">Finmile Solution</span>
-                            <img src="/assets/logos/logo-white.png" alt="Finmile" className="h-4 object-contain opacity-90" />
+                            <Image 
+                                src="/assets/logos/logo-white.png" 
+                                alt="Finmile" 
+                                width={80}
+                                height={16}
+                                className="h-4 w-auto object-contain opacity-90" 
+                            />
                         </div>
                         <div className="bg-[#2F1C8C] rounded-lg px-6 py-4 flex items-center justify-between shadow-sm">
                             <span className="font-semibold text-white text-[15px] md:text-[16px]">Result</span>

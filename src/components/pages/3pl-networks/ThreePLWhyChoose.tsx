@@ -14,7 +14,7 @@ export const ThreePLWhyChoose = () => {
         {
             pain: "Missed client SLAs",
             solution: "Predictive ETA & alerts",
-            result: "98% on-time rate"
+            result: "99% on-time rate"
         },
         {
             pain: "Driver inefficiency",
@@ -34,11 +34,11 @@ export const ThreePLWhyChoose = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] z-10 flex flex-col items-center">
 
                 {/* Header Content */}
-                <div className="w-full flex justify-center mb-12 lg:mb-16">
+                <div className="w-full flex justify-center mb-12 lg:mb-8">
                     <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2] text-center">
                         Why Leading 3PLs Choose Finmile
                     </h2>
@@ -46,11 +46,10 @@ export const ThreePLWhyChoose = () => {
 
                 {/* Table Layout */}
                 <div className="w-full max-w-[1100px]">
-                    
-                    {/* Header Row */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mb-4 font-semibold text-[15px]">
-                        {/* Mobile hide empty header, show on desktop */}
-                        <div className="hidden md:flex bg-white px-6 py-4 rounded-xl items-center border-b border-white">
+
+                    {/* Header Row - Hidden on mobile, shown as grid on desktop */}
+                    <div className="hidden md:grid grid-cols-3 gap-4 mb-4 font-semibold text-[15px]">
+                        <div className="bg-white px-6 py-4 rounded-xl flex items-center border-b border-white">
                             <span className="text-[#2F1C8C]">Pain Point</span>
                         </div>
                         {/* Finmile Solution Header */}
@@ -66,25 +65,28 @@ export const ThreePLWhyChoose = () => {
                     </div>
 
                     {/* Data Rows */}
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-4 md:gap-2">
                         {rows.map((row, idx) => (
-                            <div key={idx} className="flex flex-col md:grid md:grid-cols-3 gap-2 md:gap-4 bg-white md:bg-transparent rounded-xl md:rounded-none p-4 md:p-0 border border-gray-100 md:border-none shadow-sm md:shadow-none mb-4 md:mb-0">
-                                
+                            <div key={idx} className="flex flex-col md:grid md:grid-cols-3 gap-3 md:gap-4 bg-white md:bg-transparent rounded-2xl md:rounded-none p-5 md:p-0 border border-gray-100 md:border-none shadow-sm md:shadow-none">
+
                                 {/* Pain Point Column (Mobile: top stacked, Desktop: Grid) */}
-                                <div className="md:bg-white md:px-6 md:py-5 flex items-center md:border-b border-gray-100 md:border-none mb-3 md:mb-0 justify-center md:justify-start">
-                                    <span className="text-[#0A1B33] font-semibold text-[14px] md:text-[15px]">{row.pain}</span>
+                                <div className="md:bg-white md:px-6 md:py-5 flex flex-col md:flex-row items-center md:border-b border-gray-100 md:border-none pb-2 md:pb-0 justify-center md:justify-start text-center md:text-left">
+                                    <span className="md:hidden text-[12px] uppercase tracking-wider text-gray-400 font-bold mb-1">Pain Point</span>
+                                    <span className="text-[#0A1B33] font-semibold text-[16px] md:text-[15px]">{row.pain}</span>
                                 </div>
-                                
+
                                 {/* Solution Column */}
-                                <div className="bg-[#F8F7FF] px-6 py-4 md:py-5 rounded-xl flex items-center justify-center md:justify-start border border-[#E9E4FF] md:border-none">
-                                    <span className="text-[#6A27D4] md:text-[#2F1C8C] font-semibold text-[14px]">{row.solution}</span>
+                                <div className="bg-[#F8F7FF] px-6 py-4 md:py-5 rounded-xl flex flex-col md:flex-row items-center justify-center md:justify-start border border-[#E9E4FF] md:border-none text-center md:text-left">
+                                    <span className="md:hidden text-[12px] uppercase tracking-wider text-[#6A27D4] font-bold mb-1">Finmile Solution</span>
+                                    <span className="text-[#6A27D4] md:text-[#2F1C8C] font-semibold text-[15px] md:text-[14px]">{row.solution}</span>
                                 </div>
-                                
+
                                 {/* Result Column */}
-                                <div className="bg-[#F8F9FA] px-6 py-4 md:py-5 rounded-xl flex items-center justify-center md:justify-start">
-                                    <span className="text-[#0A1B33] font-bold text-[14px]">{row.result}</span>
+                                <div className="bg-[#F8F9FA] px-6 py-4 md:py-5 rounded-xl flex flex-col md:flex-row items-center justify-center md:justify-start text-center md:text-left">
+                                    <span className="md:hidden text-[12px] uppercase tracking-wider text-gray-500 font-bold mb-1">Measurable Result</span>
+                                    <span className="text-[#0A1B33] font-bold text-[15px] md:text-[14px]">{row.result}</span>
                                 </div>
-                                
+
                             </div>
                         ))}
                     </div>

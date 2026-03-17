@@ -8,8 +8,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const ThreePLSustainability = () => {
     return (
-        <section className={`w-full bg-[#FAFAFF] py-16 md:py-24 flex justify-center px-6 md:px-12 lg:px-24 overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
+        <section className={`w-full bg-[#FAFAFF] py-16 md:py-16 flex justify-center px-6 md:px-12 lg:px-24 overflow-hidden ${montserrat.className}`}>
+            <div className="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[540px]">

@@ -25,6 +25,8 @@ export interface Whitepaper {
   cover_image_url: string | null;
   pdf_url: string;
   author_name: string | null;
+  author: string | null;
+  published_date: string | null;
   topic: string | null;
   industry: string | null;
   tags: string[] | null;

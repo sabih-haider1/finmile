@@ -6,10 +6,10 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const AutonomousExecution = () => {
     return (
-        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-6 lg:px-24 py-20 lg:py-28 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-6 lg:px-24 py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Header Content */}
-            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-20 md:mb-24">
+            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-8 md:mb-8">
                 <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2]">
                     From Visibility to<br className="hidden md:block" />Autonomous Execution
                 </h2>

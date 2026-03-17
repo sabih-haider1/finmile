@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OperationalImpact = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-12 md:py-16 lg:py-20 flex flex-col items-center px-4 md:px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-12 md:py-16 lg:py-16 flex flex-col items-center px-4 md:px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glows matching OurOrigin */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-70 pointer-events-none" />
@@ -40,14 +40,14 @@ export const OperationalImpact = () => {
                     {/* Card 3 */}
                     <div className="bg-white/5 border border-white/10 rounded-2xl md:rounded-[24px] p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-[0_10px_30px_rgba(0,0,0,0.1)] backdrop-blur-md transition-all hover:bg-white/10">
                         <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-wider uppercase mb-3 md:mb-4">Auto-Processing</span>
-                        <h3 className="text-white font-bold text-[36px] md:text-[48px] leading-none mb-2">-70%</h3>
+                        <h3 className="text-white font-bold text-[36px] md:text-[48px] leading-none mb-2">-99.9%</h3>
                         <p className="text-[#DEE2E6] text-[13px] md:text-[14px] font-medium">Manual POD Review</p>
                     </div>
 
                     {/* Card 4 */}
                     <div className="bg-white/5 border border-white/10 rounded-2xl md:rounded-[24px] p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-[0_10px_30px_rgba(0,0,0,0.1)] backdrop-blur-md transition-all hover:bg-white/10">
                         <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-wider uppercase mb-3 md:mb-4">Fewer Inquiries</span>
-                        <h3 className="text-white font-bold text-[36px] md:text-[48px] leading-none mb-2">-35%</h3>
+                        <h3 className="text-white font-bold text-[36px] md:text-[48px] leading-none mb-2">91%</h3>
                         <p className="text-[#DEE2E6] text-[13px] md:text-[14px] font-medium">Support Tickets</p>
                     </div>
                 </div>

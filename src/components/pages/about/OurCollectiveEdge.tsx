@@ -6,10 +6,10 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OurCollectiveEdge = () => {
     return (
-        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-6 lg:px-24 py-20 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-6 lg:px-24 py-16 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Centered Header */}
-            <div className="text-center mb-16 w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto">
+            <div className="text-center mb-8 w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto">
                 <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-tight">
                     Our Collective Edge
                 </h2>
