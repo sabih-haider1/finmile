@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const TheAIOperatingLayer = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 pt-8 lg:pt-12 pb-16 md:pb-12 lg:pb-16 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 pt-6 lg:pt-6 pb-6 md:pb-6 lg:pb-6 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Header Content */}
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-12 md:mb-8 md:mb-8">

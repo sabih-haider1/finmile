@@ -33,7 +33,7 @@ export const OptimizationWhyChoose = () => {
     ];
 
     return (
-        <section className={`w-full bg-white py-16 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] flex flex-col items-start">
                 
                 {/* Heading */}

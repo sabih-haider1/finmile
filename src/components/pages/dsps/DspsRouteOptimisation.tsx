@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsRouteOptimisation = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-12 md:py-16 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-6 md:py-6 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Background Glow Effects (Exact Match to Reference) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-60 pointer-events-none" />

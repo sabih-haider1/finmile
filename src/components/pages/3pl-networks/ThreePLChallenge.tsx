@@ -29,7 +29,7 @@ export const ThreePLChallenge = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 border-y border-[#F0EDFF] ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 border-y border-[#F0EDFF] ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] flex flex-col items-center z-10">
                 
                 {/* Header Sub-section */}

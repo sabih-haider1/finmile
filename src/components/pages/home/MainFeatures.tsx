@@ -75,7 +75,7 @@ export const TrustSection = () => {
 
 export const FeaturesSection = () => {
   return (
-    <section className="w-full py-6 lg:py-10 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative">
+    <section className="w-full py-6 lg:py-6 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative">
       <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-start'>
 
         {/* Left Column */}

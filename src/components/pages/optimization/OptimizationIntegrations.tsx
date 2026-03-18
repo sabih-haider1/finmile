@@ -11,7 +11,7 @@ export const OptimizationIntegrations = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 overflow-hidden relative ${montserrat.className}`}>
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1240px] mx-auto mb-8 md:mb-10">
                 <h2 className="font-semibold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.3]">
                     Plug Finmile into existing<br />workflows — no disruption.

@@ -20,7 +20,7 @@ export const OptimizationObjectives = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#13072E] py-16 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#13072E] py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Background Glow Effect to match the deep violet gradient lighting */}
             <div className="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-[#3B1C8A] rounded-full blur-[150px] opacity-60 pointer-events-none z-0" />

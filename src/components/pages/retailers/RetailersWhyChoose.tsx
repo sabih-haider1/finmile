@@ -35,7 +35,7 @@ export const RetailersWhyChoose = () => {
 
     return (
         /* Matched the exact padding from DspsRouteOptimisation: px-4 md:px-6 lg:px-24 */
-        <section className={`w-full relative flex flex-col items-center py-16 md:py-16 px-4 md:px-6 lg:px-24 bg-white ${montserrat.className}`}>
+        <section className={`w-full relative flex flex-col items-center py-6 md:py-6 px-4 md:px-6 lg:px-24 bg-white ${montserrat.className}`}>
             
             {/* The strict 1240px inner boundary - no smaller max-w wrappers inside! */}
             <div className="w-full max-w-[1240px] z-10 relative flex flex-col items-center">

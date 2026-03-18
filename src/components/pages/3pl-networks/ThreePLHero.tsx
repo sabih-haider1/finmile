@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const ThreePLHero = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 relative overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center z-10 relative">
                 
                 {/* Left Side: Image */}

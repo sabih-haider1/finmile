@@ -53,7 +53,7 @@ export const MeetTheSuite = () => {
     const currentTab = tabs[activeTab];
 
     return (
-        <section className={`w-full py-16 lg:py-16 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full py-6 lg:py-6 bg-[#0B0616] flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Matched from OurOrigin) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-70 pointer-events-none" />

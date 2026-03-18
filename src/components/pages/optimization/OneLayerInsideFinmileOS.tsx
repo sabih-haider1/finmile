@@ -15,7 +15,7 @@ export const OneLayerInsideFinmileOS = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#160B3A] py-16 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#160B3A] py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Background Radial Glow Effect matching the lighting in the image */}
             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] bg-[#4323A3] rounded-full blur-[180px] opacity-40 pointer-events-none z-0" />

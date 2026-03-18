@@ -39,7 +39,7 @@ export const DeliverySoftwareSteps = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#FAFAFC] flex flex-col items-center px-4 md:px-6 lg:px-12 py-12 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#FAFAFC] flex flex-col items-center px-4 md:px-6 lg:px-12 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
 
             <div className="w-full max-w-[1240px] z-10 flex flex-col items-center">
 

@@ -28,7 +28,7 @@ export const RetailersOperationalImpact = () => {
     ];
 
     return (
-        <section className={`w-full relative flex flex-col items-center pt-16 md:pt-16 px-6 md:px-12 lg:px-24 ${montserrat.className}`}>
+        <section className={`w-full relative flex flex-col items-center pt-6 md:pt-6 px-6 md:px-12 lg:px-24 ${montserrat.className}`}>
             
             {/* Added px-6 md:px-12 lg:px-24 to the section above to match the Integrations component */}
             

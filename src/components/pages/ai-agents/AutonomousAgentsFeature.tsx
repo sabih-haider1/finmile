@@ -5,7 +5,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const AutonomousAgentsFeature = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 pt-12 md:pt-12 lg:pt-16 pb-8 lg:pb-12 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 pt-6 md:pt-6 lg:pt-6 pb-6 lg:pb-6 overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1440px] flex flex-col lg:flex-row items-center gap-10 lg:gap-12 z-10 relative">
 
                 {/* Left Side: Image Container */}

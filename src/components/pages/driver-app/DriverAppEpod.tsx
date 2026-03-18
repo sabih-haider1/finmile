@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DriverAppEpod = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-16 md:py-16 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-6 md:py-6 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Bright behind text, dark behind picture) */}
             <div className="absolute top-[5%] left-[-15%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[140px] opacity-60 pointer-events-none" />

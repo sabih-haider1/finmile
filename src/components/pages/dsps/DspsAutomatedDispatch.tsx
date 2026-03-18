@@ -13,7 +13,7 @@ export const DspsAutomatedDispatch = () => {
     ];
 
     return (
-        <section className={`w-full bg-white py-12 md:py-16 flex justify-center px-12 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-12 overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center">
                 
                 {/* Left Side: Image Content (INCREASED HEIGHT TO MAKE IMAGE BIGGER) */}

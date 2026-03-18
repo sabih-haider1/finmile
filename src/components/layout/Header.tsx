@@ -71,10 +71,10 @@ export const Header = () => {
         initial="initial"
         animate="animate"
         className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 rounded-full transition-all duration-500 ease-out ${isMobileMenuOpen && 'xl:hidden'
-            ? 'bg-transparent border-transparent py-3 lg:py-4'
-            : isScrolled
-              ? 'bg-slate-600/35 backdrop-blur-md border border-white/25 shadow-[0_8px_30px_rgba(15,23,42,0.35)] py-2.5 lg:py-3.5'
-              : 'bg-transparent border-transparent py-4 lg:py-5'
+          ? 'bg-transparent border-transparent py-3 lg:py-4'
+          : isScrolled
+            ? 'bg-[#2A1B54]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgba(11,6,22,0.8)] py-2.5 lg:py-3.5'
+            : 'bg-transparent border-transparent py-4 lg:py-5'
           }`}
         style={{ top: '3px' }}
       >
@@ -199,7 +199,7 @@ export const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-[#0B0616]/80 backdrop-blur-sm z-[95] xl:hidden"
+            className="fixed inset-0 bg-[#2A1B54]/80 backdrop-blur-sm z-[95] xl:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
         )}
@@ -210,7 +210,7 @@ export const Header = () => {
         variants={mobileMenuVariants}
         initial="closed"
         animate={isMobileMenuOpen ? "open" : "closed"}
-        className="fixed top-0 right-0 h-full w-[300px] bg-[#0B0616]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl"
+        className="fixed top-0 right-0 h-full w-[300px] bg-[#2A1B54]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl"
       >
         <div className="flex flex-col h-full pt-20 px-6 pb-8 overflow-y-auto custom-scrollbar">
           {/* Mobile Navigation Links */}

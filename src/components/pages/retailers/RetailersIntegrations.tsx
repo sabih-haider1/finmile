@@ -9,7 +9,7 @@ export const RetailersIntegrations = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-6 md:px-12 lg:px-24 py-12 md:py-16 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-6 md:px-12 lg:px-24 py-6 md:py-6 overflow-hidden relative ${montserrat.className}`}>
             
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1240px] mx-auto mb-10 md:mb-12">
                 <h2 className="font-semibold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.3]">

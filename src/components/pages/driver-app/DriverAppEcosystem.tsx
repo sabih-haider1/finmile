@@ -24,7 +24,7 @@ export const DriverAppEcosystem = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 lg:py-16 border-t border-[#F0EDFF] ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 lg:py-6 border-t border-[#F0EDFF] ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] flex flex-col z-10 relative">
 
                 {/* Header Content - Two Column Layout */}

@@ -24,7 +24,7 @@ export const DspsOperationalImpact = () => {
     ];
 
     return (
-        <section className={`w-full relative flex flex-col items-center pt-12 md:pt-16 ${montserrat.className}`}>
+        <section className={`w-full relative flex flex-col items-center pt-6 md:pt-6 ${montserrat.className}`}>
             
             {/* Dark background spanning top section */}
             <div className="absolute top-0 left-0 w-full h-[calc(100%-120px)] md:h-[calc(100%-150px)] bg-[#0A0318] z-0 overflow-hidden">

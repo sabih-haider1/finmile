@@ -34,7 +34,7 @@ export const FaqSection = () => {
     };
 
     return (
-        <section className={`w-full bg-white py-16 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 ${montserrat.className}`}>
+        <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 ${montserrat.className}`}>
             
             {/* Main FAQ Container with updated EXACT #F3F5FF background */}
             <div className="w-full max-w-[1000px] bg-[#F3F5FF] rounded-[32px] px-6 py-12 md:px-16 md:py-16 flex flex-col items-center shadow-[0_10px_40px_rgba(47,28,140,0.03)]">

@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const WhatDeliveriesMean = () => {
     return (
-        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-4 md:px-6 lg:px-24 py-16 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-12 items-center z-10 relative">
 
                 {/* Left Side: Text */}

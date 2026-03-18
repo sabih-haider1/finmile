@@ -25,7 +25,7 @@ export const MultiFleetOptimization = () => {
     ];
 
     return (
-        <section className={`w-full bg-white py-12 md:py-16 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
             
             {/* The giant rounded background container matching the mockup */}
             <div className="w-full max-w-[1240px] bg-[#F8F9FC] rounded-[32px] md:rounded-[48px] px-6 py-16 md:px-12 md:py-16 flex flex-col items-center">

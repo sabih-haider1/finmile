@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const HowItWorks = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-16 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
 
             {/* Header Content */}
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-10 md:mb-14 lg:mb-8">

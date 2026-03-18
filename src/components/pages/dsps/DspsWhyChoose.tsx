@@ -35,7 +35,7 @@ export const DspsWhyChoose = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 ${montserrat.className}`}>
             <div className="w-full max-w-[1000px] flex flex-col items-center">
 
                 <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight mb-10 text-center">
