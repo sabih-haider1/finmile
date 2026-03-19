@@ -24,6 +24,18 @@ export default function BlogsPage() {
     fetchBlogs();
   }, [searchQuery, featuredFilter, publishedFilter]);
 
+  const getAuthHeader = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.access_token) {
+      throw new Error('Your admin session has expired. Please log in again.');
+    }
+
+    return { Authorization: `Bearer ${session.access_token}` };
+  };
+
   const fetchBlogs = async () => {
     setLoading(true);
     try {
@@ -59,8 +71,16 @@ export default function BlogsPage() {
     }
     
     try {
-      const { error } = await supabase.from('blogs').delete().eq('id', blog.id);
-      if (error) throw error;
+      const authHeader = await getAuthHeader();
+      const response = await fetch(`/api/blogs/${blog.id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: authHeader,
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to delete blog');
+      }
       alert('Blog deleted successfully!');
       fetchBlogs();
     } catch (error: any) {
@@ -70,15 +90,38 @@ export default function BlogsPage() {
 
   const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
     try {
-      let coverImageUrl = formData.cover_image_url;
+      const normalizeUrlValue = (value: unknown): string | null => {
+        if (typeof value === 'string') {
+          const trimmed = value.trim();
+          return trimmed.length > 0 ? trimmed : null;
+        }
+
+        if (value && typeof value === 'object') {
+          const candidateKeys = ['url', 'publicUrl', 'signedUrl', 'path', 'href'];
+          for (const key of candidateKeys) {
+            const candidate = (value as Record<string, unknown>)[key];
+            if (typeof candidate === 'string' && candidate.trim().length > 0) {
+              return candidate.trim();
+            }
+          }
+        }
+
+        return null;
+      };
+
+      let coverImageUrl = normalizeUrlValue(formData.cover_image_url);
 
       // Upload cover image if provided
       if (files.cover_image_url) {
-        coverImageUrl = await uploadFile({
+        const uploadResult = await uploadFile({
           bucket: 'blog-covers',
           folder: 'covers',
           file: files.cover_image_url,
         });
+        if (!uploadResult.success || !uploadResult.url) {
+          throw new Error(uploadResult.error || 'Failed to upload cover image.');
+        }
+        coverImageUrl = uploadResult.url;
       }
 
       const blogData = {
@@ -90,24 +133,33 @@ export default function BlogsPage() {
 
       if (editingBlog) {
         // Update existing blog
-        const { id, created_at, ...updateData } = blogData;
-        const { error } = await supabase
-          .from('blogs')
-          .update({ ...updateData, updated_at: new Date().toISOString() })
-          .eq('id', editingBlog.id);
-        if (error) throw error;
+        const { id, created_at, updated_at, ...updateData } = blogData;
+        const authHeader = await getAuthHeader();
+        const response = await fetch(`/api/blogs/${editingBlog.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(updateData),
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to update blog');
+        }
         alert('Blog updated successfully!');
       } else {
         // Create new blog
-        const now = new Date().toISOString();
         const { id, created_at, updated_at, ...insertData } = blogData;
-        const { error } = await supabase.from('blogs').insert([{
-          ...insertData,
-          published_at: insertData.is_published ? now : null,
-          created_at: now,
-          updated_at: now,
-        }]);
-        if (error) throw error;
+        const authHeader = await getAuthHeader();
+        const response = await fetch('/api/blogs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(insertData),
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to create blog');
+        }
         alert('Blog created successfully!');
       }
 

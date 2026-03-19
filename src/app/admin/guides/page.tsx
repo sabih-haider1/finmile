@@ -65,11 +65,13 @@ export default function GuidesPage() {
 
       // Upload PDF if provided
       if (files.pdf_url) {
-        pdfUrl = await uploadFile({
+        const uploadResult = await uploadFile({
           bucket: 'guides',
           folder: 'pdfs',
           file: files.pdf_url,
         });
+        if (!uploadResult.success) throw new Error(uploadResult.error || 'Upload failed');
+        pdfUrl = uploadResult.url;
       }
 
       const guideData = {

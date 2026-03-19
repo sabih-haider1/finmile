@@ -17,12 +17,12 @@ interface Guide {
 function GuideCard({ guide }: { guide: Guide }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm shadow-gray-200/60 hover:shadow-xl hover:shadow-indigo-100/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
-      <div className="relative w-full h-52 bg-gradient-to-br from-purple-100 to-indigo-100 overflow-hidden flex items-center justify-center">
+      <div className="relative w-full  rounded-[16px] overflow-hidden flex items-center justify-center">
         <Image
-          src="/assets/logos/Frame 2095586041.png"
+          src="/assets/logos/guidescover.png"
           alt="Finmile Guide"
-          width={120}
-          height={120}
+          width={220}
+          height={220}
           className="object-contain"
         />
       </div>
@@ -40,7 +40,7 @@ function GuideCard({ guide }: { guide: Guide }) {
             target="_blank"
             rel="noopener noreferrer"
             download
-            className="text-sm font-medium text-[#5B52F3] hover:text-[#4338CA] transition-colors"
+            className="text-sm font-medium text-[#6A27D4] hover:text-[#6A27E4] transition-colors"
           >
             Download Guide →
           </a>

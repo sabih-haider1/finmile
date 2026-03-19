@@ -23,18 +23,18 @@ function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
 
   return (
     <div className="bg-white rounded-2xl shadow-sm shadow-gray-200/60 hover:shadow-xl hover:shadow-indigo-100/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
-      <div className="relative w-full h-52 bg-gradient-to-br from-purple-100 to-indigo-100 overflow-hidden">
+      <div className="relative w-full aspect-[384/260] bg-gradient-to-br from-purple-100 to-indigo-100 overflow-hidden rounded-[16px]">
         {!imageError && caseStudy.cover_image_url ? (
           <Image
             src={caseStudy.cover_image_url}
             alt={caseStudy.title}
             fill
-            className="object-cover"
+            className="object-cover rounded-[16px]"
             onError={() => setImageError(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center rounded-[16px]">
             <div className="text-center text-gray-400">
               <div className="text-4xl mb-2">📊</div>
               <div className="text-sm font-medium">Case Study</div>
@@ -56,7 +56,7 @@ function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
         <div className="mt-auto pt-2">
           <Link
             href={`/case-studies/${caseStudy.slug}`}
-            className="text-sm font-medium text-[#5B52F3] hover:text-[#4338CA] transition-colors"
+            className="text-sm font-medium text-[#6A27D4] hover:text-[#6A27E4] transition-colors"
           >
             Read More →
           </Link>
@@ -69,7 +69,7 @@ function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
 function CaseStudyCardSkeleton() {
   return (
     <div className="animate-pulse bg-white rounded-2xl p-6 space-y-4">
-      <div className="h-52 w-full bg-gray-200 rounded" />
+      <div className="aspect-[384/260] w-full bg-gray-200 rounded-[16px]" />
       <div className="h-4 bg-gray-200 rounded w-20" />
       <div className="h-6 bg-gray-200 rounded w-3/4" />
       <div className="space-y-2">

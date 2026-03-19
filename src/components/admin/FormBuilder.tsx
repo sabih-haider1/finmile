@@ -165,18 +165,44 @@ export default function FormBuilder({
 
       case 'file':
         return (
-          <div className="space-y-2">
+          <div className="space-y-4">
             <input
               type="file"
               onChange={(e) => handleFileChange(field.name, e.target.files?.[0] || null)}
               accept={field.accept}
               className="block w-full text-sm text-white/60 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#6A27D4] file:text-white hover:file:bg-[#5A1FC4] file:cursor-pointer"
             />
-            {value && !files[field.name] && (
-              <p className="text-xs text-white/60">
-                Current: {value.split('/').pop()}
-              </p>
-            )}
+            {/* Show local file preview if newly selected, or existing value if present */}
+            {files[field.name] ? (
+              <div className="mt-2">
+                <p className="text-xs text-white/60 mb-2">
+                  Selected new file: {files[field.name]!.name}
+                </p>
+                {files[field.name]!.type.startsWith('image/') && (
+                  <img
+                    src={URL.createObjectURL(files[field.name]!)}
+                    alt="Preview"
+                    className="w-32 h-24 object-cover rounded-lg border border-white/20"
+                  />
+                )}
+              </div>
+            ) : value ? (
+              <div className="mt-2">
+                <p className="text-xs text-white/60 mb-2">
+                  Current: {typeof value === 'string' ? value.split('/').pop() : 'File attached'}
+                </p>
+                {typeof value === 'string' && value.match(/\.(jpeg|jpg|gif|png|webp|avif)$/i) && (
+                  <img
+                    src={value}
+                    alt="Current file"
+                    className="w-32 h-24 object-cover rounded-lg border border-white/20"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                )}
+              </div>
+            ) : null}
           </div>
         );
 

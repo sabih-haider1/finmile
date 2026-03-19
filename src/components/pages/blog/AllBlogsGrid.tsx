@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Calendar } from 'lucide-react';
 import { supabase } from '@/supabaseClient';
 import { SimpleSearchBar } from '@/components/shared/SimpleSearchBar';
 
@@ -22,18 +23,18 @@ function BlogCard({ blog }: { blog: Blog }) {
 
   return (
     <div className="bg-white rounded-2xl shadow-sm shadow-gray-200/60 hover:shadow-xl hover:shadow-indigo-100/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
-      <div className="relative w-full h-52 bg-gradient-to-br from-purple-100 to-indigo-100 overflow-hidden">
+      <div className="relative w-full aspect-[384/260] bg-gradient-to-br from-purple-100 to-indigo-100 overflow-hidden rounded-[16px]">
         {!imageError && blog.cover_image_url ? (
           <Image
             src={blog.cover_image_url}
             alt={blog.title}
             fill
-            className="object-cover"
+            className="object-cover rounded-[16px]"
             onError={() => setImageError(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center rounded-[16px]">
             <div className="text-center text-gray-400">
               <div className="text-4xl mb-2">📝</div>
               <div className="text-sm font-medium">Blog Post</div>
@@ -43,10 +44,17 @@ function BlogCard({ blog }: { blog: Blog }) {
       </div>
 
       <div className="p-6 flex flex-col gap-3 flex-1">
-        {blog.category && (
-          <span className="text-xs font-semibold text-[#5B52F3] uppercase tracking-wider">
-            {blog.category}
-          </span>
+        {blog.published_at && (
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6C757D] lowercase tracking-wider">
+            <Calendar className="w-3.5 h-3.5" />
+            <span>
+              {new Date(blog.published_at).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </span>
+          </div>
         )}
         <h3 className="text-lg font-semibold text-[#1C1F4A] leading-snug">
           {blog.title}
@@ -57,9 +65,9 @@ function BlogCard({ blog }: { blog: Blog }) {
         <div className="mt-auto pt-2">
           <Link
             href={`/blog/${blog.slug}`}
-            className="text-sm font-medium text-[#5B52F3] hover:text-[#4338CA] transition-colors"
+            className="text-sm font-medium text-[#6A27D4] hover:text-[#6A27E4] transition-colors"
           >
-            Read Article →
+            Read More →
           </Link>
         </div>
       </div>
@@ -70,7 +78,7 @@ function BlogCard({ blog }: { blog: Blog }) {
 function BlogCardSkeleton() {
   return (
     <div className="animate-pulse bg-white rounded-2xl p-6 space-y-4">
-      <div className="h-52 w-full bg-gray-200 rounded" />
+      <div className="aspect-[384/260] w-full bg-gray-200 rounded-[16px]" />
       <div className="h-4 bg-gray-200 rounded w-20" />
       <div className="h-6 bg-gray-200 rounded w-3/4" />
       <div className="space-y-2">

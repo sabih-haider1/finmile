@@ -24,6 +24,18 @@ export default function CaseStudiesPage() {
     fetchCaseStudies();
   }, [searchQuery, featuredFilter, publishedFilter]);
 
+  const getAuthHeader = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.access_token) {
+      throw new Error('Your admin session has expired. Please log in again.');
+    }
+
+    return { Authorization: `Bearer ${session.access_token}` };
+  };
+
   const fetchCaseStudies = async () => {
     setLoading(true);
     try {
@@ -59,8 +71,16 @@ export default function CaseStudiesPage() {
     }
 
     try {
-      const { error } = await supabase.from('case_studies').delete().eq('id', caseStudy.id);
-      if (error) throw error;
+      const authHeader = await getAuthHeader();
+      const response = await fetch(`/api/case-studies/${caseStudy.id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: authHeader,
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to delete case study');
+      }
       alert('Case study deleted successfully!');
       fetchCaseStudies();
     } catch (error: any) {
@@ -70,15 +90,38 @@ export default function CaseStudiesPage() {
 
   const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
     try {
-      let coverImageUrl = formData.cover_image_url;
+      const normalizeUrlValue = (value: unknown): string | null => {
+        if (typeof value === 'string') {
+          const trimmed = value.trim();
+          return trimmed.length > 0 ? trimmed : null;
+        }
+
+        if (value && typeof value === 'object') {
+          const candidateKeys = ['url', 'publicUrl', 'signedUrl', 'path', 'href'];
+          for (const key of candidateKeys) {
+            const candidate = (value as Record<string, unknown>)[key];
+            if (typeof candidate === 'string' && candidate.trim().length > 0) {
+              return candidate.trim();
+            }
+          }
+        }
+
+        return null;
+      };
+
+      let coverImageUrl = normalizeUrlValue(formData.cover_image_url);
 
       // Upload cover image if provided
       if (files.cover_image_url) {
-        coverImageUrl = await uploadFile({
+        const uploadResult = await uploadFile({
           bucket: 'case-study-covers',
           folder: 'covers',
           file: files.cover_image_url,
         });
+        if (!uploadResult.success || !uploadResult.url) {
+          throw new Error(uploadResult.error || 'Failed to upload cover image.');
+        }
+        coverImageUrl = uploadResult.url;
       }
 
       const caseStudyData = {
@@ -95,24 +138,33 @@ export default function CaseStudiesPage() {
 
       if (editingCaseStudy) {
         // Update existing case study
-        const { id, created_at, ...updateData } = caseStudyData;
-        const { error } = await supabase
-          .from('case_studies')
-          .update({ ...updateData, updated_at: new Date().toISOString() })
-          .eq('id', editingCaseStudy.id);
-        if (error) throw error;
+        const { id, created_at, updated_at, ...updateData } = caseStudyData;
+        const authHeader = await getAuthHeader();
+        const response = await fetch(`/api/case-studies/${editingCaseStudy.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(updateData),
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to update case study');
+        }
         alert('Case study updated successfully!');
       } else {
         // Create new case study
-        const now = new Date().toISOString();
         const { id, created_at, updated_at, ...insertData } = caseStudyData;
-        const { error } = await supabase.from('case_studies').insert([{
-          ...insertData,
-          published_at: insertData.is_published ? now : null,
-          created_at: now,
-          updated_at: now,
-        }]);
-        if (error) throw error;
+        const authHeader = await getAuthHeader();
+        const response = await fetch('/api/case-studies', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(insertData),
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to create case study');
+        }
         alert('Case study created successfully!');
       }
 

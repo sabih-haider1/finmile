@@ -75,20 +75,24 @@ export default function ResourcesPage() {
 
       // Upload file if provided
       if (files.file_url) {
-        fileUrl = await uploadFile({
+        const fileUploadResult = await uploadFile({
           bucket: 'resources',
           folder: 'files',
           file: files.file_url,
         });
+        if (!fileUploadResult.success) throw new Error(fileUploadResult.error || 'Upload failed');
+        fileUrl = fileUploadResult.url;
       }
 
       // Upload thumbnail if provided
       if (files.thumbnail_url) {
-        thumbnailUrl = await uploadFile({
+        const thumbUploadResult = await uploadFile({
           bucket: 'resource-thumbnails',
           folder: 'thumbnails',
           file: files.thumbnail_url,
         });
+        if (!thumbUploadResult.success) throw new Error(thumbUploadResult.error || 'Upload failed');
+        thumbnailUrl = thumbUploadResult.url;
       }
 
       const resourceData = {
