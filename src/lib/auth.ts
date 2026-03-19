@@ -25,7 +25,7 @@ function normalizeValue(value: unknown): string {
   return String(value || '').trim().toLowerCase();
 }
 
-function hasAdminRoleInMetadata(metadata: Record<string, any> | null | undefined): boolean {
+function hasAdminRoleInMetadata(metadata: Record<string, unknown> | null | undefined): boolean {
   if (!metadata) return false;
 
   const role = normalizeValue(metadata.role);
@@ -53,13 +53,14 @@ function hasAdminRoleInMetadata(metadata: Record<string, any> | null | undefined
   return false;
 }
 
-function hasAnyAdminMetadata(user: any): boolean {
-  const userMetadata = user?.user_metadata;
-  const appMetadata = user?.app_metadata;
+function hasAnyAdminMetadata(user: unknown): boolean {
+  const u = user as Record<string, any>;
+  const userMetadata = (u?.user_metadata as Record<string, any>) || {};
+  const appMetadata = (u?.app_metadata as Record<string, any>) || {};
 
-  const hasRoleField = userMetadata?.role !== undefined || appMetadata?.role !== undefined;
-  const hasAdminFlag = userMetadata?.is_admin !== undefined || appMetadata?.is_admin !== undefined;
-  const hasRolesArray = Array.isArray(userMetadata?.roles) || Array.isArray(appMetadata?.roles);
+  const hasRoleField = userMetadata.role !== undefined || appMetadata.role !== undefined;
+  const hasAdminFlag = userMetadata.is_admin !== undefined || appMetadata.is_admin !== undefined;
+  const hasRolesArray = Array.isArray(userMetadata.roles) || Array.isArray(appMetadata.roles);
 
   return Boolean(hasRoleField || hasAdminFlag || hasRolesArray);
 }

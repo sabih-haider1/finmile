@@ -29,7 +29,7 @@ export const PressAndAwards = () => {
                     Press & Awards
                 </h2>
                 <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] leading-relaxed px-4">
-                    Finmile's innovation and measurable results have been recognised by industry leaders,
+                    Finmile&apos;s innovation and measurable results have been recognised by industry leaders,
                     <br className="hidden md:block" /> sustainability organisations, and technology accelerators worldwide.
                 </p>
             </div>

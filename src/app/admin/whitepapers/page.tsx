@@ -57,9 +57,9 @@ export default function WhitepapersPage() {
       }
 
       setWhitepapers(result.data?.items || []);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching whitepapers:', error);
-      alert('Failed to fetch whitepapers: ' + error.message);
+      alert('Failed to fetch whitepapers: ' + (error instanceof Error ? error.message : String(error)));
     } finally {
       setLoading(false);
     }
@@ -88,7 +88,7 @@ export default function WhitepapersPage() {
     }
   };
 
-  const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
+  const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
       const normalizeUrlValue = (value: unknown): string | null => {
         if (typeof value === 'string') {
@@ -146,28 +146,28 @@ export default function WhitepapersPage() {
         throw new Error('Please upload a valid PDF file before saving.');
       }
 
-      const selectedAuthor = WHITEPAPER_AUTHORS.includes(formData.author)
-        ? formData.author
+      const selectedAuthor = WHITEPAPER_AUTHORS.includes(formData.author as string)
+        ? formData.author as string
         : null;
       const publishedDate = formData.published_date
-        ? new Date(formData.published_date).toISOString()
+        ? new Date(formData.published_date as string).toISOString()
         : new Date().toISOString();
 
       const whitepaperData = {
         ...formData,
-        slug: generateSlug(formData.slug || formData.title),
+        slug: generateSlug((formData.slug as string) || (formData.title as string)),
         cover_image_url: coverImageUrl || null,
         pdf_url: pdfUrl,
         author: selectedAuthor,
         author_name: selectedAuthor,
         published_date: publishedDate,
-        topic: formData.topic && formData.topic.trim() !== '' ? formData.topic : null,
-        industry: formData.industry && formData.industry.trim() !== '' ? formData.industry : null,
+        topic: formData.topic && (formData.topic as string).trim() !== '' ? formData.topic : null,
+        industry: formData.industry && (formData.industry as string).trim() !== '' ? formData.industry : null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };
 
       if (editingWhitepaper) {
-        const { id, created_at, updated_at, ...updateData } = whitepaperData;
+        const { id, created_at, updated_at, ...updateData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/whitepapers/${editingWhitepaper.id}`, {
           method: 'PUT',
@@ -181,7 +181,7 @@ export default function WhitepapersPage() {
         }
         alert('Whitepaper updated successfully!');
       } else {
-        const { id, created_at, updated_at, ...insertData } = whitepaperData;
+        const { id, created_at, updated_at, ...insertData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/whitepapers', {
           method: 'POST',

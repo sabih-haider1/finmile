@@ -59,7 +59,7 @@ export default function BlogsPage() {
       setBlogs(data || []);
     } catch (error: any) {
       console.error('Error fetching blogs:', error);
-      alert('Failed to fetch blogs: ' + error.message);
+      alert('Failed to fetch blogs: ' + (error?.message || 'Unknown error'));
     } finally {
       setLoading(false);
     }
@@ -77,18 +77,18 @@ export default function BlogsPage() {
         credentials: 'include',
         headers: authHeader,
       });
-      const result = await response.json();
+      const result = await response.json() as Record<string, unknown>;
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to delete blog');
+        throw new Error((result.error as string) || 'Failed to delete blog');
       }
       alert('Blog deleted successfully!');
       fetchBlogs();
-    } catch (error: any) {
-      alert('Failed to delete blog: ' + error.message);
+    } catch (error: unknown) {
+      alert('Failed to delete blog: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   };
 
-  const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
+  const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
       const normalizeUrlValue = (value: unknown): string | null => {
         if (typeof value === 'string') {
@@ -126,14 +126,14 @@ export default function BlogsPage() {
 
       const blogData = {
         ...formData,
-        slug: generateSlug(formData.slug || formData.title),
+        slug: generateSlug((formData.slug as string) || (formData.title as string)),
         cover_image_url: coverImageUrl || null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };
 
       if (editingBlog) {
         // Update existing blog
-        const { id, created_at, updated_at, ...updateData } = blogData;
+        const { id, created_at, updated_at, ...updateData } = blogData as Record<string, any>;
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/blogs/${editingBlog.id}`, {
           method: 'PUT',
@@ -148,7 +148,7 @@ export default function BlogsPage() {
         alert('Blog updated successfully!');
       } else {
         // Create new blog
-        const { id, created_at, updated_at, ...insertData } = blogData;
+        const { id, created_at, updated_at, ...insertData } = blogData as Record<string, any>;
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/blogs', {
           method: 'POST',

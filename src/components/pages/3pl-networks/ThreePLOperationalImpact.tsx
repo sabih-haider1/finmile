@@ -74,7 +74,7 @@ export const ThreePLOperationalImpact = () => {
                     <Quote className="w-10 h-10 text-white opacity-80 mb-6 relative z-10" fill="currentColor" />
 
                     <p className="text-white font-medium text-[18px] md:text-[22px] lg:text-[24px] leading-[1.6] mb-8 relative z-10 max-w-[800px] mx-auto">
-                        "We operate across six clients and three depots — Finmile unified it all. Routing went from hours to minutes, and client SLA reports generate automatically."
+                        &quot;We operate across six clients and three depots &mdash; Finmile unified it all. Routing went from hours to minutes, and client SLA reports generate automatically.&quot;
                     </p>
 
                     <div className="relative z-10 flex flex-col items-center">

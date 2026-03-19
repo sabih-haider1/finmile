@@ -1,5 +1,5 @@
 import React from 'react';
-import { GitMerge, Share2, Workflow } from 'lucide-react';
+import { GitMerge, Workflow } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });

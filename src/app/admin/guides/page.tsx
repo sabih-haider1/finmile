@@ -36,9 +36,9 @@ export default function GuidesPage() {
       const { data, error } = await query;
       if (error) throw error;
       setGuides(data || []);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching guides:', error);
-      alert('Failed to fetch guides: ' + error.message);
+      alert('Failed to fetch guides: ' + (error instanceof Error ? error.message : String(error)));
     } finally {
       setLoading(false);
     }
@@ -59,7 +59,7 @@ export default function GuidesPage() {
     }
   };
 
-  const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
+  const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
       let pdfUrl = formData.pdf_url;
 
@@ -76,13 +76,13 @@ export default function GuidesPage() {
 
       const guideData = {
         ...formData,
-        slug: generateSlug(formData.slug || formData.title),
+        slug: generateSlug((formData.slug as string) || (formData.title as string)),
         pdf_url: pdfUrl,
       };
 
       if (editingGuide) {
         // Update existing guide
-        const { id, created_at, ...updateData } = guideData;
+        const { id, created_at, ...updateData } = guideData as typeof guideData & { id: string; created_at: string };
         const { error } = await supabase
           .from('guides')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -92,7 +92,7 @@ export default function GuidesPage() {
       } else {
         // Create new guide
         const now = new Date().toISOString();
-        const { id, created_at, updated_at, ...insertData } = guideData;
+        const { id, created_at, updated_at, ...insertData } = guideData as typeof guideData & { id: string; created_at: string; updated_at: string };
         const { error } = await supabase.from('guides').insert([{
           ...insertData,
           created_at: now,

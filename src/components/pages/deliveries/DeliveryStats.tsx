@@ -14,7 +14,7 @@ export const DeliveryStats = () => {
                         Why Finmile Delivery Solutions
                     </h2>
                     <p className="font-medium text-[15px] md:text-[16px] xl:text-[18px] text-[#6C757D] leading-relaxed max-w-[800px]">
-                        Finmile goes beyond delivery tracking. We build fully responsive transport networks. Operating globally? We've got 99.9% uptime for that.
+                        Finmile goes beyond delivery tracking. We&apos;ve built fully responsive transport networks. Operating globally? We&apos;ve got 99.9% uptime for that.
                     </p>
                 </div>
 

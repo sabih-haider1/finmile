@@ -45,9 +45,9 @@ export default function ResourcesPage() {
       const { data, error } = await query;
       if (error) throw error;
       setResources(data || []);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching resources:', error);
-      alert('Failed to fetch resources: ' + error.message);
+      alert('Failed to fetch resources: ' + (error instanceof Error ? error.message : String(error)));
     } finally {
       setLoading(false);
     }
@@ -68,7 +68,7 @@ export default function ResourcesPage() {
     }
   };
 
-  const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
+  const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
       let fileUrl = formData.file_url;
       let thumbnailUrl = formData.thumbnail_url;
@@ -97,7 +97,7 @@ export default function ResourcesPage() {
 
       const resourceData = {
         ...formData,
-        slug: generateSlug(formData.slug || formData.title),
+        slug: generateSlug((formData.slug as string) || (formData.title as string)),
         file_url: fileUrl,
         thumbnail_url: thumbnailUrl || null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
@@ -105,7 +105,7 @@ export default function ResourcesPage() {
 
       if (editingResource) {
         // Update existing resource
-        const { id, created_at, ...updateData } = resourceData;
+        const { id, created_at, ...updateData } = resourceData as typeof resourceData & { id: string; created_at: string };
         const { error } = await supabase
           .from('resources')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -115,7 +115,7 @@ export default function ResourcesPage() {
       } else {
         // Create new resource
         const now = new Date().toISOString();
-        const { id, created_at, updated_at, ...insertData } = resourceData;
+        const { id, created_at, updated_at, ...insertData } = resourceData as typeof resourceData & { id: string; created_at: string; updated_at: string };
         const { error } = await supabase.from('resources').insert([{
           ...insertData,
           created_at: now,

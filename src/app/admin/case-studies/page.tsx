@@ -57,9 +57,9 @@ export default function CaseStudiesPage() {
       const { data, error } = await query;
       if (error) throw error;
       setCaseStudies(data || []);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching case studies:', error);
-      alert('Failed to fetch case studies: ' + error.message);
+      alert('Failed to fetch case studies: ' + (error instanceof Error ? error.message : String(error)));
     } finally {
       setLoading(false);
     }
@@ -88,7 +88,7 @@ export default function CaseStudiesPage() {
     }
   };
 
-  const handleFormSubmit = async (formData: any, files: Record<string, File | null>) => {
+  const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
       const normalizeUrlValue = (value: unknown): string | null => {
         if (typeof value === 'string') {
@@ -114,8 +114,8 @@ export default function CaseStudiesPage() {
       // Upload cover image if provided
       if (files.cover_image_url) {
         const uploadResult = await uploadFile({
-          bucket: 'case-study-covers',
-          folder: 'covers',
+          bucket: 'blog-covers',
+          folder: 'case-study-covers',
           file: files.cover_image_url,
         });
         if (!uploadResult.success || !uploadResult.url) {
@@ -126,19 +126,19 @@ export default function CaseStudiesPage() {
 
       const caseStudyData = {
         ...formData,
-        slug: generateSlug(formData.slug || formData.title),
+        slug: generateSlug((formData.slug as string) || (formData.title as string)),
         cover_image_url: coverImageUrl || null,
-        industry: formData.industry && formData.industry.trim() !== '' ? formData.industry : null,
-        company_name: formData.company_name && formData.company_name.trim() !== '' ? formData.company_name : null,
-        challenge: formData.challenge && formData.challenge.trim() !== '' ? formData.challenge : null,
-        solution: formData.solution && formData.solution.trim() !== '' ? formData.solution : null,
-        results: formData.results && formData.results.trim() !== '' ? formData.results : null,
+        industry: formData.industry && (formData.industry as string).trim() !== '' ? formData.industry : null,
+        company_name: formData.company_name && (formData.company_name as string).trim() !== '' ? formData.company_name : null,
+        challenge: formData.challenge && (formData.challenge as string).trim() !== '' ? formData.challenge : null,
+        solution: formData.solution && (formData.solution as string).trim() !== '' ? formData.solution : null,
+        results: formData.results && (formData.results as string).trim() !== '' ? formData.results : null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };
 
       if (editingCaseStudy) {
         // Update existing case study
-        const { id, created_at, updated_at, ...updateData } = caseStudyData;
+        const { id, created_at, updated_at, ...updateData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/case-studies/${editingCaseStudy.id}`, {
           method: 'PUT',
@@ -153,7 +153,7 @@ export default function CaseStudiesPage() {
         alert('Case study updated successfully!');
       } else {
         // Create new case study
-        const { id, created_at, updated_at, ...insertData } = caseStudyData;
+        const { id, created_at, updated_at, ...insertData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/case-studies', {
           method: 'POST',
@@ -181,7 +181,7 @@ export default function CaseStudiesPage() {
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'summary', label: 'Summary', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
     { name: 'content', label: 'Main Content', type: 'textarea', rows: 10, required: true, placeholder: 'Full case study content...' },
-    { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'case-study-covers', folder: 'covers' },
+    { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'blog-covers', folder: 'case-study-covers' },
     { name: 'company_name', label: 'Company Name', type: 'text', placeholder: 'Acme Corporation' },
     { 
       name: 'industry', 

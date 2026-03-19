@@ -24,7 +24,7 @@ export const PowerOfControlTower = () => {
                     The Power of the Finmile Control Tower
                 </h2>
                 <p className="font-medium text-[15px] md:text-[16px] text-[#6C757D] max-w-[700px] leading-relaxed px-4">
-                    Finmile's Control Tower is your real-time delivery command centre — combining tracking, analytics, proof of delivery, and predictive insights into one control panel.
+                    Finmile&apos;s Control Tower is your real-time delivery command centre &mdash; combining tracking, analytics, proof of delivery, and predictive insights into one control panel.
                 </p>
             </div>
 
@@ -78,7 +78,7 @@ export const PowerOfControlTower = () => {
                                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6A27D4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             </div>
                             <span className="text-[#0A1B33] font-medium text-[14px] leading-snug">
-                                The Control Tower's ML model analyses the image for accuracy, location match, and completeness.
+                                The Control Tower&apos;s ML model analyses the image for accuracy, location match, and completeness.
                             </span>
                         </li>
                         <li className="flex items-start gap-4">

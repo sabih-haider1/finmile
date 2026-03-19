@@ -18,11 +18,11 @@ export const AiDataSustainability = () => {
 
                     <div className='flex flex-col space-y-6'>
                         <p className='text-[#6C757D] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'>
-                            Finmile isn't just another logistics software company — we're a research-driven AI platform reshaping how the world moves parcels.
+                            Finmile isn&apos;t just another logistics software company &mdash; we&apos;re a research-driven AI platform reshaping how the world moves parcels.
                         </p>
 
                         <p className='text-[#6C757D] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'>
-                            Here you'll find every Finmile whitepaper, report, and insight on AI route optimization, last-mile delivery innovation, sustainability strategy, and the economics of intelligent logistics.
+                            Here you&apos;ll find every Finmile whitepaper, report, and insight on AI route optimization, last-mile delivery innovation, sustainability strategy, and the economics of intelligent logistics.
                         </p>
 
                         <p className='text-[#6C757D] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'>

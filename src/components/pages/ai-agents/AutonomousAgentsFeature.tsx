@@ -28,7 +28,7 @@ export const AutonomousAgentsFeature = () => {
                     </h2>
 
                     <p className="text-[#6C757D] font-medium text-[15px] md:text-[18px] leading-relaxed mb-8 md:mb-10 max-w-[500px]">
-                        Finmile's AI Agents observe, decide, and act — removing operational friction at every step.
+                        Finmile&apos;s AI Agents observe, decide, and act &mdash; removing operational friction at every step.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
