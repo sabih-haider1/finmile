@@ -23,6 +23,7 @@ export function FaqInteractiveList() {
   const [openQuestionIndex, setOpenQuestionIndex] = useState<number>(0);
 
   // When category changes, reset open question to 0
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     setOpenQuestionIndex(0);
   }, [activeCategory]);

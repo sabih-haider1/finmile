@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Network } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -36,7 +37,7 @@ export const DriverAppOperationalImpact = () => {
                         </div>
                         <div className="bg-[#2F1C8C] rounded-xl px-6 py-4 flex items-center justify-between">
                             <span className="text-white font-semibold text-[15px]">With Finmile</span>
-                            <img src="/assets/logos/logo-white.png" alt="Finmile" className="h-4 object-contain opacity-90" />
+                            <Image src="/assets/logos/logo-white.png" alt="Finmile" width={60} height={16} className="h-4 w-auto object-contain opacity-90" />
                         </div>
                     </div>
 

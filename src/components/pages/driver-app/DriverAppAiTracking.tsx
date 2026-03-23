@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Database, Monitor, TrendingUp } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -39,7 +40,7 @@ export const DriverAppAiTracking = () => {
                             <div className="flex flex-col">
                                 <h4 className="text-[#1A1A1A] font-semibold text-[16px] mb-1">Automated Status Updates</h4>
                                 <p className="text-[#6C757D] font-medium text-[14px]">
-                                    Geofencing triggers 'Arrived' and 'Departed' events.
+                                    Geofencing triggers &apos;Arrived&apos; and &apos;Departed&apos; events.
                                 </p>
                             </div>
                         </div>
@@ -62,9 +63,11 @@ export const DriverAppAiTracking = () => {
                 <div className="flex justify-center lg:justify-end w-full order-1 lg:order-2 mt-4 lg:mt-0 relative">
                     {/* Background glow for the image to mimic design */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-white rounded-[40px] shadow-[0_30px_60px_rgba(47,28,140,0.05)] -z-10" />
-                    <img
+                    <Image
                         src="/assets/images/features/laptop-live.png"
                         alt="AI Tracking Interface"
+                        width={600}
+                        height={400}
                         className="w-full max-w-[600px] h-auto rounded-[16px] relative z-10 object-contain mix-blend-multiply"
                     />
                 </div>

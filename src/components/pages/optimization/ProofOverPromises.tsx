@@ -73,7 +73,7 @@ export const ProofOverPromises = () => {
                     
                     {/* Quote Text with standard quotes and wider container */}
                     <blockquote className="text-white font-medium text-[20px] md:text-[24px] leading-[1.6] mb-10 text-center max-w-[800px]">
-                        "Finmile's AI didn't just make routes shorter — it made our entire operation calmer."
+                        &quot;Finmile&apos;s AI didn&apos;t just make routes shorter — it made our entire operation calmer.&quot;
                     </blockquote>
                     
                     {/* Author & Company */}

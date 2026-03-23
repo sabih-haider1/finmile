@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Target, Cpu, Users, BarChart } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -150,9 +151,11 @@ export const MeetTheSuite = () => {
 
                 {/* Right Column: Image */}
                 <div className='lg:col-span-7 xl:col-span-8 w-full flex items-center justify-center lg:justify-end'>
-                    <img
+                    <Image
                         src={currentTab.image}
                         alt={`Finmile ${currentTab.title} Interface`}
+                        width={800}
+                        height={500}
                         className='w-full h-auto object-cover rounded-[24px] shadow-[0_30px_80px_rgba(0,0,0,0.5)] border border-white/10'
                     />
                 </div>

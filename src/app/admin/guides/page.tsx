@@ -54,8 +54,8 @@ export default function GuidesPage() {
       if (error) throw error;
       alert('Guide deleted successfully!');
       fetchGuides();
-    } catch (error: any) {
-      alert('Failed to delete guide: ' + error.message);
+    } catch (error: unknown) {
+      alert('Failed to delete guide: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   };
 
@@ -82,7 +82,7 @@ export default function GuidesPage() {
 
       if (editingGuide) {
         // Update existing guide
-        const { id, created_at, ...updateData } = guideData as typeof guideData & { id: string; created_at: string };
+        const { id: _id, created_at: _ca, ...updateData } = guideData as typeof guideData & { id: string; created_at: string };
         const { error } = await supabase
           .from('guides')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -92,7 +92,7 @@ export default function GuidesPage() {
       } else {
         // Create new guide
         const now = new Date().toISOString();
-        const { id, created_at, updated_at, ...insertData } = guideData as typeof guideData & { id: string; created_at: string; updated_at: string };
+        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = guideData as typeof guideData & { id: string; created_at: string; updated_at: string };
         const { error } = await supabase.from('guides').insert([{
           ...insertData,
           created_at: now,
@@ -105,8 +105,8 @@ export default function GuidesPage() {
       setShowCreateForm(false);
       setEditingGuide(null);
       fetchGuides();
-    } catch (error: any) {
-      throw new Error(error.message || 'Failed to save guide');
+    } catch (error: unknown) {
+      throw new Error(error instanceof Error ? error.message : 'Failed to save guide');
     }
   };
 

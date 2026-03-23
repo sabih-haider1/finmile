@@ -8,7 +8,7 @@
  * - Sanitized error responses
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { verifyAdminAuth } from '@/lib/auth';
 import { caseStudySchema, validateInput } from '@/lib/validation';

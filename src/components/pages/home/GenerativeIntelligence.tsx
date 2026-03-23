@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Montserrat } from 'next/font/google';
 import { fadeInLeft, fadeInRight, fadeInUp, staggerContainer } from '@/lib/animations';
@@ -32,9 +33,11 @@ export const GenerativeIntelligence = () => {
                   viewport={{ once: true, amount: 0.3 }}
                 >
                     <motion.div className="w-full max-w-[800px]" variants={fadeInLeft}>
-                        <img
+                        <Image
                             src="/assets/images/agents/AI-CommandPrompt.png"
                             alt="Finmile AI Command Interface"
+                            width={800}
+                            height={500}
                             className="w-full h-auto drop-shadow-[0_40px_100px_rgba(83,31,209,0.25)] rounded-2xl"
                         />
                     </motion.div>

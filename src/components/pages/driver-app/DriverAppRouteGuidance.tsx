@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Server, Monitor, TrendingUp } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -11,9 +12,11 @@ export const DriverAppRouteGuidance = () => {
 
                 {/* Left Side: Image */}
                 <div className="flex justify-center lg:justify-start w-full order-2 lg:order-1 mt-10 lg:mt-0">
-                    <img
+                    <Image
                         src="/assets/images/half-dashboard.png"
                         alt="Route Guidance Dashboard"
+                        width={550}
+                        height={400}
                         className="w-full max-w-[550px] h-auto rounded-[24px] shadow-[0_20px_50px_rgba(47,28,140,0.1)] relative z-10 object-contain ml-[-20px] lg:ml-[-50px]"
                     />
                 </div>

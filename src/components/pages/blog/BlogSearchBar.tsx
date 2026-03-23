@@ -4,7 +4,7 @@ import { Search, X, ChevronDown } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { TOPICS, INDUSTRIES } from '@/lib/filterConstants';
 
-interface WhitepaperSearchBarProps {
+interface BlogSearchBarProps {
   onSearchChange: (query: string) => void;
   onTopicChange: (topic: string | null) => void;
   onIndustryChange: (industry: string | null) => void;
@@ -14,23 +14,20 @@ interface WhitepaperSearchBarProps {
   currentSort: 'newest' | 'oldest' | 'featured';
 }
 
-const topics = TOPICS;
-const industries = INDUSTRIES;
-
-export function WhitepaperSearchBar({
+export function BlogSearchBar({
   onSearchChange,
   onTopicChange,
   onIndustryChange,
   onSortChange,
   selectedTopic,
   selectedIndustry,
-  currentSort
-}: WhitepaperSearchBarProps) {
+  currentSort,
+}: BlogSearchBarProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [showTopicDropdown, setShowTopicDropdown] = useState(false);
   const [showIndustryDropdown, setShowIndustryDropdown] = useState(false);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
-  
+
   const topicRef = useRef<HTMLDivElement>(null);
   const industryRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
@@ -40,7 +37,6 @@ export function WhitepaperSearchBar({
     const timer = setTimeout(() => {
       onSearchChange(searchQuery);
     }, 300);
-
     return () => clearTimeout(timer);
   }, [searchQuery, onSearchChange]);
 
@@ -57,13 +53,12 @@ export function WhitepaperSearchBar({
         setShowSortDropdown(false);
       }
     }
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const getSortLabel = () => {
-    switch(currentSort) {
+    switch (currentSort) {
       case 'newest': return 'Newest';
       case 'oldest': return 'Oldest';
       case 'featured': return 'Featured';
@@ -76,9 +71,9 @@ export function WhitepaperSearchBar({
         {/* Header Row */}
         <div className="flex justify-between items-center flex-wrap gap-4 mb-6">
           <h2 className="text-3xl md:text-4xl font-semibold text-[#2F1C8C]">
-            Search Finmile Research
+            Search Blog Posts
           </h2>
-          
+
           {/* Filter Buttons */}
           <div className="flex flex-wrap gap-3">
             {/* Topic Filter */}
@@ -86,15 +81,15 @@ export function WhitepaperSearchBar({
               <button
                 onClick={() => setShowTopicDropdown(!showTopicDropdown)}
                 className={`flex items-center gap-2 h-11 px-5 rounded-full text-sm font-medium transition-all duration-200 ${
-                  selectedTopic 
-                    ? 'bg-gradient-to-r from-[#2F1C8C] to-[#2F1C8C] text-white shadow-md shadow-indigo-200/50 hover:shadow-lg hover:-translate-y-[1px] active:translate-y-0' 
+                  selectedTopic
+                    ? 'bg-gradient-to-r from-[#2F1C8C] to-[#2F1C8C] text-white shadow-md shadow-indigo-200/50 hover:shadow-lg hover:-translate-y-[1px] active:translate-y-0'
                     : 'bg-white text-gray-700 border border-gray-300 hover:border-[#7C3AED]'
                 }`}
               >
                 {selectedTopic || 'Select Topic'}
                 {selectedTopic ? (
-                  <X 
-                    size={16} 
+                  <X
+                    size={16}
                     onClick={(e) => {
                       e.stopPropagation();
                       onTopicChange(null);
@@ -106,10 +101,10 @@ export function WhitepaperSearchBar({
                   <ChevronDown size={16} />
                 )}
               </button>
-              
+
               {showTopicDropdown && (
                 <div className="absolute top-full mt-2 left-0 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 min-w-[200px] max-h-[300px] overflow-y-auto">
-                  {topics.map((topic) => (
+                  {TOPICS.map((topic) => (
                     <button
                       key={topic}
                       onClick={() => {
@@ -130,15 +125,15 @@ export function WhitepaperSearchBar({
               <button
                 onClick={() => setShowIndustryDropdown(!showIndustryDropdown)}
                 className={`flex items-center gap-2 h-11 px-5 rounded-full text-sm font-medium transition-all duration-200 ${
-                  selectedIndustry 
-                    ? 'bg-gradient-to-r from-[#2F1C8C] to-[#2F1C8C] text-white shadow-md shadow-indigo-200/50 hover:shadow-lg hover:-translate-y-[1px] active:translate-y-0' 
+                  selectedIndustry
+                    ? 'bg-gradient-to-r from-[#2F1C8C] to-[#2F1C8C] text-white shadow-md shadow-indigo-200/50 hover:shadow-lg hover:-translate-y-[1px] active:translate-y-0'
                     : 'bg-white text-gray-700 border border-gray-300 hover:border-[#7C3AED]'
                 }`}
               >
                 {selectedIndustry || 'Select Industry'}
                 {selectedIndustry ? (
-                  <X 
-                    size={16} 
+                  <X
+                    size={16}
                     onClick={(e) => {
                       e.stopPropagation();
                       onIndustryChange(null);
@@ -150,10 +145,10 @@ export function WhitepaperSearchBar({
                   <ChevronDown size={16} />
                 )}
               </button>
-              
+
               {showIndustryDropdown && (
                 <div className="absolute top-full mt-2 left-0 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 min-w-[200px] max-h-[300px] overflow-y-auto">
-                  {industries.map((industry) => (
+                  {INDUSTRIES.map((industry) => (
                     <button
                       key={industry}
                       onClick={() => {
@@ -180,7 +175,7 @@ export function WhitepaperSearchBar({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="AI route optimization, EV delivery, last-mile ROI..."
+              placeholder="Search blog posts by title, topic, or keyword..."
               className="w-full h-12 pl-12 pr-4 rounded-full bg-[#EEF1F7] border border-transparent focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/20 outline-none text-sm text-gray-900 placeholder:text-gray-400 transition-all"
             />
           </div>
@@ -194,32 +189,23 @@ export function WhitepaperSearchBar({
               <span>Sort by: {getSortLabel()}</span>
               <ChevronDown size={16} />
             </button>
-            
+
             {showSortDropdown && (
               <div className="absolute top-full mt-2 right-0 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 w-full">
                 <button
-                  onClick={() => {
-                    onSortChange('newest');
-                    setShowSortDropdown(false);
-                  }}
+                  onClick={() => { onSortChange('newest'); setShowSortDropdown(false); }}
                   className="w-full text-left px-4 py-2.5 hover:bg-purple-50 text-gray-700 hover:text-[#7C3AED] transition-colors"
                 >
                   Newest
                 </button>
                 <button
-                  onClick={() => {
-                    onSortChange('oldest');
-                    setShowSortDropdown(false);
-                  }}
+                  onClick={() => { onSortChange('oldest'); setShowSortDropdown(false); }}
                   className="w-full text-left px-4 py-2.5 hover:bg-purple-50 text-gray-700 hover:text-[#7C3AED] transition-colors"
                 >
                   Oldest
                 </button>
                 <button
-                  onClick={() => {
-                    onSortChange('featured');
-                    setShowSortDropdown(false);
-                  }}
+                  onClick={() => { onSortChange('featured'); setShowSortDropdown(false); }}
                   className="w-full text-left px-4 py-2.5 hover:bg-purple-50 text-gray-700 hover:text-[#7C3AED] transition-colors"
                 >
                   Featured

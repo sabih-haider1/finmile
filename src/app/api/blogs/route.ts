@@ -9,7 +9,7 @@
  * - SQL injection prevention via Supabase client
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { verifyAdminAuth } from '@/lib/auth';
 import { blogSchema, validateInput } from '@/lib/validation';

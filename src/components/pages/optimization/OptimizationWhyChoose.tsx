@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -70,10 +71,12 @@ export const OptimizationWhyChoose = () => {
                             <span className="font-semibold text-white text-[14px] md:text-[17px]">
                                 With Finmile
                             </span>
-                            <img 
+                            <Image 
                                 src="/assets/logos/logo-white.png" 
                                 alt="Finmile" 
-                                className="h-3.5 md:h-4 object-contain opacity-95 hidden sm:block" 
+                                width={60}
+                                height={16}
+                                className="h-3.5 md:h-4 w-auto object-contain opacity-95 hidden sm:block" 
                             />
                         </div>
                     </div>

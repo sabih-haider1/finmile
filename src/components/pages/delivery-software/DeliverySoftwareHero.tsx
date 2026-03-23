@@ -35,7 +35,7 @@ export const DeliverySoftwareHero = () => {
                     </p>
 
                     <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] lg:text-[18px] leading-[1.6] md:leading-[1.7] mb-10 max-w-[500px]">
-                        Stop burning cash on inefficient routes. Finmile's AI-powered delivery software transforms your logistics — from first mile to happy customer.
+                        Stop burning cash on inefficient routes. Finmile&apos;s AI-powered delivery software transforms your logistics — from first mile to happy customer.
                     </p>
 
                     {/* Buttons */}

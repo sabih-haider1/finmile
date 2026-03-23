@@ -127,7 +127,7 @@ export const AnimatedButton = ({
   children,
   onClick,
   className = '',
-  variant = 'solid',
+  variant: _variant = 'solid',
   ...props
 }: AnimatedButtonProps) => {
   const prefersReducedMotion = useReducedMotion();

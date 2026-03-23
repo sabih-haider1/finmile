@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Target, Users, Factory, Map, Activity, Layers } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -166,9 +167,11 @@ export const DeliverySolutions = () => {
                     {/* Background glow behind image */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#6A27D4] rounded-full blur-[100px] opacity-40 -z-10" />
 
-                    <img
+                    <Image
                         src={currentTab.image}
                         alt={`Finmile ${currentTab.title} Dashboard`}
+                        width={700}
+                        height={450}
                         className='w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-700 drop-shadow-2xl'
                     />
                 </div>

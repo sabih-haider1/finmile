@@ -4,7 +4,7 @@
  * Security: Authentication required for write operations
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { verifyAdminAuth } from '@/lib/auth';
@@ -109,13 +109,13 @@ export async function PUT(request: NextRequest, context: { params: Promise<{ id:
       }
     }
 
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       ...validatedData,
       updated_at: new Date().toISOString(),
     };
 
     if (updateData.content) {
-      updateData.content = sanitizeHtml(updateData.content);
+      updateData.content = sanitizeHtml(updateData.content as string);
     }
 
     delete updateData.id;

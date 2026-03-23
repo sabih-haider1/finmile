@@ -43,7 +43,7 @@ export default function RetailersPage() {
 
             <JoinTheJourney
                 heading={<>Deliver the<br />Experience<br />Customers Expect</>}
-                text1={<>It's not just delivery — it's your competitive advantage.</>}
+                text1={<>It&apos;s not just delivery — it&apos;s your competitive advantage.</>}
                 text2={null}
                 secondaryButtonText="Calculate your route savings"
             />

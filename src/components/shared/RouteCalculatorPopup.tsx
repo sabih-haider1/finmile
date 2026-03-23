@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface RouteCalculatorPopupProps {
   isOpen: boolean;
@@ -17,19 +17,28 @@ export const RouteCalculatorPopup: React.FC<RouteCalculatorPopupProps> = ({ isOp
   const [result, setResult] = useState('');
   const [sendingStatus, setSendingStatus] = useState('');
 
+  const resetForm = useCallback(() => {
+    setShowInputs(true);
+    setRoutes('');
+    setMiles('');
+    setHours('');
+    setDays('');
+    setEmail('');
+    setResult('');
+    setSendingStatus('');
+  }, []);
+
+  const handleClose = useCallback(() => {
+    onClose();
+    setTimeout(resetForm, 300);
+  }, [onClose, resetForm]);
+
   // Reset form when popup opens
   useEffect(() => {
     if (isOpen) {
-      setShowInputs(true);
-      setRoutes('');
-      setMiles('');
-      setHours('');
-      setDays('');
-      setEmail('');
-      setResult('');
-      setSendingStatus('');
+      resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen, resetForm]);
 
   // Handle escape key
   useEffect(() => {
@@ -40,7 +49,7 @@ export const RouteCalculatorPopup: React.FC<RouteCalculatorPopupProps> = ({ isOp
     };
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   // Prevent body scroll when popup is open
   useEffect(() => {
@@ -64,19 +73,6 @@ export const RouteCalculatorPopup: React.FC<RouteCalculatorPopupProps> = ({ isOp
     }
   }, [isOpen]);
 
-  const handleClose = () => {
-    onClose();
-    setTimeout(() => {
-      setShowInputs(true);
-      setRoutes('');
-      setMiles('');
-      setHours('');
-      setDays('');
-      setEmail('');
-      setResult('');
-      setSendingStatus('');
-    }, 300);
-  };
 
   const calculateSavings = () => {
     const routesNum = parseFloat(routes);
@@ -133,7 +129,7 @@ export const RouteCalculatorPopup: React.FC<RouteCalculatorPopupProps> = ({ isOp
           handleClose();
         }, 2000);
       }, 1000);
-    } catch (error) {
+    } catch {
       setSendingStatus('Error sending email. Please try again.');
     }
   };

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { uploadFile, generateSlug } from '@/lib/upload';
+import { generateSlug } from '@/lib/upload';
 
 export interface FormFieldConfig {
   name: string;
@@ -20,7 +20,9 @@ export interface FormFieldConfig {
 interface FormBuilderProps {
   title: string;
   fields: FormFieldConfig[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialData?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (data: any, files: Record<string, File | null>) => Promise<void>;
   onCancel?: () => void;
   submitLabel?: string;
@@ -34,18 +36,19 @@ export default function FormBuilder({
   onCancel,
   submitLabel = 'Save',
 }: FormBuilderProps) {
-  const [formData, setFormData] = useState<Record<string, any>>(initialData);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [formData, setFormData] = useState<any>(initialData);
   const [files, setFiles] = useState<Record<string, File | null>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
-  const handleChange = (name: string, value: any) => {
+  const handleChange = (name: string, value: unknown) => {
     // If editing slug field directly, mark it as manually edited
     if (name === 'slug') {
       setSlugManuallyEdited(true);
       // Still format the slug even when manually edited
-      setFormData((prev) => ({ ...prev, [name]: generateSlug(value) }));
+      setFormData((prev) => ({ ...prev, [name]: generateSlug(String(value)) }));
       return;
     }
 
@@ -53,7 +56,7 @@ export default function FormBuilder({
 
     // Auto-generate slug from title if not manually edited
     if (name === 'title' && !slugManuallyEdited) {
-      setFormData((prev) => ({ ...prev, slug: generateSlug(value) }));
+      setFormData((prev) => ({ ...prev, slug: generateSlug(String(value)) }));
     }
   };
 
@@ -68,8 +71,8 @@ export default function FormBuilder({
 
     try {
       await onSubmit(formData, files);
-    } catch (err: any) {
-      setError(err.message || 'Failed to save');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to save');
     } finally {
       setLoading(false);
     }
@@ -87,7 +90,7 @@ export default function FormBuilder({
         return (
           <input
             type="text"
-            value={value}
+            value={String(value)}
             onChange={(e) => handleChange(field.name, e.target.value)}
             className={inputClassName}
             placeholder={field.placeholder}
@@ -98,7 +101,7 @@ export default function FormBuilder({
       case 'textarea':
         return (
           <textarea
-            value={value}
+            value={String(value)}
             onChange={(e) => handleChange(field.name, e.target.value)}
             className={inputClassName}
             placeholder={field.placeholder}
@@ -110,7 +113,7 @@ export default function FormBuilder({
       case 'richtext':
         return (
           <textarea
-            value={value}
+            value={String(value)}
             onChange={(e) => handleChange(field.name, e.target.value)}
             className={inputClassName}
             placeholder={field.placeholder}
@@ -122,7 +125,7 @@ export default function FormBuilder({
       case 'select':
         return (
           <select
-            value={value}
+            value={String(value)}
             onChange={(e) => handleChange(field.name, e.target.value)}
             className={inputClassName}
             required={field.required}
@@ -210,7 +213,7 @@ export default function FormBuilder({
         return (
           <input
             type="text"
-            value={Array.isArray(value) ? value.join(', ') : value}
+            value={Array.isArray(value) ? (value as string[]).join(', ') : String(value)}
             onChange={(e) =>
               handleChange(
                 field.name,

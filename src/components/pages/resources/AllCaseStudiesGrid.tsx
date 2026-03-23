@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { supabase } from '@/supabaseClient';
-import { SimpleSearchBar } from '@/components/shared/SimpleSearchBar';
+import { CaseStudySearchBar } from './CaseStudySearchBar';
 
 interface CaseStudy {
   id: string;
@@ -13,9 +13,12 @@ interface CaseStudy {
   summary: string;
   cover_image_url: string | null;
   company_name: string | null;
+  topic: string | null;
   industry: string | null;
   is_published: boolean;
+  is_featured: boolean;
   created_at: string;
+  published_at: string | null;
 }
 
 function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
@@ -45,7 +48,7 @@ function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
 
       <div className="p-6 flex flex-col gap-3 flex-1">
         <span className="text-xs font-semibold text-[#5B52F3] uppercase tracking-wider">
-          {caseStudy.industry || 'Case Study'}
+          {caseStudy.industry || caseStudy.topic || 'Case Study'}
         </span>
         <h3 className="text-lg font-semibold text-[#1C1F4A] leading-snug">
           {caseStudy.title}
@@ -86,6 +89,9 @@ export function AllCaseStudiesGrid() {
   const [filteredCaseStudies, setFilteredCaseStudies] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'featured'>('newest');
 
   useEffect(() => {
     async function fetchCaseStudies() {
@@ -93,9 +99,8 @@ export function AllCaseStudiesGrid() {
       try {
         const { data, error } = await supabase
           .from('case_studies')
-          .select('*')
-          .eq('is_published', true)
-          .order('created_at', { ascending: false });
+          .select('id, title, slug, summary, cover_image_url, company_name, topic, industry, is_published, is_featured, created_at, published_at')
+          .eq('is_published', true);
 
         if (error) {
           console.error('Error fetching case studies:', error);
@@ -118,23 +123,64 @@ export function AllCaseStudiesGrid() {
   useEffect(() => {
     let filtered = [...caseStudies];
 
+    // Search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter((caseStudy) => {
-        const titleMatch = caseStudy.title.toLowerCase().includes(query);
-        const summaryMatch = caseStudy.summary.toLowerCase().includes(query);
-        return titleMatch || summaryMatch;
+      filtered = filtered.filter((cs) => {
+        const titleMatch = cs.title.toLowerCase().includes(query);
+        const summaryMatch = cs.summary.toLowerCase().includes(query);
+        const companyMatch = cs.company_name?.toLowerCase().includes(query);
+        const topicMatch = cs.topic?.toLowerCase().includes(query);
+        const industryMatch = cs.industry?.toLowerCase().includes(query);
+        return titleMatch || summaryMatch || companyMatch || topicMatch || industryMatch;
       });
     }
 
+    // Topic filter
+    if (selectedTopic) {
+      filtered = filtered.filter((cs) => {
+        const csTopic = cs.topic?.trim();
+        return csTopic && csTopic.toLowerCase() === selectedTopic.toLowerCase();
+      });
+    }
+
+    // Industry filter
+    if (selectedIndustry) {
+      filtered = filtered.filter((cs) => {
+        const csIndustry = cs.industry?.trim();
+        return csIndustry && csIndustry.toLowerCase() === selectedIndustry.toLowerCase();
+      });
+    }
+
+    // Sort
+    filtered.sort((a, b) => {
+      const aDate = new Date(a.published_at || a.created_at).getTime();
+      const bDate = new Date(b.published_at || b.created_at).getTime();
+
+      if (sortBy === 'featured') {
+        if (a.is_featured && !b.is_featured) return -1;
+        if (!a.is_featured && b.is_featured) return 1;
+        return bDate - aDate;
+      } else if (sortBy === 'oldest') {
+        return aDate - bDate;
+      } else {
+        return bDate - aDate;
+      }
+    });
+
     setFilteredCaseStudies(filtered);
-  }, [caseStudies, searchQuery]);
+  }, [caseStudies, searchQuery, selectedTopic, selectedIndustry, sortBy]);
 
   return (
     <div className="bg-white">
-      <SimpleSearchBar
+      <CaseStudySearchBar
         onSearchChange={setSearchQuery}
-        placeholder="Search case studies..."
+        onTopicChange={setSelectedTopic}
+        onIndustryChange={setSelectedIndustry}
+        onSortChange={setSortBy}
+        selectedTopic={selectedTopic}
+        selectedIndustry={selectedIndustry}
+        currentSort={sortBy}
       />
 
       <div className="py-16 px-6 md:px-12 xl:px-20">
@@ -160,7 +206,7 @@ export function AllCaseStudiesGrid() {
                 No case studies found
               </h3>
               <p className="text-gray-400 text-sm">
-                Try adjusting your search to find what you're looking for.
+                Try adjusting your search or filters to find what you&apos;re looking for.
               </p>
             </div>
           )}

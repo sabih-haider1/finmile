@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -37,9 +38,11 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                     {/* Left Side */}
                     <div className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start">
                         <div className="w-full h-full flex items-center">
-                            <img
+                            <Image
                                 src="/assets/images/half-dashboard.png"
                                 alt="Finmile Dashboard"
+                                width={600}
+                                height={500}
                                 className="w-full h-full object-cover mix-blend-multiply"
                             />
                         </div>
@@ -51,9 +54,11 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                             <div>
                                 {/* Logo Chip */}
                                 <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-10 border border-slate-50">
-                                    <img
+                                    <Image
                                         src="/assets/logos/logo-blue.png"
                                         alt="Finmile Logo"
+                                        width={160}
+                                        height={40}
                                         className="h-8 md:h-10 w-auto object-contain"
                                     />
                                 </div>

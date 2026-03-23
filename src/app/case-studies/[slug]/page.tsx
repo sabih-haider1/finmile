@@ -8,15 +8,17 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // Generate metadata dynamically
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
   const { data: caseStudy } = await supabase
     .from('case_studies')
     .select('title, summary')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .single();
 
   if (!caseStudy) {
@@ -30,10 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CaseStudyDetailPage({ params }: Props) {
+  const { slug } = await params;
+
   const { data: caseStudy } = await supabase
     .from('case_studies')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .single();
 
   if (!caseStudy) {

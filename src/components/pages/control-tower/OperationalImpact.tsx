@@ -60,7 +60,7 @@ export const OperationalImpact = () => {
                     <Quote className="w-10 h-10 text-white/50 mb-8" fill="currentColor" />
 
                     <p className="text-white font-medium text-[20px] md:text-[24px] lg:text-[28px] leading-[1.4] mb-10 relative z-10">
-                        "With Finmile, we know what's happening before our customers do — and AI now approves 90% of PODs automatically. It's changed how we scale."
+                        &quot;With Finmile, we know what&apos;s happening before our customers do — and AI now approves 90% of PODs automatically. It&apos;s changed how we scale.&quot;
                     </p>
 
                     <div className="mt-auto relative z-10">

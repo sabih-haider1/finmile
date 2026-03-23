@@ -52,8 +52,8 @@ export const DspsFeaturesGrid = () => {
                     
                     <div className="flex flex-col gap-6 w-full max-w-[520px]">
                         <p className="font-medium text-[14px] md:text-[15px] text-[#6C757D] leading-relaxed">
-                            If you're spending half your day planning routes or chasing drivers for<br className="hidden lg:block" />
-                            updates, you're not scaling — you're firefighting.
+                            If you&apos;re spending half your day planning routes or chasing drivers for<br className="hidden lg:block" />
+                            updates, you&apos;re not scaling — you&apos;re firefighting.
                         </p>
                         <p className="font-medium text-[14px] md:text-[15px] text-[#6C757D] leading-relaxed">
                             Finmile fixes that with a single platform designed specifically for delivery<br className="hidden lg:block" />

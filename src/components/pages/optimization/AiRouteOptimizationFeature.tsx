@@ -45,7 +45,7 @@ export const AiRouteOptimizationFeature = () => {
 
                     {/* Paragraph Content */}
                     <p className="text-[#8B8B9B] font-medium text-[16px] md:text-[17px] leading-[1.6] mb-10 max-w-[550px]">
-                        Finmile's AI learns from every parcel to plan the fastest, most efficient delivery routes — automatically.
+                        Finmile&apos;s AI learns from every parcel to plan the fastest, most efficient delivery routes — automatically.
                     </p>
 
                     {/* CTA Buttons */}

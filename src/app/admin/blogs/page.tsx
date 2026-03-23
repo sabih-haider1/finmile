@@ -10,6 +10,7 @@ import FilterToggle from '@/components/admin/FilterToggle';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { uploadFile, generateSlug } from '@/lib/upload';
+import { TOPICS, INDUSTRIES } from '@/lib/filterConstants';
 
 export default function BlogsPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -57,9 +58,9 @@ export default function BlogsPage() {
       const { data, error } = await query;
       if (error) throw error;
       setBlogs(data || []);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching blogs:', error);
-      alert('Failed to fetch blogs: ' + (error?.message || 'Unknown error'));
+      alert('Failed to fetch blogs: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       setLoading(false);
     }
@@ -133,7 +134,7 @@ export default function BlogsPage() {
 
       if (editingBlog) {
         // Update existing blog
-        const { id, created_at, updated_at, ...updateData } = blogData as Record<string, any>;
+        const { id: _id, created_at: _ca, updated_at: _ua, ...updateData } = blogData as Record<string, unknown>;
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/blogs/${editingBlog.id}`, {
           method: 'PUT',
@@ -148,7 +149,7 @@ export default function BlogsPage() {
         alert('Blog updated successfully!');
       } else {
         // Create new blog
-        const { id, created_at, updated_at, ...insertData } = blogData as Record<string, any>;
+        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = blogData as Record<string, unknown>;
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/blogs', {
           method: 'POST',
@@ -166,8 +167,8 @@ export default function BlogsPage() {
       setShowCreateForm(false);
       setEditingBlog(null);
       fetchBlogs();
-    } catch (error: any) {
-      throw new Error(error.message || 'Failed to save blog');
+    } catch (error: unknown) {
+      throw new Error(error instanceof Error ? error.message : 'Failed to save blog');
     }
   };
 
@@ -179,6 +180,24 @@ export default function BlogsPage() {
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'blog-covers', folder: 'covers' },
     { name: 'author_name', label: 'Author Name', type: 'text', placeholder: 'John Doe' },
     { name: 'category', label: 'Category', type: 'text', placeholder: 'Technology' },
+    {
+      name: 'topic',
+      label: 'Topic',
+      type: 'select',
+      options: [
+        { value: '', label: 'Select a topic' },
+        ...TOPICS.map((t) => ({ value: t, label: t })),
+      ],
+    },
+    {
+      name: 'industry',
+      label: 'Industry',
+      type: 'select',
+      options: [
+        { value: '', label: 'Select an industry' },
+        ...INDUSTRIES.map((i) => ({ value: i, label: i })),
+      ],
+    },
     { name: 'tags', label: 'Tags', type: 'tags', placeholder: 'ai, fintech, technology' },
     { name: 'is_featured', label: 'Featured', type: 'toggle' },
     { name: 'is_published', label: 'Published', type: 'toggle' },

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { ShoppingBag, Truck, Activity, Coffee, Zap } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -124,9 +125,11 @@ export const DeliverySoftwareSectors = () => {
 
                 {/* Right Column: Image */}
                 <div className='lg:col-span-7 w-full flex items-center justify-center lg:justify-end relative mt-8 lg:mt-0 z-10 h-full'>
-                    <img
+                    <Image
                         src={currentTab.image}
                         alt={`Finmile ${currentTab.title}`}
+                        width={700}
+                        height={450}
                         className='w-full h-[300px] md:h-[400px] lg:h-[450px] object-cover rounded-[24px] shadow-[0_20px_40px_rgba(47,28,140,0.08)] transform hover:scale-[1.01] transition-transform duration-700'
                     />
                 </div>

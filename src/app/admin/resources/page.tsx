@@ -10,6 +10,7 @@ import FilterToggle from '@/components/admin/FilterToggle';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { uploadFile, generateSlug } from '@/lib/upload';
+import { TOPICS, INDUSTRIES } from '@/lib/filterConstants';
 
 export default function ResourcesPage() {
   const [resources, setResources] = useState<Resource[]>([]);
@@ -63,8 +64,8 @@ export default function ResourcesPage() {
       if (error) throw error;
       alert('Resource deleted successfully!');
       fetchResources();
-    } catch (error: any) {
-      alert('Failed to delete resource: ' + error.message);
+    } catch (error: unknown) {
+      alert('Failed to delete resource: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   };
 
@@ -105,7 +106,7 @@ export default function ResourcesPage() {
 
       if (editingResource) {
         // Update existing resource
-        const { id, created_at, ...updateData } = resourceData as typeof resourceData & { id: string; created_at: string };
+        const { id: _id, created_at: _ca, ...updateData } = resourceData as typeof resourceData & { id: string; created_at: string };
         const { error } = await supabase
           .from('resources')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -115,7 +116,7 @@ export default function ResourcesPage() {
       } else {
         // Create new resource
         const now = new Date().toISOString();
-        const { id, created_at, updated_at, ...insertData } = resourceData as typeof resourceData & { id: string; created_at: string; updated_at: string };
+        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = resourceData as typeof resourceData & { id: string; created_at: string; updated_at: string };
         const { error } = await supabase.from('resources').insert([{
           ...insertData,
           created_at: now,
@@ -128,8 +129,8 @@ export default function ResourcesPage() {
       setShowCreateForm(false);
       setEditingResource(null);
       fetchResources();
-    } catch (error: any) {
-      throw new Error(error.message || 'Failed to save resource');
+    } catch (error: unknown) {
+      throw new Error(error instanceof Error ? error.message : 'Failed to save resource');
     }
   };
 
@@ -151,6 +152,24 @@ export default function ResourcesPage() {
       ],
     },
     { name: 'thumbnail_url', label: 'Thumbnail Image', type: 'file', accept: 'image/*', bucket: 'resource-thumbnails', folder: 'thumbnails' },
+    {
+      name: 'topic',
+      label: 'Topic',
+      type: 'select',
+      options: [
+        { value: '', label: 'Select a topic' },
+        ...TOPICS.map((t) => ({ value: t, label: t })),
+      ],
+    },
+    {
+      name: 'industry',
+      label: 'Industry',
+      type: 'select',
+      options: [
+        { value: '', label: 'Select an industry' },
+        ...INDUSTRIES.map((i) => ({ value: i, label: i })),
+      ],
+    },
     { name: 'tags', label: 'Tags', type: 'tags', placeholder: 'tools, templates, guides' },
     { name: 'is_featured', label: 'Featured', type: 'toggle' },
     { name: 'is_published', label: 'Published', type: 'toggle' },

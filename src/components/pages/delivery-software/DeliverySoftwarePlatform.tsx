@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -61,9 +62,11 @@ export const DeliverySoftwarePlatform = () => {
 
                 {/* Right Side: Image */}
                 <div className="w-full flex justify-center lg:justify-end relative order-1 lg:order-2">
-                    <img
+                    <Image
                         src="/assets/images/features/laptop-live.png"
                         alt="Finmile Platform on Laptop"
+                        width={700}
+                        height={450}
                         className="w-full max-w-[700px] h-auto rounded-[32px] drop-shadow-[0_40px_100px_rgba(83,31,209,0.25)] relative z-10"
                     />
                 </div>

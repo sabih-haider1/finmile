@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/Button';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+import type { User } from '@supabase/supabase-js';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

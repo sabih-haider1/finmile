@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -11,9 +12,11 @@ export const DriverAppImageIntelligence = () => {
 
                 {/* Left Side: Image */}
                 <div className="flex justify-center lg:justify-start w-full order-1 lg:order-1 mt-4 lg:mt-0 relative">
-                    <img
+                    <Image
                         src="/assets/images/features/laptop-blue.png"
                         alt="Advanced Image Intelligence Interface"
+                        width={600}
+                        height={400}
                         className="w-full max-w-[600px] h-auto relative z-10 object-contain drop-shadow-[0_30px_50px_rgba(47,28,140,0.15)]"
                     />
                 </div>

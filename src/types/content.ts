@@ -9,6 +9,8 @@ export interface Blog {
   cover_image_url: string | null;
   author_name: string | null;
   category: string | null;
+  topic: string | null;
+  industry: string | null;
   tags: string[] | null;
   is_featured: boolean;
   is_published: boolean;
@@ -45,6 +47,8 @@ export interface Resource {
   file_url: string;
   file_type: 'pdf' | 'docx' | 'xlsx' | 'zip';
   thumbnail_url: string | null;
+  topic: string | null;
+  industry: string | null;
   tags: string[] | null;
   is_featured: boolean;
   is_published: boolean;
@@ -71,6 +75,7 @@ export interface CaseStudy {
   content: string;
   cover_image_url: string | null;
   company_name: string | null;
+  topic: string | null;
   industry: string | null;
   challenge: string | null;
   solution: string | null;

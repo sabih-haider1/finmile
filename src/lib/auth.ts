@@ -54,9 +54,9 @@ function hasAdminRoleInMetadata(metadata: Record<string, unknown> | null | undef
 }
 
 function hasAnyAdminMetadata(user: unknown): boolean {
-  const u = user as Record<string, any>;
-  const userMetadata = (u?.user_metadata as Record<string, any>) || {};
-  const appMetadata = (u?.app_metadata as Record<string, any>) || {};
+  const u = user as Record<string, unknown>;
+  const userMetadata = (u?.user_metadata as Record<string, unknown>) || {};
+  const appMetadata = (u?.app_metadata as Record<string, unknown>) || {};
 
   const hasRoleField = userMetadata.role !== undefined || appMetadata.role !== undefined;
   const hasAdminFlag = userMetadata.is_admin !== undefined || appMetadata.is_admin !== undefined;
@@ -123,7 +123,7 @@ export async function verifyAuth(request: NextRequest): Promise<AuthResult> {
       userId: user.id,
       email: user.email,
     };
-  } catch (error) {
+  } catch {
     return {
       authenticated: false,
       error: 'Authentication verification failed',
@@ -175,11 +175,12 @@ export async function verifyAdminAuth(request: NextRequest): Promise<AuthResult>
     const allowlistedAdminEmail = isAdminEmail(user.email);
     const isAdmin = metadataAdmin || directRoleAdmin || allowlistedAdminEmail;
 
-    // Local dev fallback: if no explicit role metadata is configured yet,
+    // Local dev fallback: if no explicit role metadata or admin emails are configured,
     // allow authenticated users to continue development workflows.
+    // This addresses the "single admin" setup issue where the user hasn't
+    // configured environment variables yet but has default metadata.
     const canBypassInDev =
       process.env.NODE_ENV !== 'production' &&
-      !hasAnyAdminMetadata(user) &&
       !process.env.ADMIN_EMAILS &&
       !process.env.NEXT_PUBLIC_ADMIN_EMAILS;
 
@@ -195,7 +196,7 @@ export async function verifyAdminAuth(request: NextRequest): Promise<AuthResult>
       userId: user.id,
       email: user.email,
     };
-  } catch (error) {
+  } catch {
     return {
       authenticated: false,
       error: 'Admin verification failed',

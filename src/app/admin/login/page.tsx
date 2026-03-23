@@ -43,9 +43,10 @@ export default function AdminLoginPage() {
         router.replace('/admin/dashboard');
         router.refresh(); // Refresh to ensure session is recognized
       }
-    } catch (error: any) {
-      console.error('Login error:', error?.message || 'Unknown error');
-      setError(error.message || 'Failed to login. Please check your credentials.');
+    } catch (error: unknown) {
+      const errMsg = error instanceof Error ? error.message : 'Failed to login. Please check your credentials.';
+      console.error('Login error:', errMsg);
+      setError(errMsg);
       setLoading(false);
     }
   };

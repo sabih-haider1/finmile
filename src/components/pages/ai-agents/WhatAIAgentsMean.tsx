@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -51,9 +52,11 @@ export const WhatAIAgentsMean = () => {
                             We use standard styling without a gray box to match the provided screenshot, 
                             which shows the white software UI floating directly against white page with a soft shadow.
                         */}
-                        <img
+                        <Image
                             src="/assets/images/features/app-screen-white.png"
                             alt="Finmile Route Optimization App"
+                            width={500}
+                            height={600}
                             className="w-full h-auto object-contain relative z-10"
                         />
                     </div>

@@ -10,6 +10,7 @@ import FilterToggle from '@/components/admin/FilterToggle';
 import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { uploadFile, generateSlug } from '@/lib/upload';
+import { TOPICS, INDUSTRIES } from '@/lib/filterConstants';
 
 export default function CaseStudiesPage() {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
@@ -83,8 +84,8 @@ export default function CaseStudiesPage() {
       }
       alert('Case study deleted successfully!');
       fetchCaseStudies();
-    } catch (error: any) {
-      alert('Failed to delete case study: ' + error.message);
+    } catch (error: unknown) {
+      alert('Failed to delete case study: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   };
 
@@ -138,7 +139,7 @@ export default function CaseStudiesPage() {
 
       if (editingCaseStudy) {
         // Update existing case study
-        const { id, created_at, updated_at, ...updateData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
+        const { id: _id, created_at: _ca, updated_at: _ua, ...updateData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/case-studies/${editingCaseStudy.id}`, {
           method: 'PUT',
@@ -153,7 +154,7 @@ export default function CaseStudiesPage() {
         alert('Case study updated successfully!');
       } else {
         // Create new case study
-        const { id, created_at, updated_at, ...insertData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
+        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/case-studies', {
           method: 'POST',
@@ -171,8 +172,8 @@ export default function CaseStudiesPage() {
       setShowCreateForm(false);
       setEditingCaseStudy(null);
       fetchCaseStudies();
-    } catch (error: any) {
-      throw new Error(error.message || 'Failed to save case study');
+    } catch (error: unknown) {
+      throw new Error(error instanceof Error ? error.message : 'Failed to save case study');
     }
   };
 
@@ -183,21 +184,23 @@ export default function CaseStudiesPage() {
     { name: 'content', label: 'Main Content', type: 'textarea', rows: 10, required: true, placeholder: 'Full case study content...' },
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'blog-covers', folder: 'case-study-covers' },
     { name: 'company_name', label: 'Company Name', type: 'text', placeholder: 'Acme Corporation' },
-    { 
-      name: 'industry', 
-      label: 'Industry', 
+    {
+      name: 'topic',
+      label: 'Topic',
+      type: 'select',
+      options: [
+        { value: '', label: 'Select a topic' },
+        ...TOPICS.map((t) => ({ value: t, label: t })),
+      ],
+    },
+    {
+      name: 'industry',
+      label: 'Industry',
       type: 'select',
       options: [
         { value: '', label: 'Select an industry' },
-        { value: 'E-Commerce', label: 'E-Commerce' },
-        { value: 'Retail', label: 'Retail' },
-        { value: 'Food & Beverage', label: 'Food & Beverage' },
-        { value: 'Healthcare', label: 'Healthcare' },
-        { value: 'Manufacturing', label: 'Manufacturing' },
-        { value: 'Logistics', label: 'Logistics' },
-        { value: 'Technology', label: 'Technology' },
-        { value: 'Transportation', label: 'Transportation' },
-      ]
+        ...INDUSTRIES.map((i) => ({ value: i, label: i })),
+      ],
     },
     { name: 'challenge', label: 'The Challenge', type: 'textarea', rows: 5, placeholder: 'Describe the challenge faced...' },
     { name: 'solution', label: 'The Solution', type: 'textarea', rows: 5, placeholder: 'Describe how the problem was solved...' },

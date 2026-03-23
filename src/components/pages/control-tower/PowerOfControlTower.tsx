@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -111,9 +112,11 @@ export const PowerOfControlTower = () => {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white rounded-[32px] opacity-60 pointer-events-none -z-10" />
 
                     <div className="relative w-[95%] md:w-full flex justify-center">
-                        <img
+                        <Image
                             src="/assets/images/features/laptop-live.png"
                             alt="Finmile Control Tower Dashboard"
+                            width={700}
+                            height={450}
                             className="w-full h-auto drop-shadow-2xl relative z-10 mix-blend-multiply"
                         />
                     </div>

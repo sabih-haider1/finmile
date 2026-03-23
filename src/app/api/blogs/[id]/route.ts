@@ -8,7 +8,7 @@
  * - Sanitized error responses
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { verifyAdminAuth } from '@/lib/auth';
@@ -135,14 +135,14 @@ export async function PUT(
     }
 
     // Prepare update data
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       ...validatedData,
       updated_at: new Date().toISOString(),
     };
 
     // Sanitize HTML content if body is being updated
     if (updateData.body) {
-      updateData.body = sanitizeHtml(updateData.body);
+      updateData.body = sanitizeHtml(updateData.body as string);
     }
 
     // Remove fields that shouldn't be updated

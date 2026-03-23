@@ -48,7 +48,7 @@ export const DeliverySoftwarePainPoints = () => {
                         Draining Your Profits?
                     </h2>
                     <p className="font-medium text-[15px] md:text-[18px] text-[#6C757D] leading-relaxed max-w-[800px]">
-                        If you're feeling the pressure from rising fuel costs and manual planning, you're not alone. Traditional systems weren't built for today's dynamic logistics.
+                    If you&apos;re feeling the pressure from rising fuel costs and manual planning, you&apos;re not alone. Traditional systems weren&apos;t built for today&apos;s dynamic logistics.
                     </p>
                 </div>
 

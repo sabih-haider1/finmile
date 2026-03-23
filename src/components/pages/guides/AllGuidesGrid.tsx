@@ -142,7 +142,7 @@ export function AllGuidesGrid() {
                 No guides found
               </h3>
               <p className="text-gray-400 text-sm">
-                Try adjusting your search to find what you're looking for.
+                Try adjusting your search to find what you&apos;re looking for.
               </p>
             </div>
           )}

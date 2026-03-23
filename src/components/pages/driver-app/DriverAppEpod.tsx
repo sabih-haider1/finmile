@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -59,9 +60,11 @@ export const DriverAppEpod = () => {
                 <div className="w-full flex justify-center lg:justify-end relative order-1 lg:order-2">
                     {/* Add subtle border/shadow similar to the real-time visibility screenshot */}
                     <div className="relative w-full max-w-[650px] rounded-[16px] overflow-hidden drop-shadow-[0_20px_50px_rgba(83,31,209,0.3)]">
-                        <img
+                        <Image
                             src="/assets/images/features/delivery-dashboard.png"
                             alt="Intelligent ePOD Interface"
+                            width={650}
+                            height={400}
                             className="w-full h-auto object-contain"
                         />
                     </div>

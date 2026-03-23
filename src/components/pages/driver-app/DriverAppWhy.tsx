@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Target, CheckCircle2, Zap, Cpu } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -83,7 +84,7 @@ export const DriverAppWhy = () => {
                         <div className="absolute top-0 right-0 w-32 h-32 bg-[#6A27D4] rounded-full blur-[60px] opacity-10 pointer-events-none" />
 
                         <div className="bg-white py-4 px-4 rounded-[8px] mb-8 shadow-sm border border-gray-50 flex items-center justify-center">
-                            <img src="/assets/logos/logo-blue.png" alt="Finmile Logo" className="h-4 object-contain" />
+                            <Image src="/assets/logos/logo-blue.png" alt="Finmile Logo" width={80} height={16} className="h-4 w-auto object-contain" />
                         </div>
                         <h4 className="text-[#2F1C8C] font-semibold text-[16px] mb-6">With Finmile</h4>
 

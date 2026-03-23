@@ -35,7 +35,7 @@ export const DriverAppHero = () => {
                     </h3>
 
                     <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] leading-relaxed mb-8 max-w-[500px]">
-                        The Finmile Driver App turns every driver's smartphone into a real-time logistics hub. From route guidance to proof of delivery, every mile is fully verified.
+                        The Finmile Driver App turns every driver&apos;s smartphone into a real-time logistics hub. From route guidance to proof of delivery, every mile is fully verified.
                     </p>
 
                     <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto">

@@ -83,8 +83,8 @@ export const RetailersOperationalImpact = () => {
                         </div>
                         
                         <blockquote className="text-white font-medium text-[16px] md:text-[19px] leading-[1.6] mb-8">
-                            "Finmile gave us the delivery performance our customers expect without <br className="hidden lg:block" />
-                            the cost explosion."
+                            &quot;Finmile gave us the delivery performance our customers expect without <br className="hidden lg:block" />
+                            the cost explosion.&quot;
                         </blockquote>
                         
                         <div className="flex flex-col gap-1.5">

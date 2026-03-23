@@ -118,7 +118,7 @@ export async function PUT(
       }
     }
 
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       ...validatedData,
       updated_at: new Date().toISOString(),
     };

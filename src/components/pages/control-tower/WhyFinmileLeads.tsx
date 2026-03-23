@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Share2, X, AlertTriangle, CheckSquare } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -78,7 +79,7 @@ export const WhyFinmileLeads = () => {
                         </div>
                         <div className="bg-[#2F1C8C] rounded-xl px-6 py-4 flex items-center justify-between">
                             <span className="text-white font-semibold text-[16px]">Finmile</span>
-                            <img src="/assets/logos/logo-white.png" alt="Finmile Logo" className="h-4 object-contain" />
+                            <Image src="/assets/logos/logo-white.png" alt="Finmile Logo" width={60} height={16} className="h-4 w-auto object-contain" />
                         </div>
                     </div>
 
@@ -131,7 +132,7 @@ export const WhyFinmileLeads = () => {
 
                 <div className="mt-8 text-center">
                     <p className="text-[#6C757D] text-[15px] font-medium">
-                        <strong className="text-[#0A1B33]">Finmile</strong> doesn't just track — it understands.
+                        <strong className="text-[#0A1B33]">Finmile</strong> doesn&apos;t just track — it understands.
                     </p>
                 </div>
 

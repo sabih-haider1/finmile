@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar } from 'lucide-react';
 import { supabase } from '@/supabaseClient';
-import { SimpleSearchBar } from '@/components/shared/SimpleSearchBar';
+import { BlogSearchBar } from './BlogSearchBar';
 
 interface Blog {
   id: string;
@@ -15,7 +15,12 @@ interface Blog {
   cover_image_url: string | null;
   published_at: string;
   is_published: boolean;
+  is_featured: boolean;
   category: string | null;
+  topic: string | null;
+  industry: string | null;
+  tags: string[] | null;
+  created_at: string;
 }
 
 function BlogCard({ blog }: { blog: Blog }) {
@@ -54,6 +59,23 @@ function BlogCard({ blog }: { blog: Blog }) {
                 year: 'numeric',
               })}
             </span>
+          </div>
+        )}
+        {(blog.topic || blog.industry) && (
+          <div className="flex flex-wrap gap-1.5">
+            {blog.topic && (
+              <span className="text-xs font-semibold text-[#5B52F3] uppercase tracking-wider">
+                {blog.topic}
+              </span>
+            )}
+            {blog.topic && blog.industry && (
+              <span className="text-xs text-gray-300">·</span>
+            )}
+            {blog.industry && (
+              <span className="text-xs font-semibold text-[#5B52F3] uppercase tracking-wider">
+                {blog.industry}
+              </span>
+            )}
           </div>
         )}
         <h3 className="text-lg font-semibold text-[#1C1F4A] leading-snug">
@@ -95,6 +117,9 @@ export function AllBlogsGrid() {
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'featured'>('newest');
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -102,9 +127,8 @@ export function AllBlogsGrid() {
       try {
         const { data, error } = await supabase
           .from('blogs')
-          .select('*')
-          .eq('is_published', true)
-          .order('published_at', { ascending: false });
+          .select('id, title, slug, summary, cover_image_url, published_at, is_published, is_featured, category, topic, industry, tags, created_at')
+          .eq('is_published', true);
 
         if (error) {
           console.error('Error fetching blogs:', error);
@@ -127,24 +151,65 @@ export function AllBlogsGrid() {
   useEffect(() => {
     let filtered = [...blogs];
 
+    // Search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter((blog) => {
         const titleMatch = blog.title.toLowerCase().includes(query);
         const summaryMatch = blog.summary.toLowerCase().includes(query);
         const categoryMatch = blog.category?.toLowerCase().includes(query);
-        return titleMatch || summaryMatch || categoryMatch;
+        const topicMatch = blog.topic?.toLowerCase().includes(query);
+        const industryMatch = blog.industry?.toLowerCase().includes(query);
+        const tagsMatch = blog.tags?.some((tag) => tag.toLowerCase().includes(query));
+        return titleMatch || summaryMatch || categoryMatch || topicMatch || industryMatch || tagsMatch;
       });
     }
 
+    // Topic filter
+    if (selectedTopic) {
+      filtered = filtered.filter((blog) => {
+        const blogTopic = blog.topic?.trim();
+        return blogTopic && blogTopic.toLowerCase() === selectedTopic.toLowerCase();
+      });
+    }
+
+    // Industry filter
+    if (selectedIndustry) {
+      filtered = filtered.filter((blog) => {
+        const blogIndustry = blog.industry?.trim();
+        return blogIndustry && blogIndustry.toLowerCase() === selectedIndustry.toLowerCase();
+      });
+    }
+
+    // Sort
+    filtered.sort((a, b) => {
+      const aDate = new Date(a.published_at || a.created_at).getTime();
+      const bDate = new Date(b.published_at || b.created_at).getTime();
+
+      if (sortBy === 'featured') {
+        if (a.is_featured && !b.is_featured) return -1;
+        if (!a.is_featured && b.is_featured) return 1;
+        return bDate - aDate;
+      } else if (sortBy === 'oldest') {
+        return aDate - bDate;
+      } else {
+        return bDate - aDate;
+      }
+    });
+
     setFilteredBlogs(filtered);
-  }, [blogs, searchQuery]);
+  }, [blogs, searchQuery, selectedTopic, selectedIndustry, sortBy]);
 
   return (
     <div className="bg-white">
-      <SimpleSearchBar
+      <BlogSearchBar
         onSearchChange={setSearchQuery}
-        placeholder="Search blog posts..."
+        onTopicChange={setSelectedTopic}
+        onIndustryChange={setSelectedIndustry}
+        onSortChange={setSortBy}
+        selectedTopic={selectedTopic}
+        selectedIndustry={selectedIndustry}
+        currentSort={sortBy}
       />
 
       <div className="py-16 px-6 md:px-12 xl:px-20">
@@ -170,7 +235,7 @@ export function AllBlogsGrid() {
                 No blog posts found
               </h3>
               <p className="text-gray-400 text-sm">
-                Try adjusting your search to find what you're looking for.
+                Try adjusting your search or filters to find what you&apos;re looking for.
               </p>
             </div>
           )}

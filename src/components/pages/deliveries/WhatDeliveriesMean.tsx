@@ -15,7 +15,7 @@ export const WhatDeliveriesMean = () => {
                         What Finmile Deliveries Mean for Your Team
                     </h2>
                     <p className="text-[#6C757D] font-medium text-[15px] md:text-[18px] leading-relaxed max-w-[500px]">
-                        Finmile's intelligent automation translates directly into better days for everyone involved in your delivery network, from the depot to the doorstep.
+                        Finmile&apos;s intelligent automation translates directly into better days for everyone involved in your delivery network, from the depot to the doorstep.
                     </p>
                 </div>
 

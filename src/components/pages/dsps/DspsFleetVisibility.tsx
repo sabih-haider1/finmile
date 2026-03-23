@@ -17,7 +17,7 @@ export const DspsFleetVisibility = () => {
                     </h2>
 
                     <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-8">
-                        See every vehicle, route, and driver's progress in real time. Get instant alerts <br/>
+                        See every vehicle, route, and driver&apos;s progress in real time. Get instant alerts <br/>
                         for delays, missed stops, or vehicle issues — before clients notice.
                     </p>
 

@@ -83,8 +83,8 @@ export default function WhitepapersPage() {
       }
       alert('Whitepaper deleted successfully!');
       fetchWhitepapers();
-    } catch (error: any) {
-      alert('Failed to delete whitepaper: ' + error.message);
+    } catch (error: unknown) {
+      alert('Failed to delete whitepaper: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   };
 
@@ -167,7 +167,7 @@ export default function WhitepapersPage() {
       };
 
       if (editingWhitepaper) {
-        const { id, created_at, updated_at, ...updateData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
+        const { id: _id, created_at: _ca, updated_at: _ua, ...updateData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/whitepapers/${editingWhitepaper.id}`, {
           method: 'PUT',
@@ -181,7 +181,7 @@ export default function WhitepapersPage() {
         }
         alert('Whitepaper updated successfully!');
       } else {
-        const { id, created_at, updated_at, ...insertData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
+        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/whitepapers', {
           method: 'POST',
@@ -199,8 +199,8 @@ export default function WhitepapersPage() {
       setShowCreateForm(false);
       setEditingWhitepaper(null);
       fetchWhitepapers();
-    } catch (error: any) {
-      throw new Error(error.message || 'Failed to save whitepaper');
+    } catch (error: unknown) {
+      throw new Error(error instanceof Error ? error.message : 'Failed to save whitepaper');
     }
   };
 

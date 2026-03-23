@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -61,9 +62,11 @@ export const DeliverySoftwareLiveDashboard = () => {
                     {/* Glowing backlight specifically for this phone image to make it stand out */}
                     <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-[#6A27D4] rounded-full blur-[100px] opacity-40 z-0" />
 
-                    <img
+                    <Image
                         src="/assets/images/features/app-screen-blue.png"
                         alt="Finmile Mobile App live dashboard"
+                        width={480}
+                        height={600}
                         className="w-full max-w-[400px] lg:max-w-[480px] h-auto relative z-10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.4)] lg:mr-12"
                     />
                 </div>

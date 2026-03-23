@@ -31,7 +31,7 @@ export const OneLayerInsideFinmileOS = () => {
                     </h2>
 
                     <p className="text-[#C4C1D4] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-10 max-w-[500px]">
-                        Route optimization isn't a bolt-on. It's the native intelligence layer that powers every part of your operation, from the initial plan to the final delivery confirmation.
+                        Route optimization isn&apos;t a bolt-on. It&apos;s the native intelligence layer that powers every part of your operation, from the initial plan to the final delivery confirmation.
                     </p>
 
                     {/* Features Grid: 2 Columns */}

@@ -14,7 +14,7 @@ export function FaqSection() {
           className="text-[16px] md:text-[18px] max-w-[1000px] leading-relaxed"
           style={{ color: '#6C757D' }}
         >
-          Find answers to common questions about Finmile's platform, features, and logistics solutions.
+          Find answers to common questions about Finmile&apos;s platform, features, and logistics solutions.
         </p>
       </div>
     </section>

@@ -4,7 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 
-const AgentCard = ({ title, description, benefits, index, total }) => {
+const AgentCard = ({ title, description, benefits, index, total: _total }: {
+  title: string;
+  description: string;
+  benefits: string[];
+  index: number;
+  total: number;
+}) => {
   const stickyTop = `calc(80px + ${index * 20}px)`;
   const zIndex = (index + 1) * 10;
 

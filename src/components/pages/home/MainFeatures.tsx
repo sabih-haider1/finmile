@@ -30,7 +30,7 @@ export const TrustSection = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
-        TRUSTED BY THE WORLD'S BIGGEST BRANDS
+        TRUSTED BY THE WORLD&apos;S BIGGEST BRANDS
       </motion.h3>
 
       <motion.div 
@@ -111,7 +111,7 @@ export const FeaturesSection = () => {
               variants={fadeInLeft}
               className='text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed'
             >
-              Unlike static route planners, Finmile's AI constantly learns.
+              Unlike static route planners, Finmile&apos;s AI constantly learns.
             </motion.p>
 
             <motion.p

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Layers, Navigation, Clock } from 'lucide-react';
-import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
+import { fadeInUp, staggerContainer } from '@/lib/animations';
 
 const RouteCalculatorPopup = dynamic(
   () => import('../../shared/RouteCalculatorPopup').then((mod) => mod.RouteCalculatorPopup),
@@ -32,7 +32,7 @@ export const ScaleSection = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-10 md:mb-14 w-full z-10 flex flex-col items-center"
           initial="hidden"
           whileInView="visible"
@@ -49,14 +49,7 @@ export const ScaleSection = () => {
 
         <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-stretch lg:items-start gap-12 lg:gap-[10px] z-10 relative">
           {/* Left Side */}
-          <motion.div 
-            className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start"
-            initial="hidden"
-            whileInView="visible"
-            variants={fadeInLeft}
-            viewport={{ once: true, amount: 0.3 }}
-            whileHover={{ y: -4 }}
-          >
+          <div className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start">
             <motion.div className="w-full h-full flex items-center" whileHover={{ scale: 1.01 }}>
               <Image
                 src="/assets/images/half-dashboard.png"
@@ -67,17 +60,10 @@ export const ScaleSection = () => {
                 className="w-full h-full object-cover mix-blend-multiply"
               />
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Right Side */}
-          <motion.div 
-            className="w-full lg:w-1/2 flex items-stretch"
-            initial="hidden"
-            whileInView="visible"
-            variants={fadeInRight}
-            viewport={{ once: true, amount: 0.3 }}
-            whileHover={{ y: -4 }}
-          >
+          <div className="w-full lg:w-1/2 flex items-stretch">
             <motion.div
               className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-8 pb-6 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col"
               whileHover={{ scale: 1.005 }}
@@ -100,14 +86,14 @@ export const ScaleSection = () => {
                 </h3>
 
                 {/* Features */}
-                <motion.div 
+                <motion.div
                   className="space-y-3 mb-10"
                   initial="hidden"
                   whileInView="visible"
                   variants={staggerContainer}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -123,7 +109,7 @@ export const ScaleSection = () => {
                     </span>
                   </motion.div>
 
-                  <motion.div 
+                  <motion.div
                     className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +125,7 @@ export const ScaleSection = () => {
                     </span>
                   </motion.div>
 
-                  <motion.div 
+                  <motion.div
                     className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-[0_5px_15px_rgba(0,0,0,0.02)]"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -158,14 +144,14 @@ export const ScaleSection = () => {
               </div>
 
               {/* Buttons */}
-              <motion.div 
+              <motion.div
                 className="flex flex-col sm:flex-row gap-4 items-center w-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true, amount: 0.3 }}
               >
-                <motion.button 
+                <motion.button
                   className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] lg:text-[15px] whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -184,7 +170,7 @@ export const ScaleSection = () => {
                 </motion.button>
               </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </motion.section>
     </>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Montserrat } from 'next/font/google';
+import Image from 'next/image';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -10,9 +11,11 @@ export const StoryVision = () => {
 
                 {/* Left Column: Image */}
                 <div className='w-full flex items-center justify-center lg:justify-start'>
-                    <img
+                    <Image
                         src='/assets/images/features/app-screen-blue.png'
                         alt='Finmile Blue App Screen'
+                        width={600}
+                        height={600}
                         className='w-full max-w-[600px] h-auto object-cover rounded-[32px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.08)]'
                     />
                 </div>
@@ -22,7 +25,7 @@ export const StoryVision = () => {
 
                     {/* Heading: h2 style as requested (they wrote h1 but gave h2 sizing earlier) */}
                     <h2 className='font-semibold text-[36px] md:text-[42px] text-[#2F1C8C] leading-[1.1] tracking-tight'>
-                        Our Story & Vision
+                        Our Story &amp; Vision
                     </h2>
 
                     <div className='flex flex-col space-y-6'>

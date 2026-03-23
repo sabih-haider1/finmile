@@ -70,8 +70,8 @@ export const DspsOperationalImpact = () => {
                         </div>
                         
                         <blockquote className="text-white font-medium text-[16px] md:text-[20px] leading-[1.6] mb-8">
-                            "Finmile took us from chaos to control. Route planning went from half a <br className="hidden lg:block" />
-                            day to 10 minutes, and our drivers are happier than ever."
+                            &quot;Finmile took us from chaos to control. Route planning went from half a <br className="hidden lg:block" />
+                            day to 10 minutes, and our drivers are happier than ever.&quot;
                         </blockquote>
                         
                         <div className="flex flex-col gap-1.5">
