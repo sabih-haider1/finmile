@@ -152,7 +152,7 @@ export const ScaleSection = () => {
                 viewport={{ once: true, amount: 0.3 }}
               >
                 <motion.button
-                  className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] lg:text-[15px] whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors"
+                  className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -161,7 +161,7 @@ export const ScaleSection = () => {
 
                 <motion.button
                   id="Calculate"
-                  className="w-full sm:flex-1 px-4 lg:px-6 py-3 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-[80px] text-[14px] font-medium whitespace-nowrap transition-all hover:bg-[#2F1C8C] hover:text-white"
+                  className="w-full sm:flex-1 px-4 lg:px-6 py-3 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-[80px] text-[14px] font-semibold whitespace-nowrap transition-all hover:bg-[#2F1C8C] hover:text-white"
                   onClick={() => setIsPopupOpen(true)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

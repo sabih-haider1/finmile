@@ -103,10 +103,10 @@ export const Header = () => {
 
       {/* RIGHT: ACTIONS */}
       <div className="hidden xl:flex items-center gap-3 shrink-0 ml-auto">
-        <Button variant="liquid-glass" size="lg" className="w-[140px] h-[44px]">
+        <Button variant="liquid-glass" size="lg" className="w-[150px] h-[44px] text-[14px] font-semibold text-white">
           Track Parcel
         </Button>
-        <Button variant="solid" size="lg" className="w-[140px] h-[44px]">
+        <Button variant="solid" size="lg" className="w-[150px] h-[44px] text-[14px] font-semibold">
           Request A Demo
         </Button>
       </div>
