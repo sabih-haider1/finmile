@@ -57,7 +57,7 @@ export const Header = () => {
       variants={headerVariants}
       initial="initial"
       animate="animate"
-      className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 z-[100] max-w-[1600px] mx-auto flex items-center px-4 md:px-6 lg:px-8 rounded-full transition-all duration-500 ${isScrolled ? 'bg-[#2A1B54]/80 backdrop-blur-md border border-white/10 shadow-lg py-2.5' : 'bg-transparent py-4'
+      className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 z-[100] max-w-[1600px] mx-auto flex items-center px-4 md:px-6 lg:px-8 rounded-full border transition-all duration-500 ${isScrolled ? 'bg-[#2A1B54]/80 backdrop-blur-md border-white/10 shadow-lg py-2.5' : 'bg-transparent border-transparent py-4'
         }`}
       style={{ top: '3px' }}
     >
