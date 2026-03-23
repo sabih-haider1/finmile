@@ -17,7 +17,7 @@ export default function WhitepapersPage() {
         <main className="min-h-screen bg-white text-foreground flex flex-col">
             <Header />
             <div className="flex-grow">
-                <PageHero title="Whitepapers & Blogs" />
+                <PageHero title="Whitepapers & Blogs" hideLogo />
                 <AiDataSustainability />
                 <WhitepaperSection />
                 <CaseStudiesGrid />
