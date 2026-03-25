@@ -35,10 +35,10 @@ export const DspsWhyChoose = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 ${montserrat.className}`}>
-            <div className="w-full max-w-[1000px] flex flex-col items-center">
+        <section className={`w-full bg-white flex flex-col items-center px-6 py-10 ${montserrat.className}`}>
+            <div className="w-full max-w-[1440px] flex flex-col items-center">
 
-                <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight mb-10 text-center">
+                <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight mb-8 text-center">
                     Why DSPs Choose Finmile
                 </h2>
 

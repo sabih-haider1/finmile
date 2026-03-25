@@ -7,11 +7,11 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsAIOperatingSystem = () => {
     return (
-        <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center">
+        <section className={`w-full bg-white py-10 flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
+            <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 
-                {/* Left Side: Raw Image Content (No extra UI wrapping or background) */}
-                <div className="relative w-full flex items-center justify-center h-[400px] md:h-[500px] lg:h-[600px]">
+                {/* Left Side: Raw Image Content */}
+                <div className="relative w-full flex items-center justify-center h-[350px] md:h-[450px] lg:h-[500px]">
                     <Image 
                         src="/assets/images/features/app-screen-white.png" 
                         alt="Finmile Mobile App Routing" 
@@ -23,15 +23,15 @@ export const DspsAIOperatingSystem = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[540px]">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-6">
+                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4">
                         The AI Operating System for Delivery Service Providers
                     </h2>
 
-                    <p className="text-[#2F1C8C] font-semibold text-[16px] md:text-[18px] mb-4">
+                    <p className="text-[#2F1C8C] font-semibold text-[16px] md:text-[18px] mb-3">
                         Smarter routes, easier dispatching, and full fleet visibility.
                     </p>
 
-                    <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-8 pr-4">
+                    <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-6 pr-4">
                         Running a delivery business means constant pressure. Finmile gives DSPs the tools to run more efficient, profitable operations—from automated dispatch to real-time visibility.
                     </p>
 

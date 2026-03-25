@@ -13,7 +13,7 @@ interface PageHeroProps {
 
 export function PageHero({ title, hideLogo, description, gradientFrom, gradientTo }: PageHeroProps) {
   return (
-    <section className={`relative w-full overflow-hidden pt-16 pb-16 flex items-center justify-center bg-[#0B0616] min-h-[300px] ${montserrat.className}`}>
+    <section className={`relative w-full overflow-hidden pt-[140px] pb-12 flex items-center justify-center bg-[#0B0616] min-h-[300px] ${montserrat.className}`}>
 
       {/* Ambient background glows */}
       <div

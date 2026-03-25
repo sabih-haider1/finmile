@@ -39,18 +39,18 @@ export const DspsFeaturesGrid = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 overflow-hidden relative ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] z-10 flex flex-col">
+        <section className={`w-full bg-white flex flex-col items-center px-6 py-10 overflow-hidden relative ${montserrat.className}`}>
+            <div className="w-full max-w-[1440px] z-10 flex flex-col">
 
                 {/* Header Content - Split Layout */}
-                <div className="flex flex-col lg:flex-row items-end justify-between gap-8 mb-12">
+                <div className="flex flex-col lg:flex-row items-end justify-between gap-8 mb-8">
                     <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] max-w-[550px]">
                         Run Delivery Operations<br />
                         That Practically Manage<br />
                         Themselves
                     </h2>
                     
-                    <div className="flex flex-col gap-6 w-full max-w-[520px]">
+                    <div className="flex flex-col gap-4 w-full max-w-[520px]">
                         <p className="font-medium text-[14px] md:text-[15px] text-[#6C757D] leading-relaxed">
                             If you&apos;re spending half your day planning routes or chasing drivers for<br className="hidden lg:block" />
                             updates, you&apos;re not scaling — you&apos;re firefighting.
@@ -65,13 +65,13 @@ export const DspsFeaturesGrid = () => {
                 {/* 2x3 Feature Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full">
                     {features.map((feature, idx) => (
-                        <div key={idx} className="bg-[#F8F7FF] rounded-[20px] p-8 md:p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(47,28,140,0.06)] group">
+                        <div key={idx} className="bg-[#F8F7FF] rounded-[20px] p-6 flex flex-col items-center text-center transition-transform hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(47,28,140,0.06)] group">
 
-                            <div className="mb-5 group-hover:scale-110 transition-transform duration-300">
+                            <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
                                 {feature.icon}
                             </div>
 
-                            <h3 className="text-[#0A1B33] font-bold text-[17px] md:text-[18px] mb-3">
+                            <h3 className="text-[#0A1B33] font-bold text-[17px] md:text-[18px] mb-2">
                                 {feature.title}
                             </h3>
 

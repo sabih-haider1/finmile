@@ -62,7 +62,7 @@ export const Footer = () => {
                         <Link href="/dsps" className="hover:text-white transition-colors">DSPs</Link>
                         <Link href="/retailers" className="hover:text-white transition-colors">Retailers</Link>
                         <Link href="/optimization" className="hover:text-white transition-colors">Optimization</Link>
-                        <Link href="/return-optimization" className="hover:text-white transition-colors">Return Optimization</Link>
+                        <Link href="/returns-optimization" className="hover:text-white transition-colors">Return Optimization</Link>
                         <Link href="/sustainable" className="hover:text-white transition-colors">Sustainable Delivery</Link>
                     </nav>
                 </div>
@@ -86,9 +86,9 @@ export const Footer = () => {
                     </nav>
 
                     <div className="pt-10">
-                        <a 
-                            href="https://www.linkedin.com/company/finmile/" 
-                            target="_blank" 
+                        <a
+                            href="https://www.linkedin.com/company/finmile/"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer block"
                         >

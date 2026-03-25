@@ -12,7 +12,7 @@ export const DspsOperationalImpact = () => {
         {
             value: (
                 <div className="flex items-start justify-center">
-                    99.9<span className="text-[26px] md:text-[30px] leading-[1.2] ml-0.5">↑</span>
+                    99.9%
                 </div>
             ),
             label: "On-Time Rate"
@@ -24,8 +24,8 @@ export const DspsOperationalImpact = () => {
     ];
 
     return (
-        <section className={`w-full relative flex flex-col items-center pt-6 md:pt-6 ${montserrat.className}`}>
-            
+        <section className={`w-full relative flex flex-col items-center pt-10 ${montserrat.className}`}>
+
             {/* Dark background spanning top section */}
             <div className="absolute top-0 left-0 w-full h-[calc(100%-120px)] md:h-[calc(100%-150px)] bg-[#0A0318] z-0 overflow-hidden">
                 {/* Smooth purple glow to match the image gradient */}
@@ -35,10 +35,10 @@ export const DspsOperationalImpact = () => {
             {/* White background bottom section to create the overlap effect */}
             <div className="absolute bottom-0 left-0 w-full h-[120px] md:h-[150px] bg-white z-0" />
 
-            <div className="w-full max-w-[1240px] z-10 relative px-4 md:px-6 lg:px-24">
-                
+            <div className="w-full max-w-[1440px] z-10 relative px-6">
+
                 {/* Header */}
-                <div className="text-center mb-8 md:mb-10">
+                <div className="text-center mb-6 md:mb-8">
                     <h2 className="font-bold text-[32px] md:text-[40px] text-white tracking-tight leading-[1.2]">
                         Operational Impact
                     </h2>
@@ -61,19 +61,19 @@ export const DspsOperationalImpact = () => {
                 {/* Testimonial Card */}
                 <div className="max-w-[950px] mx-auto text-center w-full">
                     <div className="bg-[#311E8F] rounded-[20px] px-8 py-10 md:px-16 md:py-14 shadow-2xl relative">
-                        
+
                         {/* Centered Quote Icon */}
                         <div className="flex justify-center mb-6">
                             <span className="text-white text-[60px] md:text-[72px] font-serif leading-[0.4]">
                                 “
                             </span>
                         </div>
-                        
+
                         <blockquote className="text-white font-medium text-[16px] md:text-[20px] leading-[1.6] mb-8">
                             &quot;Finmile took us from chaos to control. Route planning went from half a <br className="hidden lg:block" />
                             day to 10 minutes, and our drivers are happier than ever.&quot;
                         </blockquote>
-                        
+
                         <div className="flex flex-col gap-1.5">
                             <cite className="text-white font-medium text-[15px] md:text-[16px] not-italic">
                                 — Owner
@@ -82,7 +82,7 @@ export const DspsOperationalImpact = () => {
                                 Independent DSP Partner
                             </span>
                         </div>
-                        
+
                     </div>
                 </div>
 

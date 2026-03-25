@@ -154,6 +154,20 @@ export const guideUpdateSchema = guideSchema.partial().extend({
   updated_at: z.string().optional(),
 });
 
+// Contact form validation schema
+export const contactFormSchema = z.object({
+  firstName: z.string().min(1, 'First name is required').max(100),
+  lastName: z.string().min(1, 'Last name is required').max(100),
+  email: z.string().email('Please enter a valid work email'),
+  companyName: z.string().min(1, 'Company name is required').max(100),
+  subject: z.string().max(200).optional(),
+  message: z.string().min(10, 'Please tell us how we can help (at least 10 characters)').max(2000),
+});
+
+export type ContactFormData = z.infer<typeof contactFormSchema>;
+
+
+
 // Validation helper function
 export function validateInput<T>(schema: z.ZodSchema<T>, data: unknown): {
   success: boolean;

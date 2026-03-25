@@ -8,24 +8,24 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsSustainability = () => {
     return (
-        <section className={`w-full bg-[#FAFAFF] py-6 md:py-6 flex justify-center px-4 md:px-6 lg:px-24 overflow-hidden ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center">
+        <section className={`w-full bg-[#FAFAFF] py-10 flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
+            <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[540px]">
                     {/* ESG Badge */}
-                    <div className="bg-[#E2FBF0] text-[#00A859] px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-widest uppercase mb-6 flex items-center gap-1.5">
+                    <div className="bg-[#E2FBF0] text-[#00A859] px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-widest uppercase mb-4 flex items-center gap-1.5">
                         <Leaf className="w-3.5 h-3.5" strokeWidth={2.5} />
                         ESG ADVANTAGE
                     </div>
 
                     {/* Heading */}
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.15] mb-6">
+                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.15] mb-4">
                         Sustainability That<br /> Saves Money
                     </h2>
 
                     {/* Description */}
-                    <p className="text-[#6B7280] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-8 pr-4">
+                    <p className="text-[#6B7280] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-6 pr-4">
                         Finmile helps DSPs switch to e-cargo bikes, EVs, and biodiesel vans
                         without hurting productivity. AI plans routes based on battery range,
                         charging points, and zero-emission zones.
@@ -41,7 +41,7 @@ export const DspsSustainability = () => {
                 <div className="flex items-center justify-center lg:justify-end relative w-full pt-8 lg:pt-0">
 
                     {/* Main Concentric Container */}
-                    <div className="relative w-[300px] h-[300px] md:w-[360px] md:h-[360px] flex items-center justify-center">
+                    <div className="relative w-[300px] h-[300px] md:w-[320px] md:h-[320px] flex items-center justify-center">
 
                         {/* Outer Soft Shadow Base */}
                         <div className="absolute inset-0 bg-[#E8E8F2] rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-60 translate-y-4 scale-95" />

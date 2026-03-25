@@ -11,8 +11,8 @@ export const DspsIntegrations = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 overflow-hidden relative ${montserrat.className}`}>
-            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1240px] mx-auto mb-8 md:mb-10">
+        <section className={`w-full bg-white flex flex-col items-center px-6 py-10 overflow-hidden relative ${montserrat.className}`}>
+            <div className="text-center w-full z-10 flex flex-col items-center max-w-[1440px] mx-auto mb-6">
                 <h2 className="font-semibold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.3]">
                     Integrate Seamlessly with<br />Your Existing Systems
                 </h2>
@@ -20,7 +20,7 @@ export const DspsIntegrations = () => {
 
             {/* Changed flex-wrap to flex-nowrap and ensured justify-center */}
             <div
-                className="w-full max-w-[1240px] z-10 flex flex-nowrap justify-center gap-6 md:gap-8 mb-8 md:mb-10 pb-4 md:pb-0 overflow-x-auto"
+                className="w-full max-w-[1440px] z-10 flex flex-nowrap justify-center gap-6 md:gap-8 mb-6 pb-4 md:pb-0 overflow-x-auto"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {integrations.map((integration, idx) => (
