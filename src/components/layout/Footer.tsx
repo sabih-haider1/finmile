@@ -106,7 +106,7 @@ export const Footer = () => {
                 <div className="flex gap-4 md:gap-6 mt-6 md:mt-0">
                     <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                     <span className="hidden md:block">|</span>
-                    <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                    <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
                     <span className="hidden md:block">|</span>
                     <Link href="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
                 </div>

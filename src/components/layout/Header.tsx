@@ -113,13 +113,13 @@ export const Header = () => {
                                 {link.href.startsWith('/') ? (
                                     <Link
                                         href={link.href}
-                                        className={`relative z-10 text-[13px] 2xl:text-[14px] font-[600] tracking-wide whitespace-nowrap transition-colors duration-200 ${isActive ? 'text-white drop-shadow-sm' : 'text-white hover:text-gray-400'}`}
+                                        className={`relative z-10 text-[13px] 2xl:text-[14px] font-[500] tracking-wide whitespace-nowrap transition-colors duration-200 ${isActive ? 'text-white drop-shadow-sm' : 'text-white hover:text-gray-400'}`}
                                     >
                                         {link.name}
                                         {isActive && (
                                             <motion.div
                                                 layoutId="nav-active"
-                                                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-finmile-purple rounded-full"
+                                                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-[2px] bg-finmile-purple rounded-full"
                                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                             />
                                         )}
