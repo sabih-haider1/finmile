@@ -15,7 +15,7 @@ export const Footer = () => {
             <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 z-20 relative">
 
                 {/* Column 1: Brand & Actions */}
-                <div className="flex flex-col space-y-10 md:col-span-4 lg:col-span-5">
+                <div className="flex flex-col space-y-10 md:col-span-6 lg:col-span-4">
                     {/* Brand Logo */}
                     <div className="mb-2">
                         <Link href="/">
@@ -49,9 +49,9 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 2: Quick Links */}
-                <div className="flex flex-col space-y-6 md:col-span-4 lg:col-span-3 mt-2 md:mt-0">
+                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Quick Links</h4>
-                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-2 custom-scrollbar">
+                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-5 custom-scrollbar w-max">
                         <Link href="/about" className="hover:text-white transition-colors">About</Link>
                         <Link href="/ai-agents" className="hover:text-white transition-colors">AI Agents</Link>
                         <Link href="/control-tower" className="hover:text-white transition-colors">Control Tower</Link>
@@ -69,7 +69,7 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 3: Resources */}
-                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0">
+                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Resources</h4>
                     <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium">
                         <Link href="/blog/all" className="hover:text-white transition-colors">Blog</Link>

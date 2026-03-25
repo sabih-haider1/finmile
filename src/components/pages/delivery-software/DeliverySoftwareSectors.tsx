@@ -68,7 +68,7 @@ export const DeliverySoftwareSectors = () => {
             </div>
 
             {/* Pill Tabs Container - Scrollable on Mobile */}
-            <div className="flex xl:justify-center overflow-x-auto w-full max-w-[1200px] z-10 no-scrollbar mb-10 pb-4 px-2">
+            <div className="flex xl:justify-center overflow-x-auto w-full max-w-[1200px] z-10 no-scrollbar mb-2 px-2">
                 <div className="flex gap-2 mx-auto min-w-max">
                     {tabs.map((tab) => {
                         const isActive = activeTab === tab.id;
@@ -90,7 +90,7 @@ export const DeliverySoftwareSectors = () => {
             </div>
 
             {/* Split Layout Content Area representing active tab */}
-            <div className='max-w-[1200px] w-full bg-[#fdfcff] rounded-[32px] border border-[#F0EDFF] shadow-[0_8px_30px_rgba(47,28,140,0.04)] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center z-10 p-8 md:p-12 lg:p-16 relative overflow-hidden'>
+            <div className='max-w-[1200px] w-full bg-[#fdfcff] rounded-[32px] border border-[#F0EDFF] shadow-[0_8px_30px_rgba(47,28,140,0.04)] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center z-10 p-6 md:p-8 lg:p-10 relative overflow-hidden'>
 
                 {/* Subtle internal background accent */}
                 <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#6A27D4] rounded-full blur-[150px] opacity-[0.03] pointer-events-none" />
