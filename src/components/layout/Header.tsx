@@ -147,13 +147,15 @@ export const Header = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        <Button
-                            variant="liquid-glass"
-                            size="lg"
-                            className="w-[148px] h-[48px]"
-                        >
-                            Track Parcel
-                        </Button>
+                        <Link href="/track-parcel" className="block">
+                            <Button
+                                variant="liquid-glass"
+                                size="lg"
+                                className="w-[148px] h-[48px]"
+                            >
+                                Track Parcel
+                            </Button>
+                        </Link>
                     </motion.div>
                     <motion.div
                         variants={navItemVariants}
@@ -246,13 +248,15 @@ export const Header = () => {
                             animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ delay: 0.5, duration: 0.3 }}
                         >
-                            <Button
-                                variant="liquid-glass"
-                                size="lg"
-                                className="w-full justify-center"
-                            >
-                                Track Parcel
-                            </Button>
+                            <Link href="/track-parcel" onClick={() => setIsMobileMenuOpen(false)} className="block w-full">
+                                <Button
+                                    variant="liquid-glass"
+                                    size="lg"
+                                    className="w-full justify-center"
+                                >
+                                    Track Parcel
+                                </Button>
+                            </Link>
                         </motion.div>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}

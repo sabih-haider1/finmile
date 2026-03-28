@@ -64,7 +64,7 @@ export const Footer = () => {
                         <Link href="/retailers" className="hover:text-white transition-colors">Retailers</Link>
                         <Link href="/optimization" className="hover:text-white transition-colors">Optimization</Link>
                         <Link href="/returns-optimization" className="hover:text-white transition-colors">Return Optimization</Link>
-                        <Link href="/sustainable" className="hover:text-white transition-colors">Sustainable Delivery</Link>
+                        <Link href="/sustainable-delivery" className="hover:text-white transition-colors">Sustainable Delivery</Link>
                     </nav>
                 </div>
 
