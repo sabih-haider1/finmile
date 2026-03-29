@@ -1,0 +1,83 @@
+"use client";
+
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
+
+interface IndustryIntroProps {
+    title: string;
+    descriptionTop: string;
+    descriptionBottom: string;
+    image: string;
+    imageAlt: string;
+    ctaPrimaryText?: string;
+    ctaPrimaryLink?: string;
+    ctaSecondaryText?: string;
+    ctaSecondaryLink?: string;
+}
+
+export const IndustryIntro = ({
+    title,
+    descriptionTop,
+    descriptionBottom,
+    image,
+    imageAlt,
+    ctaPrimaryText = "Book A Demo",
+    ctaPrimaryLink = "/contact",
+    ctaSecondaryText = "Learn More",
+    ctaSecondaryLink = "#learn-more"
+}: IndustryIntroProps) => {
+    return (
+        <section className={`w-full bg-white pt-2 pb-2 md:pt-2 md:pb-0 lg:pt-6 flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-center gap-12 lg:gap-6">
+
+                {/* Left Side: Image Content */}
+                <div className="w-full lg:w-[48%] flex justify-center lg:justify-start">
+                    <div className="relative w-full max-w-[580px] aspect-[1.15/1] bg-[#F8F7FF] rounded-[48px] flex items-center justify-center p-8 md:p-12">
+                        <div className="relative w-full h-[90%] max-w-[500px]">
+                            <Image
+                                src={image}
+                                alt={imageAlt}
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Right Side: Text Content */}
+                <div className="w-full lg:w-[52%] flex flex-col items-start lg:pl-8">
+                    <h2 className="font-bold text-[36px] md:text-[44px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-6">
+                        {title}
+                    </h2>
+
+                    <p className="text-[#2F1C8C] font-bold text-[16px] md:text-[18px] mb-4">
+                        {descriptionTop}
+                    </p>
+
+                    <p className="text-[#64748B] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-8 pr-4">
+                        {descriptionBottom}
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                        <Link href={ctaPrimaryLink} className="w-full sm:w-auto">
+                            <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
+                                {ctaPrimaryText}
+                            </button>
+                        </Link>
+                        <Link href={ctaSecondaryLink} className="w-full sm:w-auto">
+                            <button className="border border-[#7C3AED] text-[#7C3AED] bg-white px-8 py-3.5 rounded-full font-semibold text-[15px] hover:bg-[#F5F3FF] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
+                                {ctaSecondaryText}
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    );
+};

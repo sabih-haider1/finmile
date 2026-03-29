@@ -1,38 +1,74 @@
 'use client';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import { Button } from "../ui/Button";
 
 export const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
 
+    const industryLinks = [
+        { name: "Logistics & Delivery", href: "/logistics-delivery" },
+        { name: "E-Commerce & Retail", href: "/retail-ecommerce" },
+        { name: "Automotive & Parts", href: "/automotive-parts" },
+        { name: "Medical & Pharmacy", href: "/medical-pharmacy" },
+        { name: "Field Service", href: "/field-service" },
+        { name: "Wholesale & B2B", href: "/wholesale-b2b" },
+        { name: "Sustainability", href: "/sustainable-operators" },
+    ];
+
+    const featureLinks = [
+        { name: "Integrations", href: "/integrations" },
+        { name: "Routing & Optimization", href: "/optimization" },
+        { name: "Execution & Tracking", href: "/deliveries" },
+        { name: "Drivers App", href: "/driver-app" },
+        { name: "Control Tower", href: "/control-tower" },
+    ];
+
+    const moreLinks = [
+        { name: "Delivery", href: "/deliveries" },
+        { name: "Delivery Software", href: "/delivery-software" },
+    ];
+
     const links = [
-        { name: "Solutions", href: "#solutions" },
-        { name: "Deliveries", href: "/deliveries" },
-        { name: "Features", href: "#features" },
+        { name: "Solutions", href: "/solutions" },
+        { name: "Industries", href: "#industries", subMenu: industryLinks },
+        { name: "Features", href: "#features", subMenu: featureLinks },
         { name: "About", href: "/about" },
         { name: "Resources", href: "#resources" },
         { name: "Whitepapers", href: "/whitepapers" },
-        { name: "Delivery Software", href: "/delivery-software" }
+        { name: "More", href: "#more", subMenu: moreLinks }
     ];
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20); // slightly more sensitive trigger
+            setIsScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
-        // Run once on mount to handle initial scroll position
         handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Close mobile menu when clicking outside
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setActiveDropdown(null);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    // Scroll control for mobile menu
     useEffect(() => {
         if (isMobileMenuOpen) {
             document.body.style.overflow = 'hidden';
@@ -41,7 +77,6 @@ export const Header = () => {
         }
     }, [isMobileMenuOpen]);
 
-    // Framer Motion variants
     const headerVariants: Variants = {
         initial: { y: -100, opacity: 0 },
         animate: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
@@ -59,6 +94,22 @@ export const Header = () => {
     const mobileMenuVariants: Variants = {
         closed: { x: '100%', transition: { type: 'spring', stiffness: 300, damping: 30 } },
         open: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } }
+    };
+
+    const dropdownVariants: Variants = {
+        hidden: { opacity: 0, y: 10, scale: 0.95 },
+        visible: { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            transition: { duration: 0.2, ease: "easeOut" }
+        },
+        exit: { 
+            opacity: 0, 
+            y: 10, 
+            scale: 0.95,
+            transition: { duration: 0.15, ease: "easeIn" }
+        }
     };
 
     return (
@@ -88,7 +139,9 @@ export const Header = () => {
                 {/* Center Nav Links - Desktop */}
                 <nav className="hidden xl:flex items-center justify-center min-w-0 flex-1 gap-1 2xl:gap-2 mx-2">
                     {links.map((link, i) => {
-                        const isActive = pathname === link.href || pathname?.startsWith(link.href + '/');
+                        const isActive = link.href.startsWith('/') && (pathname === link.href || pathname?.startsWith(link.href + '/'));
+                        const hasSubMenu = link.subMenu && link.subMenu.length > 0;
+
                         return (
                             <motion.div
                                 key={link.name}
@@ -96,11 +149,17 @@ export const Header = () => {
                                 variants={navItemVariants}
                                 initial="hidden"
                                 animate="visible"
-                                className="relative px-3 py-2 cursor-pointer rounded-full"
-                                onMouseEnter={() => setHoveredLink(link.name)}
-                                onMouseLeave={() => setHoveredLink(null)}
+                                className="relative rounded-full"
+                                onMouseEnter={() => {
+                                    setHoveredLink(link.name);
+                                    if (hasSubMenu) setActiveDropdown(link.name);
+                                }}
+                                onMouseLeave={() => {
+                                    setHoveredLink(null);
+                                    if (hasSubMenu) setActiveDropdown(null);
+                                }}
                             >
-                                {hoveredLink === link.name && (
+                                {hoveredLink === link.name && !hasSubMenu && (
                                     <motion.div
                                         layoutId="nav-hover"
                                         className="absolute inset-0 bg-white/10 rounded-full pointer-events-none"
@@ -110,28 +169,57 @@ export const Header = () => {
                                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                                     />
                                 )}
-                                {link.href.startsWith('/') ? (
-                                    <Link
-                                        href={link.href}
-                                        className={`relative z-10 text-[13px] 2xl:text-[14px] font-[500] tracking-wide whitespace-nowrap transition-colors duration-200 ${isActive ? 'text-white drop-shadow-sm' : 'text-white hover:text-gray-400'}`}
-                                    >
-                                        {link.name}
-                                        {isActive && (
-                                            <motion.div
-                                                layoutId="nav-active"
-                                                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-[2px] bg-finmile-purple rounded-full"
-                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                            />
-                                        )}
-                                    </Link>
-                                ) : (
-                                    <a
-                                        href={link.href}
-                                        className="relative z-10 text-[13px] 2xl:text-[14px] font-[600] tracking-wide text-white hover:text-gray-400 whitespace-nowrap transition-colors duration-200"
-                                    >
-                                        {link.name}
-                                    </a>
-                                )}
+                                
+                                <div className="relative z-10 flex items-center gap-1 px-3 py-2 cursor-pointer">
+                                    {link.href.startsWith('/') ? (
+                                        <Link
+                                            href={link.href}
+                                            className={`text-[13px] 2xl:text-[14px] font-[500] tracking-wide whitespace-nowrap transition-colors duration-200 ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    ) : (
+                                        <span
+                                            className={`text-[13px] 2xl:text-[14px] font-[500] tracking-wide text-white/80 hover:text-white whitespace-nowrap transition-colors duration-200 flex items-center gap-1`}
+                                        >
+                                            {link.name}
+                                            {hasSubMenu && <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.name ? 'rotate-180' : ''}`} />}
+                                        </span>
+                                    )}
+
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="nav-active"
+                                            className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-[2px] bg-white rounded-full"
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
+                                </div>
+
+                                {/* Dropdown Menu */}
+                                <AnimatePresence>
+                                    {activeDropdown === link.name && hasSubMenu && (
+                                        <motion.div
+                                            variants={dropdownVariants}
+                                            initial="hidden"
+                                            animate="visible"
+                                            exit="exit"
+                                            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 min-w-[200px]"
+                                        >
+                                            <div className="bg-[#1A0F2E]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl">
+                                                {link.subMenu?.map((subItem) => (
+                                                    <Link
+                                                        key={subItem.name}
+                                                        href={subItem.href}
+                                                        className="block px-4 py-2.5 text-[13px] text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all"
+                                                    >
+                                                        {subItem.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </motion.div>
                         );
                     })}
@@ -195,7 +283,7 @@ export const Header = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-[#2A1B54]/80 backdrop-blur-sm z-[95] xl:hidden"
+                        className="fixed inset-0 bg-[#0B0616]/80 backdrop-blur-sm z-[95] xl:hidden"
                         onClick={() => setIsMobileMenuOpen(false)}
                     />
                 )}
@@ -206,11 +294,11 @@ export const Header = () => {
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate={isMobileMenuOpen ? "open" : "closed"}
-                className="fixed top-0 right-0 h-full w-[300px] bg-[#2A1B54]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl"
+                className="fixed top-0 right-0 h-full w-[300px] bg-[#1A0F2E]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl"
             >
                 <div className="flex flex-col h-full pt-20 px-6 pb-8 overflow-y-auto custom-scrollbar">
                     {/* Mobile Navigation Links */}
-                    <nav className="flex flex-col gap-2 mb-8">
+                    <nav className="flex flex-col gap-1 mb-8">
                         <AnimatePresence>
                             {isMobileMenuOpen && links.map((link, i) => (
                                 <motion.div
@@ -219,22 +307,42 @@ export const Header = () => {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
                                 >
-                                    {link.href.startsWith('/') ? (
-                                        <Link
-                                            href={link.href}
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
-                                        >
-                                            {link.name}
-                                        </Link>
+                                    {link.subMenu ? (
+                                        <div className="flex flex-col">
+                                            <div className="text-[15px] font-[600] text-white/80 py-3 border-b border-white/5 flex items-center justify-between">
+                                                {link.name}
+                                            </div>
+                                            <div className="pl-4 flex flex-col gap-1 mt-1">
+                                                {link.subMenu.map((subLink) => (
+                                                    <Link
+                                                        key={subLink.name}
+                                                        href={subLink.href}
+                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                        className="text-[14px] font-[500] text-white/60 hover:text-white py-2 transition-colors"
+                                                    >
+                                                        {subLink.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </div>
                                     ) : (
-                                        <a
-                                            href={link.href}
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
-                                        >
-                                            {link.name}
-                                        </a>
+                                        link.href.startsWith('/') ? (
+                                            <Link
+                                                href={link.href}
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        ) : (
+                                            <a
+                                                href={link.href}
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                                            >
+                                                {link.name}
+                                            </a>
+                                        )
                                     )}
                                 </motion.div>
                             ))}
@@ -277,3 +385,4 @@ export const Header = () => {
         </>
     );
 };
+
