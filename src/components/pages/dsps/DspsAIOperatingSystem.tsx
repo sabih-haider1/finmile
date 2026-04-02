@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const DspsAIOperatingSystem = () => {
     return (
@@ -35,7 +36,7 @@ export const DspsAIOperatingSystem = () => {
                         Running a delivery business means constant pressure. Finmile gives DSPs the tools to run more efficient, profitable operations—from automated dispatch to real-time visibility.
                     </p>
 
-                    <Link href="#contact" className="w-fit">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-fit">
                         <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit">
                             Book A Demo
                         </button>

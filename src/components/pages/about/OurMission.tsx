@@ -1,8 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 import { Package, TrendingUp, Leaf } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const OurMission = () => {
     return (
@@ -78,9 +80,9 @@ export const OurMission = () => {
 
                         {/* Button (Left Aligned Fixed Size) */}
                         <div className="flex flex-col sm:flex-row gap-4 items-start w-full mt-auto pl-1">
-                            <button className="bg-[#6A27D4] text-white px-8 md:px-16 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] whitespace-nowrap w-full sm:w-fit hover:bg-[#5821B0] transition-colors shadow-lg shadow-[#6A27D4]/20">
+                            <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-8 md:px-16 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] whitespace-nowrap w-full sm:w-fit hover:bg-[#5821B0] transition-colors shadow-lg shadow-[#6A27D4]/20 text-center">
                                 Book A Demo
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,18 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
+
+const RouteCalculatorPopup = dynamic(
+    () => import('./RouteCalculatorPopup').then((mod) => mod.RouteCalculatorPopup),
+    { ssr: false }
+);
 
 interface JoinTheJourneyProps {
     heading?: React.ReactNode;
@@ -28,12 +35,24 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
     secondaryButtonText = "Calculate your route savings",
     secondaryButtonHref
 }) => {
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const isCalculateRouteCta = secondaryButtonText.toLowerCase().includes('calculate');
+    const isDemoCta = secondaryButtonText.toLowerCase().includes('demo') || secondaryButtonText.toLowerCase().includes('request');
+    const resolvedSecondaryHref = secondaryButtonHref || (isDemoCta ? DEMO_FORM_URL : !isCalculateRouteCta ? '/solutions' : undefined);
     const secondaryButtonClass = "w-full sm:flex-1 px-4 lg:px-6 py-3 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-[80px] text-[14px] font-medium whitespace-normal sm:whitespace-nowrap transition-all hover:bg-[#2F1C8C] hover:text-white leading-snug text-center";
 
     return (
-        <section
-            className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}
-        >
+        <>
+            {isPopupOpen && (
+                <RouteCalculatorPopup
+                    isOpen={isPopupOpen}
+                    onClose={() => setIsPopupOpen(false)}
+                />
+            )}
+
+            <section
+                className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}
+            >
             <div className="w-full max-w-[1440px] flex flex-col lg:flex-row items-stretch lg:items-center xl:items-start gap-12 lg:gap-[10px] z-10 relative">
                 {/* Left Side */}
                 <div className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start">
@@ -84,16 +103,26 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
 
                         {/* Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 items-center w-full mt-auto">
-                            <button className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] lg:text-[15px] whitespace-normal sm:whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors leading-snug">
+                            <Link
+                                href={DEMO_FORM_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] lg:text-[15px] whitespace-normal sm:whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors leading-snug text-center"
+                            >
                                 Book A Demo
-                            </button>
+                            </Link>
 
-                            {secondaryButtonHref ? (
-                                <Link href={secondaryButtonHref} className={secondaryButtonClass}>
+                            {resolvedSecondaryHref ? (
+                                <Link
+                                    href={resolvedSecondaryHref}
+                                    className={secondaryButtonClass}
+                                    target={resolvedSecondaryHref.startsWith('http') ? '_blank' : undefined}
+                                    rel={resolvedSecondaryHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                >
                                     {secondaryButtonText}
                                 </Link>
                             ) : (
-                                <button className={secondaryButtonClass}>
+                                <button className={secondaryButtonClass} onClick={() => setIsPopupOpen(true)}>
                                     {secondaryButtonText}
                                 </button>
                             )}
@@ -101,6 +130,7 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                     </div>
                 </div>
             </div>
-        </section>
+            </section>
+        </>
     );
 };

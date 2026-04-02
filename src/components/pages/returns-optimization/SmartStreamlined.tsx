@@ -1,9 +1,11 @@
 import React from 'react';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '../../ui/Button';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const SmartStreamlined = () => {
     return (
@@ -25,12 +27,14 @@ export const SmartStreamlined = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-4">
-                        <Button
-                            className="bg-[#2F1C8C] hover:bg-[#5821B0] text-white border-none min-w-[180px]"
-                            size="lg"
-                        >
-                            Book a Demo
-                        </Button>
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer">
+                            <Button
+                                className="bg-[#2F1C8C] hover:bg-[#5821B0] text-white border-none min-w-[180px]"
+                                size="lg"
+                            >
+                                Book a Demo
+                            </Button>
+                        </Link>
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Layers, Navigation, Clock } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
@@ -11,6 +12,7 @@ const RouteCalculatorPopup = dynamic(
   () => import('../../shared/RouteCalculatorPopup').then((mod) => mod.RouteCalculatorPopup),
   { ssr: false }
 );
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const ScaleSection = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -151,13 +153,15 @@ export const ScaleSection = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true, amount: 0.3 }}
               >
-                <motion.button
-                  className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Book A Demo
-                </motion.button>
+                <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:flex-1">
+                  <motion.button
+                    className="bg-[#6A27D4] text-white px-6 lg:px-8 py-3 rounded-full font-semibold text-[14px] whitespace-nowrap w-full sm:flex-1 hover:bg-[#5821B0] transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Book A Demo
+                  </motion.button>
+                </Link>
 
                 <motion.button
                   id="Calculate"

@@ -1,8 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const DriverAppHero = () => {
     return (
@@ -38,9 +40,9 @@ export const DriverAppHero = () => {
                         The Finmile Driver App turns every driver&apos;s smartphone into a real-time logistics hub. From route guidance to proof of delivery, every mile is fully verified.
                     </p>
 
-                    <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto text-center">
                         Book A Demo
-                    </button>
+                    </Link>
                 </div>
                 
             </div>

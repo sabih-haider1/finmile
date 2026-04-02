@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -32,9 +33,9 @@ export const RetailersIntegrations = () => {
             </div>
 
             {/* Button styling updated with accurate purple glow shadow */}
-            <button className="bg-[#612BDE] text-white px-8 py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_24px_rgba(97,43,222,0.3)] hover:bg-[#5222C0] transition-all hover:-translate-y-0.5 active:translate-y-0 z-10">
+            <Link href="/integrations" className="bg-[#612BDE] text-white px-8 py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_24px_rgba(97,43,222,0.3)] hover:bg-[#5222C0] transition-all hover:-translate-y-0.5 active:translate-y-0 z-10 text-center">
                 Explore All Integrations
-            </button>
+            </Link>
             
         </section>
     );

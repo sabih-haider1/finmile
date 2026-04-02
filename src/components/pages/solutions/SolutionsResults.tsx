@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MoveRight } from 'lucide-react';
 import { Button } from '../../ui/Button';
@@ -82,9 +83,11 @@ export const SolutionsResults = () => {
               whileTap={{ scale: 0.98 }}
               className="pt-2"
             >
-              <Button variant="solid" size="lg" className="w-[240px]">
-                Read More Case Studies
-              </Button>
+              <Link href="/case-studies/all">
+                <Button variant="solid" size="lg" className="w-[240px]">
+                  Read More Case Studies
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
 

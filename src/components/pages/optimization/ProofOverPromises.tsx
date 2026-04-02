@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const RouteCalculatorPopup = dynamic(
+    () => import('../../shared/RouteCalculatorPopup').then((mod) => mod.RouteCalculatorPopup),
+    { ssr: false }
+);
 
 export const ProofOverPromises = () => {
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const metrics = [
         {
             value: "42%",
@@ -24,7 +30,15 @@ export const ProofOverPromises = () => {
     ];
 
     return (
-        <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
+        <>
+            {isPopupOpen && (
+                <RouteCalculatorPopup
+                    isOpen={isPopupOpen}
+                    onClose={() => setIsPopupOpen(false)}
+                />
+            )}
+
+            <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
             
             <div className="w-full max-w-[1240px] flex flex-col items-center">
                 
@@ -90,12 +104,13 @@ export const ProofOverPromises = () => {
 
                 {/* CTA Button */}
                 <div className="text-center">
-                    <button className="bg-[#6A27D4] text-white px-8 py-4 rounded-full font-semibold text-[15px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                    <button className="bg-[#6A27D4] text-white px-8 py-4 rounded-full font-semibold text-[15px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0" onClick={() => setIsPopupOpen(true)}>
                         Calculate My Route Savings
                     </button>
                 </div>
 
             </div>
-        </section>
+            </section>
+        </>
     );
 };

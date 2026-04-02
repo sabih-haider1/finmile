@@ -53,6 +53,7 @@ export const blogSchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
+  sections: z.any().optional().nullable(),
 });
 
 export const blogUpdateSchema = blogSchema.partial().extend({
@@ -67,17 +68,16 @@ export const caseStudySchema = z.object({
   title: z.string().min(1, 'Title is required').max(500),
   slug: slugPattern,
   summary: z.string().max(1000).optional(),
-  content: z.string().min(1, 'Content is required'),
+  content: z.string().optional().nullable(),
   cover_image_url: urlPattern,
+  author_name: z.string().max(200).optional().nullable(),
   company_name: z.string().max(200).optional().nullable(),
   topic: z.string().max(200).optional().nullable(),
   industry: z.string().max(200).optional().nullable(),
-  challenge: z.string().optional().nullable(),
-  solution: z.string().optional().nullable(),
-  results: z.string().optional().nullable(),
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
+  sections: z.any().optional().nullable(),
 });
 
 export const caseStudyUpdateSchema = caseStudySchema.partial().extend({
@@ -105,6 +105,7 @@ export const whitepaperSchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
+  sections: z.any().optional().nullable(),
 });
 
 export const whitepaperUpdateSchema = whitepaperSchema.partial().extend({
@@ -131,6 +132,7 @@ export const resourceSchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
+  sections: z.any().optional().nullable(),
 });
 
 export const resourceUpdateSchema = resourceSchema.partial().extend({
@@ -146,6 +148,7 @@ export const guideSchema = z.object({
   description: z.string().max(2000).optional(),
   pdf_url: z.string().url('Valid PDF URL is required'),
   cover_image_url: urlPattern,
+  sections: z.any().optional().nullable(),
 });
 
 export const guideUpdateSchema = guideSchema.partial().extend({

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -54,9 +55,9 @@ export const DeliverySoftwarePlatform = () => {
                         </div>
                     </div>
 
-                    <button className="bg-[#6A27D4] text-white self-start px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.3)] hover:bg-[#5821B0] transition-colors mt-8">
+                    <Link href="/solutions" className="bg-[#6A27D4] text-white self-start px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.3)] hover:bg-[#5821B0] transition-colors mt-8 text-center">
                         Explore Features
-                    </button>
+                    </Link>
 
                 </div>
 

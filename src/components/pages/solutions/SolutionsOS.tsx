@@ -2,9 +2,12 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '../../ui/Button';
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
+
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const SolutionsOS = () => {
   return (
@@ -41,9 +44,11 @@ export const SolutionsOS = () => {
               whileTap={{ scale: 0.98 }}
               className="w-fit"
             >
-              <Button variant="solid" size="lg" className="w-[240px]">
-                See How Finmile Works
-              </Button>
+              <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer">
+                <Button variant="solid" size="lg" className="w-[240px]">
+                  See How Finmile Works
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
 

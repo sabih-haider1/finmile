@@ -1,7 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const AutonomousAgentsFeature = () => {
     return (
@@ -32,12 +34,12 @@ export const AutonomousAgentsFeature = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-colors hover:bg-[#5821B0] leading-snug shadow-sm">
+                        <Link href="/ai-agents" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-colors hover:bg-[#5821B0] leading-snug shadow-sm text-center">
                             See AI Agents in Action
-                        </button>
-                        <button className="bg-transparent text-[#6A27D4] px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-all border border-[#E8E5FF] hover:border-[#6A27D4] hover:bg-[#f8f7ff] leading-snug">
+                        </Link>
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-transparent text-[#6A27D4] px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-all border border-[#E8E5FF] hover:border-[#6A27D4] hover:bg-[#f8f7ff] leading-snug text-center">
                             Book A Demo
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

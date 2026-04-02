@@ -8,7 +8,7 @@ export default function AdminDashboardPage() {
   const modules = [
     {
       title: 'Blogs',
-      description: 'Manage blog articles with rich text content',
+      description: 'Manage blog articles, short summaries, and rich content sections',
       href: '/admin/blogs',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -19,7 +19,7 @@ export default function AdminDashboardPage() {
     },
     {
       title: 'Whitepapers',
-      description: 'Manage professional PDF whitepapers',
+      description: 'Manage whitepapers with summary, PDF, and shared content sections',
       href: '/admin/whitepapers',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,7 +30,7 @@ export default function AdminDashboardPage() {
     },
     {
       title: 'Resources',
-      description: 'Manage downloadable files and resources',
+      description: 'Manage downloadable resources with the same shared content model',
       href: '/admin/resources',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,6 +38,17 @@ export default function AdminDashboardPage() {
         </svg>
       ),
       color: 'from-green-500 to-teal-500',
+    },
+    {
+      title: 'Use Cases',
+      description: 'Manage use cases and case studies with summary and content sections',
+      href: '/admin/case-studies',
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      ),
+      color: 'from-emerald-500 to-cyan-500',
     },
     {
       title: 'Guides',

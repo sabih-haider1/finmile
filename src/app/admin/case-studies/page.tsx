@@ -130,10 +130,11 @@ export default function CaseStudiesPage() {
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
         cover_image_url: coverImageUrl || null,
         industry: formData.industry && (formData.industry as string).trim() !== '' ? formData.industry : null,
-        company_name: formData.company_name && (formData.company_name as string).trim() !== '' ? formData.company_name : null,
-        challenge: formData.challenge && (formData.challenge as string).trim() !== '' ? formData.challenge : null,
-        solution: formData.solution && (formData.solution as string).trim() !== '' ? formData.solution : null,
-        results: formData.results && (formData.results as string).trim() !== '' ? formData.results : null,
+        company_name: formData.author_name && (formData.author_name as string).trim() !== ''
+          ? formData.author_name
+          : formData.company_name && (formData.company_name as string).trim() !== ''
+            ? formData.company_name
+            : null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };
 
@@ -180,10 +181,10 @@ export default function CaseStudiesPage() {
   const caseStudyFormFields: FormFieldConfig[] = [
     { name: 'title', label: 'Title', type: 'text', required: true, placeholder: 'Enter case study title' },
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
-    { name: 'summary', label: 'Summary', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
-    { name: 'content', label: 'Main Content', type: 'textarea', rows: 10, required: true, placeholder: 'Full case study content...' },
+    { name: 'summary', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
+    { name: 'sections', label: 'Sections JSON', type: 'json', helpText: 'Optional unified template structure' },
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'blog-covers', folder: 'case-study-covers' },
-    { name: 'company_name', label: 'Company Name', type: 'text', placeholder: 'Acme Corporation' },
+    { name: 'author_name', label: 'Author Name', type: 'text', placeholder: 'John Doe' },
     {
       name: 'topic',
       label: 'Topic',
@@ -202,9 +203,6 @@ export default function CaseStudiesPage() {
         ...INDUSTRIES.map((i) => ({ value: i, label: i })),
       ],
     },
-    { name: 'challenge', label: 'The Challenge', type: 'textarea', rows: 5, placeholder: 'Describe the challenge faced...' },
-    { name: 'solution', label: 'The Solution', type: 'textarea', rows: 5, placeholder: 'Describe how the problem was solved...' },
-    { name: 'results', label: 'The Results', type: 'textarea', rows: 5, placeholder: 'Describe the outcomes and metrics...' },
     { name: 'tags', label: 'Tags', type: 'tags', placeholder: 'ai, automation, roi' },
     { name: 'is_featured', label: 'Featured', type: 'toggle' },
     { name: 'is_published', label: 'Published', type: 'toggle' },
@@ -212,7 +210,7 @@ export default function CaseStudiesPage() {
 
   const columns = [
     { key: 'title', label: 'Title' },
-    { key: 'company_name', label: 'Company', render: (cs: CaseStudy) => cs.company_name || '-' },
+    { key: 'company_name', label: 'Author', render: (cs: CaseStudy) => cs.author_name || cs.company_name || '-' },
     { key: 'industry', label: 'Industry', render: (cs: CaseStudy) => cs.industry || '-' },
     {
       key: 'is_featured',
@@ -265,7 +263,12 @@ export default function CaseStudiesPage() {
           <FormBuilder
             title={editingCaseStudy ? 'Edit Case Study' : 'Create New Case Study'}
             fields={caseStudyFormFields}
-            initialData={editingCaseStudy || { is_featured: false, is_published: true }}
+            initialData={editingCaseStudy
+              ? {
+                  ...editingCaseStudy,
+                  author_name: editingCaseStudy.author_name || editingCaseStudy.company_name || '',
+                }
+              : { is_featured: false, is_published: true }}
             onSubmit={handleFormSubmit}
             onCancel={() => {
               setShowCreateForm(false);

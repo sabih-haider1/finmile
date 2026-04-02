@@ -144,6 +144,7 @@ export async function POST(request: NextRequest) {
       tags: validatedData.tags || null,
       is_featured: validatedData.is_featured || false,
       is_published: validatedData.is_published ?? true,
+      sections: validatedData.sections || null,
       published_at: validatedData.is_published ? now : null,
       created_at: now,
       updated_at: now,

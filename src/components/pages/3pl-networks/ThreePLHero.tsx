@@ -1,8 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const ThreePLHero = () => {
     return (
@@ -37,9 +39,9 @@ export const ThreePLHero = () => {
                         Finmile helps third-party logistics providers and courier networks deliver faster, smarter, and more profitably. Manage thousands of deliveries across multiple clients in one unified platform.
                     </p>
 
-                    <button className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto text-center">
                         Book A Demo
-                    </button>
+                    </Link>
                 </div>
                 
             </div>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -100,9 +101,9 @@ export const PowerOfControlTower = () => {
                         </li>
                     </ul>
 
-                    <button className="self-start px-8 py-3.5 bg-[#6A27D4] text-white rounded-full font-semibold text-[14px] transition-transform hover:scale-105 shadow-[0_10px_20px_rgba(106,39,212,0.2)]">
+                    <Link href="/driver-app" className="self-start px-8 py-3.5 bg-[#6A27D4] text-white rounded-full font-semibold text-[14px] transition-transform hover:scale-105 shadow-[0_10px_20px_rgba(106,39,212,0.2)] text-center">
                         Learn More about AI POD Verification
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Right Side: Image and Benefits Overlap Box */}

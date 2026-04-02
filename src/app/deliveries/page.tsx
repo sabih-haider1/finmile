@@ -40,7 +40,7 @@ export default function DeliveriesPage() {
                 text1="Join the businesses routing smarter, delivering faster, and scaling effortlessly with Finmile's predictive network."
                 text2={null}
                 secondaryButtonText="View Pricing Plans"
-                secondaryButtonHref="#"
+                secondaryButtonHref="/contact"
             />
 
             <Footer />

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const OneLayerInsideFinmileOS = () => {
     // Array ordered specifically so CSS Grid naturally matches the columns in the image
@@ -52,9 +54,9 @@ export const OneLayerInsideFinmileOS = () => {
                     </div>
 
                     {/* CTA Button with the distinct border matching the UI */}
-                    <button className="bg-[#6D28D9] border border-[#A78BFA] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(109,40,217,0.3)] hover:bg-[#5B21B6] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6D28D9] border border-[#A78BFA] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(109,40,217,0.3)] hover:bg-[#5B21B6] transition-all hover:-translate-y-0.5 active:translate-y-0 text-center">
                         Book a Demo
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Right Side: Image Content with the Taller Rectangular Container */}

@@ -6,7 +6,7 @@ import { generateSlug } from '@/lib/upload';
 export interface FormFieldConfig {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags' | 'date';
+  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags' | 'date' | 'json';
   required?: boolean;
   placeholder?: string;
   options?: { value: string; label: string }[];
@@ -70,7 +70,30 @@ export default function FormBuilder({
     setError('');
 
     try {
-      await onSubmit(formData, files);
+      const normalizedData = { ...formData };
+
+      fields.forEach((field) => {
+        if (field.type !== 'json') {
+          return;
+        }
+
+        const rawValue = normalizedData[field.name];
+
+        if (rawValue === undefined || rawValue === null || rawValue === '') {
+          normalizedData[field.name] = null;
+          return;
+        }
+
+        if (typeof rawValue === 'string') {
+          try {
+            normalizedData[field.name] = JSON.parse(rawValue);
+          } catch {
+            throw new Error(`Invalid JSON in ${field.label}`);
+          }
+        }
+      });
+
+      await onSubmit(normalizedData, files);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to save');
     } finally {
@@ -121,6 +144,35 @@ export default function FormBuilder({
             required={field.required}
           />
         );
+
+      case 'json': {
+        const formattedValue = (() => {
+          if (typeof value === 'string') {
+            return value;
+          }
+
+          if (value && typeof value === 'object') {
+            try {
+              return JSON.stringify(value, null, 2);
+            } catch {
+              return '';
+            }
+          }
+
+          return '';
+        })();
+
+        return (
+          <textarea
+            value={formattedValue}
+            onChange={(e) => handleChange(field.name, e.target.value)}
+            className={`${inputClassName} font-mono text-sm`}
+            placeholder={field.placeholder || '{\n  "hero": {},\n  "sections": []\n}'}
+            rows={12}
+            required={field.required}
+          />
+        );
+      }
 
       case 'select':
         return (

@@ -1,5 +1,69 @@
 // Type definitions for the four content modules
 
+// ==================== Unified Content Section Types ====================
+
+export interface ContentMetadata {
+  published_date?: string;
+  read_time?: string;
+  author?: string;
+}
+
+export interface ContentHero {
+  title: string;
+  image_url: string | null;
+  description: string;
+  metadata?: ContentMetadata;
+}
+
+export interface ContentSectionData {
+  // Content section
+  body?: string;
+  // Custom HTML/CSS section
+  title?: string;
+  html?: string;
+  css?: string;
+  custom_html?: string;
+  custom_css?: string;
+  // CTA section
+  cta_title?: string;
+  cta_points?: string[];
+  cta_button?: { label: string; url: string };
+  // Features section
+  feature_items?: Array<{ icon?: string; title: string; description: string }>;
+  // Comparison section
+  comparison_table?: { headers: string[]; rows: string[][] };
+  // Generic data storage
+  [key: string]: any;
+}
+
+export interface ContentSection {
+  id: string;
+  type: 'content' | 'custom' | 'cta' | 'features' | 'comparison';
+  data: ContentSectionData;
+}
+
+export interface RelatedResource {
+  id: string;
+  title: string;
+  thumbnail?: string;
+  date?: string;
+  tags?: string[];
+  url: string;
+}
+
+export interface ContentSidebar {
+  related?: RelatedResource[];
+  table_of_contents?: Array<{ level: number; text: string; id: string }>;
+}
+
+export interface UnifiedContent {
+  hero: ContentHero;
+  sections: ContentSection[];
+  sidebar?: ContentSidebar;
+}
+
+// ==================== Content Type Interfaces ====================
+
 export interface Blog {
   id: string;
   title: string;
@@ -17,6 +81,7 @@ export interface Blog {
   published_at: string | null;
   created_at: string;
   updated_at: string;
+  sections?: UnifiedContent; // New: structured sections
 }
 
 export interface Whitepaper {
@@ -37,6 +102,7 @@ export interface Whitepaper {
   published_at: string | null;
   created_at: string;
   updated_at: string;
+  sections?: UnifiedContent; // New: structured sections
 }
 
 export interface Resource {
@@ -54,6 +120,7 @@ export interface Resource {
   is_published: boolean;
   created_at: string;
   updated_at: string;
+  sections?: UnifiedContent; // New: structured sections
 }
 
 export interface Guide {
@@ -65,6 +132,7 @@ export interface Guide {
   cover_image_url: string | null;
   created_at: string;
   updated_at: string;
+  sections?: UnifiedContent; // New: structured sections
 }
 
 export interface CaseStudy {
@@ -72,20 +140,22 @@ export interface CaseStudy {
   title: string;
   slug: string;
   summary: string;
-  content: string;
+  content?: string;
   cover_image_url: string | null;
+  author_name?: string | null;
   company_name: string | null;
   topic: string | null;
   industry: string | null;
-  challenge: string | null;
-  solution: string | null;
-  results: string | null;
+  challenge?: string | null;
+  solution?: string | null;
+  results?: string | null;
   tags: string[] | null;
   is_featured: boolean;
   is_published: boolean;
   published_at: string | null;
   created_at: string;
   updated_at: string;
+  sections?: UnifiedContent; // New: structured sections
 }
 
 // Form data types (for creating/updating)

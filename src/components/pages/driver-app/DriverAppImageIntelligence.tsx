@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -59,9 +60,9 @@ export const DriverAppImageIntelligence = () => {
                         </div>
                     </div>
 
-                    <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)]">
+                    <Link href="/driver-app" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)] text-center">
                         Learn More about AI POD Verification
-                    </button>
+                    </Link>
                 </div>
 
             </div>

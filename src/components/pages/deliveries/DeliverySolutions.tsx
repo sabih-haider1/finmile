@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Target, Users, Factory, Map, Activity, Layers } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -155,9 +156,9 @@ export const DeliverySolutions = () => {
                         ))}
                     </ul>
 
-                    <button className="self-start mt-2 bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-transform hover:scale-105">
+                    <Link href="/solutions" className="self-start mt-2 bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-transform hover:scale-105 text-center">
                         Learn More
-                    </button>
+                    </Link>
 
                 </div>
 

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 
 const AgentCard = ({ title, description, benefits, index, total: _total }: {
@@ -54,11 +55,12 @@ const AgentCard = ({ title, description, benefits, index, total: _total }: {
           ))}
         </div>
 
-        <button 
+        <Link
+          href="/ai-agents"
           className='bg-[#6A27D4] text-white px-10 py-3.5 rounded-full font-semibold text-[16px] w-fit hover:bg-[#5821B0] transition-colors mt-6 mx-auto lg:mx-0'
         >
           Learn More
-        </button>
+        </Link>
       </div>
 
       {/* Right: Dashboard Image */}

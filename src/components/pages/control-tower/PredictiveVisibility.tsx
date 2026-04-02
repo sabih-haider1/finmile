@@ -1,9 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Target, CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const PredictiveVisibility = () => {
     return (
@@ -27,12 +29,12 @@ export const PredictiveVisibility = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] w-full sm:w-auto text-center">
+                        <Link href="/control-tower" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] w-full sm:w-auto text-center">
                             See Control Tower in Action
-                        </button>
-                        <button className="bg-white text-[#6A27D4] border border-[#d6d0ff] px-8 py-3.5 rounded-full font-semibold text-[14px] transition-all hover:border-[#6A27D4] hover:shadow-[0_0_15px_rgba(106,39,212,0.15)] w-full sm:w-auto text-center">
+                        </Link>
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-white text-[#6A27D4] border border-[#d6d0ff] px-8 py-3.5 rounded-full font-semibold text-[14px] transition-all hover:border-[#6A27D4] hover:shadow-[0_0_15px_rgba(106,39,212,0.15)] w-full sm:w-auto text-center">
                             Book A Demo
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

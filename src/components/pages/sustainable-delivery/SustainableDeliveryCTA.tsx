@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const SustainableDeliveryCTA = () => {
     return (
@@ -49,7 +50,7 @@ export const SustainableDeliveryCTA = () => {
                             Join the operators already using Finmile to run cleaner, more profitable fleets. Cut carbon, not corners.
                         </p>
 
-                        <Link href="/contact" className="w-full sm:w-auto">
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                             <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-bold text-[16px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 shadow-[0_10px_20px_rgba(106,39,212,0.2)] w-full sm:w-auto">
                                 Book A Demo
                             </button>

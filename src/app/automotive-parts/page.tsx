@@ -107,7 +107,7 @@ export default function AutomotivePartsPage() {
           image="/assets/images/half-dashboard.png"
           imageAlt="Automotive Logistics Dashboard"
           ctaText="Book A Demo"
-          ctaHref="/contact"
+          ctaHref="https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform"
         />
 
         <IndustryFinalCTA />

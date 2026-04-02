@@ -1,10 +1,12 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const IntegrationsFeature = () => {
     return (
@@ -47,9 +49,9 @@ export const IntegrationsFeature = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <button className="bg-[#6A27D4] text-white px-10 py-3 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-10 py-3 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
                         Free Savings Analysis
-                    </button>
+                    </Link>
                 </div>
 
             </div>

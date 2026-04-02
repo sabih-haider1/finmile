@@ -17,7 +17,6 @@ import {
   rateLimitResponse,
   errorResponse,
 } from '@/lib/errors';
-import { sanitizeHtml } from '@/lib/security';
 import { isSlugUnique } from '@/lib/upload';
 
 const supabase = createClient(
@@ -114,9 +113,11 @@ export async function PUT(request: NextRequest, context: { params: Promise<{ id:
       updated_at: new Date().toISOString(),
     };
 
-    if (updateData.content) {
-      updateData.content = sanitizeHtml(updateData.content as string);
+    if (validatedData.author_name !== undefined || validatedData.company_name !== undefined) {
+      updateData.company_name = validatedData.author_name || validatedData.company_name || null;
     }
+
+    delete updateData.author_name;
 
     delete updateData.id;
     delete updateData.created_at;

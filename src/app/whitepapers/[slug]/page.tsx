@@ -2,12 +2,10 @@ import { notFound } from 'next/navigation';
 import { supabase } from '@/supabaseClient';
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import Image from 'next/image';
 import { Metadata } from 'next';
 import { getAuthorByName } from '@/data/authors';
-import { AuthorProfile } from '@/components/ui/AuthorProfile';
+import { DetailPageTemplate } from '@/components/detail-template';
+import { UnifiedContent } from '@/types/content';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -47,107 +45,104 @@ export default async function WhitepaperDetailPage({ params }: Props) {
   }
 
   const author = whitepaper.author || whitepaper.author_name;
-  // Define date dynamically
   const publishDate = whitepaper.published_date || whitepaper.published_at || whitepaper.created_at;
-
   const resolvedAuthor = getAuthorByName(whitepaper.author || whitepaper.author_name);
+  const authorName = whitepaper.author || whitepaper.author_name || 'Finmile Editorial Team';
+
+  const authorDisplay = resolvedAuthor ? {
+    name: resolvedAuthor.name,
+    bio: resolvedAuthor.bio,
+    avatar_url: resolvedAuthor.image,
+  } : authorName;
+
+  // Fetch related whitepapers
+  const { data: relatedItems } = await supabase
+    .from('whitepapers')
+    .select('id, title, slug, cover_image_url, published_date, created_at')
+    .neq('id', whitepaper.id)
+    .eq('is_published', true)
+    .limit(3);
+
+  const sidebarRelated = (relatedItems || []).map((item) => ({
+    id: item.id,
+    title: item.title,
+    thumbnail: item.cover_image_url || undefined,
+    date: item.published_date || item.created_at,
+    url: `/whitepapers/${item.slug}`,
+  }));
+
+  const fallbackContent: UnifiedContent = {
+    hero: {
+      title: whitepaper.title,
+      image_url: whitepaper.cover_image_url,
+      description: whitepaper.summary,
+      metadata: {
+        published_date: publishDate,
+        read_time: 'Whitepaper',
+        author: authorName,
+      },
+    },
+    sections: whitepaper.sections && typeof whitepaper.sections === 'object'
+      ? whitepaper.sections.sections?.length
+        ? whitepaper.sections.sections
+        : [
+            {
+              id: 'whitepaper-summary',
+              type: 'content',
+              data: {
+                body: `<p>${whitepaper.summary}</p>`,
+              },
+            },
+            {
+              id: 'whitepaper-download',
+              type: 'cta',
+              data: {
+                cta_title: `Download ${whitepaper.title}`,
+                cta_points: [
+                  'Get the full whitepaper PDF',
+                  'Use it as a reference document',
+                  'Share it with your team',
+                ],
+                cta_button: { label: 'Download PDF', url: whitepaper.pdf_url },
+              },
+            },
+          ]
+      : [
+          {
+            id: 'whitepaper-summary',
+            type: 'content',
+            data: {
+              body: `<p>${whitepaper.summary}</p>`,
+            },
+          },
+          {
+            id: 'whitepaper-download',
+            type: 'cta',
+            data: {
+              cta_title: `Download ${whitepaper.title}`,
+              cta_points: [
+                'Get the full whitepaper PDF',
+                'Use it as a reference document',
+                'Share it with your team',
+              ],
+              cta_button: { label: 'Download PDF', url: whitepaper.pdf_url },
+            },
+          },
+        ],
+    sidebar: {
+      related: sidebarRelated,
+    },
+  };
 
   return (
-    <main className="min-h-screen bg-[#0B0616] text-[#ffffff] flex flex-col relative overflow-hidden">
-      <Header />
+    <main className="min-h-screen bg-white text-gray-900 flex flex-col relative overflow-hidden font-montserrat">
+      <Header theme="light" />
       
-      {/* Ambient glows extracted from STYLING_GUIDE.md */}
-      <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#3B257E] rounded-full blur-[140px] opacity-30 pointer-events-none" />
-      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-20 pointer-events-none" />
-
-      <div className="flex-grow flex flex-col relative z-10 w-full max-w-[1440px] mx-auto">
-        
-        {/* Dynamic Hero Section */}
-        <section className="relative w-full pt-[140px] pb-16 md:pb-16 px-6 mt-10">
-          <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
-            
-            <div className="mb-6 flex gap-3 justify-center flex-wrap">
-               <Badge label="Research & Insights" showNew={false} />
-               {whitepaper.tags?.map((tag: string) => (
-                  <Badge key={tag} label={tag} showNew={false} />
-               ))}
-            </div>
-            
-            <h1 className="text-[36px] md:text-[52px] lg:text-[64px] tracking-tight leading-[1.15] md:leading-[1.1] font-bold text-white mb-6">
-              {whitepaper.title}
-            </h1>
-            
-            <p className="text-[#9CA3AF] text-[16px] md:text-[18px] font-medium leading-relaxed max-w-[800px] mx-auto mb-10">
-              {whitepaper.summary}
-            </p>
-            
-            <div className="flex flex-wrap items-center justify-center gap-6 text-[#D1D5DB] text-[15px] font-medium mb-12">
-               {(resolvedAuthor?.name || whitepaper.author_name || whitepaper.author) && (
-                 <div className="flex items-center gap-3 bg-white/[0.04] border border-white/10 rounded-full py-1.5 px-4 backdrop-blur-md">
-                   <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#6A27D4] to-[#A78BFA] flex items-center justify-center text-white font-bold text-xs">
-                     {author.charAt(0)}
-                   </div>
-                   <span>Author: {author}</span>
-                 </div>
-               )}
-               {publishDate && (
-                 <div className="flex items-center gap-2 bg-white/[0.04] border border-white/10 rounded-full py-1.5 px-4 backdrop-blur-md">
-                   <svg className="w-4 h-4 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                   </svg>
-                   <span>Published: {new Date(publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                 </div>
-               )}
-            </div>
-
-            {whitepaper.pdf_url && (
-               <div className="w-full px-4 sm:px-0 sm:w-auto">
-                 <a href={whitepaper.pdf_url} target="_blank" rel="noopener noreferrer" className="block w-full">
-                   <Button variant="solid" size="lg" className="w-full sm:w-auto !h-auto min-h-[48px] py-3 px-6 whitespace-normal text-center shadow-[0_0_30px_rgba(106,39,212,0.4)] hover:shadow-[0_0_40px_rgba(106,39,212,0.6)] transition-all transform hover:-translate-y-1">
-                     Download Full Whitepaper (PDF)
-                   </Button>
-                 </a>
-               </div>
-            )}
-          </div>
-        </section>
-
-        {/* Cover Image Section / Glassmorphic Empty State */}
-        {whitepaper.cover_image_url ? (
-          <section className="relative z-10 max-w-[1000px] mx-auto px-6 pb-16 w-full">
-            <div className="rounded-[24px] overflow-hidden border border-white/10 bg-white/[0.04] shadow-2xl p-2 liquid-glass">
-              <div className="relative w-full aspect-[16/9] rounded-[16px] overflow-hidden bg-gradient-to-br from-purple-100/5 to-indigo-100/5">
-                <Image 
-                  src={whitepaper.cover_image_url} 
-                  alt={`${whitepaper.title} Cover`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </section>
-        ) : (
-          <section className="relative z-10 max-w-[1000px] mx-auto px-6 pb-16 w-full mt-4">
-            <div className="rounded-[24px] overflow-hidden border border-white/10 bg-white/[0.08] backdrop-blur-3xl shadow-2xl p-8 flex flex-col items-center justify-center min-h-[350px]">
-              <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 shadow-[inset_0_2px_10px_rgba(255,255,255,0.1)]">
-                <svg className="w-10 h-10 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white/90 mb-2">Research Document</h3>
-              <p className="text-[#9CA3AF] text-[15px] font-medium text-center max-w-sm">
-                Click the button above to view or download the full research in PDF format.
-              </p>
-            </div>
-          </section>
-        )}
-
-        {/* Dynamic Author Profile Section */}
-        {resolvedAuthor && (
-          <div className="mb-16">
-            <AuthorProfile author={resolvedAuthor} />
-          </div>
-        )}
+      <div className="flex-grow flex flex-col relative z-10 w-full pt-16">
+        <DetailPageTemplate 
+          content={fallbackContent} 
+          author={authorDisplay} 
+        />
       </div>
 
       <Footer />

@@ -20,7 +20,6 @@ import {
   rateLimitResponse,
   errorResponse,
 } from '@/lib/errors';
-import { sanitizeHtml } from '@/lib/security';
 import { isSlugUnique } from '@/lib/upload';
 import { createClient } from '@supabase/supabase-js';
 
@@ -118,23 +117,18 @@ export async function POST(request: NextRequest) {
       return errorResponse('A case study with this slug already exists', 409, 'DUPLICATE_SLUG');
     }
 
-    const sanitizedContent = sanitizeHtml(validatedData.content);
-
     const now = new Date().toISOString();
     const caseStudyData = {
       title: validatedData.title,
       slug: validatedData.slug,
       summary: validatedData.summary || '',
-      content: sanitizedContent,
       cover_image_url: validatedData.cover_image_url || null,
-      company_name: validatedData.company_name || null,
+      company_name: validatedData.author_name || validatedData.company_name || null,
       industry: validatedData.industry || null,
-      challenge: validatedData.challenge || null,
-      solution: validatedData.solution || null,
-      results: validatedData.results || null,
       tags: validatedData.tags || null,
       is_featured: validatedData.is_featured || false,
       is_published: validatedData.is_published ?? true,
+      sections: validatedData.sections || null,
       published_at: validatedData.is_published ? now : null,
       created_at: now,
       updated_at: now,

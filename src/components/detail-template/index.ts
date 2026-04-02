@@ -1,0 +1,9 @@
+export { DetailPageTemplate } from './DetailPageTemplate';
+export type { DetailPageTemplateProps, AuthorInfo } from './DetailPageTemplate';
+export { HeroSection } from './HeroSection';
+export { ContentSection } from './ContentSection';
+export { CTASection } from './CTASection';
+export { FeaturesSection } from './FeaturesSection';
+export { ComparisonSection } from './ComparisonSection';
+export { Sidebar } from './Sidebar';
+export { AuthorSection } from './AuthorSection';

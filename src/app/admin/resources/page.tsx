@@ -137,7 +137,8 @@ export default function ResourcesPage() {
   const resourceFormFields: FormFieldConfig[] = [
     { name: 'title', label: 'Title', type: 'text', required: true, placeholder: 'Enter resource title' },
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
-    { name: 'description', label: 'Description', type: 'textarea', rows: 3, placeholder: 'Brief description...' },
+    { name: 'description', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief description...' },
+    { name: 'sections', label: 'Sections JSON', type: 'json', helpText: 'Optional unified template structure' },
     { name: 'file_url', label: 'File', type: 'file', required: true, accept: '.pdf,.docx,.xlsx,.zip', bucket: 'resources', folder: 'files' },
     {
       name: 'file_type',

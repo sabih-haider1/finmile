@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { Mail, Linkedin } from 'lucide-react';
 import { Button } from '../ui/Button';
 
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
+
 export const Footer = () => {
     return (
         <footer className="w-full bg-[#0B0616] text-white pt-12 pb-4 px-6 lg:px-16 overflow-hidden relative pointer-events-auto" style={{ isolation: 'isolate' }}>
@@ -35,12 +37,12 @@ export const Footer = () => {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                        <Link href="#contact" className="w-fit">
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-fit">
                             <Button variant="solid" size="lg" className="shadow-[0_0_20px_rgba(106,39,212,0.4)]">
                                 Request A Demo
                             </Button>
                         </Link>
-                        <Link href="#track" className="w-fit">
+                        <Link href="/track-parcel" className="w-fit">
                             <Button variant="liquid-glass" size="lg">
                                 Track Parcel
                             </Button>
@@ -75,7 +77,7 @@ export const Footer = () => {
                         <Link href="/blog/all" className="hover:text-white transition-colors">Blog</Link>
                         <Link href="/whitepapers/all" className="hover:text-white transition-colors">Whitepapers</Link>
                         <Link href="/faqs" className="hover:text-white transition-colors">FAQs</Link>
-                        <Link href="/track" className="hover:text-white transition-colors">Track Delivery</Link>
+                        <Link href="/track-parcel" className="hover:text-white transition-colors">Track Delivery</Link>
                     </nav>
                 </div>
 

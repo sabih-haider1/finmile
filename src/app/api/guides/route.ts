@@ -109,6 +109,7 @@ export async function POST(request: NextRequest) {
       description: validatedData.description || '',
       pdf_url: validatedData.pdf_url,
       cover_image_url: validatedData.cover_image_url || null,
+      sections: validatedData.sections || null,
       created_at: now,
       updated_at: now,
     };

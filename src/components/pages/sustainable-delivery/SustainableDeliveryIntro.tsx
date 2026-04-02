@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const SustainableDeliveryIntro = () => {
     return (
@@ -40,12 +41,12 @@ export const SustainableDeliveryIntro = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <Link href="/contact" className="w-full sm:w-auto">
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                             <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
                                 Book A Demo
                             </button>
                         </Link>
-                        <Link href="#learn-more" className="w-full sm:w-auto">
+                        <Link href="/solutions" className="w-full sm:w-auto">
                             <button className="border border-[#7C3AED] text-[#7C3AED] bg-white px-8 py-3.5 rounded-full font-semibold text-[15px] hover:bg-[#F5F3FF] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
                                 Learn More
                             </button>

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Badge } from "../../ui/Badge";
 import { Button } from "../../ui/Button";
@@ -9,6 +10,7 @@ import { Montserrat } from 'next/font/google';
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const Hero = () => {
   return (
@@ -57,14 +59,18 @@ export const Hero = () => {
           variants={fadeInUp}
         >
           <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-            <Button variant="solid" size="lg">
-              See How It Works
-            </Button>
+            <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer">
+              <Button variant="solid" size="lg">
+                See How It Works
+              </Button>
+            </Link>
           </motion.div>
           <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-            <Button variant="liquid-glass" size="lg">
-              Get In Touch
-            </Button>
+            <Link href="/contact">
+              <Button variant="liquid-glass" size="lg">
+                Get In Touch
+              </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </motion.div>

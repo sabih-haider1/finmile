@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 interface IndustryHeroIntroProps {
     title: string;
@@ -24,7 +25,7 @@ export const IndustryHeroIntro = ({
     image,
     imageAlt,
     ctaPrimaryText = "Book A Demo",
-    ctaPrimaryLink = "/contact"
+    ctaPrimaryLink = DEMO_FORM_URL
 }: IndustryHeroIntroProps) => {
     return (
         <section className={`w-full bg-white py-6 md:py-12 flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
@@ -65,7 +66,7 @@ export const IndustryHeroIntro = ({
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <Link href={ctaPrimaryLink} className="w-full sm:w-auto">
+                        <Link href={ctaPrimaryLink} target={ctaPrimaryLink.startsWith('http') ? '_blank' : undefined} rel={ctaPrimaryLink.startsWith('http') ? 'noopener noreferrer' : undefined} className="w-full sm:w-auto">
                             <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-3xl font-bold text-[16px] shadow-[0_10px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
                                 {ctaPrimaryText}
                             </button>

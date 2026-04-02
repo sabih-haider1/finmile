@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Zap, RefreshCw, Map } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -42,9 +43,9 @@ export const DriverAppEcosystem = () => {
                             The Driver App is just one part of the OS. It syncs instantly with your Control Tower and Optimisation Engine.
                         </p>
                         
-                        <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)] w-full sm:w-auto">
+                        <Link href="/solutions" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)] w-full sm:w-auto text-center">
                             Explore the Finmile Platform
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

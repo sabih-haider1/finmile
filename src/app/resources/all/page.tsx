@@ -1,20 +1,20 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/layout/PageHero";
-import { AllCaseStudiesGrid } from "@/components/pages/resources/AllCaseStudiesGrid";
+import { ResourceGrid } from "@/components/pages/resources/ResourceGrid";
 
 export const metadata = {
-    title: 'All Case Studies | Finmile',
-    description: 'Explore all of Finmile\'s case studies and success stories.',
+    title: 'All Resources | Finmile',
+    description: 'Explore all of Finmile\'s resources, templates, and downloadable assets.',
 };
 
-export default function AllCaseStudiesPage() {
+export default function AllResourcesPage() {
     return (
         <main className="min-h-screen bg-white text-foreground flex flex-col">
             <Header />
             <div className="flex-grow">
-                <PageHero title="All Case Studies" />
-                <AllCaseStudiesGrid />
+                <PageHero title="All Resources" />
+                <ResourceGrid />
             </div>
             <Footer />
         </main>

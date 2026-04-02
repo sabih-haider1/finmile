@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
@@ -72,9 +73,9 @@ export const EnterpriseIntegrations = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <button className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
+                    <Link href="/contact" className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
                         Access API Documentation
-                    </button>
+                    </Link>
                 </div>
 
             </div>

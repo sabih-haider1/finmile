@@ -2,10 +2,12 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 import { TrendingDown, Zap, User } from 'lucide-react';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const ReturnsFinalCTA = () => {
     return (
@@ -63,12 +65,12 @@ export const ReturnsFinalCTA = () => {
 
                         {/* Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
-                            <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] w-full sm:flex-1 hover:bg-[#5821B0] transition-colors">
+                            <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] w-full sm:flex-1 hover:bg-[#5821B0] transition-colors text-center">
                                 Book A Demo
-                            </button>
-                            <button className="w-full sm:flex-1 px-8 py-3.5 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-full text-[14px] font-semibold transition-all hover:bg-[#2F1C8C] hover:text-white">
+                            </Link>
+                            <Link href="/contact" className="w-full sm:flex-1 px-8 py-3.5 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-full text-[14px] font-semibold transition-all hover:bg-[#2F1C8C] hover:text-white text-center">
                                 Talk To Our Team
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

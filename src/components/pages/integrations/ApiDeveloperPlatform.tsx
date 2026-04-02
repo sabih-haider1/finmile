@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
@@ -57,9 +58,9 @@ export const ApiDeveloperPlatform = () => {
                             Developers can explore the full API in our Developer Portal, complete with schema documentation,
                             SDKs, example payloads, and authentication guides.
                         </p>
-                        <button className="bg-[#6A27D4] text-white px-8 py-3 rounded-full text-[14px] font-semibold border border-white/10 hover:bg-[#5821B0] transition-all">
+                        <Link href="/contact" className="bg-[#6A27D4] text-white px-8 py-3 rounded-full text-[14px] font-semibold border border-white/10 hover:bg-[#5821B0] transition-all inline-block">
                             Access API Documentation
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

@@ -34,7 +34,7 @@ export default function AboutPage() {
                 <OurLeadership />
                 <OurCollectiveEdge />
                 <PressAndAwards />
-                <JoinTheJourney secondaryButtonHref="#" />
+                <JoinTheJourney />
             </div>
             <Footer />
         </main>
