@@ -40,10 +40,13 @@ export const TrustSection = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        {brands.map((brand) => (
+        {brands.map((brand, index) => {
+          const isOddLastItem = brands.length % 2 !== 0 && index === brands.length - 1;
+
+          return (
           <AnimatedCard 
             key={brand.name} 
-            className='bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-full max-w-[180px] h-[88px] sm:h-[100px] md:w-[220px] md:max-w-none md:h-[120px]'
+            className={`bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-full max-w-[180px] h-[88px] sm:h-[100px] md:w-[220px] md:max-w-none md:h-[120px] ${isOddLastItem ? 'col-span-2 justify-self-center md:col-span-1' : ''}`}
             variant={fadeInUp}
             index={brands.findIndex((b) => b.name === brand.name)}
             hoverEffect='lift'
@@ -57,7 +60,8 @@ export const TrustSection = () => {
               className="max-h-[50px] w-auto object-contain"
             />
           </AnimatedCard>
-        ))}
+          );
+        })}
       </motion.div>
 
       <motion.p 

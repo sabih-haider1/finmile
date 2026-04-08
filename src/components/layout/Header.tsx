@@ -21,6 +21,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
         { name: "Logistics & Delivery", href: "/logistics-delivery" },
         { name: "E-Commerce & Retail", href: "/retail-ecommerce" },
         { name: "Automotive & Parts", href: "/automotive-parts" },
+        { name: "Automotive Logistics & Towing", href: "/automotive-logistics-towing" },
         { name: "Medical & Pharmacy", href: "/medical-pharmacy" },
         { name: "Field Service", href: "/field-service" },
         { name: "Wholesale & B2B", href: "/wholesale-b2b" },
