@@ -66,7 +66,7 @@ export const DeliverySoftwareSectors = () => {
                 "Route optimisation for automotive logistics",
                 "Workshop delivery scheduling and prioritisation",
                 "Real time tracking for parts and recovery vehicles",
-                "Reduce vehicle downtime and missed SLAs"
+                "Reduce vehicle downtime and missed SLAs."
             ],
             image: "/assets/images/features/delivery-dashboard.png"
         }
