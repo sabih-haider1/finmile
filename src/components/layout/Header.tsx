@@ -138,7 +138,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                 {/* Logo */}
                 <Link
                     href="/"
-                    className={`relative z-[110] flex items-center justify-center shrink-0 transition-opacity duration-300 self-center translate-y-[2px] cursor-pointer ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
+                    className={`relative z-[110] flex shrink-0 transition-opacity duration-300 self-center translate-y-[2px] cursor-pointer ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
                 >
                     <Image
                         src={isLight ? "/assets/logos/logo-blue.png" : "/assets/logos/logo-white.png"}

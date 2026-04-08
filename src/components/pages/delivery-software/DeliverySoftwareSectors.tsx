@@ -8,8 +8,8 @@ import { Montserrat } from 'next/font/google';
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DeliverySoftwareSectors = () => {
-    // Default to Healthcare & Pharma (index 2) as seen in screenshot
-    const [activeTab, setActiveTab] = useState(2);
+    // Default to Automotive Parts & Vehicle Towing Logistics for the new client request
+    const [activeTab, setActiveTab] = useState(5);
 
     // Define the content for each tab
     const tabs = [
@@ -52,6 +52,23 @@ export const DeliverySoftwareSectors = () => {
             subtitle: "Optimised for range and traffic.",
             bullets: ["EV charging constraint routing", "Bicycle lane pathing", "Low-emission zone compliance"],
             image: "/assets/images/people/meeting.png" // Placeholder
+        },
+        {
+            id: 5,
+            title: "Automotive Parts Delivery & Vehicle Towing Logistics",
+            icon: <Truck className="w-4 h-4" strokeWidth={2} />,
+            subtitle: "Built for urgent parts, roadside recovery, and garage SLAs.",
+            bullets: [
+                "Automotive parts delivery software",
+                "Same day and urgent auto parts delivery",
+                "Vehicle towing and roadside assistance dispatch",
+                "Breakdown recovery and fleet coordination",
+                "Route optimisation for automotive logistics",
+                "Workshop delivery scheduling and prioritisation",
+                "Real time tracking for parts and recovery vehicles",
+                "Reduce vehicle downtime and missed SLAs"
+            ],
+            image: "/assets/images/features/delivery-dashboard.png"
         }
     ];
 
