@@ -10,7 +10,7 @@ export function Badge({ label, showNew = true, className, ...props }: BadgeProps
   return (
     <div
       className={cn(
-        "inline-flex items-center rounded-full border border-white/10 bg-[#160E2A]/90 backdrop-blur-md transition-colors hover:bg-white/10",
+        "inline-flex items-center rounded-full border border-white/10 bg-[#120A22]/95 backdrop-blur-md transition-colors hover:bg-white/10",
         showNew ? "pl-1.5 pr-4 py-1.5" : "px-4 py-1.5",
         className
       )}
@@ -21,7 +21,7 @@ export function Badge({ label, showNew = true, className, ...props }: BadgeProps
           NEW
         </span>
       )}
-      <span className="text-[#D1D5DB] text-[12px] font-medium tracking-wide">
+      <span className="text-[#F3E8FF] text-[12px] font-medium tracking-wide">
         {label}
       </span>
     </div>

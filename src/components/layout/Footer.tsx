@@ -28,7 +28,7 @@ export const Footer = () => {
                     {/* Email Chip */}
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full liquid-glass flex items-center justify-center">
-                            <Mail className="w-6 h-6 text-white" />
+                            <Mail className="w-6 h-6 text-white" aria-hidden="true" />
                         </div>
                         <a href="mailto:hello@finmile.co" className="text-white text-[14px] xl:text-[16px] font-medium hover:text-[#D8C7FF] transition-colors tracking-wide">
                             hello@finmile.co
@@ -94,8 +94,9 @@ export const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer block"
+                            aria-label="Finmile on LinkedIn"
                         >
-                            <Linkedin className="w-5 h-5 text-white" />
+                            <Linkedin className="w-5 h-5 text-white" aria-hidden="true" />
                         </a>
                     </div>
                 </div>

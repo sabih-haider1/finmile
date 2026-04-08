@@ -1,8 +1,16 @@
 import dynamicImport from 'next/dynamic';
 import { Header } from "../components/layout/Header";
 import { Hero } from "../components/pages/home/Hero";
-import { TrustSection } from "../components/pages/home/MainFeatures";
-import { Footer } from "../components/layout/Footer";
+
+const TrustSection = dynamicImport(
+  () => import('../components/pages/home/MainFeatures').then((mod) => mod.TrustSection),
+  { loading: () => <section className="w-full min-h-[220px] bg-white" aria-hidden="true" /> }
+);
+
+const Footer = dynamicImport(
+  () => import('../components/layout/Footer').then((mod) => mod.Footer),
+  { loading: () => <footer className="w-full min-h-[280px] bg-[#0B0616]" aria-hidden="true" /> }
+);
 
 const FeaturesSection = dynamicImport(
   () => import('../components/pages/home/MainFeatures').then((mod) => mod.FeaturesSection),

@@ -23,7 +23,7 @@ export const TrustSection = () => {
       transition={{ duration: 0.5 }}
       viewport={{ once: true, amount: 0.3 }}
     >
-      <motion.h3 
+      <motion.h2 
         className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px]'
         variants={fadeInUp}
         initial="hidden"
@@ -31,7 +31,7 @@ export const TrustSection = () => {
         viewport={{ once: true, amount: 0.5 }}
       >
         TRUSTED BY THE WORLD&apos;S BIGGEST BRANDS
-      </motion.h3>
+      </motion.h2>
 
       <motion.div 
         className='flex flex-wrap justify-center items-center gap-6 md:gap-11 mb-12 max-w-[1600px] w-full'
@@ -132,7 +132,7 @@ export const FeaturesSection = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           {/* Background Highlight Glow */}
-          <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0 will-change-transform' />
+          <div aria-hidden="true" className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0' />
 
           <div className='relative z-10 w-full max-w-[800px]'>
             <motion.div variants={scaleIn}>

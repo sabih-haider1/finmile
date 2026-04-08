@@ -108,6 +108,8 @@ export const UnifiedCommand = () => {
                 >
                     <motion.button 
                         onClick={prevSlide}
+                        type="button"
+                        aria-label="Previous slide"
                         className="w-12 h-12 rounded-full bg-white shadow-[0_4px_12px_rgba(47,28,140,0.08)] flex items-center justify-center text-[#0A1B33] hover:bg-[#2F1C8C] hover:text-white transition-all duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
@@ -120,6 +122,7 @@ export const UnifiedCommand = () => {
                             <motion.button
                                 key={index}
                                 onClick={() => goToSlide(index)}
+                                type="button"
                                 className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
                                     currentSlide === index ? 'bg-[#2F1C8C] opacity-100' : 'bg-[#2F1C8C] opacity-20 hover:opacity-50'
                                 }`}
@@ -131,6 +134,8 @@ export const UnifiedCommand = () => {
                     
                     <motion.button 
                         onClick={nextSlide}
+                        type="button"
+                        aria-label="Next slide"
                         className="w-12 h-12 rounded-full bg-[#2F1C8C] text-white shadow-[0_4px_12px_rgba(47,28,140,0.2)] flex items-center justify-center hover:bg-[#5821B0] transition-all duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}

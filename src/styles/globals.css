@@ -159,35 +159,6 @@ body {
   text-fill-color: transparent;
 }
 
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes liquidShimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-@keyframes liquidPulse {
-  0%, 100% {
-    filter: url(#liquid-goo) brightness(1);
-  }
-  50% {
-    filter: url(#liquid-goo) brightness(1.05);
-  }
-}
-
 /* Fade in animations */
 @keyframes fadeIn {
   0% {

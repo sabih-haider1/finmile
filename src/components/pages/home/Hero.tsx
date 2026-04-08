@@ -6,21 +6,18 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Badge } from "../../ui/Badge";
 import { Button } from "../../ui/Button";
-import { Montserrat } from 'next/font/google';
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const Hero = () => {
   return (
-    <section className={`relative w-full min-h-screen flex flex-col items-center justify-start pt-[140px] px-4 overflow-hidden bg-[#0B0616] ${montserrat.className}`}>
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-start pt-[140px] px-4 overflow-hidden bg-[#0B0616]">
 
       {/* Upper Subtle Glow behind text */}
-      <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#3B257E] rounded-full blur-[140px] opacity-30 pointer-events-none transform-gpu translate-z-0 will-change-transform" />
+      <div aria-hidden="true" className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#3B257E] rounded-full blur-[140px] opacity-30 pointer-events-none transform-gpu translate-z-0" />
 
       {/* Massive Lower Intense Gradient Glow (The sweeping purple glow behind the hero image) */}
-      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-40 pointer-events-none transform-gpu translate-z-0 will-change-transform" />
+      <div aria-hidden="true" className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-[#531FD1] rounded-[100%] blur-[220px] opacity-40 pointer-events-none transform-gpu translate-z-0" />
 
       {/* Hero Content */}
       <motion.div
@@ -90,6 +87,8 @@ export const Hero = () => {
           width={1200}
           height={750}
           priority
+          fetchPriority="high"
+          quality={80}
           className="w-full h-auto object-contain"
           sizes="(max-width: 1200px) 100vw, 1200px"
         />

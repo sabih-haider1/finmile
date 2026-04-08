@@ -284,6 +284,8 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="xl:hidden relative flex flex-col gap-1.5 w-8 h-8 justify-center items-center ml-auto z-[110]"
                     aria-label="Toggle menu"
+                    aria-expanded={isMobileMenuOpen}
+                    aria-controls="mobile-menu"
                 >
                     <span className={`w-6 h-0.5 ${isLight ? 'bg-gray-900' : 'bg-white'} rounded-full transition-transform duration-300 ease-out origin-center ${isMobileMenuOpen ? 'rotate-45 translate-y-[8px]' : ''}`} />
                     <span className={`w-6 h-0.5 ${isLight ? 'bg-gray-900' : 'bg-white'} rounded-full transition-opacity duration-300 ease-out ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
@@ -307,6 +309,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
 
             {/* Mobile Menu Sidebar */}
             <motion.div
+                id="mobile-menu"
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate={isMobileMenuOpen ? "open" : "closed"}
