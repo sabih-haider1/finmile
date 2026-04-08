@@ -77,26 +77,18 @@ export function AllWhitepapersGrid() {
 
     // Apply topic filter
     if (selectedTopic) {
-      console.log('All Page - Filtering by topic:', selectedTopic);
       filtered = filtered.filter((wp) => {
         const wpTopic = wp.topic?.trim();
-        const match = wpTopic && wpTopic.toLowerCase() === selectedTopic.toLowerCase();
-        console.log(`Whitepaper "${wp.title}" topic: "${wp.topic}" - Match: ${match}`);
-        return match;
+        return Boolean(wpTopic && wpTopic.toLowerCase() === selectedTopic.toLowerCase());
       });
-      console.log('All Page - After topic filter:', filtered.length, 'whitepapers');
     }
 
     // Apply industry filter
     if (selectedIndustry) {
-      console.log('All Page - Filtering by industry:', selectedIndustry);
       filtered = filtered.filter((wp) => {
         const wpIndustry = wp.industry?.trim();
-        const match = wpIndustry && wpIndustry.toLowerCase() === selectedIndustry.toLowerCase();
-        console.log(`Whitepaper "${wp.title}" industry: "${wp.industry}" - Match: ${match}`);
-        return match;
+        return Boolean(wpIndustry && wpIndustry.toLowerCase() === selectedIndustry.toLowerCase());
       });
-      console.log('All Page - After industry filter:', filtered.length, 'whitepapers');
     }
 
     // Apply sorting

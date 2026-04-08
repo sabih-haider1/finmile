@@ -1,4 +1,5 @@
 import { ContentSectionData } from '@/types/content';
+import { sanitizeRichHtml } from '@/lib/security';
 
 interface CustomSectionProps {
   data: ContentSectionData;
@@ -7,7 +8,7 @@ interface CustomSectionProps {
 }
 
 export function CustomSection({ data, className = '', sectionId }: CustomSectionProps) {
-  const html = data.html || data.custom_html || data.body;
+  const html = sanitizeRichHtml(data.html || data.custom_html || data.body || '');
   const css = data.css || data.custom_css;
 
   if (!html && !css) {
@@ -38,7 +39,7 @@ export function CustomSection({ data, className = '', sectionId }: CustomSection
 
           <div
             className="custom-section-content px-6 py-6 md:px-8 md:py-8"
-            dangerouslySetInnerHTML={{ __html: html || '' }}
+            dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>
       </div>

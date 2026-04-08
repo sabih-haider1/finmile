@@ -33,7 +33,7 @@ export interface ContentSectionData {
   // Comparison section
   comparison_table?: { headers: string[]; rows: string[][] };
   // Generic data storage
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface ContentSection {
@@ -113,6 +113,7 @@ export interface Resource {
   file_url: string;
   file_type: 'pdf' | 'docx' | 'xlsx' | 'zip';
   thumbnail_url: string | null;
+  author_name: string | null;
   topic: string | null;
   industry: string | null;
   tags: string[] | null;

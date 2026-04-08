@@ -36,7 +36,13 @@ export const RouteCalculatorPopup: React.FC<RouteCalculatorPopupProps> = ({ isOp
   // Reset form when popup opens
   useEffect(() => {
     if (isOpen) {
-      resetForm();
+      const timer = window.setTimeout(() => {
+        resetForm();
+      }, 0);
+
+      return () => {
+        window.clearTimeout(timer);
+      };
     }
   }, [isOpen, resetForm]);
 

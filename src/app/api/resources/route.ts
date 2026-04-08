@@ -125,6 +125,7 @@ export async function POST(request: NextRequest) {
       file_url: validatedData.file_url,
       file_type: validatedData.file_type,
       thumbnail_url: validatedData.thumbnail_url || null,
+      author_name: validatedData.author_name || null,
       tags: validatedData.tags || null,
       is_featured: validatedData.is_featured || false,
       is_published: validatedData.is_published ?? true,

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaqContactCTA } from './FaqContactCTA';
 import faqDataRaw from '../../../../faq_data.json';
+import { sanitizeRichHtml } from '@/lib/security';
 
 interface FaqItem {
   category: string;
@@ -22,12 +23,6 @@ export function FaqInteractiveList() {
   const [activeCategory, setActiveCategory] = useState<string>(categories[0] || '');
   const [openQuestionIndex, setOpenQuestionIndex] = useState<number>(0);
 
-  // When category changes, reset open question to 0
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => {
-    setOpenQuestionIndex(0);
-  }, [activeCategory]);
-
   const activeFaqs = faqData.filter(faq => faq.category === activeCategory);
 
   return (
@@ -40,7 +35,10 @@ export function FaqInteractiveList() {
             return (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => {
+                  setActiveCategory(cat);
+                  setOpenQuestionIndex(0);
+                }}
                 className={`shrink-0 text-center md:text-left px-4 py-2.5 md:py-3 rounded-lg text-sm md:text-base font-text transition-all duration-200 border-b-2 md:border-b-0 md:border-l-4 ${isActive
                   ? 'bg-white/15 border-white text-white'
                   : 'border-transparent hover:bg-white/5 text-white/60 hover:text-white'
@@ -105,7 +103,7 @@ export function FaqInteractiveList() {
                       <div className="px-5 md:px-6 pb-6 pt-1 ml-11">
                         <div
                           className="text-gray-600 prose prose-sm max-w-none prose-p:leading-relaxed prose-a:text-[#2F1C8C] prose-a:font-medium hover:prose-a:underline prose-em:italic"
-                          dangerouslySetInnerHTML={{ __html: faq.answer }}
+                          dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(faq.answer) }}
                         />
                       </div>
                     </motion.div>

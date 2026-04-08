@@ -11,6 +11,7 @@ import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { uploadFile, generateSlug } from '@/lib/upload';
 import { TOPICS, INDUSTRIES } from '@/lib/filterConstants';
+import { authors } from '@/data/authors';
 
 export default function ResourcesPage() {
   const [resources, setResources] = useState<Resource[]>([]);
@@ -153,6 +154,15 @@ export default function ResourcesPage() {
       ],
     },
     { name: 'thumbnail_url', label: 'Thumbnail Image', type: 'file', accept: 'image/*', bucket: 'resource-thumbnails', folder: 'thumbnails' },
+    {
+      name: 'author_name',
+      label: 'Author Name',
+      type: 'select',
+      options: [
+        { value: '', label: 'Select an author' },
+        ...authors.map((a) => ({ value: a.name, label: a.name })),
+      ],
+    },
     {
       name: 'topic',
       label: 'Topic',

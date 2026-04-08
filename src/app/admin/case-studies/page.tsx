@@ -11,6 +11,7 @@ import FormBuilder, { FormFieldConfig } from '@/components/admin/FormBuilder';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { uploadFile, generateSlug } from '@/lib/upload';
 import { TOPICS, INDUSTRIES } from '@/lib/filterConstants';
+import { authors } from '@/data/authors';
 
 export default function CaseStudiesPage() {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
@@ -184,7 +185,15 @@ export default function CaseStudiesPage() {
     { name: 'summary', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
     { name: 'sections', label: 'Sections JSON', type: 'json', helpText: 'Optional unified template structure' },
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'blog-covers', folder: 'case-study-covers' },
-    { name: 'author_name', label: 'Author Name', type: 'text', placeholder: 'John Doe' },
+    {
+      name: 'author_name',
+      label: 'Author Name',
+      type: 'select',
+      options: [
+        { value: '', label: 'Select an author' },
+        ...authors.map((a) => ({ value: a.name, label: a.name })),
+      ],
+    },
     {
       name: 'topic',
       label: 'Topic',

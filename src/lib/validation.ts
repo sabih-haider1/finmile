@@ -127,6 +127,7 @@ export const resourceSchema = z.object({
     message: `File type must be one of: ${allowedFileTypes.join(', ')}`,
   }),
   thumbnail_url: urlPattern,
+  author_name: z.string().max(200).optional().nullable(),
   topic: z.string().max(200).optional().nullable(),
   industry: z.string().max(200).optional().nullable(),
   tags: z.array(z.string()).optional().nullable(),

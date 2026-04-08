@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Mail, Loader2, CheckCircle2, Package, MapPin } from 'lucide-react';
+import { Mail, Loader2, CheckCircle2, Package } from 'lucide-react';
 import { contactFormSchema, ContactFormData } from '../../lib/validation';
 import { Button } from '../ui/Button';
 import { Montserrat } from 'next/font/google';
@@ -29,7 +29,7 @@ export const ContactForm = () => {
         setIsSubmitting(true);
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        console.log('Form data:', data);
+        void data;
         setIsSubmitting(false);
         setIsSuccess(true);
         reset();

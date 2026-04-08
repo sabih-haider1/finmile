@@ -28,6 +28,21 @@ export function sanitizeHtml(html: string): string {
 }
 
 /**
+ * Sanitize rich HTML while preserving basic markup.
+ * This strips high-risk tags/attributes and javascript/data URLs.
+ */
+export function sanitizeRichHtml(html: string): string {
+  if (!html) return '';
+
+  return html
+    .replace(/<\s*(script|iframe|object|embed|link|meta|base|form|input|button|textarea|select)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, '')
+    .replace(/<\s*(script|iframe|object|embed|link|meta|base|form|input|button|textarea|select)[^>]*\/?\s*>/gi, '')
+    .replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+    .replace(/\s(href|src)\s*=\s*(['"])\s*(javascript:|data:text\/html)/gi, ' $1=$2#')
+    .replace(/<\s*\/\s*style\s*>/gi, '');
+}
+
+/**
  * Sanitize plain text by escaping HTML entities
  * 
  * @param text - Raw text string
