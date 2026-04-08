@@ -14,10 +14,10 @@ export const Footer = () => {
             <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none -z-10" />
             <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#3B257E] rounded-[100%] blur-[200px] opacity-40 pointer-events-none -z-10" />
 
-            <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 z-20 relative">
+            <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 z-20 relative items-start">
 
                 {/* Column 1: Brand & Actions */}
-                <div className="flex flex-col space-y-10 md:col-span-6 lg:col-span-4">
+                <div className="flex flex-col items-start space-y-10 md:col-span-6 lg:col-span-4 w-full pl-1 md:pl-0">
                     {/* Brand Logo */}
                     <div className="mb-2">
                         <Link href="/">
@@ -36,7 +36,7 @@ export const Footer = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                    <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
                         <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-fit">
                             <Button variant="solid" size="lg" className="shadow-[0_0_20px_rgba(106,39,212,0.4)]">
                                 Request A Demo
@@ -51,9 +51,9 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 2: Quick Links */}
-                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0">
+                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0 w-full pl-1 md:pl-0 text-left">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Quick Links</h4>
-                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-2 md:pr-5 custom-scrollbar w-full md:w-max">
+                    <nav className="flex flex-col items-start space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-2 md:pr-5 custom-scrollbar w-full md:w-max">
                         <Link href="/about" className="hover:text-white transition-colors">About</Link>
                         <Link href="/ai-agents" className="hover:text-white transition-colors">AI Agents</Link>
                         <Link href="/control-tower" className="hover:text-white transition-colors">Control Tower</Link>
@@ -71,9 +71,9 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 3: Resources */}
-                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0">
+                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0 w-full pl-1 md:pl-0 text-left">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Resources</h4>
-                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium">
+                    <nav className="flex flex-col items-start space-y-5 text-[#B8ADC9] text-[15px] font-medium w-full">
                         <Link href="/blog/all" className="hover:text-white transition-colors">Blog</Link>
                         <Link href="/whitepapers/all" className="hover:text-white transition-colors">Whitepapers</Link>
                         <Link href="/faqs" className="hover:text-white transition-colors">FAQs</Link>
@@ -82,9 +82,9 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 4: Get in Touch */}
-                <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0">
+                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0 w-full pl-1 md:pl-0 text-left">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Get In Touch</h4>
-                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium">
+                    <nav className="flex flex-col items-start space-y-5 text-[#B8ADC9] text-[15px] font-medium w-full">
                         <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
                     </nav>
 

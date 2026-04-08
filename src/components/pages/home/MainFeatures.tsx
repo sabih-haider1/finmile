@@ -46,7 +46,7 @@ export const TrustSection = () => {
           return (
           <AnimatedCard 
             key={brand.name} 
-            className={`bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-full max-w-[180px] h-[88px] sm:h-[100px] md:w-[220px] md:max-w-none md:h-[120px] ${isOddLastItem ? 'col-span-2 justify-self-center md:col-span-1' : ''}`}
+            className={`bg-[#F6F8FA] rounded-[12px] p-3 flex items-center justify-center w-full max-w-[200px] h-[106px] sm:h-[112px] md:w-[220px] md:max-w-none md:h-[120px] ${isOddLastItem ? 'col-span-2 justify-self-center md:col-span-1' : ''}`}
             variant={fadeInUp}
             index={brands.findIndex((b) => b.name === brand.name)}
             hoverEffect='lift'
@@ -54,10 +54,10 @@ export const TrustSection = () => {
             <Image
               src={brand.logo}
               alt={brand.name}
-              width={160}
-              height={50}
-              sizes="(max-width: 768px) 120px, 160px"
-              className="max-h-[50px] w-auto object-contain"
+              width={190}
+              height={64}
+              sizes="(max-width: 640px) 160px, (max-width: 768px) 180px, 190px"
+              className="max-h-[62px] md:max-h-[56px] w-auto object-contain"
             />
           </AnimatedCard>
           );
