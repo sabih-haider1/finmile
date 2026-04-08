@@ -34,7 +34,7 @@ export const TrustSection = () => {
       </motion.h2>
 
       <motion.div 
-        className='flex flex-wrap justify-center items-center gap-6 md:gap-11 mb-12 max-w-[1600px] w-full'
+        className='grid grid-cols-2 place-items-center gap-4 sm:gap-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-11 mb-12 max-w-[1600px] w-full'
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
@@ -43,7 +43,7 @@ export const TrustSection = () => {
         {brands.map((brand) => (
           <AnimatedCard 
             key={brand.name} 
-            className='bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-[180px] h-[100px] md:w-[220px] md:h-[120px]'
+            className='bg-[#F6F8FA] rounded-[12px] p-2 flex items-center justify-center w-full max-w-[180px] h-[88px] sm:h-[100px] md:w-[220px] md:max-w-none md:h-[120px]'
             variant={fadeInUp}
             index={brands.findIndex((b) => b.name === brand.name)}
             hoverEffect='lift'

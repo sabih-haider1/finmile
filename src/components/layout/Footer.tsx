@@ -8,7 +8,7 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const Footer = () => {
     return (
-        <footer className="w-full bg-[#0B0616] text-white pt-12 pb-4 px-6 lg:px-16 overflow-hidden relative pointer-events-auto" style={{ isolation: 'isolate' }}>
+        <footer className="w-full bg-[#0B0616] text-white pt-12 pb-4 px-4 sm:px-6 lg:px-16 overflow-hidden relative pointer-events-auto" style={{ isolation: 'isolate' }}>
 
             {/* Background Glow Effects (Hero-style gradients) */}
             <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none -z-10" />
@@ -30,7 +30,7 @@ export const Footer = () => {
                         <div className="w-12 h-12 rounded-full liquid-glass flex items-center justify-center">
                             <Mail className="w-6 h-6 text-white" aria-hidden="true" />
                         </div>
-                        <a href="mailto:hello@finmile.co" className="text-white text-[14px] xl:text-[16px] font-medium hover:text-[#D8C7FF] transition-colors tracking-wide">
+                        <a href="mailto:hello@finmile.co" className="text-white text-[14px] xl:text-[16px] font-medium hover:text-[#D8C7FF] transition-colors tracking-wide break-all">
                             hello@finmile.co
                         </a>
                     </div>
@@ -53,7 +53,7 @@ export const Footer = () => {
                 {/* Column 2: Quick Links */}
                 <div className="flex flex-col space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Quick Links</h4>
-                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-5 custom-scrollbar w-max">
+                    <nav className="flex flex-col space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-2 md:pr-5 custom-scrollbar w-full md:w-max">
                         <Link href="/about" className="hover:text-white transition-colors">About</Link>
                         <Link href="/ai-agents" className="hover:text-white transition-colors">AI Agents</Link>
                         <Link href="/control-tower" className="hover:text-white transition-colors">Control Tower</Link>
@@ -104,9 +104,9 @@ export const Footer = () => {
             </div>
 
             {/* Bottom Legal Bar */}
-            <div className="max-w-[1440px] mx-auto mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-[#B8ADC9] text-[13px] font-medium z-20 relative">
+            <div className="max-w-[1440px] mx-auto mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-[#B8ADC9] text-[13px] font-medium z-20 relative text-center md:text-left">
                 <p>© 2026 Finmile. All rights reserved.</p>
-                <div className="flex gap-4 md:gap-6 mt-6 md:mt-0">
+                <div className="flex flex-wrap justify-center md:justify-end gap-x-4 gap-y-2 md:gap-x-6 mt-6 md:mt-0">
                     <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                     <span className="hidden md:block">|</span>
                     <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
