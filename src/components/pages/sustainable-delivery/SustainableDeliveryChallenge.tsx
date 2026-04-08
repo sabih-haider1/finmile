@@ -17,7 +17,7 @@ export const SustainableDeliveryChallenge = () => {
                     </h2>
 
                     <p className="text-[#64748B] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-8 pr-4">
-                        Urban delivery demand is rising fast — but so are emissions, fuel costs, and city restrictions. Traditional routing tools weren't designed for sustainability targets.
+                        Urban delivery demand is rising fast — but so are emissions, fuel costs, and city restrictions. Traditional routing tools weren&apos;t designed for sustainability targets.
                     </p>
 
                     <ul className="space-y-5 mb-8 w-full">
@@ -48,7 +48,7 @@ export const SustainableDeliveryChallenge = () => {
                     </ul>
 
                     <p className="text-[#2F1C8C] font-semibold text-[15px] md:text-[17px] leading-[1.5]">
-                        You don't need a sustainability team to make a difference — Finmile automates it for you.
+                        You don&apos;t need a sustainability team to make a difference — Finmile automates it for you.
                     </p>
                 </div>
 

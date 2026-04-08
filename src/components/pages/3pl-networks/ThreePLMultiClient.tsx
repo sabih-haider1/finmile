@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Target, Users, Map, Activity, Layers, CheckCircle2 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -161,9 +162,11 @@ export const ThreePLMultiClient = () => {
                     {/* Background glow behind image */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#6A27D4] rounded-full blur-[100px] opacity-40 -z-10" />
 
-                    <img
+                    <Image
                         src={currentTab.image}
                         alt={`Finmile ${currentTab.title} Dashboard`}
+                        width={900}
+                        height={560}
                         className='w-full max-w-[900px] h-auto object-cover rounded-[16px] drop-shadow-2xl opacity-95'
                     />
                 </div>

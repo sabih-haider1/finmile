@@ -11,7 +11,7 @@ import {
   IndustryCTA, 
   IndustryFinalCTA 
 } from '@/components/pages/industries-shared';
-import { Truck, Navigation, CheckSquare, BarChart3, TrendingDown, Eye, FileText, Leaf } from 'lucide-react';
+import { Truck, Navigation, CheckSquare, BarChart3 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Wholesale & B2B Delivery Optimization Software | Finmile',

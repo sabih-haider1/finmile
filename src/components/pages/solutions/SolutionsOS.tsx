@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '../../ui/Button';
-import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
+import { fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
 
 const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 

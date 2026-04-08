@@ -11,7 +11,7 @@ import {
   IndustryCTA, 
   IndustryFinalCTA 
 } from '@/components/pages/industries-shared';
-import { Link, Layers, Brain, Bell, BarChart3, MessageSquare, Ship, Zap } from 'lucide-react';
+import { Link, Layers, Brain, Bell } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'E-Commerce & Retail Delivery Visibility | Finmile',

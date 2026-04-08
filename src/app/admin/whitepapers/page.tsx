@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/supabaseClient';
 import { Whitepaper } from '@/types/content';
 import { Button } from '@/components/ui/Button';
@@ -23,10 +23,6 @@ export default function WhitepapersPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingWhitepaper, setEditingWhitepaper] = useState<Whitepaper | null>(null);
 
-  useEffect(() => {
-    fetchWhitepapers();
-  }, [searchQuery, featuredFilter, publishedFilter]);
-
   const getAuthHeader = async () => {
     const {
       data: { session },
@@ -39,7 +35,7 @@ export default function WhitepapersPage() {
     return { Authorization: `Bearer ${session.access_token}` };
   };
 
-  const fetchWhitepapers = async () => {
+  const fetchWhitepapers = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -63,7 +59,11 @@ export default function WhitepapersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [featuredFilter, publishedFilter, searchQuery]);
+
+  useEffect(() => {
+    fetchWhitepapers();
+  }, [fetchWhitepapers]);
 
   const handleDelete = async (whitepaper: Whitepaper) => {
     if (!window.confirm(`Are you sure you want to delete "${whitepaper.title}"?`)) {
@@ -167,7 +167,10 @@ export default function WhitepapersPage() {
       };
 
       if (editingWhitepaper) {
-        const { id: _id, created_at: _ca, updated_at: _ua, ...updateData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
+        const updateData = { ...(whitepaperData as Record<string, unknown>) };
+        delete updateData.id;
+        delete updateData.created_at;
+        delete updateData.updated_at;
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/whitepapers/${editingWhitepaper.id}`, {
           method: 'PUT',
@@ -181,7 +184,10 @@ export default function WhitepapersPage() {
         }
         alert('Whitepaper updated successfully!');
       } else {
-        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = whitepaperData as typeof whitepaperData & { id: string; created_at: string; updated_at: string };
+        const insertData = { ...(whitepaperData as Record<string, unknown>) };
+        delete insertData.id;
+        delete insertData.created_at;
+        delete insertData.updated_at;
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/whitepapers', {
           method: 'POST',

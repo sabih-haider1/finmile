@@ -50,7 +50,7 @@ export const SustainableDeliveryStats = () => {
 
                 {/* Footer Text */}
                 <h4 className="text-[#2F1C8C] font-semibold text-[20px] md:text-[24px] text-center max-w-[1000px]">
-                    With Finmile, sustainability isn't a box to tick — it's a measurable advantage.
+                    With Finmile, sustainability isn&apos;t a box to tick — it&apos;s a measurable advantage.
                 </h4>
 
             </div>

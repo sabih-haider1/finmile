@@ -70,7 +70,7 @@ export const SolutionsGrid = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {solutions.map((solution, index) => (
+          {solutions.map((solution) => (
             <motion.div
               key={solution.title}
               variants={fadeInUp}

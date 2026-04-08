@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
@@ -13,9 +14,11 @@ export const AutonomousAgentsFeature = () => {
                 {/* Left Side: Image Container */}
                 <div className="w-full lg:w-1/2 flex justify-center">
                     <div className="bg-[#f8f7ff] rounded-[24px] md:rounded-[32px] p-6 md:p-12 w-full flex items-center justify-center relative shadow-[0_4px_30px_rgba(0,0,0,0.02)] border border-gray-50">
-                        <img
+                        <Image
                             src="/assets/images/features/laptop-blue.png"
                             alt="Finmile Autonomous AI Agents"
+                            width={900}
+                            height={560}
                             className="w-full h-auto object-contain relative z-10 max-h-[300px] md:max-h-none"
                         />
                     </div>

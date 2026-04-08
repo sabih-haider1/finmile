@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ContentHero, ContentMetadata } from '@/types/content';
+import { ContentHero } from '@/types/content';
 
 interface HeroEditorProps {
   hero: ContentHero;

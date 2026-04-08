@@ -18,22 +18,15 @@ export function HeroSection({ hero }: HeroSectionProps) {
           {/* Image - Left column */}
           {hero.image_url && (
             <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-sm">
-              {isExternalImage ? (
-                <img
-                  src={hero.image_url}
-                  alt={hero.title}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              ) : (
-                <Image
-                  src={hero.image_url}
-                  alt={hero.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              )}
+              <Image
+                src={hero.image_url}
+                alt={hero.title}
+                fill
+                unoptimized={isExternalImage}
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
           )}
 

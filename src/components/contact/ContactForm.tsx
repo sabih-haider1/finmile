@@ -97,7 +97,7 @@ export const ContactForm = () => {
                                 <div>
                                     <h3 className="text-2xl font-bold text-[#2F1C8C] mb-3">Request A Demo?</h3>
                                     <p className="text-[#64748B] text-sm leading-relaxed mb-6">
-                                        Talk to our team about Finmile's platform, integrations, and how we can optimize your delivery operations.
+                                        Talk to our team about Finmile&apos;s platform, integrations, and how we can optimize your delivery operations.
                                     </p>
                                 </div>
 

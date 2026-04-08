@@ -40,7 +40,7 @@ export default function ControlTowerPage() {
             <WhyFinmileLeads />
             <JoinTheJourney
                 heading={<>Take Control of <br className="hidden md:block" /> Every Delivery</>}
-                text1={<>Stop reacting and start predicting. With Finmile's Control <br className="hidden md:block" /> Tower, every delivery becomes transparent, measurable, and <br className="hidden md:block" /> optimised.</>}
+                text1={<>Stop reacting and start predicting. With Finmile&apos;s Control <br className="hidden md:block" /> Tower, every delivery becomes transparent, measurable, and <br className="hidden md:block" /> optimised.</>}
                 text2={null}
                 secondaryButtonText="Request a Live Walkthrough"
                 secondaryButtonHref="https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform"

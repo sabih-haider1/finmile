@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { ContentSection, ContentSectionData } from '@/types/content';
-import { Button } from '@/components/ui/Button';
 
 interface SectionEditorProps {
   section: ContentSection;

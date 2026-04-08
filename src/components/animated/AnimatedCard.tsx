@@ -117,7 +117,6 @@ interface AnimatedButtonProps
   children: ReactNode;
   onClick?: () => void;
   className?: string;
-  variant?: 'solid' | 'outline' | 'ghost';
 }
 
 /**
@@ -127,7 +126,6 @@ export const AnimatedButton = ({
   children,
   onClick,
   className = '',
-  variant: _variant = 'solid',
   ...props
 }: AnimatedButtonProps) => {
   const prefersReducedMotion = useReducedMotion();

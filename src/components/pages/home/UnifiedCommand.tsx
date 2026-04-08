@@ -34,7 +34,7 @@ export const UnifiedCommand = () => {
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [slides.length]);
+        }, []);
 
     return (
         <motion.section 

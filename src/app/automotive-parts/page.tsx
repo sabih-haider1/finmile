@@ -11,7 +11,7 @@ import {
   IndustryCTA, 
   IndustryFinalCTA 
 } from '@/components/pages/industries-shared';
-import { Zap, Warehouse, Clock, Smartphone, TrendingDown, RefreshCcw, AlertTriangle, LineChart } from 'lucide-react';
+import { Zap, Warehouse, Clock, Smartphone } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Automotive Parts Delivery Software | Finmile',

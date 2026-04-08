@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -38,9 +39,11 @@ export const AboutContent = () => {
                     <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none' />
 
                     <div className='relative z-10 w-full max-w-[800px]'>
-                        <img
+                        <Image
                             src='/assets/images/features/app-screen.png'
                             alt='Finmile Dashboard and Mobile App'
+                            width={800}
+                            height={600}
                             className='w-full h-auto drop-shadow-[0_45px_90px_rgba(0,0,0,0.12)] object-contain relative z-10'
                         />
 

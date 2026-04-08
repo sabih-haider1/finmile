@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MoveRight } from 'lucide-react';
 import { Button } from '../../ui/Button';
-import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
+import { fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
 
 const results = [
   {
@@ -68,7 +68,7 @@ export const SolutionsResults = () => {
                     {result.company} — <span className="italic font-medium text-[#6B7280]">{result.industry}</span>
                   </h3>
                   <p className="text-[#6B7280] text-[15px] md:text-[16px] leading-relaxed max-w-[500px]">
-                    "{result.quote}"
+                    &ldquo;{result.quote}&rdquo;
                   </p>
                   <div className="flex items-center gap-2 text-[#2F1C8C] font-semibold text-[14px] md:text-[15px]">
                     <MoveRight className="w-4 h-4 flex-shrink-0" />

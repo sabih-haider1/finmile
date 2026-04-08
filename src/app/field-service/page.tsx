@@ -11,7 +11,7 @@ import {
   IndustryCTA, 
   IndustryFinalCTA 
 } from '@/components/pages/industries-shared';
-import { Calendar, UserCheck, MapPin, Smartphone, FastForward, Fuel, MessageCircle, Smile } from 'lucide-react';
+import { Calendar, UserCheck, MapPin, Smartphone } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Field Service Route Optimization Software | Finmile',

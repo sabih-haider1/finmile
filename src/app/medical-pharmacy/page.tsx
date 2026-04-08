@@ -11,7 +11,7 @@ import {
   IndustryCTA, 
   IndustryFinalCTA 
 } from '@/components/pages/industries-shared';
-import { Thermometer, ShieldCheck, FileCheck, LayoutDashboard, Search, Bell, Lock, Activity } from 'lucide-react';
+import { Thermometer, ShieldCheck, FileCheck, LayoutDashboard } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Medical Courier & Pharmaceutical Delivery Software | Finmile',

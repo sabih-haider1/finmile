@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { generateSlug } from '@/lib/upload';
 
 export interface FormFieldConfig {
@@ -234,9 +235,12 @@ export default function FormBuilder({
                   Selected new file: {files[field.name]!.name}
                 </p>
                 {files[field.name]!.type.startsWith('image/') && (
-                  <img
+                  <Image
                     src={URL.createObjectURL(files[field.name]!)}
                     alt="Preview"
+                    width={128}
+                    height={96}
+                    unoptimized
                     className="w-32 h-24 object-cover rounded-lg border border-white/20"
                   />
                 )}
@@ -247,9 +251,12 @@ export default function FormBuilder({
                   Current: {typeof value === 'string' ? value.split('/').pop() : 'File attached'}
                 </p>
                 {typeof value === 'string' && value.match(/\.(jpeg|jpg|gif|png|webp|avif)$/i) && (
-                  <img
+                  <Image
                     src={value}
                     alt="Current file"
+                    width={128}
+                    height={96}
+                    unoptimized
                     className="w-32 h-24 object-cover rounded-lg border border-white/20"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none';

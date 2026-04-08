@@ -2,11 +2,8 @@ import { notFound } from 'next/navigation';
 import { supabase } from '@/supabaseClient';
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Badge } from "@/components/ui/Badge";
-import Image from 'next/image';
 import { Metadata } from 'next';
 import { DetailPageTemplate } from '@/components/detail-template';
-import { AuthorSection } from '@/components/detail-template/AuthorSection';
 import { UnifiedContent } from '@/types/content';
 import { getAuthorByName } from '@/data/authors';
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { ArrowLeft, ArrowRight, Linkedin } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -77,9 +78,11 @@ export const OurLeadership = () => {
 
                             {/* Image Placeholder */}
                             <div className="w-full h-[280px] bg-gray-200 shrink-0">
-                                <img
+                                <Image
                                     src={member.image}
                                     alt={member.name}
+                                    width={420}
+                                    height={280}
                                     className="w-full h-full object-cover"
                                 />
                             </div>

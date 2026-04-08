@@ -59,7 +59,7 @@ export const DriverAppOperationalImpact = () => {
                                     </div>
                                     <div className="flex flex-col items-center justify-center p-3 bg-[#F8F7FF] rounded-[8px] border border-[#E9E4FF]">
                                         <span className="text-[11px] text-[#6A27D4] uppercase font-bold tracking-wider mb-1 flex items-center gap-1">
-                                            <img src="/assets/logos/logo-blue.png" alt="Finmile" className="h-2 object-contain" /> Finmile
+                                            <Image src="/assets/logos/logo-blue.png" alt="Finmile" width={30} height={8} className="h-2 w-auto object-contain" /> Finmile
                                         </span>
                                         <span className="text-[#0A1B33] font-bold text-[13px] text-center">{row.after}</span>
                                     </div>

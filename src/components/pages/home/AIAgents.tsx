@@ -5,12 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 
-const AgentCard = ({ title, description, benefits, index, total: _total }: {
+const AgentCard = ({ title, description, benefits, index }: {
   title: string;
   description: string;
   benefits: string[];
   index: number;
-  total: number;
 }) => {
   const stickyTop = `calc(80px + ${index * 20}px)`;
   const zIndex = (index + 1) * 10;
@@ -125,7 +124,6 @@ export const AIAgentsSection = () => {
           <AgentCard
             key={index}
             index={index}
-            total={agents.length}
             {...agent}
           />
         ))}

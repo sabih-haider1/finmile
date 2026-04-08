@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Target } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -55,7 +56,7 @@ export const ThreePLWhyChoose = () => {
                         {/* Finmile Solution Header */}
                         <div className="bg-[#2F1C8C] rounded-xl px-6 py-4 flex items-center justify-between">
                             <span className="text-white">Finmile Solution</span>
-                            <img src="/assets/logos/logo-white.png" alt="Finmile" className="h-4 object-contain opacity-90" />
+                            <Image src="/assets/logos/logo-white.png" alt="Finmile" width={60} height={16} className="h-4 w-auto object-contain opacity-90" />
                         </div>
                         {/* Measurable Result Header */}
                         <div className="bg-[#2F1C8C] rounded-xl px-6 py-4 flex items-center justify-between">

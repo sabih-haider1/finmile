@@ -53,18 +53,6 @@ function hasAdminRoleInMetadata(metadata: Record<string, unknown> | null | undef
   return false;
 }
 
-function hasAnyAdminMetadata(user: unknown): boolean {
-  const u = user as Record<string, unknown>;
-  const userMetadata = (u?.user_metadata as Record<string, unknown>) || {};
-  const appMetadata = (u?.app_metadata as Record<string, unknown>) || {};
-
-  const hasRoleField = userMetadata.role !== undefined || appMetadata.role !== undefined;
-  const hasAdminFlag = userMetadata.is_admin !== undefined || appMetadata.is_admin !== undefined;
-  const hasRolesArray = Array.isArray(userMetadata.roles) || Array.isArray(appMetadata.roles);
-
-  return Boolean(hasRoleField || hasAdminFlag || hasRolesArray);
-}
-
 function isAdminEmail(email: string | undefined): boolean {
   if (!email) return false;
 

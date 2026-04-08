@@ -25,7 +25,7 @@ export const SustainableDeliveryOS = () => {
                     </div>
 
                     <h3 className="text-white font-semibold text-[22px] md:text-[28px] lg:text-[32px] leading-[1.35] mb-4 max-w-[800px]">
-                        "Finmile helped us prove that sustainability and efficiency aren't opposites — they're the same thing."
+                        &ldquo;Finmile helped us prove that sustainability and efficiency aren&apos;t opposites — they&apos;re the same thing.&rdquo;
                     </h3>
 
                     <div className="flex flex-col items-center">

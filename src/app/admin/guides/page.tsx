@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/supabaseClient';
 import { Guide } from '@/types/content';
 import { Button } from '@/components/ui/Button';
@@ -17,11 +17,7 @@ export default function GuidesPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingGuide, setEditingGuide] = useState<Guide | null>(null);
 
-  useEffect(() => {
-    fetchGuides();
-  }, [searchQuery]);
-
-  const fetchGuides = async () => {
+  const fetchGuides = useCallback(async () => {
     setLoading(true);
     try {
       let query = supabase
@@ -42,7 +38,11 @@ export default function GuidesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    fetchGuides();
+  }, [fetchGuides]);
 
   const handleDelete = async (guide: Guide) => {
     if (!window.confirm(`Are you sure you want to delete "${guide.title}"?`)) {
@@ -82,7 +82,9 @@ export default function GuidesPage() {
 
       if (editingGuide) {
         // Update existing guide
-        const { id: _id, created_at: _ca, ...updateData } = guideData as typeof guideData & { id: string; created_at: string };
+        const updateData = { ...(guideData as Record<string, unknown>) };
+        delete updateData.id;
+        delete updateData.created_at;
         const { error } = await supabase
           .from('guides')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -92,7 +94,10 @@ export default function GuidesPage() {
       } else {
         // Create new guide
         const now = new Date().toISOString();
-        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = guideData as typeof guideData & { id: string; created_at: string; updated_at: string };
+        const insertData = { ...(guideData as Record<string, unknown>) };
+        delete insertData.id;
+        delete insertData.created_at;
+        delete insertData.updated_at;
         const { error } = await supabase.from('guides').insert([{
           ...insertData,
           created_at: now,

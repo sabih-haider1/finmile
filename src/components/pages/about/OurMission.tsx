@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Package, TrendingUp, Leaf } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
@@ -26,9 +27,11 @@ export const OurMission = () => {
                 {/* Left Side Image */}
                 <div className="w-full lg:w-1/2 flex items-stretch justify-center lg:justify-start">
                     <div className="w-full h-full flex items-center">
-                        <img
+                        <Image
                             src="/assets/images/half-dashboard.png"
                             alt="Finmile Dashboard View"
+                            width={900}
+                            height={620}
                             className="w-full h-full object-cover mix-blend-multiply drop-shadow-sm"
                         />
                     </div>
@@ -40,9 +43,11 @@ export const OurMission = () => {
                         <div>
                             {/* Coil Icon filling the glowing box perfectly */}
                             <div className="bg-white rounded-[24px] inline-flex items-center justify-center mb-10 lg:mb-8 border border-white w-[100px] h-[100px] overflow-hidden" style={{ boxShadow: '0 0 40px 8px rgba(106, 39, 212, 0.2)' }}>
-                                <img
+                                <Image
                                     src="/assets/images/features/coil-icon.png"
                                     alt="Finmile Coil Icon"
+                                    width={100}
+                                    height={100}
                                     className="w-full h-full object-cover scale-[3]"
                                 />
                             </div>

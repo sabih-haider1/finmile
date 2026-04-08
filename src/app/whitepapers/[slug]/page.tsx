@@ -44,7 +44,6 @@ export default async function WhitepaperDetailPage({ params }: Props) {
     notFound();
   }
 
-  const author = whitepaper.author || whitepaper.author_name;
   const publishDate = whitepaper.published_date || whitepaper.published_at || whitepaper.created_at;
   const resolvedAuthor = getAuthorByName(whitepaper.author || whitepaper.author_name);
   const authorName = whitepaper.author || whitepaper.author_name || 'Finmile Editorial Team';

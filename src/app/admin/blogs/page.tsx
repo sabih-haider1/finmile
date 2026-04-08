@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/supabaseClient';
 import { Blog } from '@/types/content';
 import { Button } from '@/components/ui/Button';
@@ -22,10 +22,6 @@ export default function BlogsPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
 
-  useEffect(() => {
-    fetchBlogs();
-  }, [searchQuery, featuredFilter, publishedFilter]);
-
   const getAuthHeader = async () => {
     const {
       data: { session },
@@ -38,7 +34,7 @@ export default function BlogsPage() {
     return { Authorization: `Bearer ${session.access_token}` };
   };
 
-  const fetchBlogs = async () => {
+  const fetchBlogs = useCallback(async () => {
     setLoading(true);
     try {
       let query = supabase
@@ -65,7 +61,11 @@ export default function BlogsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [featuredFilter, publishedFilter, searchQuery]);
+
+  useEffect(() => {
+    fetchBlogs();
+  }, [fetchBlogs]);
 
   const handleDelete = async (blog: Blog) => {
     if (!window.confirm(`Are you sure you want to delete "${blog.title}"?`)) {
@@ -135,7 +135,10 @@ export default function BlogsPage() {
 
       if (editingBlog) {
         // Update existing blog
-        const { id: _id, created_at: _ca, updated_at: _ua, ...updateData } = blogData as Record<string, unknown>;
+        const updateData = { ...(blogData as Record<string, unknown>) };
+        delete updateData.id;
+        delete updateData.created_at;
+        delete updateData.updated_at;
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/blogs/${editingBlog.id}`, {
           method: 'PUT',
@@ -150,7 +153,10 @@ export default function BlogsPage() {
         alert('Blog updated successfully!');
       } else {
         // Create new blog
-        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = blogData as Record<string, unknown>;
+        const insertData = { ...(blogData as Record<string, unknown>) };
+        delete insertData.id;
+        delete insertData.created_at;
+        delete insertData.updated_at;
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/blogs', {
           method: 'POST',

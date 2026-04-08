@@ -45,7 +45,7 @@ export const ReturnsOptimizationFeature = () => {
                     </p>
 
                     <p className="text-[#64748B] text-[16px] md:text-[16px] leading-[1.6] mb-10">
-                        Returns don't have to be painful or expensive. Finmile's AI collects, routes, and processes returns faster — without adding vehicles or manual work.
+                        Returns don&apos;t have to be painful or expensive. Finmile&apos;s AI collects, routes, and processes returns faster — without adding vehicles or manual work.
                     </p>
 
                     <div className="flex flex-wrap gap-4">

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
+import { fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations';
 
 const challenges = [
   {
@@ -81,7 +81,7 @@ export const SolutionsChallenges = () => {
             </div>
 
             <p className="text-[#0B0616] font-semibold text-[16px] md:text-[18px] mt-4 pt-2 border-t border-gray-50">
-              It's time to turn your delivery network from a cost centre into a competitive advantage.
+              It&apos;s time to turn your delivery network from a cost centre into a competitive advantage.
             </p>
           </motion.div>
 

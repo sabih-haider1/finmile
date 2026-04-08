@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 import { GlassButton } from '../../ui/glass-button';
 import { FrostedGlassCard } from '../../ui/interactive-frosted-glass-card';
@@ -63,9 +64,11 @@ export const OurValues = () => {
 
                 {/* Right Side: Image */}
                 <div className="w-full flex justify-center lg:justify-end relative order-1 lg:order-2">
-                    <img
+                    <Image
                         src="/assets/images/features/app-screen-white.png"
                         alt="Finmile Platform White UI"
+                        width={650}
+                        height={480}
                         className="w-full max-w-[650px] h-auto rounded-[32px] drop-shadow-[0_40px_100px_rgba(83,31,209,0.3)] relative z-10"
                     />
                 </div>

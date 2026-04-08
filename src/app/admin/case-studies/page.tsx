@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/supabaseClient';
 import { CaseStudy } from '@/types/content';
 import { Button } from '@/components/ui/Button';
@@ -22,10 +22,6 @@ export default function CaseStudiesPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingCaseStudy, setEditingCaseStudy] = useState<CaseStudy | null>(null);
 
-  useEffect(() => {
-    fetchCaseStudies();
-  }, [searchQuery, featuredFilter, publishedFilter]);
-
   const getAuthHeader = async () => {
     const {
       data: { session },
@@ -38,7 +34,7 @@ export default function CaseStudiesPage() {
     return { Authorization: `Bearer ${session.access_token}` };
   };
 
-  const fetchCaseStudies = async () => {
+  const fetchCaseStudies = useCallback(async () => {
     setLoading(true);
     try {
       let query = supabase
@@ -65,7 +61,11 @@ export default function CaseStudiesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [featuredFilter, publishedFilter, searchQuery]);
+
+  useEffect(() => {
+    fetchCaseStudies();
+  }, [fetchCaseStudies]);
 
   const handleDelete = async (caseStudy: CaseStudy) => {
     if (!window.confirm(`Are you sure you want to delete "${caseStudy.title}"?`)) {
@@ -141,7 +141,10 @@ export default function CaseStudiesPage() {
 
       if (editingCaseStudy) {
         // Update existing case study
-        const { id: _id, created_at: _ca, updated_at: _ua, ...updateData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
+        const updateData = { ...(caseStudyData as Record<string, unknown>) };
+        delete updateData.id;
+        delete updateData.created_at;
+        delete updateData.updated_at;
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/case-studies/${editingCaseStudy.id}`, {
           method: 'PUT',
@@ -156,7 +159,10 @@ export default function CaseStudiesPage() {
         alert('Case study updated successfully!');
       } else {
         // Create new case study
-        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = caseStudyData as typeof caseStudyData & { id: string; created_at: string; updated_at: string };
+        const insertData = { ...(caseStudyData as Record<string, unknown>) };
+        delete insertData.id;
+        delete insertData.created_at;
+        delete insertData.updated_at;
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/case-studies', {
           method: 'POST',

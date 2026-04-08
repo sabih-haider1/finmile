@@ -23,7 +23,7 @@ export const SmartStreamlined = () => {
                     </h2>
 
                     <p className="text-[#64748B] text-[16px] md:text-[18px] leading-[1.6] mb-10 max-w-[580px]">
-                        Finmile's AI returns engine merges return collections directly into your existing delivery routes — no extra runs, no idle vehicles, no wasted time.
+                        Finmile&apos;s AI returns engine merges return collections directly into your existing delivery routes — no extra runs, no idle vehicles, no wasted time.
                     </p>
 
                     <div className="flex flex-wrap gap-4">

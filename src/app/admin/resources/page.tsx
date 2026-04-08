@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/supabaseClient';
 import { Resource } from '@/types/content';
 import { Button } from '@/components/ui/Button';
@@ -22,11 +22,7 @@ export default function ResourcesPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingResource, setEditingResource] = useState<Resource | null>(null);
 
-  useEffect(() => {
-    fetchResources();
-  }, [searchQuery, featuredFilter, publishedFilter]);
-
-  const fetchResources = async () => {
+  const fetchResources = useCallback(async () => {
     setLoading(true);
     try {
       let query = supabase
@@ -53,7 +49,11 @@ export default function ResourcesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [featuredFilter, publishedFilter, searchQuery]);
+
+  useEffect(() => {
+    fetchResources();
+  }, [fetchResources]);
 
   const handleDelete = async (resource: Resource) => {
     if (!window.confirm(`Are you sure you want to delete "${resource.title}"?`)) {
@@ -107,7 +107,9 @@ export default function ResourcesPage() {
 
       if (editingResource) {
         // Update existing resource
-        const { id: _id, created_at: _ca, ...updateData } = resourceData as typeof resourceData & { id: string; created_at: string };
+        const updateData = { ...(resourceData as Record<string, unknown>) };
+        delete updateData.id;
+        delete updateData.created_at;
         const { error } = await supabase
           .from('resources')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -117,7 +119,10 @@ export default function ResourcesPage() {
       } else {
         // Create new resource
         const now = new Date().toISOString();
-        const { id: _id2, created_at: _ca2, updated_at: _ua2, ...insertData } = resourceData as typeof resourceData & { id: string; created_at: string; updated_at: string };
+        const insertData = { ...(resourceData as Record<string, unknown>) };
+        delete insertData.id;
+        delete insertData.created_at;
+        delete insertData.updated_at;
         const { error } = await supabase.from('resources').insert([{
           ...insertData,
           created_at: now,

@@ -27,7 +27,7 @@ export const ThreePLSustainability = () => {
 
                     {/* Description */}
                     <p className="text-[#6B7280] font-medium text-[15px] md:text-[16px] leading-[1.6] mb-8 pr-4">
-                        Show clients you're running smarter, cleaner operations.
+                        Show clients you&apos;re running smarter, cleaner operations.
                         Finmile supports EV routing, e-cargo bikes, and real-time
                         CO₂ tracking built in.
                     </p>

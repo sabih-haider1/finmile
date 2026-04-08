@@ -39,7 +39,7 @@ export const ThreePLChallenge = () => {
                     </h2>
                     
                     <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] leading-relaxed">
-                        Running a 3PL or courier network today means balancing endless moving parts. Chaos shouldn't be the cost of scaling.
+                        Running a 3PL or courier network today means balancing endless moving parts. Chaos shouldn&apos;t be the cost of scaling.
                     </p>
                 </div>
 

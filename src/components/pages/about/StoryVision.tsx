@@ -52,7 +52,7 @@ export const StoryVision = () => {
                         {/* p2 block 3 */}
                         <div className='flex flex-col'>
                             <p className='font-medium text-[15px] md:text-[16px] text-[#6C757D] leading-relaxed'>
-                                We've built the next generation of intelligent logistics systems <br className='hidden md:block' />where data drives every decision, fleets waste nothing, and <br className='hidden md:block' />sustainability and profitability go hand-in-hand.
+                                We&apos;ve built the next generation of intelligent logistics systems <br className='hidden md:block' />where data drives every decision, fleets waste nothing, and <br className='hidden md:block' />sustainability and profitability go hand-in-hand.
                             </p>
                         </div>
 

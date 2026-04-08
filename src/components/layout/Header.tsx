@@ -50,16 +50,6 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
         { name: "More", href: "#more", subMenu: moreLinks }
     ];
 
-    const resourceLinks = [
-        { name: "Solutions", href: "/solutions" },
-        { name: "Deliveries", href: "/deliveries" },
-        { name: "Features", href: "#features", subMenu: featureLinks },
-        { name: "About", href: "/about" },
-        { name: "Resources", href: "/resources/all" },
-        { name: "Whitepapers", href: "/whitepapers/all" },
-        { name: "Delivery Software", href: "/delivery-software" }
-    ];
-
     const links = defaultLinks;
 
     useEffect(() => {

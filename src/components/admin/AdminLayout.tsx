@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/Button';
@@ -15,6 +15,23 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const checkAuth = useCallback(async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user);
+      } else {
+        // No session - redirect to login
+        router.push('/admin/login');
+      }
+    } catch (error) {
+      console.error('Auth check error:', error);
+      router.push('/admin/login');
+    } finally {
+      setLoading(false);
+    }
+  }, [router]);
 
   useEffect(() => {
     checkAuth();
@@ -32,24 +49,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     return () => {
       subscription?.unsubscribe();
     };
-  }, [router]);
-
-  const checkAuth = async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setUser(session.user);
-      } else {
-        // No session - redirect to login
-        router.push('/admin/login');
-      }
-    } catch (error) {
-      console.error('Auth check error:', error);
-      router.push('/admin/login');
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [checkAuth, router]);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();

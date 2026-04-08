@@ -11,7 +11,7 @@ import {
   IndustryCTA, 
   IndustryFinalCTA 
 } from '@/components/pages/industries-shared';
-import { Zap, BatteryCharging, Bike, Leaf, BarChart3, TrendingDown, Ship, Globe } from 'lucide-react';
+import { Zap, BatteryCharging, Bike, Leaf } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Sustainable Logistics & EV Fleet Software | Finmile',
