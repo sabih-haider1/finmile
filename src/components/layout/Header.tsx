@@ -124,7 +124,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                 variants={headerVariants}
                 initial="initial"
                 animate="animate"
-                className={`fixed left-3 right-3 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 rounded-full transition-all duration-500 ease-out ${
+                className={`fixed left-2 right-2 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-3 md:px-8 lg:px-10 rounded-full transition-all duration-500 ease-out ${
                     isMobileMenuOpen && 'xl:hidden' 
                         ? 'bg-transparent border-transparent py-3 lg:py-4' 
                         : isScrolled 
@@ -138,7 +138,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                 {/* Logo */}
                 <Link
                     href="/"
-                    className={`relative z-[110] flex items-center justify-center shrink-0 mr-4 transition-opacity duration-300 self-center translate-y-[2px] cursor-pointer ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
+                    className={`relative z-[110] flex items-center justify-center shrink-0 transition-opacity duration-300 self-center translate-y-[2px] cursor-pointer ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
                 >
                     <Image
                         src={isLight ? "/assets/logos/logo-blue.png" : "/assets/logos/logo-white.png"}

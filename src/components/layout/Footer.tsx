@@ -8,7 +8,7 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const Footer = () => {
     return (
-        <footer className="w-full bg-[#0B0616] text-white pt-12 pb-4 px-4 sm:px-6 lg:px-16 overflow-hidden relative pointer-events-auto" style={{ isolation: 'isolate' }}>
+        <footer className="w-full bg-[#0B0616] text-white pt-12 pb-4 px-3 sm:px-6 lg:px-16 overflow-hidden relative pointer-events-auto" style={{ isolation: 'isolate' }}>
 
             {/* Background Glow Effects (Hero-style gradients) */}
             <div className="absolute -top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#531FD1] rounded-full blur-[180px] opacity-40 pointer-events-none -z-10" />
@@ -17,7 +17,7 @@ export const Footer = () => {
             <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 z-20 relative items-start">
 
                 {/* Column 1: Brand & Actions */}
-                <div className="flex flex-col items-start space-y-10 md:col-span-6 lg:col-span-4 w-full pl-1 md:pl-0">
+                <div className="flex flex-col items-start space-y-10 md:col-span-6 lg:col-span-4 w-full">
                     {/* Brand Logo */}
                     <div className="mb-2">
                         <Link href="/">
@@ -51,7 +51,7 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 2: Quick Links */}
-                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0 w-full pl-1 md:pl-0 text-left">
+                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0 w-full text-left">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Quick Links</h4>
                     <nav className="flex flex-col items-start space-y-5 text-[#B8ADC9] text-[15px] font-medium max-h-[220px] overflow-y-auto pr-2 md:pr-5 custom-scrollbar w-full md:w-max">
                         <Link href="/about" className="hover:text-white transition-colors">About</Link>
@@ -71,7 +71,7 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 3: Resources */}
-                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0 w-full pl-1 md:pl-0 text-left">
+                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-3 mt-2 md:mt-0 w-full text-left">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Resources</h4>
                     <nav className="flex flex-col items-start space-y-5 text-[#B8ADC9] text-[15px] font-medium w-full">
                         <Link href="/blog/all" className="hover:text-white transition-colors">Blog</Link>
@@ -82,7 +82,7 @@ export const Footer = () => {
                 </div>
 
                 {/* Column 4: Get in Touch */}
-                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0 w-full pl-1 md:pl-0 text-left">
+                <div className="flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-2 mt-2 md:mt-0 w-full text-left">
                     <h4 className="font-bold text-[18px] tracking-wide mb-2">Get In Touch</h4>
                     <nav className="flex flex-col items-start space-y-5 text-[#B8ADC9] text-[15px] font-medium w-full">
                         <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
@@ -104,7 +104,7 @@ export const Footer = () => {
             </div>
 
             {/* Bottom Legal Bar */}
-            <div className="max-w-[1440px] mx-auto mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-[#B8ADC9] text-[13px] font-medium z-20 relative text-center md:text-left">
+            <div className="max-w-[1440px] mx-auto mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between text-[#B8ADC9] text-[13px] font-medium z-20 relative text-left md:text-left">
                 <p>© 2026 Finmile. All rights reserved.</p>
                 <div className="flex flex-wrap justify-center md:justify-end gap-x-4 gap-y-2 md:gap-x-6 mt-6 md:mt-0">
                     <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
