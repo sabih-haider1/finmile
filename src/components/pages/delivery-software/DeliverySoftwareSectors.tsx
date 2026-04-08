@@ -10,7 +10,6 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 export const DeliverySoftwareSectors = () => {
     const currentTab = {
         title: "Automotive Parts Delivery & Vehicle Towing Logistics",
-        icon: <Truck className="w-4 h-4" strokeWidth={2} />,
         subtitle: "Built for urgent parts, roadside recovery, and garage SLAs.",
         bullets: [
             "Automotive parts delivery software",
@@ -46,11 +45,6 @@ export const DeliverySoftwareSectors = () => {
 
                 {/* Left Column: Text Content */}
                 <div className='lg:col-span-5 flex flex-col space-y-4 lg:pr-6 z-10'>
-
-                    {/* Floating Icon matching the screenshot */}
-                    <div className="w-[50px] h-[50px] rounded-[14px] bg-[#6A27D4] flex items-center justify-center mb-4 shadow-[0_8px_20px_rgba(106,39,212,0.3)]">
-                        {React.cloneElement(currentTab.icon, { className: "w-6 h-6 text-white", strokeWidth: 2 })}
-                    </div>
 
                     <h3 className='font-semibold text-[24px] md:text-[28px] text-[#2F1C8C] leading-[1.2] tracking-tight mb-4'>
                         {currentTab.title}
