@@ -69,10 +69,10 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
 
                 {/* Right Side */}
                 <div className="w-full lg:w-1/2 flex items-stretch">
-                    <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-10 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col justify-center">
+                    <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 text-center items-center md:text-left md:items-start md:p-10 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col justify-center">
                         <div>
                             {/* Logo Chip */}
-                            <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-10 border border-slate-50">
+                            <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-10 border border-slate-50 mx-auto md:mx-0">
                                 <Image
                                     src="/assets/logos/logo-blue.png"
                                     alt="Finmile Logo"
@@ -102,7 +102,7 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                         </div>
 
                         {/* Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 items-center w-full mt-auto">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center w-full mt-auto">
                             <Link
                                 href={DEMO_FORM_URL}
                                 target="_blank"
