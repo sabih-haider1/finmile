@@ -71,7 +71,7 @@ export function WhitepaperSearchBar({
   };
 
   return (
-    <div className="bg-[#F6F7FB] py-16 px-6 md:px-12 xl:px-20">
+    <div className="bg-[#F6F7FB] py-6 px-4 md:px-12 xl:px-20">
       <div className="max-w-7xl mx-auto">
         {/* Header Row */}
         <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left flex-wrap gap-4 mb-6">
