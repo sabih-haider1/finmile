@@ -1,8 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const DeliverySoftwareHero = () => {
     return (
@@ -40,12 +42,17 @@ export const DeliverySoftwareHero = () => {
 
                     {/* Buttons */}
                     <div className="flex flex-wrap gap-4 w-full md:w-auto">
-                        <button className="bg-[#6A27D4] text-white px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors w-full sm:w-auto whitespace-nowrap">
+                        <Link
+                            href={DEMO_FORM_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-[#6A27D4] text-white px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors w-full sm:w-auto whitespace-nowrap text-center"
+                        >
                             Free Savings Analysis
-                        </button>
-                        <button className="bg-white text-[#6A27D4] border-2 border-[#E8E5FF] px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#F8F7FF] transition-colors w-full sm:w-auto whitespace-nowrap shadow-[0_4px_10px_rgba(47,28,140,0.02)]">
+                        </Link>
+                        <Link href="/delivery-software#how-it-works" className="bg-white text-[#6A27D4] border-2 border-[#E8E5FF] px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#F8F7FF] transition-colors w-full sm:w-auto whitespace-nowrap shadow-[0_4px_10px_rgba(47,28,140,0.02)] text-center">
                             See How It Works
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

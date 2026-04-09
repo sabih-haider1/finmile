@@ -1,8 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 import { Navigation, MapPin, Zap, Camera, BarChart3, Smartphone } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
+const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
 export const DeliverySoftwareResults = () => {
     const results = [
@@ -72,9 +74,9 @@ export const DeliverySoftwareResults = () => {
                 </div>
 
                 {/* CTA Button */}
-                <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors">
+                <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors text-center">
                     See the Platform in Action
-                </button>
+                </Link>
 
             </div>
         </section>

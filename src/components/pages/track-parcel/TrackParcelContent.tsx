@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Montserrat } from 'next/font/google';
@@ -111,12 +112,14 @@ export const TrackParcelContent = () => {
                         Need assistance with tracking your order?
                     </p>
 
-                    <Button
-                        variant="solid"
-                        className="h-14 bg-[#6A27D4] hover:bg-[#581FB1] transition-colors rounded-full px-12 text-[15px] font-semibold"
-                    >
-                        Fill Out the Help Form
-                    </Button>
+                    <Link href="/contact" className="inline-block">
+                        <Button
+                            variant="solid"
+                            className="h-14 bg-[#6A27D4] hover:bg-[#581FB1] transition-colors rounded-full px-12 text-[15px] font-semibold"
+                        >
+                            Fill Out the Help Form
+                        </Button>
+                    </Link>
                 </div>
 
             </div>

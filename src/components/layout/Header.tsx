@@ -104,15 +104,15 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
 
     const dropdownVariants: Variants = {
         hidden: { opacity: 0, y: 10, scale: 0.95 },
-        visible: { 
-            opacity: 1, 
-            y: 0, 
+        visible: {
+            opacity: 1,
+            y: 0,
             scale: 1,
             transition: { duration: 0.2, ease: "easeOut" }
         },
-        exit: { 
-            opacity: 0, 
-            y: 10, 
+        exit: {
+            opacity: 0,
+            y: 10,
             scale: 0.95,
             transition: { duration: 0.15, ease: "easeIn" }
         }
@@ -124,21 +124,21 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                 variants={headerVariants}
                 initial="initial"
                 animate="animate"
-                className={`fixed left-2 right-2 md:left-5 md:right-5 lg:left-6 lg:right-6 xl:left-4 xl:right-4 2xl:left-[30px] 2xl:right-[30px] z-[100] max-w-[1600px] mx-auto flex items-center justify-between px-3 md:px-8 lg:px-10 rounded-full transition-all duration-500 ease-out ${
-                    isMobileMenuOpen && 'xl:hidden' 
-                        ? 'bg-transparent border-transparent py-3 lg:py-4' 
-                        : isScrolled 
-                            ? isLight 
+                className={`fixed left-0 right-0 z-[100] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 rounded-full transition-all duration-500 ease-out 
+                    w-[calc(100%-16px)] md:w-[calc(100%-40px)] lg:w-[calc(100%-48px)] xl:w-[calc(100%-32px)] 2xl:w-[calc(100%-60px)] max-w-[1600px] ${isMobileMenuOpen && 'xl:hidden'
+                        ? 'bg-transparent border-transparent py-3 lg:py-4'
+                        : isScrolled
+                            ? isLight
                                 ? 'bg-white/90 backdrop-blur-md border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.08)] py-2.5 lg:py-3.5'
-                                : 'bg-[#2A1B54]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgba(11,6,22,0.8)] py-2.5 lg:py-3.5' 
+                                : 'bg-[#2A1B54]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgba(11,6,22,0.8)] py-2.5 lg:py-3.5'
                             : 'bg-transparent border-transparent py-4 lg:py-5'
-                }`}
-                style={{ top: '3px' }}
+                    }`}
+                style={{ top: '8px' }}
             >
                 {/* Logo */}
                 <Link
                     href="/"
-                    className={`relative z-[110] flex shrink-0 transition-opacity duration-300 self-center translate-y-[2px] cursor-pointer ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
+                    className={`relative z-[110] flex shrink-0 transition-all duration-300 self-center translate-y-[2px] cursor-pointer left-[-38px] md:left-0 ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
                 >
                     <Image
                         src={isLight ? "/assets/logos/logo-blue.png" : "/assets/logos/logo-white.png"}
@@ -146,7 +146,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                         width={224}
                         height={56}
                         sizes="(max-width: 768px) 140px, 224px"
-                        className="h-10 md:h-12 lg:h-14 object-contain drop-shadow-lg align-middle"
+                        className="mt-1 h-10 md:h-12 lg:h-14 object-contain drop-shadow-lg align-middle"
                     />
                 </Link>
 
@@ -183,31 +183,31 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                                     />
                                 )}
-                                
+
                                 <div className="relative z-10 flex items-center gap-1 px-3 py-2 cursor-pointer">
                                     {link.href.startsWith('/') ? (
-                                             <Link
-                                             href={link.href}
-                                             className={`text-[13px] 2xl:text-[14px] font-[600] tracking-tight whitespace-nowrap transition-colors duration-200 ${isActive ? (isLight ? 'text-[#6A27D4]' : 'text-white') : (isLight ? 'text-gray-900 hover:text-[#6A27D4]' : 'text-white/80 hover:text-white')}`}
-                                         >
-                                             {link.name}
-                                         </Link>
-                                     ) : (
-                                         <span
-                                             className={`text-[13px] 2xl:text-[14px] font-[600] tracking-tight whitespace-nowrap transition-colors duration-200 flex items-center gap-1 ${isLight ? 'text-gray-900 hover:text-[#6A27D4]' : 'text-white/80 hover:text-white'}`}
-                                         >
-                                             {link.name}
-                                             {hasSubMenu && <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.name ? 'rotate-180' : ''}`} />}
-                                         </span>
-                                     )}
+                                        <Link
+                                            href={link.href}
+                                            className={`text-[13px] 2xl:text-[14px] font-[600] tracking-tight whitespace-nowrap transition-colors duration-200 ${isActive ? (isLight ? 'text-[#6A27D4]' : 'text-white') : (isLight ? 'text-gray-900 hover:text-[#6A27D4]' : 'text-white/80 hover:text-white')}`}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    ) : (
+                                        <span
+                                            className={`text-[13px] 2xl:text-[14px] font-[600] tracking-tight whitespace-nowrap transition-colors duration-200 flex items-center gap-1 ${isLight ? 'text-gray-900 hover:text-[#6A27D4]' : 'text-white/80 hover:text-white'}`}
+                                        >
+                                            {link.name}
+                                            {hasSubMenu && <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.name ? 'rotate-180' : ''}`} />}
+                                        </span>
+                                    )}
 
-                                     {isActive && (
-                                         <motion.div
-                                             layoutId="nav-active"
-                                             className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-[2px] rounded-full ${isLight ? 'bg-[#6A27D4]' : 'bg-white'}`}
-                                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                         />
-                                     )}
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="nav-active"
+                                            className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-[2px] rounded-full ${isLight ? 'bg-[#6A27D4]' : 'bg-white'}`}
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
                                 </div>
 
                                 {/* Dropdown Menu */}
@@ -259,7 +259,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                             </Button>
                         </Link>
                     </motion.div>
-                    
+
                     <motion.div
                         variants={navItemVariants}
                         custom={links.length + 1}

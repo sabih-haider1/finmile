@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { TrendingDown, AlertTriangle, MapPin, Clock, Users } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 
@@ -74,9 +75,9 @@ export const DeliverySoftwarePainPoints = () => {
                         <h3 className="text-white font-semibold text-[22px] leading-[1.3] mb-6 w-full">
                             Turn your delivery<br />network into a competitive<br />advantage.
                         </h3>
-                        <button className="bg-[#6A27D4] text-white px-6 py-3 rounded-full font-semibold text-[13px] shadow-[0_4px_15px_rgba(106,39,212,0.3)] hover:bg-[#5821B0] transition-colors w-full whitespace-nowrap">
+                        <Link href="/delivery-software#platform" className="bg-[#6A27D4] text-white px-6 py-3 rounded-full font-semibold text-[13px] shadow-[0_4px_15px_rgba(106,39,212,0.3)] hover:bg-[#5821B0] transition-colors w-full whitespace-nowrap text-center">
                             Explore How Finmile Fixes This
-                        </button>
+                        </Link>
                     </div>
                 </div>
 
