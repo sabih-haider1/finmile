@@ -74,7 +74,7 @@ export function WhitepaperSearchBar({
     <div className="bg-[#F6F7FB] py-16 px-6 md:px-12 xl:px-20">
       <div className="max-w-7xl mx-auto">
         {/* Header Row */}
-        <div className="flex justify-between items-center flex-wrap gap-4 mb-6">
+        <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left flex-wrap gap-4 mb-6">
           <h2 className="text-3xl md:text-4xl font-semibold text-[#2F1C8C]">
             Search Finmile Research
           </h2>
@@ -172,7 +172,7 @@ export function WhitepaperSearchBar({
         </div>
 
         {/* Search Bar Row */}
-        <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex flex-col md:flex-row items-center gap-4 w-full">
           {/* Search Input */}
           <div className="relative flex-1 min-w-[280px]">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" size={20} />
@@ -186,7 +186,7 @@ export function WhitepaperSearchBar({
           </div>
 
           {/* Sort Dropdown */}
-          <div className="relative lg:w-48" ref={sortRef}>
+          <div className="relative w-full md:w-auto lg:w-48" ref={sortRef}>
             <button
               onClick={() => setShowSortDropdown(!showSortDropdown)}
               className="w-full flex items-center justify-between gap-2 h-11 px-5 rounded-full bg-white border border-gray-200 text-sm text-gray-600 hover:border-gray-300 hover:shadow-sm transition-all"

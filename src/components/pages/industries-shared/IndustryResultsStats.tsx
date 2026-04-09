@@ -44,7 +44,7 @@ export const IndustryResultsStats = ({ title, subtitle, stats }: IndustryResults
                     {stats.map((stat, index) => (
                         <div 
                             key={index} 
-                            className="bg-white/5 backdrop-blur-sm rounded-[24px] p-8 flex flex-col items-start border border-white/10 transition-all hover:bg-white/10 hover:border-white/20"
+                            className="bg-white/5 backdrop-blur-sm rounded-[24px] p-6 text-center items-center md:p-8 flex flex-col md:items-start md:text-left border border-white/10 transition-all hover:bg-white/10 hover:border-white/20"
                         >
                             <span className="text-white/60 font-bold text-[12px] uppercase tracking-wider mb-6">
                                 {stat.label}

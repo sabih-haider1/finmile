@@ -7,10 +7,10 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 export const AiDataSustainability = () => {
     return (
         <section className={`w-full py-6 lg:py-6 bg-white flex flex-col items-center px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
-            <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-12 lg:gap-12 items-center'>
+            <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-8 md:gap-12 items-center'>
 
                 {/* Left Column: Text Content */}
-                <div className='flex flex-col space-y-10 pt-4'>
+                <div className='flex flex-col items-center text-center md:items-start md:text-left space-y-10 pt-4'>
                     <h2 className='text-[#2F1C8C] text-[28px] md:text-[40px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight'>
                         AI. Data. Sustainability.<br className='hidden md:block' />
                         Efficiency. The intelligence that<br className='hidden md:block' />
