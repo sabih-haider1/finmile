@@ -133,7 +133,7 @@ export default async function WhitepaperDetailPage({ params }: Props) {
     <main className="min-h-screen bg-white text-gray-900 flex flex-col relative overflow-hidden font-montserrat">
       <Header theme="light" />
       
-      <div className="flex-grow flex flex-col relative z-10 w-full pt-16">
+      <div className="flex-grow flex flex-col relative z-10 w-full pt-6">
         <DetailPageTemplate 
           content={fallbackContent} 
           author={authorDisplay} 

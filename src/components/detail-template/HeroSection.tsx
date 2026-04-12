@@ -16,12 +16,12 @@ export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
   const isExternalImage = /^https?:\/\//i.test(hero.image_url || '');
 
   return (
-    <section className="w-full bg-[#fcfcff] pt-24 pb-16 md:pt-32 md:pb-24">
+    <section className="w-full bg-[#fcfcff] pt-6 pb-6 md:pt-6 md:pb-6">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-6 items-center">
           {/* Image - Left column */}
           {hero.image_url && (
-            <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-sm bg-white">
+            <div className="relative w-full aspect-[4/3] rounded-[20px] overflow-hidden shadow-sm bg-white">
               <Image
                 src={hero.image_url}
                 alt={hero.title}
@@ -37,7 +37,7 @@ export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
           {/* Text content - Right column */}
           <div className="flex flex-col">
             {/* Metadata at the top */}
-            <div className="flex flex-wrap gap-6 text-sm font-medium text-gray-500 mb-6">
+            <div className="flex flex-wrap gap-4 text-sm font-medium text-gray-500 mb-4">
               {publishDate && (
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-gray-400" strokeWidth={1.5} />
@@ -57,7 +57,7 @@ export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#2D126B] leading-[1.1] mb-8">
+            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#2D126B] leading-[1.1] mb-6">
               {hero.title}
             </h1>
 
@@ -67,7 +67,7 @@ export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
             </p>
 
             {downloadButton?.url && (
-              <div className="mt-6">
+              <div className="mt-4">
                 <a
                   href={downloadButton.url}
                   target="_blank"

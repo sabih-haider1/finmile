@@ -133,7 +133,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     <main className="min-h-screen bg-white text-gray-900 flex flex-col relative overflow-hidden">
       <Header theme="light" />
 
-      <div className="flex-grow flex flex-col relative z-10 w-full pt-16">
+      <div className="flex-grow flex flex-col relative z-10 w-full pt-6">
         <DetailPageTemplate content={content} author={authorDisplay} downloadButton={downloadButton} />
       </div>
 
