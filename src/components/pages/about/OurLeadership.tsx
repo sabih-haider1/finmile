@@ -100,7 +100,9 @@ export const OurLeadership = () => {
                                         </p>
                                     </div>
                                     <a
-                                        href="#"
+                                        href={member.linkedin || '#'}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="w-8 h-8 rounded-full bg-[#3B257E] text-white flex items-center justify-center shrink-0 hover:bg-[#5821B0] transition-colors"
                                         aria-label={`LinkedIn for ${member.name}`}
                                     >

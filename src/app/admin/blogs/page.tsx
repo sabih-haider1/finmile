@@ -130,6 +130,9 @@ export default function BlogsPage() {
         ...formData,
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
         cover_image_url: coverImageUrl || null,
+        published_at: formData.published_at
+          ? new Date(formData.published_at as string).toISOString()
+          : null,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };
 
@@ -214,6 +217,7 @@ export default function BlogsPage() {
         ...INDUSTRIES.map((i) => ({ value: i, label: i })),
       ],
     },
+    { name: 'published_at', label: 'Publish Date', type: 'date', helpText: 'Custom publish date' },
     { name: 'tags', label: 'Tags', type: 'tags', placeholder: 'ai, fintech, technology' },
     { name: 'is_featured', label: 'Featured', type: 'toggle' },
     { name: 'is_published', label: 'Published', type: 'toggle' },
@@ -273,7 +277,12 @@ export default function BlogsPage() {
           <FormBuilder
             title={editingBlog ? 'Edit Blog' : 'Create New Blog'}
             fields={blogFormFields}
-            initialData={editingBlog || { is_featured: false, is_published: true }}
+            initialData={editingBlog
+              ? {
+                  ...editingBlog,
+                  published_at: editingBlog.published_at || editingBlog.created_at,
+                }
+              : { is_featured: false, is_published: true }}
             onSubmit={handleFormSubmit}
             onCancel={() => {
               setShowCreateForm(false);

@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Metadata } from 'next';
 import { DetailPageTemplate } from '@/components/detail-template';
 import { UnifiedContent } from '@/types/content';
+import { getAuthorProfileByName } from '@/data/authors';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -44,6 +45,9 @@ export default async function CaseStudyDetailPage({ params }: Props) {
   }
 
   const publishDate = caseStudy.published_at || caseStudy.created_at;
+  const authorName = caseStudy.author_name || caseStudy.company_name || 'Finmile Editorial Team';
+  const resolvedAuthor = getAuthorProfileByName(authorName);
+  const authorDisplay = resolvedAuthor || authorName;
 
   const { data: relatedCaseStudies } = await supabase
     .from('case_studies')
@@ -76,7 +80,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
             ...(sectionsData.hero?.metadata || {}),
             published_date: publishDate,
             read_time: sectionsData.hero?.metadata?.read_time || 'Case study',
-            author: caseStudy.author_name || caseStudy.company_name || sectionsData.hero?.metadata?.author,
+            author: authorName || sectionsData.hero?.metadata?.author,
           },
         },
         sections: Array.isArray(sectionsData.sections) && sectionsData.sections.length > 0
@@ -102,7 +106,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
           metadata: {
             published_date: publishDate,
             read_time: 'Case study',
-            author: caseStudy.author_name || caseStudy.company_name || 'Finmile Editorial Team',
+            author: authorName,
           },
         },
         sections: [
@@ -124,7 +128,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
       <Header theme="light" />
 
       <div className="flex-grow flex flex-col relative z-10 w-full pt-16">
-        <DetailPageTemplate content={content} author={caseStudy.author_name || caseStudy.company_name || 'Finmile Editorial Team'} />
+        <DetailPageTemplate content={content} author={authorDisplay} />
       </div>
 
       <Footer />

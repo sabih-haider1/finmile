@@ -133,6 +133,7 @@ export async function POST(request: NextRequest) {
     const sanitizedBody = sanitizeHtml(validatedData.body);
 
     const now = new Date().toISOString();
+    const customPublishedAt = validatedData.published_at || null;
     const blogData = {
       title: validatedData.title,
       slug: validatedData.slug,
@@ -145,7 +146,7 @@ export async function POST(request: NextRequest) {
       is_featured: validatedData.is_featured || false,
       is_published: validatedData.is_published ?? true,
       sections: validatedData.sections || null,
-      published_at: validatedData.is_published ? now : null,
+      published_at: customPublishedAt || (validatedData.is_published ? now : null),
       created_at: now,
       updated_at: now,
     };

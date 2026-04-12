@@ -3,7 +3,7 @@ import { supabase } from '@/supabaseClient';
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Metadata } from 'next';
-import { getAuthorByName } from '@/data/authors';
+import { getAuthorProfileByName } from '@/data/authors';
 import { DetailPageTemplate } from '@/components/detail-template';
 import { UnifiedContent } from '@/types/content';
 
@@ -45,14 +45,10 @@ export default async function WhitepaperDetailPage({ params }: Props) {
   }
 
   const publishDate = whitepaper.published_date || whitepaper.published_at || whitepaper.created_at;
-  const resolvedAuthor = getAuthorByName(whitepaper.author || whitepaper.author_name);
+  const resolvedAuthor = getAuthorProfileByName(whitepaper.author || whitepaper.author_name);
   const authorName = whitepaper.author || whitepaper.author_name || 'Finmile Editorial Team';
 
-  const authorDisplay = resolvedAuthor ? {
-    name: resolvedAuthor.name,
-    bio: resolvedAuthor.bio,
-    avatar_url: resolvedAuthor.image,
-  } : authorName;
+  const authorDisplay = resolvedAuthor || authorName;
 
   // Fetch related whitepapers
   const { data: relatedItems } = await supabase

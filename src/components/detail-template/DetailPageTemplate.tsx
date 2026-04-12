@@ -10,9 +10,11 @@ import { AuthorSection } from './AuthorSection';
 
 export interface AuthorInfo {
   name: string;
+  role?: string;
   bio?: string;
   avatar_url?: string;
   email?: string;
+  linkedin?: string;
 }
 
 export interface DetailPageTemplateProps {

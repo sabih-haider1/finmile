@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Metadata } from 'next';
 import { DetailPageTemplate } from '@/components/detail-template';
 import { UnifiedContent } from '@/types/content';
-import { getAuthorByName } from '@/data/authors';
+import { getAuthorProfileByName } from '@/data/authors';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -61,12 +61,8 @@ export default async function ResourceDetailPage({ params }: Props) {
     url: `/resources/${item.slug}`,
   }));
 
-  const resolvedAuthor = getAuthorByName(authorName);
-  const authorDisplay = resolvedAuthor ? {
-    name: resolvedAuthor.name,
-    bio: resolvedAuthor.bio,
-    avatar_url: resolvedAuthor.image,
-  } : authorName;
+  const resolvedAuthor = getAuthorProfileByName(authorName);
+  const authorDisplay = resolvedAuthor || authorName;
 
   const fallbackContent: UnifiedContent = {
     hero: {

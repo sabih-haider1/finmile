@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Metadata } from 'next';
 import { DetailPageTemplate } from '@/components/detail-template';
 import { UnifiedContent } from '@/types/content';
-import { getAuthorByName } from '@/data/authors';
+import { getAuthorProfileByName } from '@/data/authors';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -60,12 +60,8 @@ export default async function BlogDetailPage({ params }: Props) {
     url: `/blog/${item.slug}`,
   }));
 
-  const resolvedAuthor = getAuthorByName(blog.author_name);
-  const authorDisplay = resolvedAuthor ? {
-    name: resolvedAuthor.name,
-    bio: resolvedAuthor.bio,
-    avatar_url: resolvedAuthor.image,
-  } : blog.author_name || 'Finmile Editorial Team';
+  const resolvedAuthor = getAuthorProfileByName(blog.author_name);
+  const authorDisplay = resolvedAuthor || blog.author_name || 'Finmile Editorial Team';
 
   const content: UnifiedContent = (blog.sections && typeof blog.sections === 'object')
     ? {

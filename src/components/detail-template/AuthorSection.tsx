@@ -1,10 +1,13 @@
 import Image from 'next/image';
+import { Linkedin } from 'lucide-react';
 
 interface AuthorInfo {
   name: string;
+  role?: string;
   bio?: string;
   avatar_url?: string;
   email?: string;
+  linkedin?: string;
 }
 
 interface AuthorSectionProps {
@@ -32,7 +35,7 @@ export function AuthorSection({ author, className = '' }: AuthorSectionProps) {
   }
 
   // Handle full author object
-  const { name, bio, avatar_url, email } = author;
+  const { name, role, bio, avatar_url, email, linkedin } = author;
 
   return (
     <section className={`w-full my-12 md:my-16 py-12 border-t border-gray-100 ${className}`}>
@@ -58,10 +61,26 @@ export function AuthorSection({ author, className = '' }: AuthorSectionProps) {
             <div className="flex-1">
               <h4 className="text-xl md:text-2xl font-bold text-[#2D126B] mb-3">{name}</h4>
 
+              {role && (
+                <p className="text-sm md:text-base font-semibold text-[#6A27D4] mb-3">{role}</p>
+              )}
+
               {bio && (
                 <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-4">
                   {bio}
                 </p>
+              )}
+
+              {linkedin && (
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#2D126B] hover:text-[#1E4FA8] font-semibold text-sm transition-colors mb-3"
+                >
+                  <Linkedin className="w-4 h-4" fill="currentColor" strokeWidth={0.5} />
+                  LinkedIn Profile
+                </a>
               )}
 
               {email && (

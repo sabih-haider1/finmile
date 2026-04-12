@@ -78,13 +78,15 @@ export default function GuidesPage() {
         ...formData,
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
         pdf_url: pdfUrl,
+        created_at: formData.created_at
+          ? new Date(formData.created_at as string).toISOString()
+          : undefined,
       };
 
       if (editingGuide) {
         // Update existing guide
         const updateData = { ...(guideData as Record<string, unknown>) };
         delete updateData.id;
-        delete updateData.created_at;
         const { error } = await supabase
           .from('guides')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -93,10 +95,9 @@ export default function GuidesPage() {
         alert('Guide updated successfully!');
       } else {
         // Create new guide
-        const now = new Date().toISOString();
+        const now = (guideData.created_at as string) || new Date().toISOString();
         const insertData = { ...(guideData as Record<string, unknown>) };
         delete insertData.id;
-        delete insertData.created_at;
         delete insertData.updated_at;
         const { error } = await supabase.from('guides').insert([{
           ...insertData,
@@ -120,6 +121,7 @@ export default function GuidesPage() {
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'description', label: 'Description', type: 'textarea', rows: 4, placeholder: 'Guide description...' },
     { name: 'pdf_url', label: 'PDF File', type: 'file', required: true, accept: '.pdf', bucket: 'guides', folder: 'pdfs' },
+    { name: 'created_at', label: 'Publish Date', type: 'date', helpText: 'Custom publish date' },
   ];
 
   const columns = [

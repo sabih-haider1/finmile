@@ -102,6 +102,9 @@ export default function ResourcesPage() {
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
         file_url: fileUrl,
         thumbnail_url: thumbnailUrl || null,
+        created_at: formData.created_at
+          ? new Date(formData.created_at as string).toISOString()
+          : undefined,
         tags: Array.isArray(formData.tags) ? formData.tags : [],
       };
 
@@ -109,7 +112,6 @@ export default function ResourcesPage() {
         // Update existing resource
         const updateData = { ...(resourceData as Record<string, unknown>) };
         delete updateData.id;
-        delete updateData.created_at;
         const { error } = await supabase
           .from('resources')
           .update({ ...updateData, updated_at: new Date().toISOString() })
@@ -118,10 +120,9 @@ export default function ResourcesPage() {
         alert('Resource updated successfully!');
       } else {
         // Create new resource
-        const now = new Date().toISOString();
+        const now = (resourceData.created_at as string) || new Date().toISOString();
         const insertData = { ...(resourceData as Record<string, unknown>) };
         delete insertData.id;
-        delete insertData.created_at;
         delete insertData.updated_at;
         const { error } = await supabase.from('resources').insert([{
           ...insertData,
@@ -186,6 +187,7 @@ export default function ResourcesPage() {
         ...INDUSTRIES.map((i) => ({ value: i, label: i })),
       ],
     },
+    { name: 'created_at', label: 'Publish Date', type: 'date', helpText: 'Custom publish date' },
     { name: 'tags', label: 'Tags', type: 'tags', placeholder: 'tools, templates, guides' },
     { name: 'is_featured', label: 'Featured', type: 'toggle' },
     { name: 'is_published', label: 'Published', type: 'toggle' },
@@ -253,7 +255,9 @@ export default function ResourcesPage() {
           <FormBuilder
             title={editingResource ? 'Edit Resource' : 'Create New Resource'}
             fields={resourceFormFields}
-            initialData={editingResource || { is_featured: false, is_published: true, file_type: 'pdf' }}
+            initialData={editingResource
+              ? editingResource
+              : { is_featured: false, is_published: true, file_type: 'pdf' }}
             onSubmit={handleFormSubmit}
             onCancel={() => {
               setShowCreateForm(false);

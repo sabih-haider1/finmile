@@ -130,6 +130,9 @@ export default function CaseStudiesPage() {
         ...formData,
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
         cover_image_url: coverImageUrl || null,
+        published_at: formData.published_at
+          ? new Date(formData.published_at as string).toISOString()
+          : null,
         industry: formData.industry && (formData.industry as string).trim() !== '' ? formData.industry : null,
         company_name: formData.author_name && (formData.author_name as string).trim() !== ''
           ? formData.author_name
@@ -218,6 +221,7 @@ export default function CaseStudiesPage() {
         ...INDUSTRIES.map((i) => ({ value: i, label: i })),
       ],
     },
+    { name: 'published_at', label: 'Publish Date', type: 'date', helpText: 'Custom publish date' },
     { name: 'tags', label: 'Tags', type: 'tags', placeholder: 'ai, automation, roi' },
     { name: 'is_featured', label: 'Featured', type: 'toggle' },
     { name: 'is_published', label: 'Published', type: 'toggle' },
@@ -282,6 +286,7 @@ export default function CaseStudiesPage() {
               ? {
                   ...editingCaseStudy,
                   author_name: editingCaseStudy.author_name || editingCaseStudy.company_name || '',
+                  published_at: editingCaseStudy.published_at || editingCaseStudy.created_at,
                 }
               : { is_featured: false, is_published: true }}
             onSubmit={handleFormSubmit}

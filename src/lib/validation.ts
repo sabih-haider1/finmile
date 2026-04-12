@@ -53,6 +53,7 @@ export const blogSchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
+  published_at: z.string().datetime().optional().nullable(),
   sections: z.any().optional().nullable(),
 });
 
@@ -77,6 +78,7 @@ export const caseStudySchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
+  published_at: z.string().datetime().optional().nullable(),
   sections: z.any().optional().nullable(),
 });
 
