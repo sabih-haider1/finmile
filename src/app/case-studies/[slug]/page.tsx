@@ -123,12 +123,18 @@ export default async function CaseStudyDetailPage({ params }: Props) {
         },
       };
 
+  const ctaSection = content.sections.find((section) => section.type === 'cta');
+  const ctaButton = ctaSection?.data?.cta_button as { label?: string; url?: string } | undefined;
+  const downloadButton = ctaButton?.url
+    ? { url: ctaButton.url, label: ctaButton.label || 'Download PDF' }
+    : undefined;
+
   return (
     <main className="min-h-screen bg-white text-gray-900 flex flex-col relative overflow-hidden">
       <Header theme="light" />
 
       <div className="flex-grow flex flex-col relative z-10 w-full pt-16">
-        <DetailPageTemplate content={content} author={authorDisplay} />
+        <DetailPageTemplate content={content} author={authorDisplay} downloadButton={downloadButton} />
       </div>
 
       <Footer />

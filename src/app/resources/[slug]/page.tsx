@@ -111,7 +111,11 @@ export default async function ResourceDetailPage({ params }: Props) {
       <Header theme="light" />
 
       <div className="flex-grow flex flex-col relative z-10 w-full pt-16">
-        <DetailPageTemplate content={content} author={authorDisplay} />
+        <DetailPageTemplate
+          content={content}
+          author={authorDisplay}
+          downloadButton={resource.file_url ? { url: resource.file_url, label: resource.file_type === 'pdf' ? 'Download PDF' : 'Download File' } : undefined}
+        />
       </div>
 
       <Footer />

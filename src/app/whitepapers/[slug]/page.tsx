@@ -137,6 +137,7 @@ export default async function WhitepaperDetailPage({ params }: Props) {
         <DetailPageTemplate 
           content={fallbackContent} 
           author={authorDisplay} 
+          downloadButton={whitepaper.pdf_url ? { url: whitepaper.pdf_url, label: 'Download PDF' } : undefined}
         />
       </div>
 

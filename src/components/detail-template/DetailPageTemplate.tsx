@@ -21,12 +21,17 @@ export interface DetailPageTemplateProps {
   content: UnifiedContent;
   author?: AuthorInfo | string;
   featureGridColumns?: 2 | 3;
+  downloadButton?: {
+    url: string;
+    label?: string;
+  };
 }
 
 export function DetailPageTemplate({
   content,
   author,
   featureGridColumns = 3,
+  downloadButton,
 }: DetailPageTemplateProps) {
   const { hero, sections, sidebar } = content;
 
@@ -90,6 +95,24 @@ export function DetailPageTemplate({
                     return null;
                 }
               })}
+
+              {downloadButton?.url && (
+                <div className="w-full rounded-2xl bg-gradient-to-r from-[#F5F3FF] to-[#EEF2FF] p-6 md:p-8 border border-[#E9E2FF]">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <p className="text-[#2D126B] font-semibold text-lg md:text-xl">
+                      Ready to download?
+                    </p>
+                    <a
+                      href={downloadButton.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#2F1C8C] text-white font-semibold text-sm hover:bg-[#4A2FC2] transition-colors"
+                    >
+                      {downloadButton.label || 'Download PDF'}
+                    </a>
+                  </div>
+                </div>
+              )}
 
               {/* Author section at the end */}
               {author && <AuthorSection author={author} />}
