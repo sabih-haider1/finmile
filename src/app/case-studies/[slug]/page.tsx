@@ -60,21 +60,36 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     url: `/case-studies/${item.slug}`,
   }));
 
-  const content: UnifiedContent = (caseStudy.sections && typeof caseStudy.sections === 'object')
+  const sectionsData = caseStudy.sections && typeof caseStudy.sections === 'object'
+    ? caseStudy.sections as Partial<UnifiedContent>
+    : null;
+
+  const content: UnifiedContent = sectionsData
     ? {
-        ...caseStudy.sections,
+        ...sectionsData,
         hero: {
-          ...caseStudy.sections.hero,
-          title: caseStudy.sections.hero.title || caseStudy.title,
-          image_url: caseStudy.sections.hero.image_url ?? caseStudy.cover_image_url,
+          ...(sectionsData.hero || {}),
+          title: sectionsData.hero?.title || caseStudy.title,
+          image_url: sectionsData.hero?.image_url ?? caseStudy.cover_image_url,
           description: caseStudy.summary,
           metadata: {
-            ...caseStudy.sections.hero.metadata,
+            ...(sectionsData.hero?.metadata || {}),
             published_date: publishDate,
-            read_time: caseStudy.sections.hero.metadata?.read_time || 'Case study',
-            author: caseStudy.author_name || caseStudy.company_name || caseStudy.sections.hero.metadata?.author,
+            read_time: sectionsData.hero?.metadata?.read_time || 'Case study',
+            author: caseStudy.author_name || caseStudy.company_name || sectionsData.hero?.metadata?.author,
           },
         },
+        sections: Array.isArray(sectionsData.sections) && sectionsData.sections.length > 0
+          ? sectionsData.sections
+          : [
+              {
+                id: 'case-study-body',
+                type: 'content' as const,
+                data: {
+                  body: caseStudy.content || `<p>${caseStudy.summary}</p>`,
+                },
+              },
+            ],
         sidebar: {
           related: sidebarRelated,
         },

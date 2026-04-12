@@ -33,7 +33,7 @@ export const AiDataSustainability = () => {
                 </div>
 
                 {/* Right Column: Image with Overlays */}
-                <div className='relative w-full flex items-center justify-center pt-8 md:pt-0 px-4 lg:px-0 min-h-[500px] lg:min-h-[600px]'>
+                <div className='relative w-full flex items-center justify-center pt-4 md:pt-0 px-4 lg:px-0 min-h-[500px] lg:min-h-[600px]'>
 
                     {/* Background Highlight Glow */}
                     <div className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none' />
