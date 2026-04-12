@@ -4,9 +4,13 @@ import { Calendar, Clock } from 'lucide-react';
 
 interface HeroSectionProps {
   hero: ContentHero;
+  downloadButton?: {
+    url: string;
+    label?: string;
+  };
 }
 
-export function HeroSection({ hero }: HeroSectionProps) {
+export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
   const readTime = hero.metadata?.read_time || '10 minutes read';
   const publishDate = hero.metadata?.published_date;
   const isExternalImage = /^https?:\/\//i.test(hero.image_url || '');
@@ -17,13 +21,13 @@ export function HeroSection({ hero }: HeroSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image - Left column */}
           {hero.image_url && (
-            <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-sm">
+            <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-sm bg-white">
               <Image
                 src={hero.image_url}
                 alt={hero.title}
                 fill
                 unoptimized={isExternalImage}
-                className="object-cover"
+                className="object-contain object-center"
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
@@ -61,6 +65,19 @@ export function HeroSection({ hero }: HeroSectionProps) {
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl">
               {hero.description}
             </p>
+
+            {downloadButton?.url && (
+              <div className="mt-6">
+                <a
+                  href={downloadButton.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#2F1C8C] text-white font-semibold text-sm hover:bg-[#4A2FC2] transition-colors"
+                >
+                  {downloadButton.label || 'Download PDF'}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>
