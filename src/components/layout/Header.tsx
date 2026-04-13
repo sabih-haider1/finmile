@@ -146,6 +146,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                         width={224}
                         height={56}
                         sizes="(max-width: 768px) 140px, 224px"
+                        priority
                         className="mt-1 h-10 md:h-12 lg:h-14 object-contain drop-shadow-lg align-middle"
                     />
                 </Link>

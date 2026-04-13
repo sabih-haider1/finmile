@@ -24,6 +24,7 @@ function GuideCard({ guide }: { guide: Guide }) {
           width={220}
           height={220}
           className="object-contain"
+          style={{ width: 'auto', height: 'auto' }}
         />
       </div>
 

@@ -88,7 +88,7 @@ export const Hero = () => {
           height={750}
           priority
           fetchPriority="high"
-          quality={80}
+          quality={75}
           className="w-full h-auto object-contain"
           sizes="(max-width: 1200px) 100vw, 1200px"
         />

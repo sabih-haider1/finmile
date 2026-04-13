@@ -16,7 +16,7 @@ export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
   const isExternalImage = /^https?:\/\//i.test(hero.image_url || '');
 
   return (
-    <section className="w-full bg-[#fcfcff] pt-12 pb-6 md:pt-6 md:pb-6">
+    <section className="w-full bg-[#fcfcff] pt-20 pb-6 md:pt-16 md:pb-6">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-6 items-center">
           {/* Image - Left column */}
