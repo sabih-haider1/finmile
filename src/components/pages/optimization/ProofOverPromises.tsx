@@ -46,7 +46,7 @@ export const ProofOverPromises = () => {
                 
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-8">
-                    <h2 className="font-semibold text-[36px] md:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2]">
+                    <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] text-balance text-[clamp(36px,4vw,48px)]">
                         Proof Over Promises
                     </h2>
                 </div>
@@ -58,7 +58,7 @@ export const ProofOverPromises = () => {
                             key={idx} 
                             className="bg-[#F8F7FC] rounded-[24px] flex flex-col w-full hover:-translate-y-1 transition-transform duration-300"
                         >
-                            <div className="py-10 md:py-12 flex justify-center items-center">
+                            <div className="py-10 md:py-[clamp(32px,5vw,48px)] flex justify-center items-center">
                                 <span className="font-semibold text-[42px] md:text-[48px] text-[#2F1C8C] leading-none">
                                     {metric.value}
                                 </span>
@@ -78,7 +78,7 @@ export const ProofOverPromises = () => {
 
                 {/* Testimonial Block */}
                 {/* Increased width to max-w-[1000px] to better align with the cards above */}
-                <div className="w-full max-w-[1000px] bg-[#2F1C8C] rounded-[24px] px-10 py-12 md:py-16 md:px-12 flex flex-col items-center mb-8 relative overflow-hidden">
+                <div className="w-full max-w-[1000px] bg-[#2F1C8C] rounded-[24px] px-5 md:px-10 py-8 md:py-12 md:py-16 md:px-12 flex flex-col items-center mb-8 relative overflow-hidden">
                     
                     {/* Double Quote Icon replacing SVG */}
                     <div className="mb-4 flex justify-center h-[40px] items-center">
@@ -106,7 +106,7 @@ export const ProofOverPromises = () => {
 
                 {/* CTA Button */}
                 <div className="text-center">
-                    <button className="bg-[#6A27D4] text-white px-8 py-4 rounded-full font-semibold text-[15px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0" onClick={() => setIsPopupOpen(true)}>
+                    <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-4 rounded-full font-semibold text-[15px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0" onClick={() => setIsPopupOpen(true)}>
                         Calculate My Route Savings
                     </button>
                 </div>

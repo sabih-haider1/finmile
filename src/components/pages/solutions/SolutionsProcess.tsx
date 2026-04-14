@@ -40,7 +40,7 @@ const steps = [
 
 export const SolutionsProcess = () => {
   return (
-    <section className="w-full py-6 lg:py-6 bg-white overflow-hidden relative">
+    <section className="w-full py-6 lg:py-6 -mb-[1px] z-10 bg-white overflow-hidden relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
         {/* Section Heading */}
         <motion.div
@@ -50,7 +50,7 @@ export const SolutionsProcess = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-[#2F1C8C] text-[34px] md:text-[42px] lg:text-[48px] font-bold leading-tight tracking-tight">
+          <h2 className="text-[#2F1C8C] font-bold leading-tight tracking-normal md:tracking-tight text-balance text-[clamp(34px,4vw,48px)]">
             Simple Steps to Delivery Excellence
           </h2>
         </motion.div>

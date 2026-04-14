@@ -37,9 +37,9 @@ export const FaqSection = () => {
         <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 ${montserrat.className}`}>
             
             {/* Main FAQ Container with updated EXACT #F3F5FF background */}
-            <div className="w-full max-w-[1000px] bg-[#F3F5FF] rounded-[32px] px-6 py-12 md:px-16 md:py-16 flex flex-col items-center shadow-[0_10px_40px_rgba(47,28,140,0.03)]">
+            <div className="w-full max-w-[1000px] bg-[#F3F5FF] rounded-[32px] px-6 py-8 md:py-12 md:px-16 md:py-[clamp(40px,5vw,64px)] flex flex-col items-center shadow-[0_10px_40px_rgba(47,28,140,0.03)]">
                 
-                <h2 className="text-[#2F1C8C] font-bold text-[32px] md:text-[42px] mb-10 text-center tracking-tight">
+                <h2 className="text-[#2F1C8C] font-bold mb-10 text-center tracking-normal md:tracking-tight text-balance text-[clamp(32px,4vw,42px)]">
                     Frequently Asked Questions
                 </h2>
 
@@ -90,7 +90,7 @@ export const FaqSection = () => {
                 </div>
 
                 {/* Call to action button */}
-                <button className="mt-10 bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                <button className="mt-10 bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
                     Read Full FAQ&apos;s
                 </button>
 

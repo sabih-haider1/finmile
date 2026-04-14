@@ -19,7 +19,7 @@ interface IndustryResultsStatsProps {
 
 export const IndustryResultsStats = ({ title, subtitle, stats }: IndustryResultsStatsProps) => {
     return (
-        <section className={`w-full bg-[#0B0616] py-20 md:py-32 flex justify-center px-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-8 md:py-12 md:py-20 md:py-32 flex justify-center px-6 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Background Gradients */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -31,7 +31,7 @@ export const IndustryResultsStats = ({ title, subtitle, stats }: IndustryResults
                 
                 {/* Header Content */}
                 <div className="text-center max-w-[900px] mb-16">
-                    <h2 className="font-bold text-[36px] md:text-[44px] lg:text-[48px] text-white tracking-tight leading-[1.1] mb-6">
+                    <h2 className="font-bold text-white tracking-normal md:tracking-tight leading-[1.1] mb-6 text-balance text-[clamp(36px,4vw,48px)]">
                         {title}
                     </h2>
                     <p className="text-[#ADB5BD] font-medium text-[15px] md:text-[16px] leading-[1.6]">

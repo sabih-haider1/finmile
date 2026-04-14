@@ -18,7 +18,7 @@ export const SmartStreamlined = () => {
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[640px] z-10 order-2 lg:order-1">
-                    <h2 className="font-semibold text-[36px] md:text-[48px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-6">
+                    <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.1] mb-6 text-balance text-[clamp(36px,4vw,48px)]">
                         Smarter, Streamlined Reverse Logistics
                     </h2>
 

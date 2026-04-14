@@ -25,7 +25,7 @@ export const DriverAppHero = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-2">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight mb-6 mt-4 lg:mt-0">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 mt-4 lg:mt-0 text-balance text-[clamp(32px,4vw,48px)]">
                         Finmile Driver App:<br className="hidden md:block"/>
                         Proof of Delivery and<br className="hidden md:block"/>
                         Driver Management<br className="hidden md:block"/>
@@ -40,7 +40,7 @@ export const DriverAppHero = () => {
                         The Finmile Driver App turns every driver&apos;s smartphone into a real-time logistics hub. From route guidance to proof of delivery, every mile is fully verified.
                     </p>
 
-                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto text-center">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-5 md:px-10 py-4 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto text-center">
                         Book A Demo
                     </Link>
                 </div>

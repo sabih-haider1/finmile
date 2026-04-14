@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsRouteOptimisation = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-12 lg:py-20 flex justify-center px-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-8 md:py-12 lg:py-[clamp(48px,6vw,80px)] flex justify-center px-6 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Background Glow Effects (Exact Match to Reference) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-60 pointer-events-none" />
@@ -16,7 +16,7 @@ export const DspsRouteOptimisation = () => {
                 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[540px] order-2 lg:order-1 z-10">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-white tracking-tight leading-[1.2] mb-4">
+                    <h2 className="font-bold text-white tracking-normal md:tracking-tight leading-[1.2] mb-4 text-balance text-[clamp(32px,4vw,40px)]">
                         AI Route Optimisation
                     </h2>
 

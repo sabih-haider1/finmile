@@ -5,11 +5,11 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OutcomesAtScale = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative ${montserrat.className}`}>
 
             {/* Header Content */}
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-12 md:mb-8 md:mb-8">
-                <h2 className="font-semibold text-[32px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.15] md:leading-tight">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.15] md:leading-tight text-balance text-[clamp(32px,4vw,48px)]">
                     Outcomes Delivered at Scale
                 </h2>
             </div>

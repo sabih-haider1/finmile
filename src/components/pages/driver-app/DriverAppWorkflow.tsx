@@ -45,7 +45,7 @@ export const DriverAppWorkflow = () => {
 
                 {/* Header Content */}
                 <div className="text-center w-full z-10 flex flex-col items-center max-w-[900px] mx-auto mb-8 lg:mb-8">
-                    <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2]">
+                    <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] text-balance text-[clamp(32px,4vw,44px)]">
                         Simple Workflow for<br />Maximum Performance
                     </h2>
                 </div>

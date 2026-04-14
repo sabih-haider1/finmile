@@ -30,7 +30,7 @@ export const EcommerceIntegrations = () => {
 
                 {/* Left Side: Content */}
                 <div className="w-full lg:w-[48%] flex flex-col items-start text-left">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[38px] lg:text-[48px] leading-[1.1] tracking-tight mb-8">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight mb-8 text-balance text-[clamp(32px,4vw,48px)]">
                         E-Commerce &<br />
                         Marketplace Integrations
                     </h2>
@@ -53,13 +53,44 @@ export const EcommerceIntegrations = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Link href="/integrations" className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
+                    <Link href="/integrations" className="bg-[#6A27D4] text-white px-5 md:px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
                         Explore Commerce Integrations
                     </Link>
                 </div>
 
-                {/* Right Side: Logo Grid */}
-                <div className="w-full lg:w-[52%] grid grid-cols-2 gap-4 md:gap-6">
+                {/* Mobile View: Infinite Marquee Strip */}
+                <div className="lg:hidden relative w-[calc(100%+2rem)] -mx-4 overflow-hidden py-4">
+                    <style>{`
+                        @keyframes ecommerceMarquee {
+                            0% { transform: translateX(0); }
+                            100% { transform: translateX(-33.333333%); }
+                        }
+                        .animate-ecommerce-marquee {
+                            animation: ecommerceMarquee 25s linear infinite;
+                            width: max-content;
+                        }
+                    `}</style>
+                    <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+                    <div className="flex animate-ecommerce-marquee hover:![animation-play-state:paused] items-center">
+                        {[...integrations, ...integrations, ...integrations].map((item, index) => (
+                            <div key={`${item.name}-${index}`} className="flex-shrink-0 bg-[#F8F7FF] rounded-[24px] mx-2 p-6 flex flex-col items-center justify-center w-[160px] h-[80px] shadow-sm transition-transform hover:-translate-y-1">
+                                <div className="relative w-[110px] h-[36px]">
+                                    <Image
+                                        src={item.logo}
+                                        alt={`${item.name} Logo`}
+                                        fill
+                                        style={{ objectFit: 'contain' }}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Desktop View: Logo Grid */}
+                <div className="hidden lg:grid w-full lg:w-[52%] grid-cols-2 gap-4 md:gap-6">
                     {integrations.map((item, index) => (
                         <div
                             key={index}

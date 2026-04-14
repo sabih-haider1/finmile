@@ -29,7 +29,7 @@ export const OptimizationObjectives = () => {
                 
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-8">
-                    <h2 className="font-semibold text-[48px] text-white tracking-tight leading-[1.2] mb-4">
+                    <h2 className="font-semibold text-[48px] text-white tracking-normal md:tracking-tight leading-[1.2] mb-4 text-balance">
                         Optimize for Every Objective
                     </h2>
                     <p className="text-[#D3D1DF] font-medium text-[16px] md:text-[18px] leading-[1.6]">
@@ -42,7 +42,7 @@ export const OptimizationObjectives = () => {
                     {objectives.map((objective, idx) => (
                         <div 
                             key={idx} 
-                            className="bg-[#2F1C8C] rounded-[24px] px-8 py-10 md:px-10 md:py-12 flex flex-col items-center justify-center text-center transition-transform hover:-translate-y-1 shadow-lg"
+                            className="bg-[#2F1C8C] rounded-[24px] px-5 md:px-8 py-10 md:px-10 md:py-[clamp(32px,5vw,48px)] flex flex-col items-center justify-center text-center transition-transform hover:-translate-y-1 shadow-lg"
                         >
                             <div className="font-bold text-[48px] md:text-[56px] text-white mb-3 md:mb-4">
                                 {objective.value}

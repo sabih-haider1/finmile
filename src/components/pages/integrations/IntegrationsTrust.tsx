@@ -30,7 +30,7 @@ export const IntegrationsTrust = () => {
             <div className="w-full max-w-[1240px] flex flex-col items-center text-center">
 
                 {/* Main Heading */}
-                <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[42px] lg:text-[52px] leading-[1.1] tracking-tight mb-6">
+                <h2 className="text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(32px,4vw,52px)]">
                     Built for Scale, Security, and Speed
                 </h2>
 

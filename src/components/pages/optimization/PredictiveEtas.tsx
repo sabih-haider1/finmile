@@ -33,7 +33,7 @@ export const PredictiveEtas = () => {
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start w-full pr-0 lg:pr-8">
                     {/* Updated to text-[48px] and font-semibold */}
-                    <h2 className="font-semibold text-[36px] md:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-6">
+                    <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-6 text-balance text-[clamp(36px,4vw,48px)]">
                         Predictive ETAs &<br />
                         Real-Time Routing
                     </h2>

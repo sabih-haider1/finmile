@@ -56,7 +56,7 @@ export const SustainableDeliveryOS = () => {
 
                     {/* Text Area - Closer to mockup typography */}
                     <div className="w-full flex flex-col items-start lg:pt-4">
-                        <h2 className="font-bold text-[32px] md:text-[40px] lg:text-[46px] text-white tracking-tight leading-[1.1] mb-8">
+                        <h2 className="font-bold text-white tracking-normal md:tracking-tight leading-[1.1] mb-8 text-balance text-[clamp(32px,4vw,46px)]">
                             The Finmile Operating System for Sustainable Logistics
                         </h2>
 

@@ -32,7 +32,7 @@ export const AiRouteOptimizationFeature = () => {
                 <div className="w-full lg:w-[55%] flex flex-col items-start text-left lg:pl-8">
                     
                     {/* Main Heading with forced line breaks for desktop */}
-                    <h2 className="text-[#2F1C8C] font-bold text-[36px] md:text-[44px] lg:text-[48px] leading-[1.2] tracking-tight mb-8">
+                    <h2 className="text-[#2F1C8C] font-bold leading-[1.2] tracking-normal md:tracking-tight mb-8 text-balance text-[clamp(36px,4vw,48px)]">
                         AI Route Optimization<br className="hidden lg:block" />
                         That Cuts Routes, Costs,<br className="hidden lg:block" />
                         and Carbon
@@ -50,11 +50,11 @@ export const AiRouteOptimizationFeature = () => {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                        <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
                             Free Savings Analysis
                         </button>
                         {/* Corrected border color to match the design */}
-                        <button className="bg-transparent text-[#6A27D4] border border-[#6A27D4] px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#F8F7FC] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                        <button className="bg-transparent text-[#6A27D4] border border-[#6A27D4] px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#F8F7FC] transition-all hover:-translate-y-0.5 active:translate-y-0">
                             Calculate Savings
                         </button>
                     </div>

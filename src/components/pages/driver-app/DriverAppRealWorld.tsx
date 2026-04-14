@@ -37,7 +37,7 @@ export const DriverAppRealWorld = () => {
 
             <div className="w-full max-w-[1240px] flex flex-col items-center">
 
-                <h2 className="font-semibold text-[28px] md:text-[36px] lg:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-12">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-12 text-balance text-[clamp(28px,4vw,40px)]">
                     Built for the Real World
                 </h2>
 

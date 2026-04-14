@@ -36,7 +36,7 @@ export const SustainableDeliveryIntegrations = () => {
             <div className="w-full max-w-[1440px] flex flex-col items-center">
 
                 {/* Heading */}
-                <h2 className="font-semibold text-[34px] md:text-[40px] lg:text-[46px] text-[#2F1C8C] text-center tracking-tight leading-[1.1] mb-16 max-w-[800px]">
+                <h2 className="font-semibold text-[#2F1C8C] text-center tracking-normal md:tracking-tight leading-[1.1] mb-16 max-w-[800px] text-balance text-[clamp(34px,4vw,46px)]">
                     Works with the Fleets and Tools You Already Use
                 </h2>
 
@@ -62,7 +62,7 @@ export const SustainableDeliveryIntegrations = () => {
 
                 {/* CTA Button */}
                 <Link href="/integrations">
-                    <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-bold text-[16px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                    <button className="bg-[#6A27D4] text-white px-5 md:px-10 py-4 rounded-full font-bold text-[16px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
                         Explore All Integrations
                     </button>
                 </Link>

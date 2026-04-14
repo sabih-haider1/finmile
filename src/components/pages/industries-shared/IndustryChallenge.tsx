@@ -23,7 +23,7 @@ export const IndustryChallenge = ({ title, description, bullets, bottomText, ima
 
                 {/* Left Side: Text Content */}
                 <div className="w-full lg:w-[52%] flex flex-col items-start lg:pr-8 order-2 lg:order-1">
-                    <h2 className="font-bold text-[36px] md:text-[44px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-6">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.1] mb-6 text-balance text-[clamp(36px,4vw,48px)]">
                         {title}
                     </h2>
 

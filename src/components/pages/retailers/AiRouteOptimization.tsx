@@ -24,7 +24,7 @@ export const AiRouteOptimization = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start w-full">
-                    <h2 className="font-bold text-[36px] md:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-5">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-5 text-balance text-[clamp(36px,4vw,44px)]">
                         AI Route Optimization
                     </h2>
 

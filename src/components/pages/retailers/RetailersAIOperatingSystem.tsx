@@ -24,7 +24,7 @@ export const RetailersAIOperatingSystem = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[540px]">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-6">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-6 text-balance text-[clamp(32px,4vw,40px)]">
                         The AI Operating System for Modern Retail Delivery
                     </h2>
 
@@ -36,7 +36,7 @@ export const RetailersAIOperatingSystem = () => {
                         Modern retail demands perfect delivery experiences. Finmile gives retailers the AI-powered tools to exceed customer expectations while controlling costs—from intelligent routing to real-time tracking.
                     </p>
 
-                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit text-center">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit text-center">
                         Book A Demo
                     </Link>
                 </div>

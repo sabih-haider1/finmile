@@ -27,7 +27,7 @@ export function CTASection({ data, className = '' }: CTASectionProps) {
           {/* Content */}
           <div className="relative z-10 max-w-2xl">
             {/* Heading */}
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-balance">
               {cta_title}
             </h2>
 

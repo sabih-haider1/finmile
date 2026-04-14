@@ -31,12 +31,12 @@ export const IndustryFeatures = ({ title, subtitle, tabs }: IndustryFeaturesProp
     const currentTab = tabs[activeTab] || tabs[0];
 
     return (
-        <section className={`w-full bg-white pt-0 pb-32 md:pb-44 lg:pb-52 flex flex-col items-center px-6 ${montserrat.className}`}>
+        <section className={`w-full bg-white pt-0 pb-[clamp(64px,10vw,200px)] flex flex-col items-center px-6 ${montserrat.className}`}>
             <div className="w-full max-w-[1440px] flex flex-col items-center">
 
                 {/* Header Sequence */}
                 <div className="text-center mb-6 lg:mb-6">
-                    <h2 className="font-bold text-[36px] md:text-[44px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-2">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.1] mb-2 text-balance text-[clamp(36px,4vw,48px)]">
                         {title}
                     </h2>
                     {subtitle && (

@@ -10,7 +10,7 @@ export const AutonomousExecution = () => {
 
             {/* Header Content */}
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-8 md:mb-8">
-                <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2]">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] text-balance text-[clamp(36px,4vw,48px)]">
                     From Visibility to<br className="hidden md:block" />Autonomous Execution
                 </h2>
             </div>

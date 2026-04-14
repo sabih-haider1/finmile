@@ -72,7 +72,7 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                     <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 text-center items-center md:text-left md:items-start md:p-10 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col justify-center">
                         <div>
                             {/* Logo Chip */}
-                            <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-10 border border-slate-50 mx-auto md:mx-0">
+                            <div className="bg-white rounded-[24px] py-6 px-5 md:px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-10 border border-slate-50 mx-auto md:mx-0">
                                 <Image
                                     src="/assets/logos/logo-blue.png"
                                     alt="Finmile Logo"
@@ -82,7 +82,7 @@ export const JoinTheJourney: React.FC<JoinTheJourneyProps> = ({
                                 />
                             </div>
 
-                            <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] mb-6 mt-8 leading-tight">
+                            <h2 className="text-[#2F1C8C] font-semibold mb-6 mt-8 leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                                 {heading}
                             </h2>
 

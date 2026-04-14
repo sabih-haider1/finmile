@@ -44,7 +44,7 @@ export const SolutionsResults = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-[#2F1C8C] text-[34px] md:text-[42px] lg:text-[48px] font-bold tracking-tight">
+          <h2 className="text-[#2F1C8C] font-bold tracking-normal md:tracking-tight text-balance text-[clamp(34px,4vw,48px)]">
             Results That Speak for Themselves
           </h2>
         </motion.div>

@@ -9,7 +9,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsSustainability = () => {
     return (
-        <section className={`w-full bg-[#FAFAFF] py-10 flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#FAFAFF] py-[clamp(32px,4vw,40px)] flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                 {/* Left Side: Text Content */}
@@ -21,7 +21,7 @@ export const DspsSustainability = () => {
                     </div>
 
                     {/* Heading */}
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.15] mb-4">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.15] mb-4 text-balance text-[clamp(32px,4vw,40px)]">
                         Sustainability That<br /> Saves Money
                     </h2>
 
@@ -33,7 +33,7 @@ export const DspsSustainability = () => {
                     </p>
 
                     {/* CTA Button */}
-                    <Link href="/sustainable-delivery" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit text-center">
+                    <Link href="/sustainable-delivery" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit text-center">
                         Learn More About Sustainable Logistics
                     </Link>
                 </div>

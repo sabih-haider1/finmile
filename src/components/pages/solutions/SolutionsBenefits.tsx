@@ -52,7 +52,7 @@ export const SolutionsBenefits = () => {
             variants={fadeInLeft}
           >
             <div className="space-y-4">
-              <h2 className="text-[#2F1C8C] text-[34px] md:text-[42px] lg:text-[46px] font-bold leading-[1.1] tracking-tight">
+              <h2 className="text-[#2F1C8C] font-bold leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(34px,4vw,46px)]">
                 Introducing Finmile: The AI Delivery Platform Built for Performance
               </h2>
               <h3 className="text-[#0B0616] text-[20px] md:text-[24px] font-semibold leading-tight pt-2">

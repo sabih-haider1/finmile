@@ -19,7 +19,7 @@ export const DriverAppOperationalImpact = () => {
 
                 {/* Header Content */}
                 <div className="w-full flex justify-center md:justify-start mb-10 lg:mb-12 text-center md:text-left">
-                    <h2 className="font-semibold text-[30px] md:text-[40px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2]">
+                    <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] text-balance text-[clamp(30px,4vw,48px)]">
                         Operational Impact
                     </h2>
                 </div>

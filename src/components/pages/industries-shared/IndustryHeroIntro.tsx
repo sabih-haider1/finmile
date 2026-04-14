@@ -28,7 +28,7 @@ export const IndustryHeroIntro = ({
     ctaPrimaryLink = DEMO_FORM_URL
 }: IndustryHeroIntroProps) => {
     return (
-        <section className={`w-full bg-white py-6 md:py-12 flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white py-6 md:py-[clamp(32px,5vw,48px)] flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
                 {/* Left Side: Image Content */}
@@ -48,7 +48,7 @@ export const IndustryHeroIntro = ({
 
                 {/* Right Side: Text Content */}
                 <div className="w-full lg:w-[50%] flex flex-col items-start lg:pl-4">
-                    <h2 className="font-bold text-[36px] md:text-[48px] lg:text-[52px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-6">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.1] mb-6 text-balance text-[clamp(36px,4vw,52px)]">
                         {title}
                     </h2>
 
@@ -67,7 +67,7 @@ export const IndustryHeroIntro = ({
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                         <Link href={ctaPrimaryLink} target={ctaPrimaryLink.startsWith('http') ? '_blank' : undefined} rel={ctaPrimaryLink.startsWith('http') ? 'noopener noreferrer' : undefined} className="w-full sm:w-auto">
-                            <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-3xl font-bold text-[16px] shadow-[0_10px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
+                            <button className="bg-[#6A27D4] text-white px-5 md:px-10 py-4 rounded-3xl font-bold text-[16px] shadow-[0_10px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
                                 {ctaPrimaryText}
                             </button>
                         </Link>

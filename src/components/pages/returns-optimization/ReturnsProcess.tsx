@@ -34,9 +34,9 @@ const processItems = [
 
 export const ReturnsProcess = () => {
     return (
-        <section className={`w-full bg-white py-8 lg:py-12 flex justify-center px-6 ${montserrat.className}`}>
-            <div className="max-w-[1440px] w-full">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8">
+        <section className={`w-full bg-white py-[clamp(32px,5vw,48px)] flex justify-center px-6 ${montserrat.className}`}>
+            <div className="w-full max-w-[1440px] z-10 relative mt-16 md:mt-16 sm:mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8">
                     {processItems.map((item, index) => (
                         <div key={index} className="flex flex-col items-center text-center group">
                             {/* Icon Container with Glossy Effect */}

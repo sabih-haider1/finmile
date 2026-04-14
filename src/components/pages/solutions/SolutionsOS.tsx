@@ -11,7 +11,7 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const SolutionsOS = () => {
   return (
-    <section className="w-full py-8 lg:py-12 bg-white overflow-hidden relative">
+    <section className="w-full py-[clamp(32px,5vw,48px)] -mb-[1px] z-10 bg-white overflow-hidden relative">
       {/* Background Decorative Glows */}
       <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#6A27D4]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-[#3B257E]/5 rounded-full blur-[100px] pointer-events-none" />
@@ -29,7 +29,7 @@ export const SolutionsOS = () => {
             className="flex flex-col space-y-8"
             variants={fadeInLeft}
           >
-            <h2 className="text-[#2F1C8C] text-[34px] md:text-[42px] lg:text-[46px] font-bold leading-[1.1] tracking-tight">
+            <h2 className="text-[#2F1C8C] font-bold leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(34px,4vw,46px)]">
               Slash Your Delivery Costs by up to <span className="text-[#2F1C8C]">42%</span> with Finmile’s Intelligent Delivery Software
             </h2>
 

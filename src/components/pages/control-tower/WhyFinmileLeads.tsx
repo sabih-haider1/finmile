@@ -58,11 +58,11 @@ export const WhyFinmileLeads = () => {
     };
 
     return (
-        <section className={`w-full bg-[#fdfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fdfcff] flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] z-10 relative flex flex-col items-center">
 
                 {/* Header Content */}
-                <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-8 md:mb-12 text-center max-w-[800px]">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-8 md:mb-12 text-center max-w-[800px] text-balance text-[clamp(32px,4vw,48px)]">
                     Why Finmile Leads in Tracking <br className="hidden md:block" /> & Visibility
                 </h2>
 

@@ -24,11 +24,11 @@ const operatorItems = [
 
 export const ReturnsOperators = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] py-6 lg:py-12 flex flex-col items-center px-6 ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] py-6 lg:py-[clamp(32px,5vw,48px)] flex flex-col items-center px-6 ${montserrat.className}`}>
             <div className="max-w-[1440px] w-full">
                 {/* Header Section */}
                 <div className="text-center mb-10">
-                    <h2 className="text-[#2F1C8C] text-[36px] md:text-[48px] lg:text-[56px] font-bold tracking-tight leading-[1.1]">
+                    <h2 className="text-[#2F1C8C] font-bold tracking-normal md:tracking-tight leading-[1.1] text-balance text-[clamp(36px,4vw,56px)]">
                         For Every Type of Operator
                     </h2>
                 </div>

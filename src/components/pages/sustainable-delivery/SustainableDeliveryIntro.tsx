@@ -28,7 +28,7 @@ export const SustainableDeliveryIntro = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="w-full lg:w-[52%] flex flex-col items-start lg:pl-8">
-                    <h2 className="font-bold text-[36px] md:text-[44px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-6">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.1] mb-6 text-balance text-[clamp(36px,4vw,48px)]">
                         Sustainable Delivery, Powered by AI
                     </h2>
 
@@ -42,12 +42,12 @@ export const SustainableDeliveryIntro = () => {
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                         <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                            <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
+                            <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
                                 Book A Demo
                             </button>
                         </Link>
                         <Link href="/solutions" className="w-full sm:w-auto">
-                            <button className="border border-[#7C3AED] text-[#7C3AED] bg-white px-8 py-3.5 rounded-full font-semibold text-[15px] hover:bg-[#F5F3FF] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
+                            <button className="border border-[#7C3AED] text-[#7C3AED] bg-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[15px] hover:bg-[#F5F3FF] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
                                 Learn More
                             </button>
                         </Link>

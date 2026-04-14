@@ -8,7 +8,7 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const DspsAIOperatingSystem = () => {
     return (
-        <section className={`w-full bg-white py-10 flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-white py-[clamp(32px,4vw,40px)] flex justify-center px-6 overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 
                 {/* Left Side: Raw Image Content */}
@@ -24,7 +24,7 @@ export const DspsAIOperatingSystem = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[540px]">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-4 text-balance text-[clamp(32px,4vw,40px)]">
                         The AI Operating System for Delivery Service Providers
                     </h2>
 
@@ -37,7 +37,7 @@ export const DspsAIOperatingSystem = () => {
                     </p>
 
                     <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-fit">
-                        <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit">
+                        <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit">
                             Book A Demo
                         </button>
                     </Link>

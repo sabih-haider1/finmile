@@ -27,7 +27,7 @@ export const ScaleSection = () => {
       )}
 
       <motion.section
-        className="w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 py-10 lg:py-12 overflow-hidden relative"
+        className="w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 py-10 lg:py-[clamp(32px,5vw,48px)] overflow-hidden relative"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -41,7 +41,7 @@ export const ScaleSection = () => {
           variants={fadeInUp}
           viewport={{ once: true, amount: 0.5 }}
         >
-          <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-6 leading-tight">
+          <h2 className="text-[#2F1C8C] font-semibold tracking-normal md:tracking-tight mb-6 leading-tight text-balance text-[clamp(28px,4vw,48px)]">
             Built for scale. Designed for reality.
           </h2>
           <p className="text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium mx-auto px-4">
@@ -72,7 +72,7 @@ export const ScaleSection = () => {
             >
               <div>
                 {/* Logo Chip */}
-                <div className="bg-white rounded-[24px] py-6 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-14 border border-slate-50">
+                <div className="bg-white rounded-[24px] py-6 px-5 md:px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06),inset_0_4px_12px_rgba(0,0,0,0.04)] inline-flex items-center justify-center mb-14 border border-slate-50">
                   <Image
                     src="/assets/logos/logo-blue.png"
                     alt="Finmile Logo"

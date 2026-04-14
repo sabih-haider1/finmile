@@ -18,7 +18,7 @@ export const RetailersModernDelivery = () => {
                 <div className="flex flex-col items-start text-left w-full">
                     
                     {/* Exact Title Line Breaks */}
-                    <h2 className="text-[#2F1C8C] font-bold text-[36px] md:text-[42px] leading-[1.25] tracking-tight mb-6">
+                    <h2 className="text-[#2F1C8C] font-bold leading-[1.25] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(36px,4vw,42px)]">
                         Meet Modern Delivery<br className="hidden sm:block" />
                         Expectations — Without<br className="hidden sm:block" />
                         Breaking Margins

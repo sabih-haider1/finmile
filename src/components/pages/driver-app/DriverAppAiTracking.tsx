@@ -12,7 +12,7 @@ export const DriverAppAiTracking = () => {
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 mt-8 lg:mt-0">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight mb-6 mt-4 lg:mt-0">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 mt-4 lg:mt-0 text-balance text-[clamp(32px,4vw,48px)]">
                         AI Tracking & Geofencing
                     </h2>
 

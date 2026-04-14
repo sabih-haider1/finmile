@@ -66,7 +66,7 @@ export const MeetTheSuite = () => {
                 <span className="bg-white/5 border border-white/10 text-white rounded-full px-4 py-1.5 text-[11px] font-semibold tracking-wider mb-6 shadow-sm">
                     AI Agents
                 </span>
-                <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-white tracking-tight leading-tight">
+                <h2 className="font-semibold text-white tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(36px,4vw,48px)]">
                     Meet the Suite
                 </h2>
             </div>

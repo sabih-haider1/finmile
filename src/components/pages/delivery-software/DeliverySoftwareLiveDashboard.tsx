@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DeliverySoftwareLiveDashboard = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-6 md:py-6 lg:py-6 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-[clamp(24px,4vw,32px)] flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Bright behind text, dark behind picture) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-70 pointer-events-none" />
@@ -18,7 +18,7 @@ export const DeliverySoftwareLiveDashboard = () => {
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col space-y-6 pr-0 lg:pr-8 order-2 lg:order-1 pt-8 lg:pt-0">
 
-                    <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[46px] text-[#FFFFFF] leading-[1.15] tracking-tight mb-2">
+                    <h2 className="font-semibold text-[#FFFFFF] leading-[1.15] tracking-normal md:tracking-tight mb-2 text-balance text-[clamp(36px,4vw,46px)]">
                         Live Dashboard Snapshot
                     </h2>
 

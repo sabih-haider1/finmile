@@ -32,7 +32,7 @@ export const IntegrationsFeature = () => {
                 <div className="w-full lg:w-[52%] flex flex-col items-start text-left lg:pl-4">
 
                     {/* Main Heading */}
-                    <h2 className="text-[#2F1C8C] font-semibold text-[36px] md:text-[38px] lg:text-[48px] leading-[1.1] tracking-tight mb-8">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight mb-8 text-balance text-[clamp(36px,4vw,48px)]">
                         Seamless Connectivity.<br />
                         Smarter Delivery. Total<br />
                         Control.
@@ -49,7 +49,7 @@ export const IntegrationsFeature = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-10 py-3 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-5 md:px-10 py-3 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
                         Free Savings Analysis
                     </Link>
                 </div>

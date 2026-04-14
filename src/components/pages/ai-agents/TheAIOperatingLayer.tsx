@@ -10,7 +10,7 @@ export const TheAIOperatingLayer = () => {
 
             {/* Header Content */}
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-12 md:mb-8 md:mb-8">
-                <h2 className="font-semibold text-[32px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.15] md:leading-tight mb-4 md:mb-6">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.15] md:leading-tight mb-4 md:mb-6 text-balance text-[clamp(32px,4vw,48px)]">
                     The AI Operating Layer That Never Stops
                 </h2>
                 <p className="font-medium text-[15px] md:text-[16px] text-[#6C757D] max-w-[800px] leading-relaxed px-4">

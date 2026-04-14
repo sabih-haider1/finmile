@@ -124,11 +124,11 @@ export function WhitepaperGrid({
   return (
     <div className="bg-white">
       {/* Recent White Papers Section */}
-      <div className="py-16 px-6 md:px-12 xl:px-20">
+      <div className="py-10 md:py-[clamp(40px,5vw,64px)] px-6 md:px-12 xl:px-20">
         <div className="max-w-7xl mx-auto">
           {/* Header Row */}
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#2F1C8C]">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#2F1C8C] text-balance">
               Recent White Papers
             </h2>
 
@@ -150,7 +150,7 @@ export function WhitepaperGrid({
 
           {/* Empty State */}
           {!loading && filteredWhitepapers.length === 0 && (
-            <div className="col-span-full text-center py-16">
+            <div className="col-span-full text-center py-10 md:py-[clamp(40px,5vw,64px)]">
               <div className="text-6xl mb-4">📚</div>
               <h3 className="text-2xl font-bold text-gray-800 mb-2">
                 No whitepapers found

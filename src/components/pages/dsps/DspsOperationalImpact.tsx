@@ -39,7 +39,7 @@ export const DspsOperationalImpact = () => {
 
                 {/* Header */}
                 <div className="text-center mb-6 md:mb-8">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-white tracking-tight leading-[1.2]">
+                    <h2 className="font-bold text-white tracking-normal md:tracking-tight leading-[1.2] text-balance text-[clamp(32px,4vw,40px)]">
                         Operational Impact
                     </h2>
                 </div>
@@ -47,7 +47,7 @@ export const DspsOperationalImpact = () => {
                 {/* Metrics Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">
                     {metrics.map((metric, idx) => (
-                        <div key={idx} className="bg-transparent border border-white/10 rounded-[20px] py-10 px-6 text-center">
+                        <div key={idx} className="bg-transparent border border-white/10 rounded-[20px] py-[clamp(32px,4vw,40px)] px-6 text-center">
                             <div className="font-bold text-[38px] md:text-[42px] text-white mb-3 flex items-center justify-center">
                                 {metric.value}
                             </div>
@@ -60,7 +60,7 @@ export const DspsOperationalImpact = () => {
 
                 {/* Testimonial Card */}
                 <div className="max-w-[950px] mx-auto text-center w-full">
-                    <div className="bg-[#311E8F] rounded-[20px] px-8 py-10 md:px-16 md:py-14 shadow-2xl relative">
+                    <div className="bg-[#311E8F] rounded-[20px] px-5 md:px-8 py-10 md:px-16 md:py-14 shadow-2xl relative">
 
                         {/* Centered Quote Icon */}
                         <div className="flex justify-center mb-6">

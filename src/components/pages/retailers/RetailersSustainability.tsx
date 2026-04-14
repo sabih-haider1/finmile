@@ -21,7 +21,7 @@ export const RetailersSustainability = () => {
                     </div>
 
                     {/* Heading */}
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.15] mb-6">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.15] mb-6 text-balance text-[clamp(32px,4vw,40px)]">
                         Sustainability Built-In
                     </h2>
 
@@ -31,7 +31,7 @@ export const RetailersSustainability = () => {
                     </p>
 
                     {/* CTA Button */}
-                    <Link href="/sustainable-delivery" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit text-center">
+                    <Link href="/sustainable-delivery" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 w-fit text-center">
                         Learn More About Sustainable Logistics
                     </Link>
                 </div>

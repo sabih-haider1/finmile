@@ -34,7 +34,7 @@ const stats = [
 
 export const ReturnsBenefits = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-6 lg:py-12 flex flex-col items-center px-6 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-6 lg:py-[clamp(32px,5vw,48px)] flex flex-col items-center px-6 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Ambient Background Glows */}
             <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-[#3B257E] rounded-full blur-[160px] opacity-40 pointer-events-none" />
@@ -42,7 +42,7 @@ export const ReturnsBenefits = () => {
 
             <div className="max-w-[1440px] w-full z-10">
                 {/* Header */}
-                <h2 className="text-white text-[36px] md:text-[48px] lg:text-[56px] font-bold text-center mb-10 tracking-tight">
+                <h2 className="text-white font-bold text-center mb-10 tracking-normal md:tracking-tight text-balance text-[clamp(36px,4vw,56px)]">
                     Key Benefits for Your Business
                 </h2>
 

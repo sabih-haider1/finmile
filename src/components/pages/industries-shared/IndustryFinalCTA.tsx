@@ -38,7 +38,7 @@ export const IndustryFinalCTA = ({
                     {/* Pulsing rings or decorative elements could go here if needed to match the mockup's "glow" better */}
                 </div>
 
-                <h2 className="text-[#2F1C8C] font-semibold text-[36px] md:text-[52px] lg:text-[60px] tracking-tight leading-[1.1] mb-6 relative z-10">
+                <h2 className="text-[#2F1C8C] font-semibold tracking-normal md:tracking-tight leading-[1.1] mb-6 relative z-10 text-balance text-[clamp(36px,4vw,60px)]">
                     {title}
                 </h2>
 
@@ -48,7 +48,7 @@ export const IndustryFinalCTA = ({
 
                 <div className="relative z-10">
                     <Link href={ctaHref} target={ctaHref.startsWith('http') ? '_blank' : undefined} rel={ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                        <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-bold text-[16px] shadow-[0_10px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
+                        <button className="bg-[#6A27D4] text-white px-5 md:px-10 py-4 rounded-full font-bold text-[16px] shadow-[0_10px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
                             {ctaText}
                         </button>
                     </Link>

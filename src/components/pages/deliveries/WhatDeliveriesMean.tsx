@@ -6,12 +6,12 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const WhatDeliveriesMean = () => {
     return (
-        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#F8F7FF] flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-12 items-center z-10 relative">
 
                 {/* Left Side: Text */}
                 <div className="flex flex-col items-start text-left">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight mb-6 max-w-[500px]">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 max-w-[500px] text-balance text-[clamp(32px,4vw,48px)]">
                         What Finmile Deliveries Mean for Your Team
                     </h2>
                     <p className="text-[#6C757D] font-medium text-[15px] md:text-[18px] leading-relaxed max-w-[500px]">
