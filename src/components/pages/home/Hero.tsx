@@ -74,7 +74,7 @@ export const Hero = () => {
 
       {/* Dashboard Mockup Image */}
       <motion.div
-        className="relative z-10 mt-[clamp(48px,8vw,96px)] w-full max-w-[1200px] mx-auto px-2 md:px-8"
+        className="relative z-10 mt-[clamp(48px,8vw,96px)] w-full max-w-[1200px] mx-auto px-2 md:px-8 mb-[clamp(-68px,-5vw,-64px)]"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
@@ -88,7 +88,7 @@ export const Hero = () => {
           height={750}
           priority
           fetchPriority="high"
-          quality={75}
+          quality={100}
           className="w-full h-auto object-contain"
           sizes="(max-width: 1200px) 100vw, 1200px"
         />
