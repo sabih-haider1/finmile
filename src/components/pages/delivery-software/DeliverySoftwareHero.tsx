@@ -8,8 +8,8 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const DeliverySoftwareHero = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
-            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center z-10 relative">
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-12 md:py-16 lg:py-20 overflow-hidden relative ${montserrat.className}`}>
+            <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-20 items-center z-10 relative">
 
                 {/* Left Side: Image */}
                 <div className="w-full flex justify-center lg:justify-start order-2 lg:order-1 relative mt-12 lg:mt-0">
