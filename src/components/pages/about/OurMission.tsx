@@ -13,7 +13,7 @@ export const OurMission = () => {
 
             {/* Centered Mission Header */}
             <div className="text-center mb-8 md:mb-8 w-full z-10 flex flex-col items-center">
-                <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight mb-6 leading-tight">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight mb-6 leading-tight text-balance text-[clamp(36px,4vw,48px)]">
                     Our Mission
                 </h2>
                 <p className="font-medium text-[16px] text-[#6C757D] max-w-[800px] leading-relaxed px-4">
@@ -85,7 +85,7 @@ export const OurMission = () => {
 
                         {/* Button (Left Aligned Fixed Size) */}
                         <div className="flex flex-col sm:flex-row gap-4 items-start w-full mt-auto pl-1">
-                            <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-8 md:px-16 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] whitespace-nowrap w-full sm:w-fit hover:bg-[#5821B0] transition-colors shadow-lg shadow-[#6A27D4]/20 text-center">
+                            <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-5 md:px-8 md:px-16 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] whitespace-nowrap w-full sm:w-fit hover:bg-[#5821B0] transition-colors shadow-lg shadow-[#6A27D4]/20 text-center">
                                 Book A Demo
                             </Link>
                         </div>

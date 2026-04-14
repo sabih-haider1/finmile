@@ -11,7 +11,7 @@ export const AboutContent = () => {
 
                 {/* Left Column: Text Content */}
                 <div className='flex flex-col space-y-10 pt-4'>
-                    <h2 className='text-[#2F1C8C] text-[28px] md:text-[40px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight'>
+                    <h2 className='text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(28px,4vw,48px)]'>
                         Intelligent Logistics. <br className='hidden md:block' />
                         Sustainable Future. Real <br className='hidden md:block' />
                         Results.

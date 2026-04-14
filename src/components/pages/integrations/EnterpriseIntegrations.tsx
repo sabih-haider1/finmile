@@ -21,7 +21,7 @@ export const EnterpriseIntegrations = () => {
     ];
 
     return (
-        <section className={`w-full bg-[#FAFAFF] flex justify-center px-4 md:px-8 lg:px-24 py-12 md:py-16 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#FAFAFF] flex justify-center px-4 md:px-8 lg:px-24 py-8 md:py-12 md:py-[clamp(40px,5vw,64px)] overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
                 {/* Left Side: Image Content */}
@@ -43,7 +43,7 @@ export const EnterpriseIntegrations = () => {
                 <div className="w-full lg:w-[50%] flex flex-col items-start text-left lg:pl-4">
 
                     {/* Main Heading */}
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[38px] lg:text-[48px] leading-[1.1] tracking-tight mb-8">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight mb-8 text-balance text-[clamp(32px,4vw,48px)]">
                         Enterprise & Data<br />
                         Integrations
                     </h2>
@@ -73,7 +73,7 @@ export const EnterpriseIntegrations = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Link href="/contact" className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
+                    <Link href="/contact" className="bg-[#6A27D4] text-white px-5 md:px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
                         Access API Documentation
                     </Link>
                 </div>

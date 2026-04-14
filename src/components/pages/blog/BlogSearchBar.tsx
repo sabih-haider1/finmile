@@ -66,11 +66,11 @@ export function BlogSearchBar({
   };
 
   return (
-    <div className="bg-[#F6F7FB] py-16 px-6 md:px-12 xl:px-20">
+    <div className="bg-[#F6F7FB] py-10 md:py-[clamp(40px,5vw,64px)] px-6 md:px-12 xl:px-20">
       <div className="max-w-7xl mx-auto">
         {/* Header Row */}
         <div className="flex justify-between items-center flex-wrap gap-4 mb-6">
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#2F1C8C]">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#2F1C8C] text-balance">
             Search Blog Posts
           </h2>
 

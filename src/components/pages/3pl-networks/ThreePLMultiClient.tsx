@@ -84,7 +84,7 @@ export const ThreePLMultiClient = () => {
             
             {/* Top Text Header */}
             <div className="flex flex-col items-center text-center w-full z-10 mb-12 lg:mb-8">
-                <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-white tracking-tight leading-[1.2] mb-4">
+                <h2 className="font-semibold text-white tracking-normal md:tracking-tight leading-[1.2] mb-4 text-balance text-[clamp(32px,4vw,44px)]">
                     Built for Multi-Client Operations —<br className="hidden md:block"/> Unified by Finmile OS
                 </h2>
                 <p className="text-[#A09DB0] font-medium text-[15px] md:text-[16px] max-w-[600px]">

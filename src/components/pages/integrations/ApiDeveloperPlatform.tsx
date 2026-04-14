@@ -27,7 +27,7 @@ export const ApiDeveloperPlatform = () => {
 
                 {/* Left Side: Developers Content */}
                 <div className="w-full lg:w-[48%] flex flex-col items-start text-left">
-                    <h2 className="text-white font-semibold text-[32px] md:text-[38px] lg:text-[48px] leading-[1.1] tracking-tight mb-8">
+                    <h2 className="text-white font-semibold leading-[1.1] tracking-normal md:tracking-tight mb-8 text-balance text-[clamp(32px,4vw,48px)]">
                         Finmile API &<br />
                         Developer Platform
                     </h2>
@@ -58,7 +58,7 @@ export const ApiDeveloperPlatform = () => {
                             Developers can explore the full API in our Developer Portal, complete with schema documentation,
                             SDKs, example payloads, and authentication guides.
                         </p>
-                        <Link href="/contact" className="bg-[#6A27D4] text-white px-8 py-3 rounded-full text-[14px] font-semibold border border-white/10 hover:bg-[#5821B0] transition-all inline-block">
+                        <Link href="/contact" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3 rounded-full text-[14px] font-semibold border border-white/10 hover:bg-[#5821B0] transition-all inline-block">
                             Access API Documentation
                         </Link>
                     </div>

@@ -5,7 +5,7 @@ import { CheckCircle2 } from 'lucide-react';
 
 export const PrivacyContent = () => {
     return (
-        <section className="relative w-full py-24 px-6 lg:px-16 bg-white overflow-hidden">
+        <section className="relative w-full py-8 md:py-12 md:py-24 px-6 lg:px-16 -mb-[1px] z-10 bg-white overflow-hidden">
             <div className="max-w-[1000px] mx-auto relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -18,7 +18,7 @@ export const PrivacyContent = () => {
                     <div className="space-y-2">
                         <div>
                             <p className="text-[#6A27D4] font-semibold text-[14px] mb-4 uppercase tracking-widest">Last Updated: March 25, 2026</p>
-                            <h2 className="text-[36px] md:text-[48px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                            <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(36px,4vw,48px)]">
                                 Introduction
                             </h2>
                         </div>
@@ -64,7 +64,7 @@ export const PrivacyContent = () => {
 
                     {/* Types of personal information we collect Section */}
                     <div className="space-y-2">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Types of personal information we collect
                         </h2>
 
@@ -114,7 +114,7 @@ export const PrivacyContent = () => {
 
                     {/* Purposes for processing personal information Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Purposes for processing personal information
                         </h2>
 
@@ -133,7 +133,7 @@ export const PrivacyContent = () => {
 
                     {/* Service-related purposes Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Service-related purposes
                         </h2>
 
@@ -152,7 +152,7 @@ export const PrivacyContent = () => {
 
                     {/* Contractual purposes Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Contractual purposes
                         </h2>
 
@@ -165,7 +165,7 @@ export const PrivacyContent = () => {
 
                     {/* For advertising and marketing purposes Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             For advertising and marketing purposes
                         </h2>
 
@@ -178,7 +178,7 @@ export const PrivacyContent = () => {
 
                     {/* Legal purposes Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Legal purposes
                         </h2>
 
@@ -191,7 +191,7 @@ export const PrivacyContent = () => {
 
                     {/* Legitimate interest Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Legitimate interest
                         </h2>
 
@@ -204,7 +204,7 @@ export const PrivacyContent = () => {
 
                     {/* How do we collect personal information Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             How do we collect personal information
                         </h2>
 
@@ -230,7 +230,7 @@ export const PrivacyContent = () => {
 
                     {/* Via Cookies Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Via Cookies:
                         </h2>
 
@@ -246,7 +246,7 @@ export const PrivacyContent = () => {
 
                     {/* Browser/Device/Server Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Through your browser or device or through our servers:
                         </h2>
 
@@ -259,7 +259,7 @@ export const PrivacyContent = () => {
 
                     {/* Sharing Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Who we share personal information with
                         </h2>
 
@@ -272,7 +272,7 @@ export const PrivacyContent = () => {
 
                     {/* Third-party providers Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Transfers to third-party service providers
                         </h2>
 
@@ -285,7 +285,7 @@ export const PrivacyContent = () => {
 
                     {/* Other third parties Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Transfers to other third parties
                         </h2>
 
@@ -311,7 +311,7 @@ export const PrivacyContent = () => {
 
                     {/* International transfer Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             International transfer of your data
                         </h2>
 
@@ -324,7 +324,7 @@ export const PrivacyContent = () => {
 
                     {/* Data retention Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Data retention periods
                         </h2>
 
@@ -356,7 +356,7 @@ export const PrivacyContent = () => {
 
                     {/* Data privacy rights Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Data privacy rights
                         </h2>
 
@@ -383,7 +383,7 @@ export const PrivacyContent = () => {
 
                     {/* Updates Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Updates to this Notice
                         </h2>
 
@@ -396,7 +396,7 @@ export const PrivacyContent = () => {
 
                     {/* Contact details Section */}
                     <div className="space-y-4">
-                        <h2 className="text-[32px] md:text-[40px] font-semibold text-[#2D1B69] tracking-tight leading-tight">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,40px)]">
                             Contact details
                         </h2>
 
@@ -408,8 +408,8 @@ export const PrivacyContent = () => {
                     </div>
 
                     {/* ANNEX A Section */}
-                    <div className="pt-16 border-t border-gray-100">
-                        <h2 className="text-[36px] md:text-[44px] font-semibold text-[#2D1B69] tracking-tight leading-tight mb-8">
+                    <div className="pt-10 md:pt-16 border-t border-gray-100">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight mb-8 text-balance text-[clamp(36px,4vw,44px)]">
                             ANNEX A &ndash; THIRD-PARTY PROCESSORS
                         </h2>
                         <div className="space-y-4 text-[#4A5568] text-[15px] md:text-[17px] leading-[1.8] font-normal">

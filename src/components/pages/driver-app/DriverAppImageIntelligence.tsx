@@ -24,7 +24,7 @@ export const DriverAppImageIntelligence = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-2 mt-8 lg:mt-0">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight mb-6">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(32px,4vw,48px)]">
                         Advanced Image<br />
                         Intelligence
                     </h2>
@@ -60,7 +60,7 @@ export const DriverAppImageIntelligence = () => {
                         </div>
                     </div>
 
-                    <Link href="/driver-app" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)] text-center">
+                    <Link href="/driver-app" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)] text-center">
                         Learn More about AI POD Verification
                     </Link>
                 </div>

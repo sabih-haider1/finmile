@@ -29,7 +29,7 @@ export const IndustryProblemSection = ({
 
                 {/* Left Side: Text Content */}
                 <div className="w-full lg:w-[50%] flex flex-col items-start order-2 lg:order-1">
-                    <h2 className="font-bold text-[36px] md:text-[48px] lg:text-[52px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-8">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.1] mb-8 text-balance text-[clamp(36px,4vw,52px)]">
                         {title}
                     </h2>
 

@@ -8,7 +8,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DeliverySoftwarePlatform = () => {
     return (
-        <section className={`w-full bg-[#0B0616] py-6 md:py-6 lg:py-6 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#0B0616] py-[clamp(24px,4vw,32px)] flex flex-col items-center px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Background Glow Effects (Bright behind text, dark behind picture) */}
             <div className="absolute top-[5%] left-[-15%] w-[900px] h-[900px] bg-[#3B257E] rounded-full blur-[160px] opacity-70 pointer-events-none" />
@@ -20,7 +20,7 @@ export const DeliverySoftwarePlatform = () => {
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col space-y-8 pr-0 lg:pr-10 order-1">
 
-                    <h2 className="font-semibold text-[32px] md:text-[42px] lg:text-[48px] text-[#FFFFFF] leading-[1.1] tracking-tight">
+                    <h2 className="font-semibold text-[#FFFFFF] leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(32px,4vw,48px)]">
                         Introducing Finmile: The <br className="hidden lg:block" />AI Delivery Platform Built<br className="hidden lg:block" /> for Performance
                     </h2>
 
@@ -55,7 +55,7 @@ export const DeliverySoftwarePlatform = () => {
                         </div>
                     </div>
 
-                    <Link href="/solutions" className="bg-[#6A27D4] text-white self-start px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.3)] hover:bg-[#5821B0] transition-colors mt-8 text-center">
+                    <Link href="/solutions" className="bg-[#6A27D4] text-white self-start px-5 md:px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.3)] hover:bg-[#5821B0] transition-colors mt-8 text-center">
                         Explore Features
                     </Link>
 

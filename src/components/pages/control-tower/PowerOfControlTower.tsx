@@ -18,11 +18,11 @@ export const PowerOfControlTower = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative ${montserrat.className}`}>
 
             {/* Header Content */}
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1000px] mx-auto mb-10 md:mb-12">
-                <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4 md:mb-6">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-4 md:mb-6 text-balance text-[clamp(32px,4vw,48px)]">
                     The Power of the Finmile Control Tower
                 </h2>
                 <p className="font-medium text-[15px] md:text-[16px] text-[#6C757D] max-w-[700px] leading-relaxed px-4">
@@ -101,7 +101,7 @@ export const PowerOfControlTower = () => {
                         </li>
                     </ul>
 
-                    <Link href="/driver-app" className="self-start px-8 py-3.5 bg-[#6A27D4] text-white rounded-full font-semibold text-[14px] transition-transform hover:scale-105 shadow-[0_10px_20px_rgba(106,39,212,0.2)] text-center">
+                    <Link href="/driver-app" className="self-start px-5 md:px-8 py-3.5 bg-[#6A27D4] text-white rounded-full font-semibold text-[14px] transition-transform hover:scale-105 shadow-[0_10px_20px_rgba(106,39,212,0.2)] text-center">
                         Learn More about AI POD Verification
                     </Link>
                 </div>

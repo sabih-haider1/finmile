@@ -34,7 +34,7 @@ const challenges = [
 
 export const SolutionsChallenges = () => {
   return (
-    <section className="w-full py-6 lg:py-6 bg-white overflow-hidden relative">
+    <section className="w-full py-6 lg:py-6 -mb-[1px] z-10 bg-white overflow-hidden relative">
       {/* Background Decorative Glow */}
       <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-[#6A27D4]/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -90,7 +90,7 @@ export const SolutionsChallenges = () => {
             className="flex flex-col space-y-8 lg:pt-20"
             variants={fadeInRight}
           >
-            <h2 className="text-[#2F1C8C] text-[34px] md:text-[42px] lg:text-[46px] font-bold leading-[1.1] tracking-tight">
+            <h2 className="text-[#2F1C8C] font-bold leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(34px,4vw,46px)]">
               Are Outdated Delivery Processes Draining Your Profits?
             </h2>
             <div className="space-y-6">

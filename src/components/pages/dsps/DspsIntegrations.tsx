@@ -12,9 +12,9 @@ export const DspsIntegrations = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-6 py-10 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-6 py-[clamp(32px,4vw,40px)] overflow-hidden relative ${montserrat.className}`}>
             <div className="text-center w-full z-10 flex flex-col items-center max-w-[1440px] mx-auto mb-6">
-                <h2 className="font-semibold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.3]">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.3] text-balance text-[clamp(32px,4vw,40px)]">
                     Integrate Seamlessly with<br />Your Existing Systems
                 </h2>
             </div>
@@ -36,7 +36,7 @@ export const DspsIntegrations = () => {
                 ))}
             </div>
 
-            <Link href="/integrations" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 z-10 text-center">
+            <Link href="/integrations" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0 z-10 text-center">
                 Explore All Integrations
             </Link>
         </section>

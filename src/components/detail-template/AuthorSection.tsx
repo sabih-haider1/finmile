@@ -20,7 +20,7 @@ export function AuthorSection({ author, className = '' }: AuthorSectionProps) {
   // Handle string author names (backward compatibility)
   if (typeof author === 'string') {
     return (
-      <section className={`w-full my-12 md:my-16 py-12 border-t border-gray-100 ${className}`}>
+      <section className={`w-full my-12 md:my-16 py-8 md:py-12 border-t border-gray-100 ${className}`}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-2xl">
             <h3 className="text-sm font-bold text-gray-500 tracking-wider mb-3 uppercase">Written by</h3>
@@ -35,7 +35,7 @@ export function AuthorSection({ author, className = '' }: AuthorSectionProps) {
   const { name, bio, avatar_url, email } = author;
 
   return (
-    <section className={`w-full my-12 md:my-16 py-12 border-t border-gray-100 ${className}`}>
+    <section className={`w-full my-12 md:my-16 py-8 md:py-12 border-t border-gray-100 ${className}`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-2xl">
           <h3 className="text-sm font-bold text-gray-500 tracking-wider mb-8 uppercase">About the author</h3>

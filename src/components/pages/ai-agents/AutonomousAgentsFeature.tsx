@@ -26,7 +26,7 @@ export const AutonomousAgentsFeature = () => {
 
                 {/* Right Side: Text & Buttons */}
                 <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[42px] lg:text-[48px] leading-[1.2] tracking-tight mb-6 md:mb-8">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 md:mb-8 text-balance text-[clamp(32px,4vw,48px)]">
                         Autonomous AI<br className="hidden md:block" />
                         Agents That Run Your<br className="hidden md:block" />
                         Logistics
@@ -37,10 +37,10 @@ export const AutonomousAgentsFeature = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <Link href="/ai-agents" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-colors hover:bg-[#5821B0] leading-snug shadow-sm text-center">
+                        <Link href="/ai-agents" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-colors hover:bg-[#5821B0] leading-snug shadow-sm text-center">
                             See AI Agents in Action
                         </Link>
-                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-transparent text-[#6A27D4] px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-all border border-[#E8E5FF] hover:border-[#6A27D4] hover:bg-[#f8f7ff] leading-snug text-center">
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-transparent text-[#6A27D4] px-5 md:px-8 py-3.5 rounded-full font-semibold text-[15px] whitespace-nowrap transition-all border border-[#E8E5FF] hover:border-[#6A27D4] hover:bg-[#f8f7ff] leading-snug text-center">
                             Book A Demo
                         </Link>
                     </div>

@@ -16,7 +16,7 @@ const AgentCard = ({ title, description, benefits, index }: {
 
   return (
     <div
-      className='lg:sticky w-[98%] max-w-[1440px] min-h-[580px] lg:min-h-[660px] rounded-[32px] md:rounded-[32px] px-8 md:px-10 lg:px-12 py-8 md:py-6 lg:py-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 transform-gpu overflow-hidden will-change-transform'
+      className='lg:sticky w-[98%] max-w-[1440px] min-h-[580px] lg:min-h-[660px] rounded-[32px] md:rounded-[32px] px-5 md:px-8 md:px-10 lg:px-12 py-8 md:py-6 lg:py-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] border border-indigo-50/50 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 transform-gpu overflow-hidden will-change-transform'
       style={{
         background: 'linear-gradient(208.41deg, #F5F3FF -9.69%, #FAF9FF 100.08%)',
         top: stickyTop,
@@ -56,7 +56,7 @@ const AgentCard = ({ title, description, benefits, index }: {
 
         <Link
           href="/ai-agents"
-          className='bg-[#6A27D4] text-white px-10 py-3.5 rounded-full font-semibold text-[16px] w-fit hover:bg-[#5821B0] transition-colors mt-6 mx-auto lg:mx-0'
+          className='bg-[#6A27D4] text-white px-5 md:px-10 py-3.5 rounded-full font-semibold text-[16px] w-fit hover:bg-[#5821B0] transition-colors mt-6 mx-auto lg:mx-0'
         >
           Learn More
         </Link>
@@ -102,11 +102,11 @@ export const AIAgentsSection = () => {
 
   return (
     <section 
-      className="w-full bg-white flex flex-col items-center px-4 lg:px-20 py-16 lg:py-16"
+      className="w-full -mb-[1px] relative z-10 bg-white flex flex-col items-center px-4 lg:px-20 py-[clamp(40px,5vw,64px)]"
     >
       <div className='text-center mb-10 w-full max-w-[1400px]'>
         <h2 
-          className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold mb-8 tracking-tight leading-[1] text-center'
+          className='text-[#2F1C8C] font-semibold mb-8 tracking-normal md:tracking-tight leading-[1] text-center text-balance text-[clamp(28px,4vw,48px)]'
         >
           Meet Your Specialized AI Agents
         </h2>

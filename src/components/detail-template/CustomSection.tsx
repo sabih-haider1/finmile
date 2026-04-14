@@ -23,7 +23,7 @@ export function CustomSection({ data, className = '', sectionId }: CustomSection
         <div className={`relative overflow-hidden rounded-3xl border border-[#E6D9FF] bg-white shadow-[0_10px_32px_rgba(106,39,212,0.08)] ${scopeClass}`}>
           {data.title && (
             <div className="border-b border-[#F0E7FF] px-6 py-5 md:px-8 md:py-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#2D126B]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#2D126B] text-balance">
                 {data.title}
               </h2>
             </div>

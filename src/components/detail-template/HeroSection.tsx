@@ -12,7 +12,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
   const isExternalImage = /^https?:\/\//i.test(hero.image_url || '');
 
   return (
-    <section className="w-full bg-[#fcfcff] pt-24 pb-16 md:pt-32 md:pb-24">
+    <section className="w-full bg-[#fcfcff] pt-8 md:pt-12 md:pt-24 pb-10 md:pb-16 md:pt-32 md:pb-24">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image - Left column */}
@@ -53,7 +53,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#2D126B] leading-[1.1] mb-8">
+            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#2D126B] leading-[1.1] mb-8 text-balance">
               {hero.title}
             </h1>
 

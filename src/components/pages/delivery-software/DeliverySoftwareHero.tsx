@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DeliverySoftwareHero = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 lg:gap-12 items-center z-10 relative">
 
                 {/* Left Side: Image */}
@@ -25,7 +25,7 @@ export const DeliverySoftwareHero = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start text-left order-1 lg:order-2">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[36px] md:text-[42px] lg:text-[48px] leading-[1.2] tracking-tight mb-6">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(36px,4vw,48px)]">
                         Slash Your Delivery<br />
                         Costs by up to 42%
                     </h2>
@@ -40,10 +40,10 @@ export const DeliverySoftwareHero = () => {
 
                     {/* Buttons */}
                     <div className="flex flex-wrap gap-4 w-full md:w-auto">
-                        <button className="bg-[#6A27D4] text-white px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors w-full sm:w-auto whitespace-nowrap">
+                        <button className="bg-[#6A27D4] text-white px-5 md:px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors w-full sm:w-auto whitespace-nowrap">
                             Free Savings Analysis
                         </button>
-                        <button className="bg-white text-[#6A27D4] border-2 border-[#E8E5FF] px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#F8F7FF] transition-colors w-full sm:w-auto whitespace-nowrap shadow-[0_4px_10px_rgba(47,28,140,0.02)]">
+                        <button className="bg-white text-[#6A27D4] border-2 border-[#E8E5FF] px-5 md:px-8 md:px-10 py-3.5 md:py-4 rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-[#F8F7FF] transition-colors w-full sm:w-auto whitespace-nowrap shadow-[0_4px_10px_rgba(47,28,140,0.02)]">
                             See How It Works
                         </button>
                     </div>

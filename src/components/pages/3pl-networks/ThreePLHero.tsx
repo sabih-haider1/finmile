@@ -27,7 +27,7 @@ export const ThreePLHero = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2 lg:pl-10">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[44px] xl:text-[48px] leading-[1.2] tracking-tight mb-6">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(32px,4vw,48px)]">
                         Finmile OS — The AI<br className="hidden lg:block"/> Operating System for<br className="hidden lg:block"/> 3PLs & Courier Networks
                     </h2>
 
@@ -39,7 +39,7 @@ export const ThreePLHero = () => {
                         Finmile helps third-party logistics providers and courier networks deliver faster, smarter, and more profitably. Manage thousands of deliveries across multiple clients in one unified platform.
                     </p>
 
-                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto text-center">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-5 md:px-10 py-3.5 rounded-full font-semibold text-[15px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.3)] w-full sm:w-auto text-center">
                         Book A Demo
                     </Link>
                 </div>

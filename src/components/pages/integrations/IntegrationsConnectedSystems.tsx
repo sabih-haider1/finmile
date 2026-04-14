@@ -36,7 +36,7 @@ export const IntegrationsConnectedSystems = () => {
             <div className="w-full max-w-[1240px] flex flex-col items-center text-center">
 
                 {/* Main Heading */}
-                <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[42px] lg:text-[52px] leading-[1.1] tracking-tight mb-6">
+                <h2 className="text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(32px,4vw,52px)]">
                     The Cost of Disconnected Systems
                 </h2>
 
@@ -73,7 +73,7 @@ export const IntegrationsConnectedSystems = () => {
                         Every integration extends your operational intelligence.
                     </p>
 
-                    <Link href="/integrations" className="bg-[#6A27D4] text-white px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
+                    <Link href="/integrations" className="bg-[#6A27D4] text-white px-5 md:px-10 py-3.5 rounded-full text-[15px] md:text-[16px] shadow-[0_8px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1 active:translate-y-0">
                         See How Finmile Connects Everything
                     </Link>
                 </div>

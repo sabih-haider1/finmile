@@ -76,7 +76,7 @@ export const DeliverySolutions = () => {
 
             {/* Top Text Header */}
             <div className="flex flex-col items-center text-center w-full z-10 mb-12 lg:mb-8">
-                <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-white tracking-tight leading-tight mb-4">
+                <h2 className="font-semibold text-white tracking-normal md:tracking-tight leading-tight mb-4 text-balance text-[clamp(36px,4vw,48px)]">
                     Delivery Solutions for Every Business
                 </h2>
                 <p className="text-[#A09DB0] font-medium text-[15px] md:text-[18px] max-w-[800px]">
@@ -156,7 +156,7 @@ export const DeliverySolutions = () => {
                         ))}
                     </ul>
 
-                    <Link href="/solutions" className="self-start mt-2 bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-transform hover:scale-105 text-center">
+                    <Link href="/solutions" className="self-start mt-2 bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-transform hover:scale-105 text-center">
                         Learn More
                     </Link>
 

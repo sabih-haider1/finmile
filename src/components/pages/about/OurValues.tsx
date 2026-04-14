@@ -28,7 +28,7 @@ export const OurValues = () => {
                 </div>
 
                 {/* Heading */}
-                <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#FFFFFF] leading-[1.1] tracking-tight">
+                <h2 className="font-semibold text-[#FFFFFF] leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(36px,4vw,48px)]">
                     The Finmile Compass
                 </h2>
             </div>

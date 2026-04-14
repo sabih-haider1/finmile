@@ -39,13 +39,13 @@ export const DeliverySoftwareResults = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative ${montserrat.className}`}>
 
             <div className="w-full max-w-[1240px] z-10 flex flex-col items-center">
 
                 {/* Header Content */}
                 <div className="text-center w-full z-10 flex flex-col items-center max-w-[900px] mx-auto mb-12 md:mb-8">
-                    <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2]">
+                    <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] text-balance text-[clamp(32px,4vw,44px)]">
                         How Finmile Delivers Real-World Results
                     </h2>
                 </div>
@@ -72,7 +72,7 @@ export const DeliverySoftwareResults = () => {
                 </div>
 
                 {/* CTA Button */}
-                <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors">
+                <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-colors">
                     See the Platform in Action
                 </button>
 

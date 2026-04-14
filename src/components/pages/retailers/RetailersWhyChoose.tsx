@@ -41,7 +41,7 @@ export const RetailersWhyChoose = () => {
             {/* The strict 1240px inner boundary - no smaller max-w wrappers inside! */}
             <div className="w-full max-w-[1240px] z-10 relative flex flex-col items-center">
 
-                <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight mb-10 text-center">
+                <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight mb-10 text-center text-balance text-[clamp(32px,4vw,40px)]">
                     Why DSPs Choose Finmile
                 </h2>
 

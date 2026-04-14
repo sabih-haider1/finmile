@@ -11,7 +11,7 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 export const SustainableDeliveryCTA = () => {
     return (
         <section
-            className={`w-full bg-white flex flex-col items-center px-6 lg:px-24 py-12 lg:py-16 overflow-hidden relative ${montserrat.className}`}
+            className={`w-full bg-white flex flex-col items-center px-6 lg:px-24 py-8 md:py-12 lg:py-[clamp(40px,5vw,64px)] overflow-hidden relative ${montserrat.className}`}
         >
             <div className="w-full max-w-[1440px] flex flex-col lg:flex-row items-stretch lg:items-center gap-12 lg:gap-8 z-10 relative">
 
@@ -32,7 +32,7 @@ export const SustainableDeliveryCTA = () => {
                     <div className="bg-[#F8F7FF] rounded-[40px] p-10 md:p-14 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col justify-center items-start">
 
                         {/* Logo Card */}
-                        <div className="bg-white rounded-[24px] py-4 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06)] inline-flex items-center justify-center mb-10 border border-slate-50">
+                        <div className="bg-white rounded-[24px] py-4 px-5 md:px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06)] inline-flex items-center justify-center mb-10 border border-slate-50">
                             <Image
                                 src="/assets/logos/logo-blue.png"
                                 alt="Finmile Logo"
@@ -42,7 +42,7 @@ export const SustainableDeliveryCTA = () => {
                             />
                         </div>
 
-                        <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] mb-6 leading-tight max-w-[500px]">
+                        <h2 className="text-[#2F1C8C] font-semibold mb-6 leading-tight max-w-[500px] text-balance text-[clamp(32px,4vw,48px)]">
                             Start Reducing Emissions Today
                         </h2>
 
@@ -51,7 +51,7 @@ export const SustainableDeliveryCTA = () => {
                         </p>
 
                         <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                            <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-bold text-[16px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 shadow-[0_10px_20px_rgba(106,39,212,0.2)] w-full sm:w-auto">
+                            <button className="bg-[#6A27D4] text-white px-5 md:px-10 py-4 rounded-full font-bold text-[16px] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 shadow-[0_10px_20px_rgba(106,39,212,0.2)] w-full sm:w-auto">
                                 Book A Demo
                             </button>
                         </Link>

@@ -316,7 +316,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                 animate={isMobileMenuOpen ? "open" : "closed"}
                 className="fixed top-0 right-0 h-full w-[300px] bg-[#1A0F2E]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl"
             >
-                <div className="flex flex-col h-full pt-20 px-6 pb-8 overflow-y-auto custom-scrollbar">
+                <div className="flex flex-col h-full pt-8 md:pt-12 md:pt-20 px-6 pb-8 overflow-y-auto custom-scrollbar">
                     {/* Mobile Navigation Links */}
                     <nav className="flex flex-col gap-1 mb-8">
                         <AnimatePresence>

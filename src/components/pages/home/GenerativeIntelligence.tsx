@@ -8,7 +8,7 @@ import { fadeInLeft, fadeInRight, fadeInUp, staggerContainer } from '@/lib/anima
 export const GenerativeIntelligence = () => {
     return (
         <motion.section
-            className="w-full bg-[#0B0616] py-16 flex flex-col items-center px-6 lg:px-24 relative overflow-hidden"
+            className="w-full bg-[#0B0616] py-10 md:py-[clamp(40px,5vw,64px)] flex flex-col items-center px-6 lg:px-24 relative overflow-hidden"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -41,7 +41,7 @@ export const GenerativeIntelligence = () => {
                     
                     {/* Mobile Button */}
                     <motion.button
-                        className="lg:hidden liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit transition-colors"
+                        className="lg:hidden liquid-solid text-white px-5 md:px-10 py-4 rounded-full font-bold text-[15px] w-fit transition-colors"
                         variants={fadeInUp}
                         whileHover={{ scale: 1.04 }}
                         whileTap={{ scale: 0.96 }}
@@ -58,7 +58,7 @@ export const GenerativeIntelligence = () => {
                   variants={staggerContainer}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                    <motion.h2 variants={fadeInRight} className="text-white text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.05] tracking-tight">
+                    <motion.h2 variants={fadeInRight} className="text-white font-semibold leading-[1.05] tracking-normal md:tracking-tight text-balance text-[clamp(28px,4vw,48px)]">
                         Generative Intelligence
                     </motion.h2>
 
@@ -74,7 +74,7 @@ export const GenerativeIntelligence = () => {
 
                     {/* Desktop Button */}
                     <motion.button
-                        className="hidden lg:flex liquid-solid text-white px-10 py-4 rounded-full font-bold text-[15px] w-fit mt-10 transition-colors"
+                        className="hidden lg:flex liquid-solid text-white px-5 md:px-10 py-4 rounded-full font-bold text-[15px] w-fit mt-10 transition-colors"
                         variants={fadeInRight}
                         whileHover={{ scale: 1.04 }}
                         whileTap={{ scale: 0.96 }}

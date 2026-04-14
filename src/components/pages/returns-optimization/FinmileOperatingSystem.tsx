@@ -25,7 +25,7 @@ const features = [
 
 export const FinmileOperatingSystem = () => {
     return (
-        <section className={`w-full bg-white py-10 lg:py-16 flex justify-center px-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white py-10 lg:py-[clamp(40px,5vw,64px)] flex justify-center px-6 overflow-hidden relative ${montserrat.className}`}>
             
             {/* Ambient background decorative elements */}
             <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-[#E8E4FF] rounded-full blur-[120px] opacity-40 pointer-events-none" />
@@ -50,7 +50,7 @@ export const FinmileOperatingSystem = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[680px] z-10">
-                    <h2 className="font-semibold text-[36px] md:text-[48px] lg:text-[56px] text-[#2F1C8C] tracking-tight leading-[1.1] mb-8">
+                    <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.1] mb-8 text-balance text-[clamp(36px,4vw,56px)]">
                         Finmile Operating System for Reverse Logistics
                     </h2>
 

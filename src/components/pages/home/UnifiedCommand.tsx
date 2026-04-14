@@ -38,7 +38,7 @@ export const UnifiedCommand = () => {
 
     return (
         <motion.section 
-          className="w-full bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-16 overflow-hidden"
+          className="w-full -mb-[1px] relative z-10 bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-[clamp(40px,5vw,64px)] overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -53,7 +53,7 @@ export const UnifiedCommand = () => {
               variants={fadeInUp}
               viewport={{ once: true, amount: 0.5 }}
             >
-                <h2 className="text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold tracking-tight mb-3 md:mb-6 leading-tight">
+                <h2 className="text-[#2F1C8C] font-semibold tracking-normal md:tracking-tight mb-3 md:mb-6 leading-tight text-balance text-[clamp(28px,4vw,48px)]">
                     One Unified Command Interface
                 </h2>
                 <p className="text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed px-4">

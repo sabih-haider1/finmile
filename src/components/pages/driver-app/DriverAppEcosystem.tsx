@@ -31,7 +31,7 @@ export const DriverAppEcosystem = () => {
                 {/* Header Content - Two Column Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-12 lg:mb-8 text-center lg:text-left">
                     <div>
-                        <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight">
+                        <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight text-balance text-[clamp(32px,4vw,48px)]">
                             Connect the Driver<br className="hidden lg:block"/>
                             App to Your Finmile<br className="hidden lg:block"/>
                             Ecosystem
@@ -43,7 +43,7 @@ export const DriverAppEcosystem = () => {
                             The Driver App is just one part of the OS. It syncs instantly with your Control Tower and Optimisation Engine.
                         </p>
                         
-                        <Link href="/solutions" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)] w-full sm:w-auto text-center">
+                        <Link href="/solutions" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] shadow-[0_10px_20px_rgba(106,39,212,0.2)] w-full sm:w-auto text-center">
                             Explore the Finmile Platform
                         </Link>
                     </div>

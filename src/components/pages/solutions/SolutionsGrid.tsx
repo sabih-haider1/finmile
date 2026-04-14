@@ -61,7 +61,7 @@ const solutions = [
 
 export const SolutionsGrid = () => {
   return (
-    <section className="w-full py-6 bg-white px-6 lg:px-20 relative overflow-hidden">
+    <section className="w-full py-6 -mb-[1px] z-10 bg-white px-6 lg:px-20 relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"

@@ -23,7 +23,7 @@ export const DriverAppRouteGuidance = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start text-left order-1 lg:order-2">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight mb-6">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(32px,4vw,48px)]">
                         Route Guidance &<br />
                         Navigation
                     </h2>

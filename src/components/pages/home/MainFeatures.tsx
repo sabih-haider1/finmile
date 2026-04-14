@@ -17,14 +17,14 @@ export const TrustSection = () => {
 
   return (
     <motion.section 
-      className="w-full py-10 bg-white flex flex-col items-center px-6 lg:px-20"
+      className="w-full py-[clamp(32px,4vw,40px)] pb-[41px] -mb-[1px] relative z-10 bg-white flex flex-col items-center px-6 lg:px-20"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true, amount: 0.3 }}
     >
       <motion.h2 
-        className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px]'
+        className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px] text-balance'
         variants={fadeInUp}
         initial="hidden"
         whileInView="visible"
@@ -33,8 +33,40 @@ export const TrustSection = () => {
         TRUSTED BY THE WORLD&apos;S BIGGEST BRANDS
       </motion.h2>
 
+      <style>{`
+        @keyframes mobileMarquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-25%); }
+        }
+        .animate-mobile-marquee {
+          animation: mobileMarquee 25s linear infinite;
+          width: max-content;
+        }
+      `}</style>
+
+      {/* Mobile View: Infinite Marquee Strip */}
+      <div className="md:hidden relative w-[calc(100%+3rem)] -mx-6 overflow-hidden bg-white mb-6 pb-2">
+        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        <div className="flex animate-mobile-marquee hover:![animation-play-state:paused] items-center">
+          {[...brands, ...brands, ...brands, ...brands].map((brand, index) => (
+            <div key={`${brand.name}-${index}`} className="flex-shrink-0 bg-[#F6F8FA] rounded-[16px] flex items-center justify-center w-[130px] h-[72px] mx-3 overflow-hidden shadow-sm border border-gray-50/50">
+              <Image
+                src={brand.logo}
+                alt={brand.name}
+                width={110}
+                height={40}
+                className="w-auto h-auto max-h-[28px] max-w-[100px] object-contain opacity-90 mix-blend-multiply"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop View: Grid Layout */}
       <motion.div 
-        className='grid grid-cols-2 place-items-center gap-4 sm:gap-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-11 mb-12 max-w-[1600px] w-full'
+        className='hidden md:flex md:flex-wrap md:justify-center md:items-center md:gap-11 mb-12 max-w-[1600px] w-full'
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
@@ -64,15 +96,6 @@ export const TrustSection = () => {
         })}
       </motion.div>
 
-      <motion.p 
-        className='text-[#9CA3AF] text-[16px] font-medium text-center leading-[20px] tracking-[0px]'
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        Finmile powers deliveries for <span className='text-[#111827]'>JD.com, TikTok Shop, ILG</span>, and other global leaders.
-      </motion.p>
     </motion.section>
   );
 };
@@ -92,7 +115,7 @@ export const FeaturesSection = () => {
         >
           <motion.h2
             variants={fadeInLeft}
-            className='text-[#2F1C8C] text-[28px] md:text-[36px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight'
+            className='text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(28px,4vw,48px)]'
           >
             Stop Managing <br className='hidden md:block' />
             Software and Start <br className='hidden md:block' />

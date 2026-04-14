@@ -18,7 +18,7 @@ export const DriverAppEpod = () => {
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col space-y-8 pr-0 lg:pr-10 order-1">
 
-                    <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[48px] text-[#FFFFFF] leading-[1.2] tracking-tight">
+                    <h2 className="font-semibold text-[#FFFFFF] leading-[1.2] tracking-normal md:tracking-tight text-balance text-[clamp(32px,4vw,48px)]">
                         Intelligent Proof of<br />
                         Delivery (ePOD)
                     </h2>

@@ -28,11 +28,11 @@ export const MultiFleetOptimization = () => {
         <section className={`w-full bg-white py-6 md:py-6 flex justify-center px-4 md:px-8 lg:px-24 overflow-hidden ${montserrat.className}`}>
             
             {/* The giant rounded background container matching the mockup */}
-            <div className="w-full max-w-[1240px] bg-[#F8F9FC] rounded-[32px] md:rounded-[48px] px-6 py-16 md:px-12 md:py-16 flex flex-col items-center">
+            <div className="w-full max-w-[1240px] bg-[#F8F9FC] rounded-[32px] md:rounded-[48px] px-6 py-10 md:py-16 md:px-12 md:py-[clamp(40px,5vw,64px)] flex flex-col items-center">
                 
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-8">
-                    <h2 className="font-bold text-[34px] md:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-4 text-balance text-[clamp(34px,4vw,44px)]">
                         Multi-Fleet & Multi-Mode Optimization
                     </h2>
                     <p className="text-[#8B8B9B] font-medium text-[15px] md:text-[16px] leading-[1.6]">
@@ -106,7 +106,7 @@ export const MultiFleetOptimization = () => {
 
                 {/* CTA Button */}
                 <div className="text-center">
-                    <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_24px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                    <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_24px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
                         See How Finmile Handles Mixed Fleets
                     </button>
                 </div>

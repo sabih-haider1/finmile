@@ -31,7 +31,7 @@ export const DspsAutomatedDispatch = () => {
 
                 {/* Right Side: Text Content */}
                 <div className="flex flex-col items-start max-w-[500px] order-2 lg:ml-4">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-4 text-balance text-[clamp(32px,4vw,40px)]">
                         Automated Dispatch & Tracking
                     </h2>
 

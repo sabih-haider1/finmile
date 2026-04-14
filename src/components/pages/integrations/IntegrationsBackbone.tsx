@@ -8,13 +8,13 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const IntegrationsBackbone = () => {
     return (
-        <section className={`w-full bg-[#FAFAFF] flex justify-center px-4 md:px-8 lg:px-24 py-6 md:py-12 overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full bg-[#FAFAFF] flex justify-center px-4 md:px-8 lg:px-24 py-6 md:py-[clamp(32px,5vw,48px)] overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
                 
                 {/* Left Side: Text Content */}
                 <div className="w-full lg:w-[48%] flex flex-col items-start text-left">
                     {/* Main Heading */}
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[38px] lg:text-[48px] leading-[1.1] tracking-tight mb-8">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight mb-8 text-balance text-[clamp(32px,4vw,48px)]">
                         The Backbone of the<br />
                         Finmile Operating<br />
                         System

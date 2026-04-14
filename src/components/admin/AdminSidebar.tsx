@@ -74,7 +74,7 @@ export default function AdminSidebar() {
     <aside className="w-64 bg-white/5 backdrop-blur-xl border-r border-white/10 min-h-screen">
       <div className="p-6">
         <Link href="/admin/dashboard">
-          <h2 className="text-xl font-bold text-white mb-1">
+          <h2 className="text-xl font-bold text-white mb-1 text-balance">
             Admin <span className="gradient-text-os">Panel</span>
           </h2>
         </Link>

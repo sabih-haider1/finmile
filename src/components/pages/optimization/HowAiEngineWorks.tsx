@@ -38,7 +38,7 @@ export const HowAiEngineWorks = () => {
 
             <div className="w-full max-w-[1240px] flex flex-col items-center">
 
-                <h2 className="font-semibold text-[36px] md:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-4 text-center">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-4 text-center text-balance text-[clamp(36px,4vw,44px)]">
                     How the AI Engine Works
                 </h2>
 
@@ -62,7 +62,7 @@ export const HowAiEngineWorks = () => {
                     ))}
                 </div>
 
-                <button className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
+                <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(106,39,212,0.2)] hover:bg-[#5821B0] transition-all hover:-translate-y-0.5 active:translate-y-0">
                     See the AI Engine in Action
                 </button>
 

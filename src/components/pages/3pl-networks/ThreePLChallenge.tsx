@@ -34,7 +34,7 @@ export const ThreePLChallenge = () => {
                 
                 {/* Header Sub-section */}
                 <div className="text-center w-full max-w-[800px] mb-12 lg:mb-8">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[44px] leading-[1.2] tracking-tight mb-6">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-6 text-balance text-[clamp(32px,4vw,44px)]">
                         Your Challenge
                     </h2>
                     
@@ -61,11 +61,11 @@ export const ThreePLChallenge = () => {
                 </div>
 
                 {/* Bottom Banner */}
-                <div className="w-full max-w-[1240px] bg-[#2F1C8C] rounded-full py-5 px-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_15px_40px_rgba(47,28,140,0.2)]">
+                <div className="w-full max-w-[1240px] bg-[#2F1C8C] rounded-full py-5 px-5 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_15px_40px_rgba(47,28,140,0.2)]">
                     <p className="text-white font-medium text-[15px] md:text-[16px] leading-snug text-center sm:text-left">
                         Finmile fixes that — giving your team the automation and analytics they need.
                     </p>
-                    <button className="bg-[#6A27D4] text-white px-8 py-3 rounded-full font-semibold text-[14px] hover:bg-[#5821B0] transition-colors whitespace-nowrap shadow-md">
+                    <button className="bg-[#6A27D4] text-white px-5 md:px-8 py-3 rounded-full font-semibold text-[14px] hover:bg-[#5821B0] transition-colors whitespace-nowrap shadow-md">
                         Fix My Operation
                     </button>
                 </div>

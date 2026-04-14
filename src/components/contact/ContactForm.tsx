@@ -37,7 +37,7 @@ export const ContactForm = () => {
     };
 
     return (
-        <section className={`${montserrat.className} py-12 px-6 bg-white overflow-hidden text-[#1E1B4B]`}>
+        <section className={`${montserrat.className} py-8 md:py-12 px-6 bg-white overflow-hidden text-[#1E1B4B]`}>
 
             <div className="max-w-[1240px] mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_560px] gap-12 lg:gap-16 mb-12">
@@ -46,9 +46,9 @@ export const ContactForm = () => {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="flex flex-col pt-12"
+                        className="flex flex-col pt-8 md:pt-12"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-[#2F1C8C] mb-4">
+                        <h2 className="text-4xl md:text-5xl font-bold text-[#2F1C8C] mb-4 text-balance">
                             Get In Touch
                         </h2>
                         <p className="text-[#64748B] text-base leading-relaxed max-w-[500px] mb-8">
@@ -76,7 +76,7 @@ export const ContactForm = () => {
                         className="bg-[#F8F9FF] rounded-[40px] p-6 md:p-10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.04)]"
                     >
                         {isSuccess ? (
-                            <div className="py-12 flex flex-col items-center text-center space-y-6">
+                            <div className="py-8 md:py-12 flex flex-col items-center text-center space-y-6">
                                 <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center">
                                     <CheckCircle2 className="w-10 h-10 text-green-500" />
                                 </div>
@@ -196,7 +196,7 @@ export const ContactForm = () => {
                     </p>
                     <Button
                         variant="solid"
-                        className="h-12 bg-[#2F1C8C] hover:bg-[#581FB1] rounded-full px-12"
+                        className="h-12 bg-[#2F1C8C] hover:bg-[#581FB1] rounded-full px-6 md:px-12"
                     >
                         Fill Out the Help Form
                     </Button>

@@ -51,7 +51,7 @@ export const IndustryCTA = ({
                     <div className="bg-[#F8F7FF] rounded-[40px] p-6 text-center items-center md:items-start md:text-left md:p-12 w-full border border-white flex flex-col justify-center shadow-[0_20px_50px_rgba(47,28,140,0.05)]">
 
                         {/* Logo Chip */}
-                        <div className="bg-white rounded-[24px] py-6 px-10 shadow-[0_15px_40px_rgba(47,28,140,0.08)] inline-flex items-center justify-center mb-10 w-fit mx-auto md:mx-0">
+                        <div className="bg-white rounded-[24px] py-6 px-5 md:px-10 shadow-[0_15px_40px_rgba(47,28,140,0.08)] inline-flex items-center justify-center mb-10 w-fit mx-auto md:mx-0">
                             <Image
                                 src="/assets/logos/logo-blue.png"
                                 alt="Finmile Logo"
@@ -61,7 +61,7 @@ export const IndustryCTA = ({
                             />
                         </div>
 
-                        <h2 className="text-[#2F1C8C] font-bold text-[32px] md:text-[44px] mb-6 leading-tight">
+                        <h2 className="text-[#2F1C8C] font-bold mb-6 leading-tight text-balance text-[clamp(32px,4vw,44px)]">
                             {title}
                         </h2>
 
@@ -77,7 +77,7 @@ export const IndustryCTA = ({
 
                         <div className="mt-auto flex justify-center md:justify-start w-full">
                             <Link href={ctaHref} target={ctaHref.startsWith('http') ? '_blank' : undefined} rel={ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                                <button className="bg-[#6A27D4] text-white px-10 py-4 rounded-full font-bold text-[16px] shadow-[0_10px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1">
+                                <button className="bg-[#6A27D4] text-white px-5 md:px-10 py-4 rounded-full font-bold text-[16px] shadow-[0_10px_25px_rgba(106,39,212,0.25)] hover:bg-[#5821B0] transition-all hover:-translate-y-1">
                                     {ctaText}
                                 </button>
                             </Link>

@@ -38,7 +38,7 @@ export const OptimizationWhyChoose = () => {
             <div className="w-full max-w-[1240px] flex flex-col items-start">
                 
                 {/* Heading */}
-                <h2 className="font-bold text-[36px] md:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-10 md:mb-14">
+                <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-10 md:mb-14 text-balance text-[clamp(36px,4vw,44px)]">
                     Switch to Finmile
                 </h2>
 

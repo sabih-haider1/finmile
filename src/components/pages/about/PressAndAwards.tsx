@@ -25,7 +25,7 @@ export const PressAndAwards = () => {
 
             {/* Header Area */}
             <div className="text-center mb-8 w-full z-10 flex flex-col items-center max-w-[800px] mx-auto">
-                <h2 className="font-semibold text-[36px] md:text-[42px] lg:text-[48px] text-[#2F1C8C] tracking-tight mb-6 leading-tight">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight mb-6 leading-tight text-balance text-[clamp(36px,4vw,48px)]">
                     Press & Awards
                 </h2>
                 <p className="text-[#6C757D] font-medium text-[15px] md:text-[16px] leading-relaxed px-4">

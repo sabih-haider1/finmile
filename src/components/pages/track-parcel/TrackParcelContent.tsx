@@ -31,7 +31,7 @@ export const TrackParcelContent = () => {
                     {/* Logo Capsule */}
                     <div className="flex justify-center mb-4">
                         <div className="p-1.5 rounded-3xl bg-[#EBEBFA]/60 shadow-inner">
-                            <div className="bg-white rounded-[20px] px-8 py-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-[#F1F5F9]">
+                            <div className="bg-white rounded-[20px] px-5 md:px-8 py-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-[#F1F5F9]">
                                 <Image
                                     src="/assets/logos/logo-blue.png"
                                     alt="Finmile"
@@ -43,7 +43,7 @@ export const TrackParcelContent = () => {
                         </div>
                     </div>
 
-                    <h2 className="text-[32px] md:text-[40px] font-bold text-[#2F1C8C] tracking-tight mb-4">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight mb-4 text-balance text-[clamp(32px,4vw,40px)]">
                         Track Your Parcel
                     </h2>
 
@@ -83,7 +83,7 @@ export const TrackParcelContent = () => {
                         <div className="flex justify-center pt-4">
                             <Button
                                 type="submit"
-                                className="h-14 bg-[#6A27D4] hover:bg-[#581FB1] transition-colors rounded-full px-16 w-full md:w-auto min-w-[240px] text-[15px] font-semibold"
+                                className="h-14 bg-[#6A27D4] hover:bg-[#581FB1] transition-colors rounded-full px-6 md:px-16 w-full md:w-auto min-w-[240px] text-[15px] font-semibold"
                             >
                                 Track Order
                             </Button>
@@ -113,7 +113,7 @@ export const TrackParcelContent = () => {
 
                     <Button
                         variant="solid"
-                        className="h-14 bg-[#6A27D4] hover:bg-[#581FB1] transition-colors rounded-full px-12 text-[15px] font-semibold"
+                        className="h-14 bg-[#6A27D4] hover:bg-[#581FB1] transition-colors rounded-full px-6 md:px-12 text-[15px] font-semibold"
                     >
                         Fill Out the Help Form
                     </Button>

@@ -39,12 +39,12 @@ export const DspsFeaturesGrid = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-6 py-10 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-6 py-[clamp(32px,4vw,40px)] overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1440px] z-10 flex flex-col">
 
                 {/* Header Content - Split Layout */}
                 <div className="flex flex-col lg:flex-row items-end justify-between gap-8 mb-8">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-[#2F1C8C] tracking-tight leading-[1.2] max-w-[550px]">
+                    <h2 className="font-bold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] max-w-[550px] text-balance text-[clamp(32px,4vw,40px)]">
                         Run Delivery Operations<br />
                         That Practically Manage<br />
                         Themselves

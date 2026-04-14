@@ -26,7 +26,7 @@ export function FaqInteractiveList() {
   const activeFaqs = faqData.filter(faq => faq.category === activeCategory);
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 pb-24 flex flex-col md:flex-row gap-10 md:gap-16">
+    <div className="max-w-[1200px] mx-auto px-6 pb-8 md:pb-12 md:pb-24 flex flex-col md:flex-row gap-10 md:gap-16">
       {/* Left Sidebar */}
       <div className="w-full md:w-1/3 lg:w-1/4 shrink-0">
         <div className="md:sticky md:top-32 flex flex-row md:flex-col overflow-x-auto md:overflow-visible space-x-3 md:space-x-0 space-y-0 md:space-y-2 bg-[#2F1C8C] rounded-[20px] p-4 md:p-5 shadow-lg [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">

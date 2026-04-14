@@ -11,7 +11,7 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const Hero = () => {
   return (
-    <section className="relative w-full min-h-screen flex flex-col items-center justify-start pt-[140px] px-4 overflow-hidden bg-[#0B0616]">
+    <section className="relative w-full pb-[clamp(32px,5vw,64px)] flex flex-col items-center justify-start pt-[140px] px-4 overflow-hidden bg-[#0B0616]">
 
       {/* Upper Subtle Glow behind text */}
       <div aria-hidden="true" className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#3B257E] rounded-full blur-[140px] opacity-30 pointer-events-none transform-gpu translate-z-0" />
@@ -21,7 +21,7 @@ export const Hero = () => {
 
       {/* Hero Content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center max-w-[900px] mx-auto space-y-6"
+        className="relative z-10 flex flex-col items-center text-center max-w-[900px] mx-auto"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
@@ -29,13 +29,13 @@ export const Hero = () => {
       >
 
         {/* Top Badge */}
-        <motion.div variants={fadeInUp}>
+        <motion.div variants={fadeInUp} className="mb-[clamp(16px,2vw,24px)]">
           <Badge label="An operating system for execution, not another logistics tool" />
         </motion.div>
 
         {/* Headline */}
         <motion.h1
-          className="text-white text-[44px] md:text-[60px] lg:text-[64px] md:whitespace-nowrap font-bold tracking-tight leading-[1.05] pb-2"
+          className="text-white md:whitespace-nowrap font-bold tracking-normal md:tracking-tight leading-[1.05] text-balance mb-[clamp(16px,2.5vw,32px)] text-[clamp(44px,4vw,64px)]"
           variants={fadeInUp}
         >
           The <span className="gradient-text-os px-1">OS</span> for Modern Logistics
@@ -43,7 +43,7 @@ export const Hero = () => {
 
         {/* Sub-headline */}
         <motion.p
-          className="text-[#9CA3AF] text-[16px] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mt-2"
+          className="text-[#9CA3AF] text-[clamp(15px,1.5vw,20px)] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mb-[clamp(24px,4vw,48px)]"
           variants={fadeInUp}
         >
           Finmile AI automates delivery operations end to end, using agentic AI to optimise multi drop routes in
@@ -52,7 +52,7 @@ export const Hero = () => {
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-6 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto"
           variants={fadeInUp}
         >
           <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -74,7 +74,7 @@ export const Hero = () => {
 
       {/* Dashboard Mockup Image */}
       <motion.div
-        className="relative z-10 mt-12 w-full max-w-[1200px] mx-auto px-2 md:px-8"
+        className="relative z-10 mt-[clamp(48px,8vw,96px)] w-full max-w-[1200px] mx-auto px-2 md:px-8"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}

@@ -27,7 +27,7 @@ export const OneLayerInsideFinmileOS = () => {
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start w-full pr-0 lg:pr-4">
                     {/* Updated to text-[48px] and font-semibold */}
-                    <h2 className="font-semibold text-[36px] md:text-[48px] text-white tracking-tight leading-[1.2] mb-6">
+                    <h2 className="font-semibold text-white tracking-normal md:tracking-tight leading-[1.2] mb-6 text-balance text-[clamp(36px,4vw,48px)]">
                         One Layer Inside the<br />
                         Finmile OS
                     </h2>
@@ -37,7 +37,7 @@ export const OneLayerInsideFinmileOS = () => {
                     </p>
 
                     {/* Features Grid: 2 Columns */}
-                    <div className="grid grid-cols-2 gap-y-5 gap-x-12 mb-12 w-full max-w-[450px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-12 mb-12 w-full max-w-[450px]">
                         {features.map((feature, idx) => (
                             <div key={idx} className="flex items-center gap-3">
                                 {/* Custom Icon matching the exact UI (Transparent bg + border) */}
@@ -54,7 +54,7 @@ export const OneLayerInsideFinmileOS = () => {
                     </div>
 
                     {/* CTA Button with the distinct border matching the UI */}
-                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6D28D9] border border-[#A78BFA] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(109,40,217,0.3)] hover:bg-[#5B21B6] transition-all hover:-translate-y-0.5 active:translate-y-0 text-center">
+                    <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6D28D9] border border-[#A78BFA] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] md:text-[15px] shadow-[0_10px_20px_rgba(109,40,217,0.3)] hover:bg-[#5B21B6] transition-all hover:-translate-y-0.5 active:translate-y-0 text-center">
                         Book a Demo
                     </Link>
                 </div>

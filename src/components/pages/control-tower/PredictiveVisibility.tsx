@@ -9,12 +9,12 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const PredictiveVisibility = () => {
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-12 z-10 relative">
 
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start text-left">
-                    <h2 className="text-[#2F1C8C] font-semibold text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] tracking-tight mb-4 md:mb-6">
+                    <h2 className="text-[#2F1C8C] font-semibold leading-[1.2] tracking-normal md:tracking-tight mb-4 md:mb-6 text-balance text-[clamp(32px,4vw,48px)]">
                         Real-Time Delivery<br className="hidden md:block" />
                         Tracking & Predictive<br className="hidden md:block" />
                         Visibility
@@ -29,10 +29,10 @@ export const PredictiveVisibility = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <Link href="/control-tower" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] w-full sm:w-auto text-center">
+                        <Link href="/control-tower" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] transition-transform hover:scale-105 hover:bg-[#5821B0] w-full sm:w-auto text-center">
                             See Control Tower in Action
                         </Link>
-                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-white text-[#6A27D4] border border-[#d6d0ff] px-8 py-3.5 rounded-full font-semibold text-[14px] transition-all hover:border-[#6A27D4] hover:shadow-[0_0_15px_rgba(106,39,212,0.15)] w-full sm:w-auto text-center">
+                        <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-white text-[#6A27D4] border border-[#d6d0ff] px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] transition-all hover:border-[#6A27D4] hover:shadow-[0_0_15px_rgba(106,39,212,0.15)] w-full sm:w-auto text-center">
                             Book A Demo
                         </Link>
                     </div>

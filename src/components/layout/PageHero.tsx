@@ -13,7 +13,7 @@ interface PageHeroProps {
 
 export function PageHero({ title, hideLogo, description, gradientFrom, gradientTo }: PageHeroProps) {
   return (
-    <section className={`relative w-full overflow-hidden pt-[140px] pb-12 flex items-center justify-center bg-[#0B0616] min-h-[300px] ${montserrat.className}`}>
+    <section className={`relative w-full overflow-hidden pt-[100px] md:pt-[140px] pb-6 md:pb-12 flex items-center justify-center bg-[#0B0616] min-h-[160px] md:min-h-[300px] ${montserrat.className}`}>
 
       {/* Ambient background glows */}
       <div
@@ -37,7 +37,7 @@ export function PageHero({ title, hideLogo, description, gradientFrom, gradientT
 
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 flex flex-col items-center justify-center">
         <h1
-          className="text-white font-text tracking-tight text-center leading-[1.15] md:leading-[1.1] z-10 text-[36px] md:text-[52px] lg:text-[64px]"
+          className="text-white font-text tracking-normal md:tracking-tight text-center leading-[1.15] md:leading-[1.1] z-10 text-balance text-[clamp(36px,4vw,64px)]"
         >
           {title} {!hideLogo && <span className="text-white/100">Finmile</span>}
         </h1>

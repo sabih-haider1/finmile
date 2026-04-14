@@ -12,11 +12,11 @@ export const AIVisibilityInAction = () => {
     ];
 
     return (
-        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-6 md:py-6 lg:py-6 overflow-hidden relative gap-0 -mt-4 md:-mt-8 ${montserrat.className}`}>
+        <section className={`w-full bg-white flex flex-col items-center px-4 md:px-6 lg:px-24 py-[clamp(24px,4vw,32px)] overflow-hidden relative gap-0 -mt-4 md:-mt-8 ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] z-10 relative flex flex-col items-center">
 
                 {/* Header Content */}
-                <h2 className="font-semibold text-[30px] md:text-[40px] lg:text-[48px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-10 lg:mb-12 text-center">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-10 lg:mb-12 text-center text-balance text-[clamp(30px,4vw,48px)]">
                     AI Visibility in Action
                 </h2>
 

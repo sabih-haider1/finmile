@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export const TermsContent = () => {
     return (
-        <section className="relative w-full py-12 px-6 lg:px-16 bg-white overflow-hidden">
+        <section className="relative w-full py-8 md:py-[clamp(32px,5vw,48px)] px-6 lg:px-16 -mb-[1px] z-10 bg-white overflow-hidden">
             <div className="max-w-[1000px] mx-auto relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -17,7 +17,7 @@ export const TermsContent = () => {
                     <div className="space-y-2">
                         <div>
                             <p className="text-[#6A27D4] font-semibold text-[14px] mb-4 uppercase tracking-widest">Last Updated: October 2025</p>
-                            <h2 className="text-[36px] md:text-[48px] font-semibold text-[#2D1B69] tracking-tight leading-tight uppercase">
+                            <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight uppercase text-balance text-[clamp(36px,4vw,48px)]">
                                 Company Details
                             </h2>
                         </div>
@@ -35,7 +35,7 @@ export const TermsContent = () => {
 
                     {/* Overview Section */}
                     <div className="space-y-4 pt-10 border-t border-gray-100">
-                        <h2 className="text-[36px] md:text-[48px] font-semibold text-[#2D1B69] tracking-tight leading-tight uppercase">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight uppercase text-balance text-[clamp(36px,4vw,48px)]">
                             Overview
                         </h2>
 
@@ -51,7 +51,7 @@ export const TermsContent = () => {
 
                     {/* Terms & Conditions Section */}
                     <div className="space-y-4 pt-10 border-t border-gray-100">
-                        <h2 className="text-[36px] md:text-[48px] font-semibold text-[#2D1B69] tracking-tight leading-tight uppercase">
+                        <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight uppercase text-balance text-[clamp(36px,4vw,48px)]">
                             Terms & Conditions
                         </h2>
 
@@ -552,9 +552,9 @@ export const TermsContent = () => {
                     </div>
 
                     {/* Schedule Section */}
-                    <div className="space-y-8 pt-16 border-t border-gray-100">
+                    <div className="space-y-8 pt-10 md:pt-16 border-t border-gray-100">
                         <div className="space-y-4">
-                            <h2 className="text-[36px] md:text-[48px] font-semibold text-[#2D1B69] tracking-tight leading-tight uppercase">
+                            <h2 className="font-semibold text-[#2D1B69] tracking-normal md:tracking-tight leading-tight uppercase text-balance text-[clamp(36px,4vw,48px)]">
                                 SCHEDULE – DEFINED TERMS
                             </h2>
                             <p className="text-[#4A5568] text-[15px] md:text-[17px] leading-[1.8] font-normal">

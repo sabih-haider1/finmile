@@ -24,7 +24,7 @@ export const StoryVision = () => {
                 <div className='flex flex-col space-y-8'>
 
                     {/* Heading: h2 style as requested (they wrote h1 but gave h2 sizing earlier) */}
-                    <h2 className='font-semibold text-[36px] md:text-[42px] text-[#2F1C8C] leading-[1.1] tracking-tight'>
+                    <h2 className='font-semibold text-[#2F1C8C] leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(36px,4vw,42px)]'>
                         Our Story &amp; Vision
                     </h2>
 

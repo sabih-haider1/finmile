@@ -11,7 +11,7 @@ const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXU
 
 export const ReturnsFinalCTA = () => {
     return (
-        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-8 lg:py-12 overflow-hidden relative ${montserrat.className}`}>
+        <section className={`w-full bg-[#fcfcff] flex flex-col items-center px-6 lg:px-24 py-[clamp(32px,5vw,48px)] overflow-hidden relative ${montserrat.className}`}>
             <div className="w-full max-w-[1440px] flex flex-col lg:flex-row items-stretch lg:items-center gap-12 lg:gap-[10px] z-10 relative">
                 
                 {/* Left Side - Dashboard Image with NO background and NO internal spacing */}
@@ -32,7 +32,7 @@ export const ReturnsFinalCTA = () => {
                     <div className="bg-[#F8F7FF] rounded-3xl md:rounded-[24px] p-6 md:p-10 w-full shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white flex flex-col justify-center">
                         <div>
                             {/* Logo Chip */}
-                            <div className="bg-white rounded-[24px] py-4 px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06)] inline-flex items-center justify-center mb-8 border border-slate-50">
+                            <div className="bg-white rounded-[24px] py-4 px-5 md:px-8 shadow-[0_15px_40px_rgba(47,28,140,0.06)] inline-flex items-center justify-center mb-8 border border-slate-50">
                                 <Image
                                     src="/assets/logos/logo-blue.png"
                                     alt="Finmile Logo"
@@ -42,7 +42,7 @@ export const ReturnsFinalCTA = () => {
                                 />
                             </div>
 
-                            <h2 className="text-[#2F1C8C] font-bold text-[32px] md:text-[40px] mb-8 leading-tight uppercase">
+                            <h2 className="text-[#2F1C8C] font-bold mb-8 leading-tight uppercase text-balance text-[clamp(32px,4vw,40px)]">
                                 Get Started with<br />Smarter Returns
                             </h2>
 
@@ -65,10 +65,10 @@ export const ReturnsFinalCTA = () => {
 
                         {/* Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
-                            <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-8 py-3.5 rounded-full font-semibold text-[14px] w-full sm:flex-1 hover:bg-[#5821B0] transition-colors text-center">
+                            <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="bg-[#6A27D4] text-white px-5 md:px-8 py-3.5 rounded-full font-semibold text-[14px] w-full sm:flex-1 hover:bg-[#5821B0] transition-colors text-center">
                                 Book A Demo
                             </Link>
-                            <Link href="/contact" className="w-full sm:flex-1 px-8 py-3.5 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-full text-[14px] font-semibold transition-all hover:bg-[#2F1C8C] hover:text-white text-center">
+                            <Link href="/contact" className="w-full sm:flex-1 px-5 md:px-8 py-3.5 bg-white text-[#6A27D4] border border-[#6A27D4] rounded-full text-[14px] font-semibold transition-all hover:bg-[#2F1C8C] hover:text-white text-center">
                                 Talk To Our Team
                             </Link>
                         </div>

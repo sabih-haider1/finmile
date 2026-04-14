@@ -48,7 +48,7 @@ export const RetailersOperationalImpact = () => {
                 
                 {/* Header */}
                 <div className="text-center mb-10 md:mb-14">
-                    <h2 className="font-bold text-[32px] md:text-[40px] text-white tracking-tight leading-[1.2]">
+                    <h2 className="font-bold text-white tracking-normal md:tracking-tight leading-[1.2] text-balance text-[clamp(32px,4vw,40px)]">
                         Results from Retail Clients
                     </h2>
                 </div>
@@ -73,7 +73,7 @@ export const RetailersOperationalImpact = () => {
                 {/* Testimonial Card */}
                 <div className="max-w-[950px] mx-auto text-center w-full">
                     {/* Adjusted bg color to match the deeper violet in the new image */}
-                    <div className="bg-[#2D1987] rounded-[24px] px-8 py-10 md:px-16 md:py-12 shadow-2xl relative">
+                    <div className="bg-[#2D1987] rounded-[24px] px-5 md:px-8 py-10 md:px-16 md:py-[clamp(32px,5vw,48px)] shadow-2xl relative">
                         
                         {/* Centered Quote Icon */}
                         <div className="flex justify-center mb-6">

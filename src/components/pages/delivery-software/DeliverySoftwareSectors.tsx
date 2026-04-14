@@ -25,11 +25,11 @@ export const DeliverySoftwareSectors = () => {
     };
 
     return (
-        <section className={`w-full py-6 md:py-6 lg:py-6 bg-white flex flex-col items-center px-4 md:px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
+        <section className={`w-full py-[clamp(24px,4vw,32px)] bg-white flex flex-col items-center px-4 md:px-6 lg:px-20 relative overflow-hidden ${montserrat.className}`}>
 
             {/* Top Text Header */}
             <div className="flex flex-col items-center text-center w-full z-10 mb-8 lg:mb-12">
-                <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-[#2F1C8C] tracking-tight leading-tight">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-tight text-balance text-[clamp(32px,4vw,44px)]">
                     {currentTab.title}
                 </h2>
                 <p className="mt-3 max-w-3xl text-[15px] md:text-[16px] leading-7 text-[#6C757D]">

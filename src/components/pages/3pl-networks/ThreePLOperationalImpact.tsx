@@ -10,7 +10,7 @@ export const ThreePLOperationalImpact = () => {
     return (
         <section className={`w-full bg-white py-6 md:py-6 flex flex-col items-center px-4 md:px-6 lg:px-24 relative overflow-hidden ${montserrat.className}`}>
             <div className="w-full max-w-[1240px] z-10 flex flex-col items-center text-center mx-auto">
-                <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[44px] text-[#2F1C8C] tracking-tight leading-[1.2] mb-12 md:mb-8">
+                <h2 className="font-semibold text-[#2F1C8C] tracking-normal md:tracking-tight leading-[1.2] mb-12 md:mb-8 text-balance text-[clamp(32px,4vw,44px)]">
                     Operational Impact
                 </h2>
 
