@@ -152,7 +152,7 @@ export const FeaturesSection = () => {
 
         {/* Right Column */}
         <motion.div 
-          className='relative w-full flex items-center justify-center pt-0 lg:pt-0 px-4 lg:px-0 min-h-[500px] lg:min-h-[600px]'
+          className='relative z-20 w-full flex items-center justify-center pt-0 lg:pt-0 px-4 lg:px-0 min-h-[500px] lg:min-h-[600px]'
           initial="hidden"
           whileInView="visible"
           variants={fadeInRight}
@@ -175,7 +175,7 @@ export const FeaturesSection = () => {
 
             {/* 42% Card - Top Left */}
             <motion.div 
-              className='absolute -top-4 left-0 md:-top-10 md:-left-24 z-20 bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white w-[220px] md:w-[320px] transform-gpu will-change-transform'
+              className='absolute -top-4 left-0 md:-top-10 md:-left-24 z-40 bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white w-[220px] md:w-[320px] transform-gpu will-change-transform'
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -188,7 +188,7 @@ export const FeaturesSection = () => {
 
             {/* 91% Card - Bottom Right */}
             <motion.div 
-              className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-20 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px] transform-gpu will-change-transform'
+              className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-40 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px] transform-gpu will-change-transform'
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
