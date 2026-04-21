@@ -139,7 +139,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                 {/* Logo */}
                 <Link
                     href="/"
-                    className={`relative z-[110] flex shrink-0 transition-all duration-300 self-center translate-y-[2px] cursor-pointer left-[-38px] md:left-0 ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
+                    className={`relative z-[110] flex items-center shrink-0 transition-all duration-300 self-center cursor-pointer left-[-38px] md:left-0 ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
                 >
                     <Image
                         src={isLight ? "/assets/logos/logo-blue.png" : WHITE_LOGO_SRC}
@@ -149,7 +149,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                         sizes="(max-width: 768px) 140px, 224px"
                         quality={100}
                         priority
-                        className="mt-1 h-10 md:h-12 lg:h-14 object-contain drop-shadow-lg align-middle"
+                        className={`w-auto object-contain drop-shadow-lg ${isLight ? 'h-9 md:h-10 lg:h-12' : 'h-8 md:h-9 lg:h-10'}`}
                     />
                 </Link>
 
