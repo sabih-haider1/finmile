@@ -214,7 +214,7 @@ export default function WhitepapersPage() {
     { name: 'title', label: 'Title', type: 'text', required: true, placeholder: 'Enter whitepaper title' },
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'summary', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
-    { name: 'sections', label: 'Sections JSON', type: 'json', helpText: 'Optional unified template structure' },
+    { name: 'sections', label: 'Sections', type: 'editorjs-sections', helpText: 'Build content with structured blocks (no HTML/CSS)' },
     { name: 'pdf_url', label: 'PDF File', type: 'file', required: true, accept: '.pdf', bucket: 'whitepapers', folder: 'pdfs' },
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'whitepaper-covers', folder: 'covers' },
     { 

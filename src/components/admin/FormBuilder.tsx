@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { generateSlug } from '@/lib/upload';
+import { EditorJsSectionsManager } from '@/components/admin/editorjs';
+import { normalizeEditorJsSectionsPayload } from '@/lib/editorjs';
 
 export interface FormFieldConfig {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags' | 'date' | 'json';
+  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags' | 'date' | 'json' | 'editorjs-sections';
   required?: boolean;
   placeholder?: string;
   options?: { value: string; label: string }[];
@@ -74,7 +76,12 @@ export default function FormBuilder({
       const normalizedData = { ...formData };
 
       fields.forEach((field) => {
-        if (field.type !== 'json') {
+        if (field.type !== 'json' && field.type !== 'editorjs-sections') {
+          return;
+        }
+
+        if (field.type === 'editorjs-sections') {
+          normalizedData[field.name] = normalizeEditorJsSectionsPayload(normalizedData[field.name]);
           return;
         }
 
@@ -174,6 +181,14 @@ export default function FormBuilder({
           />
         );
       }
+
+      case 'editorjs-sections':
+        return (
+          <EditorJsSectionsManager
+            value={value}
+            onChange={(nextValue) => handleChange(field.name, nextValue)}
+          />
+        );
 
       case 'select':
         return (

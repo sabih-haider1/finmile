@@ -5,6 +5,7 @@ import { CustomSection } from './CustomSection';
 import { CTASection } from './CTASection';
 import { FeaturesSection } from './FeaturesSection';
 import { ComparisonSection } from './ComparisonSection';
+import { EditorJsSectionRenderer } from './EditorJsSection';
 import { Sidebar } from './Sidebar';
 import { AuthorSection } from './AuthorSection';
 
@@ -48,6 +49,14 @@ export function DetailPageTemplate({
             <div className="lg:col-span-2 space-y-6 md:space-y-6">
               {sections.map((section) => {
                 switch (section.type) {
+                  case 'editorjs':
+                    return (
+                      <EditorJsSectionRenderer
+                        key={section.id}
+                        section={section}
+                      />
+                    );
+
                   case 'content':
                     return (
                       <ContentSection

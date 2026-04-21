@@ -63,21 +63,41 @@ export default async function BlogDetailPage({ params }: Props) {
   const resolvedAuthor = getAuthorProfileByName(blog.author_name);
   const authorDisplay = resolvedAuthor || blog.author_name || 'Finmile Editorial Team';
 
-  const content: UnifiedContent = (blog.sections && typeof blog.sections === 'object')
+  const sectionsPayload = (blog.sections && typeof blog.sections === 'object')
+    ? blog.sections as Partial<UnifiedContent>
+    : null;
+
+  const storedSections = Array.isArray(sectionsPayload?.sections)
+    ? sectionsPayload.sections
+    : [];
+
+  const heroOverrides = sectionsPayload?.hero;
+
+  const content: UnifiedContent = sectionsPayload
     ? {
-        ...blog.sections,
         hero: {
-          ...blog.sections.hero,
-          title: blog.sections.hero.title || blog.title,
-          image_url: blog.sections.hero.image_url ?? blog.cover_image_url,
+          ...(heroOverrides || {}),
+          title: heroOverrides?.title || blog.title,
+          image_url: heroOverrides?.image_url ?? blog.cover_image_url,
           description: blog.summary,
           metadata: {
-            ...blog.sections.hero.metadata,
+            ...(heroOverrides?.metadata || {}),
             published_date: publishDate,
-            read_time: blog.sections.hero.metadata?.read_time || 'Read article',
-            author: blog.author_name || blog.sections.hero.metadata?.author,
+            read_time: heroOverrides?.metadata?.read_time || 'Read article',
+            author: blog.author_name || heroOverrides?.metadata?.author,
           },
         },
+        sections: storedSections.length > 0
+          ? storedSections
+          : [
+              {
+                id: 'blog-body',
+                type: 'content',
+                data: {
+                  body: blog.body || `<p>${blog.summary}</p>`,
+                },
+              },
+            ],
         sidebar: {
           related: sidebarRelated,
         },

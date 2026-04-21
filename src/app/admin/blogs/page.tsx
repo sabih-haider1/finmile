@@ -187,7 +187,7 @@ export default function BlogsPage() {
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'summary', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
     { name: 'body', label: 'Body', type: 'richtext', required: true, placeholder: 'Write your blog content...' },
-    { name: 'sections', label: 'Sections JSON', type: 'json', helpText: 'Optional unified template structure' },
+    { name: 'sections', label: 'Sections', type: 'editorjs-sections', helpText: 'Build content with structured blocks (no HTML/CSS)' },
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'blog-covers', folder: 'covers' },
     {
       name: 'author_name',

@@ -2,6 +2,91 @@
 
 // ==================== Unified Content Section Types ====================
 
+export type EditorJsBlockType =
+  | 'header'
+  | 'paragraph'
+  | 'list'
+  | 'table'
+  | 'quote'
+  | 'image';
+
+export interface EditorJsHeaderBlock {
+  id?: string;
+  type: 'header';
+  data: {
+    text: string;
+    level: 1 | 2 | 3 | 4;
+  };
+}
+
+export interface EditorJsParagraphBlock {
+  id?: string;
+  type: 'paragraph';
+  data: {
+    text: string;
+  };
+}
+
+export interface EditorJsListBlock {
+  id?: string;
+  type: 'list';
+  data: {
+    style: 'ordered' | 'unordered';
+    items: string[];
+  };
+}
+
+export interface EditorJsTableBlock {
+  id?: string;
+  type: 'table';
+  data: {
+    withHeadings?: boolean;
+    content: string[][];
+  };
+}
+
+export interface EditorJsQuoteBlock {
+  id?: string;
+  type: 'quote';
+  data: {
+    text: string;
+    caption?: string;
+    alignment?: 'left' | 'center';
+  };
+}
+
+export interface EditorJsImageBlock {
+  id?: string;
+  type: 'image';
+  data: {
+    file: {
+      url: string;
+    };
+    caption?: string;
+    withBorder?: boolean;
+    withBackground?: boolean;
+    stretched?: boolean;
+  };
+}
+
+export type EditorJsBlock =
+  | EditorJsHeaderBlock
+  | EditorJsParagraphBlock
+  | EditorJsListBlock
+  | EditorJsTableBlock
+  | EditorJsQuoteBlock
+  | EditorJsImageBlock;
+
+export interface EditorJsSection {
+  id: string;
+  type: 'editorjs';
+  blocks: EditorJsBlock[];
+}
+
+export interface EditorJsSectionsPayload {
+  sections: EditorJsSection[];
+}
+
 export interface ContentMetadata {
   published_date?: string;
   read_time?: string;
@@ -18,7 +103,7 @@ export interface ContentHero {
 export interface ContentSectionData {
   // Content section
   body?: string;
-  // Custom HTML/CSS section
+  // Legacy custom HTML/CSS section
   title?: string;
   html?: string;
   css?: string;
@@ -36,11 +121,13 @@ export interface ContentSectionData {
   [key: string]: unknown;
 }
 
-export interface ContentSection {
+export interface LegacyContentSection {
   id: string;
   type: 'content' | 'custom' | 'cta' | 'features' | 'comparison';
   data: ContentSectionData;
 }
+
+export type ContentSection = EditorJsSection | LegacyContentSection;
 
 export interface RelatedResource {
   id: string;

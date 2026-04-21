@@ -232,3 +232,49 @@ body {
     transform: translateY(0);
   }
 }
+
+/* Admin Editor.js overrides for dark surfaces */
+.editorjs-content {
+  color: #f3edff;
+}
+
+.editorjs-content .tc-wrap {
+  --color-background: rgba(255, 255, 255, 0.08);
+  --color-text-secondary: #d7c5ff;
+  --color-border: rgba(255, 255, 255, 0.25);
+}
+
+.editorjs-content .tc-cell {
+  color: #f3edff;
+}
+
+.editorjs-content .tc-add-column,
+.editorjs-content .tc-add-row,
+.editorjs-content .tc-toolbox__toggler {
+  color: #d7c5ff;
+}
+
+.editorjs-content .tc-add-column svg {
+  background: transparent;
+}
+
+.editorjs-content .tc-toolbox__toggler {
+  opacity: 1;
+}
+
+.editorjs-content .tc-popover {
+  z-index: 20;
+  color: #161226;
+}
+
+.editorjs-content .tc-popover__item,
+.editorjs-content .tc-popover__item-label,
+.editorjs-content .ce-popover-item,
+.editorjs-content .ce-popover-item__title {
+  color: #161226;
+}
+
+.editorjs-content .ce-popover,
+.editorjs-content .ce-popover__container {
+  z-index: 20;
+}

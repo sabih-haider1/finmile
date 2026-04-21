@@ -64,6 +64,14 @@ export default async function ResourceDetailPage({ params }: Props) {
   const resolvedAuthor = getAuthorProfileByName(authorName);
   const authorDisplay = resolvedAuthor || authorName;
 
+  const sectionsPayload = (resource.sections && typeof resource.sections === 'object')
+    ? resource.sections as Partial<UnifiedContent>
+    : null;
+
+  const storedSections = Array.isArray(sectionsPayload?.sections)
+    ? sectionsPayload.sections
+    : [];
+
   const fallbackContent: UnifiedContent = {
     hero: {
       title: resource.title,
@@ -102,8 +110,25 @@ export default async function ResourceDetailPage({ params }: Props) {
     },
   };
 
-  const content = (resource.sections && typeof resource.sections === 'object')
-    ? (resource.sections as UnifiedContent)
+  const content: UnifiedContent = sectionsPayload
+    ? {
+        hero: {
+          ...(sectionsPayload.hero || {}),
+          title: sectionsPayload.hero?.title || resource.title,
+          image_url: sectionsPayload.hero?.image_url ?? resource.thumbnail_url,
+          description: resource.description,
+          metadata: {
+            ...(sectionsPayload.hero?.metadata || {}),
+            published_date: publishDate,
+            read_time: resource.file_type.toUpperCase(),
+            author: authorName,
+          },
+        },
+        sections: storedSections.length > 0 ? storedSections : fallbackContent.sections,
+        sidebar: {
+          related: sidebarRelated,
+        },
+      }
     : fallbackContent;
 
   return (
