@@ -7,7 +7,7 @@ import { generateSlug } from '@/lib/upload';
 export interface FormFieldConfig {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags' | 'date' | 'json';
+  type: 'text' | 'textarea' | 'richtext' | 'select' | 'toggle' | 'file' | 'tags' | 'date' | 'json' | 'editorjs-sections';
   required?: boolean;
   placeholder?: string;
   options?: { value: string; label: string }[];
@@ -74,7 +74,7 @@ export default function FormBuilder({
       const normalizedData = { ...formData };
 
       fields.forEach((field) => {
-        if (field.type !== 'json') {
+        if (field.type !== 'json' && field.type !== 'editorjs-sections') {
           return;
         }
 
@@ -169,6 +169,35 @@ export default function FormBuilder({
             onChange={(e) => handleChange(field.name, e.target.value)}
             className={`${inputClassName} font-mono text-sm`}
             placeholder={field.placeholder || '{\n  "hero": {},\n  "sections": []\n}'}
+            rows={12}
+            required={field.required}
+          />
+        );
+      }
+
+      case 'editorjs-sections': {
+        const formattedValue = (() => {
+          if (typeof value === 'string') {
+            return value;
+          }
+
+          if (value && typeof value === 'object') {
+            try {
+              return JSON.stringify(value, null, 2);
+            } catch {
+              return '';
+            }
+          }
+
+          return '';
+        })();
+
+        return (
+          <textarea
+            value={formattedValue}
+            onChange={(e) => handleChange(field.name, e.target.value)}
+            className={`${inputClassName} font-mono text-sm`}
+            placeholder={field.placeholder || '{\n  "sections": []\n}'}
             rows={12}
             required={field.required}
           />
