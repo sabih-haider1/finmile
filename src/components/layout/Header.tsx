@@ -14,7 +14,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
-    const WHITE_LOGO_SRC = "/assets/logos/logo-white.png?v=20260421";
+    const WHITE_LOGO_SRC = "/assets/logos/logo-white-v2.png";
 
     const isLight = theme === 'light';
 
