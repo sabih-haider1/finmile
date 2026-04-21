@@ -22,6 +22,18 @@ export default function ResourcesPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingResource, setEditingResource] = useState<Resource | null>(null);
 
+  const getAuthHeader = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.access_token) {
+      throw new Error('Your admin session has expired. Please log in again.');
+    }
+
+    return { Authorization: `Bearer ${session.access_token}` };
+  };
+
   const fetchResources = useCallback(async () => {
     setLoading(true);
     try {
@@ -61,8 +73,16 @@ export default function ResourcesPage() {
     }
 
     try {
-      const { error } = await supabase.from('resources').delete().eq('id', resource.id);
-      if (error) throw error;
+      const authHeader = await getAuthHeader();
+      const response = await fetch(`/api/resources/${resource.id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: authHeader,
+      });
+      const result = await response.json() as Record<string, unknown>;
+      if (!response.ok) {
+        throw new Error((result.error as string) || 'Failed to delete resource');
+      }
       alert('Resource deleted successfully!');
       fetchResources();
     } catch (error: unknown) {
@@ -72,8 +92,27 @@ export default function ResourcesPage() {
 
   const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
-      let fileUrl = formData.file_url;
-      let thumbnailUrl = formData.thumbnail_url;
+      const normalizeUrlValue = (value: unknown): string | null => {
+        if (typeof value === 'string') {
+          const trimmed = value.trim();
+          return trimmed.length > 0 ? trimmed : null;
+        }
+
+        if (value && typeof value === 'object') {
+          const candidateKeys = ['url', 'publicUrl', 'signedUrl', 'path', 'href'];
+          for (const key of candidateKeys) {
+            const candidate = (value as Record<string, unknown>)[key];
+            if (typeof candidate === 'string' && candidate.trim().length > 0) {
+              return candidate.trim();
+            }
+          }
+        }
+
+        return null;
+      };
+
+      let fileUrl = normalizeUrlValue(formData.file_url);
+      let thumbnailUrl = normalizeUrlValue(formData.thumbnail_url);
 
       // Upload file if provided
       if (files.file_url) {
@@ -82,7 +121,9 @@ export default function ResourcesPage() {
           folder: 'files',
           file: files.file_url,
         });
-        if (!fileUploadResult.success) throw new Error(fileUploadResult.error || 'Upload failed');
+        if (!fileUploadResult.success || !fileUploadResult.url) {
+          throw new Error(fileUploadResult.error || 'Failed to upload resource file.');
+        }
         fileUrl = fileUploadResult.url;
       }
 
@@ -93,8 +134,14 @@ export default function ResourcesPage() {
           folder: 'thumbnails',
           file: files.thumbnail_url,
         });
-        if (!thumbUploadResult.success) throw new Error(thumbUploadResult.error || 'Upload failed');
+        if (!thumbUploadResult.success || !thumbUploadResult.url) {
+          throw new Error(thumbUploadResult.error || 'Failed to upload thumbnail.');
+        }
         thumbnailUrl = thumbUploadResult.url;
+      }
+
+      if (!fileUrl) {
+        throw new Error('A valid resource file is required.');
       }
 
       const resourceData = {
@@ -112,24 +159,36 @@ export default function ResourcesPage() {
         // Update existing resource
         const updateData = { ...(resourceData as Record<string, unknown>) };
         delete updateData.id;
-        const { error } = await supabase
-          .from('resources')
-          .update({ ...updateData, updated_at: new Date().toISOString() })
-          .eq('id', editingResource.id);
-        if (error) throw error;
+        delete updateData.created_at;
+        delete updateData.updated_at;
+        const authHeader = await getAuthHeader();
+        const response = await fetch(`/api/resources/${editingResource.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(updateData),
+        });
+        const result = await response.json() as Record<string, unknown>;
+        if (!response.ok) {
+          throw new Error((result.error as string) || 'Failed to update resource');
+        }
         alert('Resource updated successfully!');
       } else {
         // Create new resource
-        const now = (resourceData.created_at as string) || new Date().toISOString();
         const insertData = { ...(resourceData as Record<string, unknown>) };
         delete insertData.id;
         delete insertData.updated_at;
-        const { error } = await supabase.from('resources').insert([{
-          ...insertData,
-          created_at: now,
-          updated_at: now,
-        }]);
-        if (error) throw error;
+        const authHeader = await getAuthHeader();
+        const response = await fetch('/api/resources', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeader },
+          credentials: 'include',
+          body: JSON.stringify(insertData),
+        });
+        const result = await response.json() as Record<string, unknown>;
+        if (!response.ok) {
+          throw new Error((result.error as string) || 'Failed to create resource');
+        }
         alert('Resource created successfully!');
       }
 
@@ -145,7 +204,7 @@ export default function ResourcesPage() {
     { name: 'title', label: 'Title', type: 'text', required: true, placeholder: 'Enter resource title' },
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'description', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief description...' },
-    { name: 'sections', label: 'Sections JSON', type: 'json', helpText: 'Optional unified template structure' },
+    { name: 'sections', label: 'Sections', type: 'editorjs-sections', helpText: 'Build content with structured blocks (no HTML/CSS)' },
     { name: 'file_url', label: 'File', type: 'file', required: true, accept: '.pdf,.docx,.xlsx,.zip', bucket: 'resources', folder: 'files' },
     {
       name: 'file_type',

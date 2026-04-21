@@ -118,6 +118,7 @@ export async function POST(request: NextRequest) {
     }
 
     const now = new Date().toISOString();
+    const createdAt = validatedData.created_at || now;
     const resourceData = {
       title: validatedData.title,
       slug: validatedData.slug,
@@ -130,7 +131,7 @@ export async function POST(request: NextRequest) {
       is_featured: validatedData.is_featured || false,
       is_published: validatedData.is_published ?? true,
       sections: validatedData.sections || null,
-      created_at: now,
+      created_at: createdAt,
       updated_at: now,
     };
 

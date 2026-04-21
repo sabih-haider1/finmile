@@ -39,6 +39,84 @@ const slugPattern = z.string().min(1).max(200).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$
   message: 'Slug must contain only lowercase letters, numbers, and hyphens',
 });
 
+const editorJsHeaderBlockSchema = z.object({
+  id: z.string().optional(),
+  type: z.literal('header'),
+  data: z.object({
+    text: z.string(),
+    level: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]),
+  }),
+});
+
+const editorJsParagraphBlockSchema = z.object({
+  id: z.string().optional(),
+  type: z.literal('paragraph'),
+  data: z.object({
+    text: z.string(),
+  }),
+});
+
+const editorJsListBlockSchema = z.object({
+  id: z.string().optional(),
+  type: z.literal('list'),
+  data: z.object({
+    style: z.union([z.literal('ordered'), z.literal('unordered')]),
+    items: z.array(z.string()),
+  }),
+});
+
+const editorJsTableBlockSchema = z.object({
+  id: z.string().optional(),
+  type: z.literal('table'),
+  data: z.object({
+    withHeadings: z.boolean().optional(),
+    content: z.array(z.array(z.string())),
+  }),
+});
+
+const editorJsQuoteBlockSchema = z.object({
+  id: z.string().optional(),
+  type: z.literal('quote'),
+  data: z.object({
+    text: z.string(),
+    caption: z.string().optional(),
+    alignment: z.union([z.literal('left'), z.literal('center')]).optional(),
+  }),
+});
+
+const editorJsImageBlockSchema = z.object({
+  id: z.string().optional(),
+  type: z.literal('image'),
+  data: z.object({
+    file: z.object({
+      url: z.string().url(),
+    }),
+    caption: z.string().optional(),
+    withBorder: z.boolean().optional(),
+    withBackground: z.boolean().optional(),
+    stretched: z.boolean().optional(),
+  }),
+});
+
+const editorJsBlockSchema = z.discriminatedUnion('type', [
+  editorJsHeaderBlockSchema,
+  editorJsParagraphBlockSchema,
+  editorJsListBlockSchema,
+  editorJsTableBlockSchema,
+  editorJsQuoteBlockSchema,
+  editorJsImageBlockSchema,
+]);
+
+const editorJsSectionSchema = z.object({
+  id: z.string().min(1),
+  type: z.literal('editorjs'),
+  blocks: z.array(editorJsBlockSchema),
+});
+
+export const editorSectionsSchema = z.object({
+  sections: z.array(editorJsSectionSchema),
+});
+
 // Blog validation schema
 export const blogSchema = z.object({
   title: z.string().min(1, 'Title is required').max(500),
@@ -54,7 +132,7 @@ export const blogSchema = z.object({
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
   published_at: z.string().datetime().optional().nullable(),
-  sections: z.any().optional().nullable(),
+  sections: editorSectionsSchema.optional().nullable(),
 });
 
 export const blogUpdateSchema = blogSchema.partial().extend({
@@ -79,7 +157,7 @@ export const caseStudySchema = z.object({
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
   published_at: z.string().datetime().optional().nullable(),
-  sections: z.any().optional().nullable(),
+  sections: editorSectionsSchema.optional().nullable(),
 });
 
 export const caseStudyUpdateSchema = caseStudySchema.partial().extend({
@@ -107,7 +185,7 @@ export const whitepaperSchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
-  sections: z.any().optional().nullable(),
+  sections: editorSectionsSchema.optional().nullable(),
 });
 
 export const whitepaperUpdateSchema = whitepaperSchema.partial().extend({
@@ -124,7 +202,10 @@ export const resourceSchema = z.object({
   title: z.string().min(1, 'Title is required').max(500),
   slug: slugPattern,
   description: z.string().max(2000).optional(),
-  file_url: z.string().url('Valid file URL is required'),
+  file_url: z.preprocess(
+    coerceUrlInput,
+    z.string().url('Valid file URL is required')
+  ),
   file_type: z.enum(allowedFileTypes as [string, ...string[]], {
     message: `File type must be one of: ${allowedFileTypes.join(', ')}`,
   }),
@@ -135,7 +216,8 @@ export const resourceSchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
-  sections: z.any().optional().nullable(),
+  created_at: z.string().datetime().optional(),
+  sections: editorSectionsSchema.optional().nullable(),
 });
 
 export const resourceUpdateSchema = resourceSchema.partial().extend({
@@ -151,7 +233,7 @@ export const guideSchema = z.object({
   description: z.string().max(2000).optional(),
   pdf_url: z.string().url('Valid PDF URL is required'),
   cover_image_url: urlPattern,
-  sections: z.any().optional().nullable(),
+  sections: editorSectionsSchema.optional().nullable(),
 });
 
 export const guideUpdateSchema = guideSchema.partial().extend({
