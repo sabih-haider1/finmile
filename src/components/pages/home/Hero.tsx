@@ -43,7 +43,7 @@ export const Hero = () => {
 
         {/* Sub-headline */}
         <motion.p
-          className="text-[#9CA3AF] text-[clamp(15px,1.5vw,20px)] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mb-[clamp(24px,4vw,48px)]"
+          className="text-[#9CA3AF] text-[clamp(13px,1.3vw,18px)] font-normal w-full max-w-[760px] leading-relaxed mx-auto px-4 mb-[clamp(24px,4vw,48px)]"
           variants={fadeInUp}
         >
           Finmile AI automates delivery operations end to end, using agentic AI to optimise multi drop routes in
@@ -74,7 +74,7 @@ export const Hero = () => {
 
       {/* Dashboard Mockup Image */}
       <motion.div
-        className="relative z-10 mt-[clamp(48px,8vw,96px)] w-full max-w-[1200px] mx-auto px-2 md:px-8 mb-[clamp(-68px,-5vw,-58px)]"
+        className="relative z-10 mt-[clamp(42px,7.6vw,94px)] w-full max-w-[1200px] mx-auto px-2 md:px-8 mb-[clamp(-68px,-5vw,-58px)]"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
