@@ -14,6 +14,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
+    const WHITE_LOGO_SRC = "/assets/logos/logo-white.png?v=20260421";
 
     const isLight = theme === 'light';
 
@@ -141,11 +142,12 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                     className={`relative z-[110] flex shrink-0 transition-all duration-300 self-center translate-y-[2px] cursor-pointer left-[-38px] md:left-0 ${isMobileMenuOpen ? 'xl:opacity-100 opacity-0' : 'opacity-100'}`}
                 >
                     <Image
-                        src={isLight ? "/assets/logos/logo-blue.png" : "/assets/logos/logo-white.png"}
+                        src={isLight ? "/assets/logos/logo-blue.png" : WHITE_LOGO_SRC}
                         alt="Finmile Logo"
                         width={224}
                         height={56}
                         sizes="(max-width: 768px) 140px, 224px"
+                        quality={100}
                         priority
                         className="mt-1 h-10 md:h-12 lg:h-14 object-contain drop-shadow-lg align-middle"
                     />
