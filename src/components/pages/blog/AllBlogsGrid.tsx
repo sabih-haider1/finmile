@@ -120,6 +120,12 @@ export function AllBlogsGrid() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'featured'>('newest');
+  const PAGE_SIZE = 12;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedTopic, selectedIndustry, sortBy]);
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -200,6 +206,14 @@ export function AllBlogsGrid() {
     setFilteredBlogs(filtered);
   }, [blogs, searchQuery, selectedTopic, selectedIndustry, sortBy]);
 
+  const totalPages = Math.max(1, Math.ceil(filteredBlogs.length / PAGE_SIZE));
+  const pagedBlogs = filteredBlogs.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const firstItemIndex = filteredBlogs.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const lastItemIndex = Math.min(currentPage * PAGE_SIZE, filteredBlogs.length);
+  const visiblePageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1).filter((page) => {
+    return page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1;
+  });
+
   return (
     <div className="bg-white">
       <BlogSearchBar
@@ -218,6 +232,11 @@ export function AllBlogsGrid() {
             <h2 className="text-2xl md:text-3xl font-semibold text-[#2F1C8C] text-balance">
               All Blog Posts
             </h2>
+            {!loading && filteredBlogs.length > 0 && (
+              <p className="text-sm text-gray-500">
+                Showing {firstItemIndex}-{lastItemIndex} of {filteredBlogs.length}
+              </p>
+            )}
           </div>
 
           {loading && (
@@ -241,11 +260,53 @@ export function AllBlogsGrid() {
           )}
 
           {!loading && filteredBlogs.length > 0 && (
-            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredBlogs.map((blog) => (
-                <BlogCard key={blog.id} blog={blog} />
-              ))}
-            </div>
+            <>
+              <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                {pagedBlogs.map((blog) => (
+                  <BlogCard key={blog.id} blog={blog} />
+                ))}
+              </div>
+
+              {totalPages > 1 && (
+                <div className="mt-10 flex items-center justify-center gap-2 flex-wrap">
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className="h-10 px-4 rounded-full border border-gray-300 text-sm text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed hover:border-[#2F1C8C]"
+                  >
+                    Previous
+                  </button>
+
+                  {visiblePageNumbers.map((page, index) => {
+                    const showEllipsis = index > 0 && page - visiblePageNumbers[index - 1] > 1;
+
+                    return (
+                      <div key={page} className="flex items-center gap-2">
+                        {showEllipsis && <span className="text-gray-400">...</span>}
+                        <button
+                          onClick={() => setCurrentPage(page)}
+                          className={`h-10 w-10 rounded-full text-sm border transition-colors ${
+                            currentPage === page
+                              ? 'bg-[#2F1C8C] border-[#2F1C8C] text-white'
+                              : 'border-gray-300 text-gray-700 hover:border-[#2F1C8C]'
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      </div>
+                    );
+                  })}
+
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className="h-10 px-4 rounded-full border border-gray-300 text-sm text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed hover:border-[#2F1C8C]"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
