@@ -25,6 +25,7 @@ interface Blog {
 
 function BlogCard({ blog }: { blog: Blog }) {
   const [imageError, setImageError] = useState(false);
+  const isExternalImage = /^https?:\/\//i.test(blog.cover_image_url || '');
 
   return (
     <div className="bg-white rounded-2xl shadow-sm shadow-gray-200/60 hover:shadow-xl hover:shadow-indigo-100/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
@@ -34,6 +35,7 @@ function BlogCard({ blog }: { blog: Blog }) {
             src={blog.cover_image_url}
             alt={blog.title}
             fill
+            unoptimized={isExternalImage}
             className="object-cover rounded-[16px]"
             onError={() => setImageError(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
