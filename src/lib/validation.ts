@@ -117,6 +117,24 @@ export const editorSectionsSchema = z.object({
   sections: z.array(editorJsSectionSchema),
 });
 
+const legacyContentSectionSchema = z.object({
+  id: z.string().min(1),
+  type: z.union([
+    z.literal('content'),
+    z.literal('custom'),
+    z.literal('cta'),
+    z.literal('features'),
+    z.literal('comparison'),
+  ]),
+  data: z.record(z.string(), z.unknown()),
+});
+
+export const legacySectionsSchema = z.object({
+  sections: z.array(legacyContentSectionSchema),
+});
+
+const whitepaperSectionsSchema = z.union([editorSectionsSchema, legacySectionsSchema]);
+
 // Blog validation schema
 export const blogSchema = z.object({
   title: z.string().min(1, 'Title is required').max(500),
@@ -185,7 +203,7 @@ export const whitepaperSchema = z.object({
   tags: z.array(z.string()).optional().nullable(),
   is_featured: z.boolean().optional(),
   is_published: z.boolean().optional(),
-  sections: editorSectionsSchema.optional().nullable(),
+  sections: whitepaperSectionsSchema.optional().nullable(),
 });
 
 export const whitepaperUpdateSchema = whitepaperSchema.partial().extend({
