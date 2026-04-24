@@ -113,7 +113,7 @@ export const Footer = () => {
                     <span className="hidden md:block">|</span>
                     <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
                     <span className="hidden md:block">|</span>
-                    <Link href="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
+                    <Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link>
                 </div>
             </div>
         </footer>
