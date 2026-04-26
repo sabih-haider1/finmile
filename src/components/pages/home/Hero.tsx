@@ -73,13 +73,8 @@ export const Hero = () => {
       </motion.div>
 
       {/* Dashboard Mockup Image */}
-      <motion.div
+      <div
         className="relative z-10 mt-[clamp(42px,7.6vw,94px)] w-full max-w-[1200px] mx-auto px-2 md:px-8 mb-[clamp(-68px,-5vw,-58px)]"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        viewport={{ once: true, amount: 0.3 }}
-        whileTap={{ scale: 0.995 }}
       >
         <Image
           src="/assets/images/hero-dashboard.webp"
@@ -88,11 +83,10 @@ export const Hero = () => {
           height={597}
           priority
           fetchPriority="high"
-          quality={100}
           className="w-full h-auto object-contain"
-          sizes="(max-width: 1234px) 100vw, 1234px"
+          sizes="(max-width: 768px) calc(100vw - 16px), (max-width: 1280px) calc(100vw - 64px), 1234px"
         />
-      </motion.div>
+      </div>
 
     </section>
   );
