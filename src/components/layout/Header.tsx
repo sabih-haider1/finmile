@@ -147,7 +147,6 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                         width={224}
                         height={56}
                         sizes="(max-width: 768px) 140px, 224px"
-                        priority
                         className={`w-auto object-contain drop-shadow-lg ${isLight ? 'h-9 md:h-10 lg:h-12' : 'h-8 md:h-9 lg:h-10'}`}
                     />
                 </Link>
