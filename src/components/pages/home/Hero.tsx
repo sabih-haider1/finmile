@@ -82,15 +82,15 @@ export const Hero = () => {
         whileTap={{ scale: 0.995 }}
       >
         <Image
-          src="/assets/images/hero-dashboard.png"
+          src="/assets/images/hero-dashboard.webp"
           alt="Finmile Dashboard"
-          width={1200}
-          height={750}
+          width={1234}
+          height={597}
           priority
           fetchPriority="high"
           quality={100}
           className="w-full h-auto object-contain"
-          sizes="(max-width: 1200px) 100vw, 1200px"
+          sizes="(max-width: 1234px) 100vw, 1234px"
         />
       </motion.div>
 
