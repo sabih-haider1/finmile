@@ -84,7 +84,7 @@ export const Hero = () => {
           priority
           fetchPriority="high"
           className="w-full h-auto object-contain"
-          sizes="(max-width: 768px) 94vw, (max-width: 1280px) 92vw, 1234px"
+          sizes="(max-width: 768px) calc(100vw - 16px), (max-width: 1280px) calc(100vw - 64px), 1234px"
         />
       </div>
 
