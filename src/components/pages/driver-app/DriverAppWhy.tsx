@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Target, CheckCircle2, Zap, Cpu } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const DriverAppWhy = () => {
     return (

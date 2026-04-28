@@ -3,9 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Target, Cpu, Users, BarChart } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const MeetTheSuite = () => {
     // Determine which tab is active (0 to 3)

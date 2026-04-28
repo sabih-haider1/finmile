@@ -1,8 +1,6 @@
 import React from 'react';
 import { Bot } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const DeliverySoftwareTestimonials = () => {
     // Extracted data from the screenshot for "Results That Speak for Themselves"

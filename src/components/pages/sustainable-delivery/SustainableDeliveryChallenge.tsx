@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { CheckCircle2 } from 'lucide-react';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const SustainableDeliveryChallenge = () => {
     return (

@@ -1,8 +1,6 @@
 import React from 'react';
 import { TrendingDown, AlertTriangle, MapPin, Clock, Users } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const OptimizationPainPoints = () => {
     const features = [

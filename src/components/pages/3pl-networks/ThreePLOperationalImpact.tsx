@@ -2,9 +2,7 @@
 
 import React from 'react';
 import { Quote } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const ThreePLOperationalImpact = () => {
     return (

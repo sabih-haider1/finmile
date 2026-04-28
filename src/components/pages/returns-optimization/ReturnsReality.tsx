@@ -1,8 +1,6 @@
 import React from 'react';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { TrendingDown, AlertTriangle, MapPin, Clock } from 'lucide-react';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 const realityItems = [
     {

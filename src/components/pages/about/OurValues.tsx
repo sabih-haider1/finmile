@@ -1,10 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { GlassButton } from '../../ui/glass-button';
 import { FrostedGlassCard } from '../../ui/interactive-frosted-glass-card';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OurValues = () => {
     return (

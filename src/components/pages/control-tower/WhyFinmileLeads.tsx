@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Share2, X, AlertTriangle, CheckSquare } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const WhyFinmileLeads = () => {
     const rows = [

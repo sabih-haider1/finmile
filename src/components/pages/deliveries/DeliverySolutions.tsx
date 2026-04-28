@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Target, Users, Factory, Map, Activity, Layers } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const DeliverySolutions = () => {
     // Determine which tab is active (0 to 5) - default to B2C (1)

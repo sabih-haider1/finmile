@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { GlassButton } from '../../ui/glass-button';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const OurOrigin = () => {
     return (

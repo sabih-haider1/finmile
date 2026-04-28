@@ -1,8 +1,6 @@
 import React from 'react';
 import { Share2, Navigation, Zap, ShieldCheck, BarChart2 } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const HowItWorks = () => {
     return (

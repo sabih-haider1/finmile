@@ -1,9 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 interface StatItem {
     label: string;

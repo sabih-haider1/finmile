@@ -1,8 +1,6 @@
 import React from 'react';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { Database, Cpu, Navigation, CheckCircle, TrendingUp } from 'lucide-react';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 const processItems = [
     {

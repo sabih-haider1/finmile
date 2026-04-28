@@ -2,11 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Linkedin } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { Button } from '../ui/Button';
 
 const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const Footer = () => {
     return (

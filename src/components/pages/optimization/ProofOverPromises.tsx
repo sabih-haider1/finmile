@@ -2,9 +2,7 @@
 
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 const RouteCalculatorPopup = dynamic(
     () => import('../../shared/RouteCalculatorPopup').then((mod) => mod.RouteCalculatorPopup),
     { ssr: false }

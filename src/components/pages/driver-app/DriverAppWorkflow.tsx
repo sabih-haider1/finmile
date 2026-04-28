@@ -1,8 +1,6 @@
 import React from 'react';
 import { Layers, Camera, Cpu, Database, BarChart2 } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const DriverAppWorkflow = () => {
     const steps = [

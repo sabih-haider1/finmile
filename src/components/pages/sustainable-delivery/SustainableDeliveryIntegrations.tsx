@@ -2,10 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { Battery, Bike, Fuel, BarChart3 } from 'lucide-react';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const SustainableDeliveryIntegrations = () => {
     const integrations = [

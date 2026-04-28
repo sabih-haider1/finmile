@@ -1,8 +1,6 @@
 import React from 'react';
 import { Truck, HeadphonesIcon, LineChart } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const WhatDeliveriesMean = () => {
     return (

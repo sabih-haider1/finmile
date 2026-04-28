@@ -1,9 +1,7 @@
 import React from 'react';
 import { Settings } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import Image from 'next/image';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const DspsWhyChoose = () => {
     const tableData = [

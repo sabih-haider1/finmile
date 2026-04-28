@@ -7,9 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Mail, Loader2, CheckCircle2, Package } from 'lucide-react';
 import { contactFormSchema, ContactFormData } from '../../lib/validation';
 import { Button } from '../ui/Button';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const ContactForm = () => {
 

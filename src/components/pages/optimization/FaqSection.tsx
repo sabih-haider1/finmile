@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const FaqSection = () => {
     // State to track which FAQ is currently open (defaulting to the second one to match your image)

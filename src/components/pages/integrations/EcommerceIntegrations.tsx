@@ -2,11 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const EcommerceIntegrations = () => {
     const integrations = [

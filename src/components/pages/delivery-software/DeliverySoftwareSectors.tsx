@@ -3,9 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ShoppingBag, Truck, Activity, Coffee, Zap } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const DeliverySoftwareSectors = () => {
     // Default to Automotive Parts & Vehicle Towing Logistics for the new client request

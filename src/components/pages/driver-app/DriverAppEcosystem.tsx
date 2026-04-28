@@ -1,9 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Zap, RefreshCw, Map } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const DriverAppEcosystem = () => {
     const features = [

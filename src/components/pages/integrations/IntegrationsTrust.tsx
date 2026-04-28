@@ -1,10 +1,8 @@
 "use client";
 
 import React from 'react';
-import { Montserrat } from 'next/font/google';
+import { montserrat } from '@/lib/fonts';
 import { Lock, Cloud, Activity } from 'lucide-react';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const IntegrationsTrust = () => {
     const trustPoints = [

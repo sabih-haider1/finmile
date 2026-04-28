@@ -3,9 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Leaf } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const ThreePLSustainability = () => {
     return (

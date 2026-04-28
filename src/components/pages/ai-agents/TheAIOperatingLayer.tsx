@@ -1,8 +1,6 @@
 import React from 'react';
 import { Eye, TrendingUp, Cpu, Zap } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { montserrat } from '@/lib/fonts';
 
 export const TheAIOperatingLayer = () => {
     return (
