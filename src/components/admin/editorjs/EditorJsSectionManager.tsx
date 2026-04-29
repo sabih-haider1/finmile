@@ -17,6 +17,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { EditorJsBlock, EditorJsSection, EditorJsSections } from '@/types/content';
 import { isValidUrl } from '@/lib/security';
+import SimpleTableTool from './SimpleTableTool';
 
 interface EditorJsSectionManagerProps {
   value?: EditorJsSections | null;
@@ -45,7 +46,6 @@ type EditorJsTools = {
   Header: any;
   List: any;
   Table: any;
-  Quote: any;
   ImageTool: any;
 };
 
@@ -152,12 +152,10 @@ function EditorJsSectionEditor({
         return;
       }
 
-      const [editorModule, headerModule, listModule, tableModule, quoteModule, imageModule] = await Promise.all([
+      const [editorModule, headerModule, listModule, imageModule] = await Promise.all([
         import('@editorjs/editorjs'),
         import('@editorjs/header'),
         import('@editorjs/list'),
-        import('@editorjs/table'),
-        import('@editorjs/quote'),
         import('@editorjs/image'),
       ]);
 
@@ -169,8 +167,7 @@ function EditorJsSectionEditor({
         EditorJS: editorModule.default,
         Header: headerModule.default,
         List: listModule.default,
-        Table: tableModule.default,
-        Quote: quoteModule.default,
+        Table: SimpleTableTool,
         ImageTool: imageModule.default,
       };
       setToolsReady(true);
@@ -194,7 +191,9 @@ function EditorJsSectionEditor({
     const editor = new toolsRef.current.EditorJS({
       holder: holderRef.current,
       data: { blocks: bodyBlocks || [] },
+      defaultBlock: 'paragraph',
       inlineToolbar: false,
+      minHeight: 0,
       tools: {
         header: {
           class: toolsRef.current.Header,
@@ -209,10 +208,6 @@ function EditorJsSectionEditor({
         },
         table: {
           class: toolsRef.current.Table,
-          inlineToolbar: false,
-        },
-        quote: {
-          class: toolsRef.current.Quote,
           inlineToolbar: false,
         },
         image: {
@@ -333,13 +328,13 @@ function SortableSectionCard({
     <div
       ref={setNodeRef}
       style={style}
-      className={`rounded-2xl border border-white/15 bg-white/5 p-4 space-y-3 ${isDragging ? 'shadow-2xl' : ''}`}
+      className={`mx-auto w-full max-w-[820px] space-y-5 rounded-3xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_20px_60px_rgba(3,7,18,0.24)] backdrop-blur-sm ${isDragging ? 'shadow-2xl' : ''}`}
     >
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div className="flex items-center gap-3">
           <button
             type="button"
-            className="cursor-grab rounded-lg border border-white/10 px-2 py-1 text-[10px] uppercase font-bold tracking-wider text-white/50 hover:text-white transition-colors"
+            className="cursor-grab rounded-full border border-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-white"
             {...attributes}
             {...listeners}
           >
@@ -350,24 +345,24 @@ function SortableSectionCard({
         <button
           type="button"
           onClick={() => onDelete(section.id)}
-          className="text-xs text-red-300 hover:text-red-200"
+          className="rounded-full border border-red-400/20 bg-red-400/10 px-3 py-1.5 text-xs font-semibold text-red-200 hover:bg-red-400/20"
         >
           Delete
         </button>
       </div>
 
-      <div className="grid grid-cols-[120px_1fr] gap-4 items-center">
-        <label className="text-[11px] font-bold text-white/50 uppercase tracking-wider">Section title</label>
+      <div className="space-y-2">
+        <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">Section title</label>
         <input
           type="text"
           value={titleValue}
           onChange={(event) => onUpdateTitle(section.id, event.target.value)}
           placeholder="Enter section title"
-          className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[#6A27D4] transition-all"
+          className="w-full rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-base text-white placeholder-white/25 outline-none transition focus:border-white/20 focus:ring-2 focus:ring-[#6A27D4]/40"
         />
       </div>
 
-      <div className="rounded-xl border border-white/5 bg-[#080410] px-3 py-2">
+      <div className="rounded-2xl border border-white/10 bg-[#080410] px-4 py-4">
         <EditorJsSectionEditor section={section} onUpdateBlocks={onUpdateBlocks} />
       </div>
     </div>
@@ -376,20 +371,26 @@ function SortableSectionCard({
 
 export default function EditorJsSectionManager({ value, onChange }: EditorJsSectionManagerProps) {
   const [sections, setSections] = useState<EditorJsSection[]>([]);
+  const sectionsRef = useRef<EditorJsSection[]>([]);
   const sensors = useSensors(useSensor(PointerSensor));
 
   useEffect(() => {
     if (value?.sections) {
-      setSections(value.sections.map((section) => ({
+      const nextSections = value.sections.map((section) => ({
         ...section,
         blocks: normalizeBlocks(section.blocks || []),
-      })));
+      }));
+
+      sectionsRef.current = nextSections;
+      setSections(nextSections);
     } else {
+      sectionsRef.current = [];
       setSections([]);
     }
   }, [value]);
 
   const updateSections = useCallback((nextSections: EditorJsSection[]) => {
+    sectionsRef.current = nextSections;
     setSections(nextSections);
     onChange({ sections: nextSections });
   }, [onChange]);
@@ -409,34 +410,25 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
       return;
     }
 
-    setSections((prev) => {
-      const next = prev.filter((s) => s.id !== id);
-      onChange({ sections: next });
-      return next;
-    });
+    const next = sectionsRef.current.filter((s) => s.id !== id);
+    updateSections(next);
   }, [onChange]);
 
   const handleUpdateBlocks = useCallback((id: string, blocks: EditorJsBlock[]) => {
-    setSections((prev) => {
-      const next = prev.map((s) =>
-        s.id === id ? { ...s, blocks: normalizeBlocks(blocks) } : s
-      );
-      onChange({ sections: next });
-      return next;
-    });
-  }, [onChange]);
+    const next = sectionsRef.current.map((s) =>
+      s.id === id ? { ...s, blocks: normalizeBlocks(blocks) } : s
+    );
+    updateSections(next);
+  }, [updateSections]);
 
   const handleUpdateTitle = useCallback((id: string, title: string) => {
-    setSections((prev) => {
-      const next = prev.map((s) =>
-        s.id === id
-          ? { ...s, blocks: applyTitleToBlocks(s.blocks || [], title, s.id) }
-          : s
-      );
-      onChange({ sections: next });
-      return next;
-    });
-  }, [onChange]);
+    const next = sectionsRef.current.map((s) =>
+      s.id === id
+        ? { ...s, blocks: applyTitleToBlocks(s.blocks || [], title, s.id) }
+        : s
+    );
+    updateSections(next);
+  }, [updateSections]);
 
   const handleDragEnd = useCallback((event: any) => {
     if (!event.over || event.active.id === event.over.id) {
@@ -446,44 +438,42 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
     const oldId = String(event.active.id);
     const newId = String(event.over.id);
 
-    setSections((prev) => {
-      const oldIndex = prev.findIndex((s) => s.id === oldId);
-      const newIndex = prev.findIndex((s) => s.id === newId);
-      
-      if (oldIndex === -1 || newIndex === -1) {
-        return prev;
-      }
+    const current = sectionsRef.current;
+    const oldIndex = current.findIndex((s) => s.id === oldId);
+    const newIndex = current.findIndex((s) => s.id === newId);
 
-      const next = arrayMove(prev, oldIndex, newIndex);
-      onChange({ sections: next });
-      return next;
-    });
-  }, [onChange]);
+    if (oldIndex === -1 || newIndex === -1) {
+      return;
+    }
+
+    const next = arrayMove(current, oldIndex, newIndex);
+    updateSections(next);
+  }, [updateSections]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-8">
+      <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-5 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-sm text-white/70">Build structured sections using the block editor.</p>
-          <p className="text-xs text-white/40">Only predefined blocks are allowed. No HTML or CSS.</p>
+          <p className="text-sm font-medium text-white/80">Build structured sections using the block editor.</p>
+          <p className="text-xs text-white/45">Only predefined blocks are allowed. No HTML or CSS.</p>
         </div>
         <button
           type="button"
           onClick={handleAddSection}
-          className="rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/20"
+          className="rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-[#0B0616] transition hover:bg-white/90"
         >
           Add section
         </button>
       </div>
 
       {sections.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-white/20 p-6 text-sm text-white/50">
+        <div className="rounded-3xl border border-dashed border-white/20 bg-white/[0.02] p-6 text-sm text-white/50">
           No sections yet. Click "Add section" to start.
         </div>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={sections.map((section) => section.id)} strategy={verticalListSortingStrategy}>
-            <div className="space-y-4">
+            <div className="space-y-5">
               {sections.map((section, index) => (
                 <SortableSectionCard
                   key={section.id}
