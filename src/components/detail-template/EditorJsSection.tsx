@@ -7,20 +7,22 @@ interface EditorJsSectionProps {
   className?: string;
 }
 
+const wrapperClassName = 'mx-auto w-full max-w-[820px] rounded-3xl border border-[#E6D9FF] bg-white px-6 py-6 shadow-[0_10px_32px_rgba(106,39,212,0.08)] md:px-8 md:py-8';
+
+const headingClassNames = {
+  1: 'mb-4 text-4xl font-bold leading-[1.08] tracking-tight text-[#111827] md:text-5xl',
+  2: 'mb-4 text-3xl font-bold leading-[1.1] tracking-tight text-[#111827] md:text-4xl',
+  3: 'mb-3 text-2xl font-semibold leading-[1.15] tracking-tight text-[#111827] md:text-3xl',
+  4: 'mb-3 text-xl font-semibold leading-[1.2] tracking-tight text-[#111827] md:text-2xl',
+} as const;
+
 function HeadingBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'header' }>; index: number }) {
   const text = block.data.text || '';
   if (!text) return null;
 
   const level = block.data.level || 2;
   const Tag = level === 1 ? 'h1' : level === 2 ? 'h2' : level === 3 ? 'h3' : 'h4';
-  const className =
-    level === 1
-      ? 'text-3xl md:text-4xl font-bold tracking-tight text-slate-900'
-      : level === 2
-        ? 'text-2xl md:text-3xl font-bold tracking-tight text-slate-900'
-        : level === 3
-          ? 'text-xl md:text-2xl font-semibold text-slate-900'
-          : 'text-lg md:text-xl font-semibold text-slate-900';
+  const className = headingClassNames[level as 1 | 2 | 3 | 4] || headingClassNames[2];
 
   return <Tag key={`header-${index}`} className={className} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }} />;
 }
@@ -29,7 +31,13 @@ function ParagraphBlock({ block, index }: { block: Extract<EditorJsBlock, { type
   const text = block.data.text || '';
   if (!text) return null;
 
-  return <p key={`paragraph-${index}`} className="text-[16px] leading-7 text-slate-700" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }} />;
+  return (
+    <p
+      key={`paragraph-${index}`}
+      className="text-[16px] leading-7 text-[#4b5563]"
+      dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }}
+    />
+  );
 }
 
 function ListBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'list' }>; index: number }) {
@@ -49,7 +57,11 @@ function ListBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'li
   return (
     <ListTag
       key={`list-${index}`}
-      className={block.data.style === 'ordered' ? 'list-decimal space-y-3 pl-6 text-slate-700' : 'list-disc space-y-3 pl-6 text-slate-700'}
+      className={
+        block.data.style === 'ordered'
+          ? 'list-decimal space-y-3 pl-6 text-[#4b5563] marker:text-[#3a1d9e]'
+          : 'list-disc space-y-3 pl-6 text-[#4b5563] marker:text-[#3a1d9e]'
+      }
     >
       {items.map((item, itemIndex) => (
         <li key={`list-${index}-${itemIndex}`} className="pl-1 leading-7" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(item) }} />
@@ -66,15 +78,15 @@ function TableBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 't
   const showHeadings = block.data.withHeadings && headRow;
 
   return (
-    <div key={`table-${index}`} className="my-8 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-      <table className="w-full border-collapse text-left text-sm text-slate-700">
+    <div key={`table-${index}`} className="my-8 overflow-x-auto rounded-3xl border border-[#E6D9FF] bg-[#FCFBFF] shadow-[0_10px_32px_rgba(106,39,212,0.08)]">
+      <table className="w-full border-collapse text-left text-sm text-[#4b5563]">
         {showHeadings && (
-          <thead className="bg-slate-50">
+          <thead className="bg-[#F5F0FF]">
             <tr>
               {headRow.map((cell, cellIndex) => (
                 <th
                   key={`table-head-${index}-${cellIndex}`}
-                  className="border-b border-slate-200 px-4 py-3 font-semibold text-slate-900"
+                  className="border-b border-[#E6D9FF] px-4 py-3 font-semibold text-[#111827]"
                   dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(cell || '') }}
                 />
               ))}
@@ -83,11 +95,11 @@ function TableBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 't
         )}
         <tbody>
           {(showHeadings ? bodyRows : rows).map((row, rowIndex) => (
-            <tr key={`table-row-${index}-${rowIndex}`} className="border-b border-slate-200 even:bg-slate-50/70 last:border-b-0">
+            <tr key={`table-row-${index}-${rowIndex}`} className="border-b border-[#EEE7FF] even:bg-white last:border-b-0">
               {row.map((cell, cellIndex) => (
                 <td
                   key={`table-cell-${index}-${rowIndex}-${cellIndex}`}
-                  className="border-r border-slate-200 px-4 py-3 align-top last:border-r-0"
+                  className="border-r border-[#EEE7FF] px-4 py-3 align-top last:border-r-0"
                   dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(cell || '') }}
                 />
               ))}
@@ -107,10 +119,13 @@ function QuoteBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'q
   const alignment = block.data.alignment === 'center' ? 'text-center' : 'text-left';
 
   return (
-    <figure key={`quote-${index}`} className={`my-8 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 ${alignment}`}>
-      <blockquote className="text-[17px] leading-8 text-slate-800 italic" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }} />
+    <figure key={`quote-${index}`} className={`my-8 rounded-3xl border border-[#E6D9FF] bg-[#FBF8FF] px-5 py-5 ${alignment}`}>
+      <blockquote
+        className="text-[17px] leading-8 text-[#111827] italic"
+        dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }}
+      />
       {caption && (
-        <figcaption className="mt-3 text-sm font-semibold text-slate-600" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }} />
+        <figcaption className="mt-3 text-sm font-semibold text-[#4b5563]" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }} />
       )}
     </figure>
   );
@@ -130,9 +145,9 @@ function ImageBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'i
         width={1200}
         height={800}
         sizes="100vw"
-        className="block h-auto w-full rounded-2xl border border-slate-200 shadow-sm"
+        className="block h-auto w-full rounded-3xl border border-[#E6D9FF] shadow-[0_10px_32px_rgba(106,39,212,0.08)]"
       />
-      {caption && <figcaption className="text-center text-sm text-slate-500" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }} />}
+      {caption && <figcaption className="text-center text-sm text-[#6b7280]" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }} />}
     </figure>
   );
 }
@@ -162,7 +177,7 @@ export function EditorJsSection({ section, className = '' }: EditorJsSectionProp
   }
 
   return (
-    <div className={`mx-auto w-full max-w-[780px] space-y-8 ${className}`}>
+    <div className={`${wrapperClassName} space-y-8 ${className}`}>
       {section.blocks.map((block, index) => renderBlock(block, index))}
     </div>
   );
