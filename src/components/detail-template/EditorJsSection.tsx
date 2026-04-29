@@ -10,10 +10,10 @@ interface EditorJsSectionProps {
 const wrapperClassName = 'mx-auto w-full max-w-[820px] rounded-3xl border border-[#E6D9FF] bg-white px-6 py-6 shadow-[0_10px_32px_rgba(106,39,212,0.08)] md:px-8 md:py-8';
 
 const headingClassNames = {
-  1: 'mb-4 text-4xl font-bold leading-[1.08] tracking-tight text-[#111827] md:text-5xl',
-  2: 'mb-4 text-3xl font-bold leading-[1.1] tracking-tight text-[#111827] md:text-4xl',
-  3: 'mb-3 text-2xl font-semibold leading-[1.15] tracking-tight text-[#111827] md:text-3xl',
-  4: 'mb-3 text-xl font-semibold leading-[1.2] tracking-tight text-[#111827] md:text-2xl',
+  1: 'mb-4 text-4xl font-bold leading-[1.08] tracking-tight text-[#2D126B] md:text-5xl',
+  2: 'mb-4 text-3xl font-bold leading-[1.1] tracking-tight text-[#2D126B] md:text-4xl',
+  3: 'mb-3 text-2xl font-semibold leading-[1.15] tracking-tight text-[#2D126B] md:text-3xl',
+  4: 'mb-3 text-xl font-semibold leading-[1.2] tracking-tight text-[#2D126B] md:text-2xl',
 } as const;
 
 function HeadingBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'header' }>; index: number }) {
