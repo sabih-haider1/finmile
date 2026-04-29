@@ -6,150 +6,143 @@ interface EditorJsSectionProps {
   className?: string;
 }
 
-function renderBlock(block: EditorJsBlock, index: number) {
-  const key = `${block.type}-${index}`;
+function HeadingBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'header' }>; index: number }) {
+  const text = block.data.text || '';
+  if (!text) return null;
 
-  switch (block.type) {
-    case 'header': {
-      const text = block.data.text || '';
-      if (!text) return null;
-      
-      const level = block.data.level || 2;
-      const Tag = level === 1 ? 'h1' : level === 2 ? 'h2' : level === 3 ? 'h3' : 'h4';
-      const className = level === 1
-        ? 'text-3xl md:text-4xl font-bold text-[#2D126B]'
-        : level === 2
-          ? 'text-2xl md:text-3xl font-bold text-[#2D126B]'
-          : level === 3
-            ? 'text-xl md:text-2xl font-semibold text-[#2D126B]'
-            : 'text-lg md:text-xl font-semibold text-[#2D126B]';
+  const level = block.data.level || 2;
+  const Tag = level === 1 ? 'h1' : level === 2 ? 'h2' : level === 3 ? 'h3' : 'h4';
+  const className =
+    level === 1
+      ? 'text-3xl md:text-4xl font-bold tracking-tight text-slate-900'
+      : level === 2
+        ? 'text-2xl md:text-3xl font-bold tracking-tight text-slate-900'
+        : level === 3
+          ? 'text-xl md:text-2xl font-semibold text-slate-900'
+          : 'text-lg md:text-xl font-semibold text-slate-900';
 
-      return (
-        <Tag 
-          key={key} 
-          className={className}
-          dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }}
-        />
-      );
-    }
-    case 'paragraph': {
-      const text = block.data.text || '';
-      if (!text) return null;
-      
-      return (
-        <p 
-          key={key} 
-          className="text-gray-700 leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }}
-        />
-      );
-    }
-    case 'list': {
-      const items = (block.data.items || []).map((item) => {
-        if (item && typeof item === 'object' && 'content' in item) {
-          return String((item as { content?: unknown }).content || '');
-        }
-        return String(item || '');
-      }).filter(Boolean);
+  return <Tag key={`header-${index}`} className={className} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }} />;
+}
 
-      if (items.length === 0) return null;
+function ParagraphBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'paragraph' }>; index: number }) {
+  const text = block.data.text || '';
+  if (!text) return null;
 
-      const ListTag = block.data.style === 'ordered' ? 'ol' : 'ul';
-      return (
-        <ListTag
-          key={key}
-          className={block.data.style === 'ordered' ? 'list-decimal pl-6 space-y-2' : 'list-disc pl-6 space-y-2'}
-        >
-          {items.map((item, itemIndex) => (
-            <li 
-              key={`${key}-${itemIndex}`} 
-              className="text-gray-700"
-              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(item) }}
-            />
-          ))}
-        </ListTag>
-      );
-    }
-    case 'table': {
-      const rows = block.data.content || [];
-      if (rows.length === 0) return null;
-      
-      const [headRow, ...bodyRows] = rows;
-      const showHeadings = block.data.withHeadings && headRow;
+  return <p key={`paragraph-${index}`} className="text-[16px] leading-7 text-slate-700" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }} />;
+}
 
-      return (
-        <div key={key} className="overflow-x-auto my-6">
-          <table className="w-full text-left border-collapse">
-            {showHeadings && (
-              <thead>
-                <tr>
-                  {headRow.map((cell, cellIndex) => (
-                    <th
-                      key={`table-head-${cellIndex}`}
-                      className="border-b border-gray-200 pb-3 text-sm font-semibold text-[#2D126B]"
-                      dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(cell || '') }}
-                    />
-                  ))}
-                </tr>
-              </thead>
-            )}
-            <tbody>
-              {(showHeadings ? bodyRows : rows).map((row, rowIndex) => (
-                <tr key={`table-row-${rowIndex}`} className="border-b border-gray-100 last:border-b-0">
-                  {row.map((cell, cellIndex) => (
-                    <td 
-                      key={`table-cell-${rowIndex}-${cellIndex}`} 
-                      className="py-3 pr-4 text-sm text-gray-700"
-                      dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(cell || '') }}
-                    />
-                  ))}
-                </tr>
+function ListBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'list' }>; index: number }) {
+  const items = (block.data.items || [])
+    .map((item) => {
+      if (item && typeof item === 'object' && 'content' in item) {
+        return String((item as { content?: unknown }).content || '');
+      }
+      return String(item || '');
+    })
+    .filter(Boolean);
+
+  if (items.length === 0) return null;
+
+  const ListTag = block.data.style === 'ordered' ? 'ol' : 'ul';
+
+  return (
+    <ListTag
+      key={`list-${index}`}
+      className={block.data.style === 'ordered' ? 'list-decimal space-y-3 pl-6 text-slate-700' : 'list-disc space-y-3 pl-6 text-slate-700'}
+    >
+      {items.map((item, itemIndex) => (
+        <li key={`list-${index}-${itemIndex}`} className="pl-1 leading-7" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(item) }} />
+      ))}
+    </ListTag>
+  );
+}
+
+function TableBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'table' }>; index: number }) {
+  const rows = block.data.content || [];
+  if (rows.length === 0) return null;
+
+  const [headRow, ...bodyRows] = rows;
+  const showHeadings = block.data.withHeadings && headRow;
+
+  return (
+    <div key={`table-${index}`} className="my-8 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <table className="w-full border-collapse text-left text-sm text-slate-700">
+        {showHeadings && (
+          <thead className="bg-slate-50">
+            <tr>
+              {headRow.map((cell, cellIndex) => (
+                <th
+                  key={`table-head-${index}-${cellIndex}`}
+                  className="border-b border-slate-200 px-4 py-3 font-semibold text-slate-900"
+                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(cell || '') }}
+                />
               ))}
-            </tbody>
-          </table>
-        </div>
-      );
-    }
-    case 'quote': {
-      const text = block.data.text || '';
-      if (!text) return null;
-      
-      const caption = block.data.caption || '';
-      const alignment = block.data.alignment === 'center' ? 'text-center' : 'text-left';
+            </tr>
+          </thead>
+        )}
+        <tbody>
+          {(showHeadings ? bodyRows : rows).map((row, rowIndex) => (
+            <tr key={`table-row-${index}-${rowIndex}`} className="border-b border-slate-200 even:bg-slate-50/70 last:border-b-0">
+              {row.map((cell, cellIndex) => (
+                <td
+                  key={`table-cell-${index}-${rowIndex}-${cellIndex}`}
+                  className="border-r border-slate-200 px-4 py-3 align-top last:border-r-0"
+                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(cell || '') }}
+                />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
-      return (
-        <figure key={key} className={`border-l-4 border-[#6A27D4] pl-4 my-8 ${alignment}`}>
-          <blockquote 
-            className="text-lg text-gray-700 italic"
-            dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }}
-          />
-          {caption && (
-            <figcaption 
-              className="mt-2 text-sm font-semibold text-[#2D126B]"
-              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }}
-            />
-          )}
-        </figure>
-      );
-    }
-    case 'image': {
-      const url = block.data.file?.url;
-      if (!url) return null;
-      
-      const caption = block.data.caption || '';
+function QuoteBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'quote' }>; index: number }) {
+  const text = block.data.text || '';
+  if (!text) return null;
 
-      return (
-        <figure key={key} className="space-y-3 my-8">
-          <img src={url} alt={caption || 'Content image'} className="w-full rounded-2xl shadow-md" />
-          {caption && (
-            <figcaption 
-              className="text-sm text-gray-500 text-center"
-              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }}
-            />
-          )}
-        </figure>
-      );
-    }
+  const caption = block.data.caption || '';
+  const alignment = block.data.alignment === 'center' ? 'text-center' : 'text-left';
+
+  return (
+    <figure key={`quote-${index}`} className={`my-8 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 ${alignment}`}>
+      <blockquote className="text-[17px] leading-8 text-slate-800 italic" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }} />
+      {caption && (
+        <figcaption className="mt-3 text-sm font-semibold text-slate-600" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }} />
+      )}
+    </figure>
+  );
+}
+
+function ImageBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'image' }>; index: number }) {
+  const url = block.data.file?.url;
+  if (!url) return null;
+
+  const caption = block.data.caption || '';
+
+  return (
+    <figure key={`image-${index}`} className="my-8 space-y-3">
+      <img src={url} alt={caption || 'Content image'} className="block h-auto w-full rounded-2xl border border-slate-200 shadow-sm" />
+      {caption && <figcaption className="text-center text-sm text-slate-500" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }} />}
+    </figure>
+  );
+}
+
+function renderBlock(block: EditorJsBlock, index: number) {
+  switch (block.type) {
+    case 'header':
+      return <HeadingBlock block={block} index={index} />;
+    case 'paragraph':
+      return <ParagraphBlock block={block} index={index} />;
+    case 'list':
+      return <ListBlock block={block} index={index} />;
+    case 'table':
+      return <TableBlock block={block} index={index} />;
+    case 'quote':
+      return <QuoteBlock block={block} index={index} />;
+    case 'image':
+      return <ImageBlock block={block} index={index} />;
     default:
       return null;
   }
@@ -161,7 +154,7 @@ export function EditorJsSection({ section, className = '' }: EditorJsSectionProp
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`mx-auto w-full max-w-[780px] space-y-8 ${className}`}>
       {section.blocks.map((block, index) => renderBlock(block, index))}
     </div>
   );
