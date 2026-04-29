@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import EditorJsSectionManager from '@/components/admin/editorjs/EditorJsSectionManager';
 import { generateSlug } from '@/lib/upload';
 
 export interface FormFieldConfig {
@@ -176,30 +177,22 @@ export default function FormBuilder({
       }
 
       case 'editorjs-sections': {
-        const formattedValue = (() => {
+        const parsedValue = (() => {
           if (typeof value === 'string') {
-            return value;
-          }
-
-          if (value && typeof value === 'object') {
             try {
-              return JSON.stringify(value, null, 2);
+              return JSON.parse(value);
             } catch {
-              return '';
+              return undefined;
             }
           }
 
-          return '';
+          return value;
         })();
 
         return (
-          <textarea
-            value={formattedValue}
-            onChange={(e) => handleChange(field.name, e.target.value)}
-            className={`${inputClassName} font-mono text-sm`}
-            placeholder={field.placeholder || '{\n  "sections": []\n}'}
-            rows={12}
-            required={field.required}
+          <EditorJsSectionManager
+            value={parsedValue && typeof parsedValue === 'object' ? parsedValue : undefined}
+            onChange={(nextValue) => handleChange(field.name, nextValue)}
           />
         );
       }

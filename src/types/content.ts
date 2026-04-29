@@ -42,6 +42,83 @@ export interface ContentSection {
   data: ContentSectionData;
 }
 
+export interface EditorJsHeaderBlock {
+  id?: string;
+  type: 'header';
+  data: {
+    text: string;
+    level: 1 | 2 | 3 | 4;
+  };
+}
+
+export interface EditorJsParagraphBlock {
+  id?: string;
+  type: 'paragraph';
+  data: {
+    text: string;
+  };
+}
+
+export interface EditorJsListBlock {
+  id?: string;
+  type: 'list';
+  data: {
+    style: 'ordered' | 'unordered';
+    items: Array<string | { content?: string } | null>;
+  };
+}
+
+export interface EditorJsTableBlock {
+  id?: string;
+  type: 'table';
+  data: {
+    withHeadings?: boolean;
+    content: string[][];
+  };
+}
+
+export interface EditorJsQuoteBlock {
+  id?: string;
+  type: 'quote';
+  data: {
+    text: string;
+    caption?: string;
+    alignment?: 'left' | 'center';
+  };
+}
+
+export interface EditorJsImageBlock {
+  id?: string;
+  type: 'image';
+  data: {
+    file: {
+      url: string;
+    };
+    caption?: string;
+    withBorder?: boolean;
+    withBackground?: boolean;
+    stretched?: boolean;
+  };
+}
+
+export type EditorJsBlock =
+  | EditorJsHeaderBlock
+  | EditorJsParagraphBlock
+  | EditorJsListBlock
+  | EditorJsTableBlock
+  | EditorJsQuoteBlock
+  | EditorJsImageBlock;
+
+export interface EditorJsSection {
+  id: string;
+  type: 'editorjs';
+  blocks: EditorJsBlock[];
+}
+
+export interface EditorJsSections {
+  sections: EditorJsSection[];
+}
+
 export interface RelatedResource {
   id: string;
   title: string;
@@ -58,9 +135,15 @@ export interface ContentSidebar {
 
 export interface UnifiedContent {
   hero: ContentHero;
-  sections: ContentSection[];
+  sections: Array<ContentSection | EditorJsSection>;
   sidebar?: ContentSidebar;
 }
+
+export interface LegacySections {
+  sections: ContentSection[];
+}
+
+export type ContentSectionsPayload = UnifiedContent | EditorJsSections | LegacySections;
 
 // ==================== Content Type Interfaces ====================
 
@@ -81,7 +164,7 @@ export interface Blog {
   published_at: string | null;
   created_at: string;
   updated_at: string;
-  sections?: UnifiedContent; // New: structured sections
+  sections?: ContentSectionsPayload;
 }
 
 export interface Whitepaper {
@@ -102,7 +185,7 @@ export interface Whitepaper {
   published_at: string | null;
   created_at: string;
   updated_at: string;
-  sections?: UnifiedContent; // New: structured sections
+  sections?: ContentSectionsPayload;
 }
 
 export interface Resource {
@@ -110,8 +193,8 @@ export interface Resource {
   title: string;
   slug: string;
   description: string;
-  file_url: string;
-  file_type: 'pdf' | 'docx' | 'xlsx' | 'zip';
+  file_url: string | null;
+  file_type: 'pdf' | 'docx' | 'xlsx' | 'zip' | null;
   thumbnail_url: string | null;
   author_name: string | null;
   topic: string | null;
@@ -121,7 +204,7 @@ export interface Resource {
   is_published: boolean;
   created_at: string;
   updated_at: string;
-  sections?: UnifiedContent; // New: structured sections
+  sections?: ContentSectionsPayload;
 }
 
 export interface Guide {
@@ -133,7 +216,7 @@ export interface Guide {
   cover_image_url: string | null;
   created_at: string;
   updated_at: string;
-  sections?: UnifiedContent; // New: structured sections
+  sections?: ContentSectionsPayload;
 }
 
 export interface CaseStudy {
@@ -156,7 +239,7 @@ export interface CaseStudy {
   published_at: string | null;
   created_at: string;
   updated_at: string;
-  sections?: UnifiedContent; // New: structured sections
+  sections?: ContentSectionsPayload;
 }
 
 // Form data types (for creating/updating)

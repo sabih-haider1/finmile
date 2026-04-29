@@ -140,14 +140,12 @@ export default function ResourcesPage() {
         thumbnailUrl = thumbUploadResult.url;
       }
 
-      if (!fileUrl) {
-        throw new Error('A valid resource file is required.');
-      }
-
+      // File is no longer mandatory
       const resourceData = {
         ...formData,
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
-        file_url: fileUrl,
+        file_url: fileUrl || null,
+        file_type: formData.file_type || (fileUrl ? 'pdf' : null),
         thumbnail_url: thumbnailUrl || null,
         created_at: formData.created_at
           ? new Date(formData.created_at as string).toISOString()
@@ -205,13 +203,14 @@ export default function ResourcesPage() {
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'description', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief description...' },
     { name: 'sections', label: 'Sections', type: 'editorjs-sections', helpText: 'Build content with structured blocks (no HTML/CSS)' },
-    { name: 'file_url', label: 'File', type: 'file', required: true, accept: '.pdf,.docx,.xlsx,.zip', bucket: 'resources', folder: 'files' },
+    { name: 'file_url', label: 'File', type: 'file', required: false, accept: '.pdf,.docx,.xlsx,.zip', bucket: 'resources', folder: 'files' },
     {
       name: 'file_type',
       label: 'File Type',
       type: 'select',
-      required: true,
+      required: false,
       options: [
+        { value: '', label: 'None' },
         { value: 'pdf', label: 'PDF' },
         { value: 'docx', label: 'DOCX' },
         { value: 'xlsx', label: 'XLSX' },

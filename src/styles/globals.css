@@ -168,6 +168,31 @@ body {
   text-fill-color: transparent;
 }
 
+.editorjs-shell .ce-toolbar__content,
+.editorjs-shell .ce-block__content {
+  max-width: 100%;
+}
+
+.editorjs-shell .ce-paragraph,
+.editorjs-shell .ce-header {
+  color: #ffffff;
+}
+
+.editorjs-shell .ce-toolbar__actions,
+.editorjs-shell .ce-toolbar__plus {
+  color: #ffffff;
+}
+
+.editorjs-shell .cdx-input {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.editorjs-shell .ce-block__content {
+  margin-left: 0;
+}
+
 /* Fade in animations */
 @keyframes fadeIn {
   0% {

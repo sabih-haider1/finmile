@@ -4,8 +4,9 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Metadata } from 'next';
 import { DetailPageTemplate } from '@/components/detail-template';
-import { UnifiedContent } from '@/types/content';
+import { ContentSection, UnifiedContent } from '@/types/content';
 import { getAuthorProfileByName } from '@/data/authors';
+import { isEditorSections } from '@/lib/editorjs';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -63,26 +64,16 @@ export default async function BlogDetailPage({ params }: Props) {
   const resolvedAuthor = getAuthorProfileByName(blog.author_name);
   const authorDisplay = resolvedAuthor || blog.author_name || 'Finmile Editorial Team';
 
-  const content: UnifiedContent = (blog.sections && typeof blog.sections === 'object')
+  const legacySections = (blog.sections && typeof blog.sections === 'object' && Array.isArray((blog.sections as { sections?: unknown }).sections))
+    ? (blog.sections as { sections: ContentSection[] }).sections
+    : null;
+
+  const editorSections = isEditorSections(blog.sections)
+    ? blog.sections.sections
+    : null;
+
+  const content: UnifiedContent = editorSections
     ? {
-        ...blog.sections,
-        hero: {
-          ...blog.sections.hero,
-          title: blog.sections.hero.title || blog.title,
-          image_url: blog.sections.hero.image_url ?? blog.cover_image_url,
-          description: blog.summary,
-          metadata: {
-            ...blog.sections.hero.metadata,
-            published_date: publishDate,
-            read_time: blog.sections.hero.metadata?.read_time || 'Read article',
-            author: blog.author_name || blog.sections.hero.metadata?.author,
-          },
-        },
-        sidebar: {
-          related: sidebarRelated,
-        },
-      }
-    : {
         hero: {
           title: blog.title,
           image_url: blog.cover_image_url,
@@ -93,21 +84,61 @@ export default async function BlogDetailPage({ params }: Props) {
             author: blog.author_name || 'Finmile Editorial Team',
           },
         },
-        sections: [
-          {
-            id: 'blog-body',
-            type: 'content',
-            data: {
-              body: blog.body || `<p>${blog.summary}</p>`,
-            },
-          },
-        ],
+        sections: editorSections,
         sidebar: {
           related: sidebarRelated,
         },
-      };
+      }
+    : (blog.sections && typeof blog.sections === 'object' && 'hero' in blog.sections)
+      ? {
+          ...(blog.sections as UnifiedContent),
+          hero: {
+            ...(blog.sections as UnifiedContent).hero,
+            title: (blog.sections as UnifiedContent).hero.title || blog.title,
+            image_url: (blog.sections as UnifiedContent).hero.image_url ?? blog.cover_image_url,
+            description: blog.summary,
+            metadata: {
+              ...(blog.sections as UnifiedContent).hero.metadata,
+              published_date: publishDate,
+              read_time: (blog.sections as UnifiedContent).hero.metadata?.read_time || 'Read article',
+              author: blog.author_name || (blog.sections as UnifiedContent).hero.metadata?.author,
+            },
+          },
+          sections: legacySections || (blog.sections as UnifiedContent).sections,
+          sidebar: {
+            related: sidebarRelated,
+          },
+        }
+      : {
+          hero: {
+            title: blog.title,
+            image_url: blog.cover_image_url,
+            description: blog.summary,
+            metadata: {
+              published_date: publishDate,
+              read_time: 'Read article',
+              author: blog.author_name || 'Finmile Editorial Team',
+            },
+          },
+          sections: legacySections && legacySections.length > 0
+            ? legacySections
+            : [
+                {
+                  id: 'blog-body',
+                  type: 'content',
+                  data: {
+                    body: blog.body || `<p>${blog.summary}</p>`,
+                  },
+                },
+              ],
+          sidebar: {
+            related: sidebarRelated,
+          },
+        };
 
-  const ctaSection = content.sections.find((section) => section.type === 'cta');
+  const ctaSection = content.sections.find(
+    (section): section is ContentSection => section.type === 'cta'
+  );
   const ctaButton = ctaSection?.data?.cta_button as { label?: string; url?: string } | undefined;
   const downloadButton = ctaButton?.url
     ? { url: ctaButton.url, label: ctaButton.label || 'Download PDF' }
