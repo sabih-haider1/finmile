@@ -64,10 +64,199 @@ function stripTags(value: unknown) {
   return String(value ?? '').replace(/<[^>]*>/g, '');
 }
 
-function normalizeBlocks(blocks: EditorJsBlock[]): EditorJsBlock[] {
-  // We no longer strip tags from text/paragraph blocks here to preserve 
-  // inline formatting (bold, italic, links) that EditorJS manages.
-  return blocks;
+function toPlainText(value: unknown) {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (typeof value === 'number' || typeof value === 'boolean') {
+    return String(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => toPlainText(item)).join('');
+  }
+
+  if (value && typeof value === 'object') {
+    const candidate = value as Record<string, unknown>;
+
+    for (const key of ['text', 'content', 'html', 'value']) {
+      const nestedValue = candidate[key];
+      if (typeof nestedValue === 'string' || typeof nestedValue === 'number' || typeof nestedValue === 'boolean') {
+        return String(nestedValue);
+      }
+    }
+  }
+
+  return '';
+}
+
+function normalizeBlocks(blocks: unknown[]): EditorJsBlock[] {
+  return blocks.reduce<EditorJsBlock[]>((accumulator, block) => {
+    const normalizedBlock = (() => {
+      if (!block || typeof block !== 'object') {
+        return null;
+      }
+
+      const candidate = block as Record<string, unknown>;
+      const type = candidate.type;
+      const id = typeof candidate.id === 'string' ? candidate.id : undefined;
+      const data = candidate.data;
+
+      if (typeof type !== 'string' || !data || typeof data !== 'object') {
+        return null;
+      }
+
+      const source = data as Record<string, unknown>;
+
+      switch (type) {
+        case 'header': {
+          const text = toPlainText(source.text ?? source.content ?? source.html);
+          const levelValue = Number(source.level);
+          const level = [1, 2, 3, 4].includes(levelValue) ? (levelValue as 1 | 2 | 3 | 4) : 2;
+
+          if (!text) {
+            return null;
+          }
+
+          return {
+            id,
+            type: 'header',
+            data: {
+              text,
+              level,
+            },
+          };
+        }
+
+        case 'paragraph': {
+          const text = toPlainText(source.text ?? source.content ?? source.html ?? data);
+
+          if (!text) {
+            return null;
+          }
+
+          return {
+            id,
+            type: 'paragraph',
+            data: {
+              text,
+            },
+          };
+        }
+
+        case 'list': {
+          const style = source.style === 'ordered' ? 'ordered' : 'unordered';
+          const items = Array.isArray(source.items)
+            ? source.items
+                .map((item) => {
+                  if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
+                    return String(item);
+                  }
+
+                  if (item && typeof item === 'object' && 'content' in item) {
+                    return toPlainText((item as { content?: unknown }).content);
+                  }
+
+                  return '';
+                })
+                .filter(Boolean)
+            : [];
+
+          if (items.length === 0) {
+            return null;
+          }
+
+          return {
+            id,
+            type: 'list',
+            data: {
+              style,
+              items,
+            },
+          };
+        }
+
+        case 'table': {
+          const content = Array.isArray(source.content)
+            ? source.content
+                .map((row) => (Array.isArray(row) ? row.map((cell) => toPlainText(cell)) : []))
+                .filter((row) => row.length > 0)
+            : [];
+
+          if (content.length === 0) {
+            return null;
+          }
+
+          return {
+            id,
+            type: 'table',
+            data: {
+              withHeadings: Boolean(source.withHeadings),
+              content,
+            },
+          };
+        }
+
+        case 'quote': {
+          const text = toPlainText(source.text ?? source.content ?? source.html);
+
+          if (!text) {
+            return null;
+          }
+
+          const caption = toPlainText(source.caption);
+          const alignment = source.alignment === 'center' || source.alignment === 'left'
+            ? source.alignment
+            : undefined;
+
+          return {
+            id,
+            type: 'quote',
+            data: {
+              text,
+              ...(caption ? { caption } : {}),
+              ...(alignment ? { alignment } : {}),
+            },
+          };
+        }
+
+        case 'image': {
+          const file = source.file;
+          const url =
+            (file && typeof file === 'object' ? toPlainText((file as Record<string, unknown>).url) : '') ||
+            toPlainText(source.url);
+
+          if (!url) {
+            return null;
+          }
+
+          const caption = toPlainText(source.caption);
+
+          return {
+            id,
+            type: 'image',
+            data: {
+              file: { url },
+              ...(caption ? { caption } : {}),
+              ...(typeof source.withBorder === 'boolean' ? { withBorder: source.withBorder } : {}),
+              ...(typeof source.withBackground === 'boolean' ? { withBackground: source.withBackground } : {}),
+              ...(typeof source.stretched === 'boolean' ? { stretched: source.stretched } : {}),
+            },
+          };
+        }
+
+        default:
+          return null;
+      }
+    })();
+
+    if (normalizedBlock) {
+      accumulator.push(normalizedBlock);
+    }
+
+    return accumulator;
+  }, []);
 }
 
 function isRenderableBlock(block: EditorJsBlock): boolean {
@@ -114,7 +303,7 @@ function getTitleFromBlocks(blocks: EditorJsBlock[], sectionId: string) {
 function applyTitleToBlocks(blocks: EditorJsBlock[], title: string, sectionId: string): EditorJsBlock[] {
   const sanitizedTitle = stripTags(title || '');
   const titleId = getTitleBlockId(sectionId);
-  const { bodyBlocks } = splitBlocks(blocks, sectionId);
+  const { bodyBlocks } = splitBlocks(normalizeBlocks(blocks), sectionId);
 
   if (!sanitizedTitle) {
     return bodyBlocks;
@@ -196,7 +385,7 @@ function EditorJsSectionEditor({
     }
 
     const currentBlocks = sectionBlocksRef.current || [];
-    const { bodyBlocks } = splitBlocks(currentBlocks, section.id);
+    const { bodyBlocks } = splitBlocks(normalizeBlocks(currentBlocks), section.id);
     const editor = new toolsRef.current.EditorJS({
       holder: holderRef.current,
       data: { blocks: bodyBlocks || [] },
@@ -294,7 +483,7 @@ function EditorJsSectionEditor({
 
       try {
         await editorRef.current.isReady;
-        const { bodyBlocks } = splitBlocks(currentBlocks, section.id);
+        const { bodyBlocks } = splitBlocks(normalizeBlocks(currentBlocks), section.id);
         const nextBlocks = normalizeBlocks(bodyBlocks || []).filter(isRenderableBlock);
         
         if (editorRef.current.blocks && typeof editorRef.current.blocks.render === 'function') {
