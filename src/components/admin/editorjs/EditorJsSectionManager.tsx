@@ -16,7 +16,17 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { EditorJsBlock, EditorJsSection, EditorJsSections } from '@/types/content';
+import {
+  EditorJsBlock,
+  EditorJsHeaderBlock,
+  EditorJsImageBlock,
+  EditorJsListBlock,
+  EditorJsParagraphBlock,
+  EditorJsQuoteBlock,
+  EditorJsSection,
+  EditorJsSections,
+  EditorJsTableBlock,
+} from '@/types/content';
 import { isValidUrl } from '@/lib/security';
 import SimpleTableTool from './SimpleTableTool';
 
@@ -91,9 +101,145 @@ function toPlainText(value: unknown) {
   return '';
 }
 
+function buildHeaderBlock(source: Record<string, unknown>, id: string | undefined): EditorJsHeaderBlock | null {
+  const text = toPlainText(source.text ?? source.content ?? source.html);
+  const levelValue = Number(source.level);
+  const level = [1, 2, 3, 4].includes(levelValue) ? (levelValue as 1 | 2 | 3 | 4) : 2;
+
+  if (!text) {
+    return null;
+  }
+
+  return {
+    id,
+    type: 'header',
+    data: {
+      text,
+      level,
+    },
+  };
+}
+
+function buildParagraphBlock(source: Record<string, unknown>, id: string | undefined): EditorJsParagraphBlock | null {
+  const text = toPlainText(source.text ?? source.content ?? source.html);
+
+  if (!text) {
+    return null;
+  }
+
+  return {
+    id,
+    type: 'paragraph',
+    data: {
+      text,
+    },
+  };
+}
+
+function buildListBlock(source: Record<string, unknown>, id: string | undefined): EditorJsListBlock | null {
+  const style = source.style === 'ordered' ? 'ordered' : 'unordered';
+  const items = Array.isArray(source.items)
+    ? source.items
+        .map((item) => {
+          if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
+            return String(item);
+          }
+
+          if (item && typeof item === 'object' && 'content' in item) {
+            return toPlainText((item as { content?: unknown }).content);
+          }
+
+          return '';
+        })
+        .filter(Boolean)
+    : [];
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return {
+    id,
+    type: 'list',
+    data: {
+      style,
+      items,
+    },
+  };
+}
+
+function buildTableBlock(source: Record<string, unknown>, id: string | undefined): EditorJsTableBlock | null {
+  const content = Array.isArray(source.content)
+    ? source.content
+        .map((row) => (Array.isArray(row) ? row.map((cell) => toPlainText(cell)) : []))
+        .filter((row) => row.length > 0)
+    : [];
+
+  if (content.length === 0) {
+    return null;
+  }
+
+  return {
+    id,
+    type: 'table',
+    data: {
+      withHeadings: Boolean(source.withHeadings),
+      content,
+    },
+  };
+}
+
+function buildQuoteBlock(source: Record<string, unknown>, id: string | undefined): EditorJsQuoteBlock | null {
+  const text = toPlainText(source.text ?? source.content ?? source.html);
+
+  if (!text) {
+    return null;
+  }
+
+  const caption = toPlainText(source.caption);
+  const alignment = source.alignment === 'center' || source.alignment === 'left'
+    ? source.alignment
+    : undefined;
+
+  return {
+    id,
+    type: 'quote',
+    data: {
+      text,
+      ...(caption ? { caption } : {}),
+      ...(alignment ? { alignment } : {}),
+    },
+  };
+}
+
+function buildImageBlock(source: Record<string, unknown>, id: string | undefined): EditorJsImageBlock | null {
+  const file = source.file;
+  const url =
+    (file && typeof file === 'object' ? toPlainText((file as Record<string, unknown>).url) : '') ||
+    toPlainText(source.url);
+
+  if (!url) {
+    return null;
+  }
+
+  const caption = toPlainText(source.caption);
+
+  return {
+    id,
+    type: 'image',
+    data: {
+      file: { url },
+      ...(caption ? { caption } : {}),
+      ...(typeof source.withBorder === 'boolean' ? { withBorder: source.withBorder } : {}),
+      ...(typeof source.withBackground === 'boolean' ? { withBackground: source.withBackground } : {}),
+      ...(typeof source.stretched === 'boolean' ? { stretched: source.stretched } : {}),
+    },
+  };
+}
+
 function normalizeBlocks(blocks: unknown[]): EditorJsBlock[] {
   return blocks.reduce<EditorJsBlock[]>((accumulator, block) => {
-    const normalizedBlock = (() => {
+    const normalizedBlock: EditorJsBlock | null = (() => {
       if (!block || typeof block !== 'object') {
         return null;
       }
@@ -111,139 +257,27 @@ function normalizeBlocks(blocks: unknown[]): EditorJsBlock[] {
 
       switch (type) {
         case 'header': {
-          const text = toPlainText(source.text ?? source.content ?? source.html);
-          const levelValue = Number(source.level);
-          const level = [1, 2, 3, 4].includes(levelValue) ? (levelValue as 1 | 2 | 3 | 4) : 2;
-
-          if (!text) {
-            return null;
-          }
-
-          return {
-            id,
-            type: 'header',
-            data: {
-              text,
-              level,
-            },
-          };
+          return buildHeaderBlock(source, id);
         }
 
         case 'paragraph': {
-          const text = toPlainText(source.text ?? source.content ?? source.html ?? data);
-
-          if (!text) {
-            return null;
-          }
-
-          return {
-            id,
-            type: 'paragraph',
-            data: {
-              text,
-            },
-          };
+          return buildParagraphBlock(source, id);
         }
 
         case 'list': {
-          const style = source.style === 'ordered' ? 'ordered' : 'unordered';
-          const items = Array.isArray(source.items)
-            ? source.items
-                .map((item) => {
-                  if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
-                    return String(item);
-                  }
-
-                  if (item && typeof item === 'object' && 'content' in item) {
-                    return toPlainText((item as { content?: unknown }).content);
-                  }
-
-                  return '';
-                })
-                .filter(Boolean)
-            : [];
-
-          if (items.length === 0) {
-            return null;
-          }
-
-          return {
-            id,
-            type: 'list',
-            data: {
-              style,
-              items,
-            },
-          };
+          return buildListBlock(source, id);
         }
 
         case 'table': {
-          const content = Array.isArray(source.content)
-            ? source.content
-                .map((row) => (Array.isArray(row) ? row.map((cell) => toPlainText(cell)) : []))
-                .filter((row) => row.length > 0)
-            : [];
-
-          if (content.length === 0) {
-            return null;
-          }
-
-          return {
-            id,
-            type: 'table',
-            data: {
-              withHeadings: Boolean(source.withHeadings),
-              content,
-            },
-          };
+          return buildTableBlock(source, id);
         }
 
         case 'quote': {
-          const text = toPlainText(source.text ?? source.content ?? source.html);
-
-          if (!text) {
-            return null;
-          }
-
-          const caption = toPlainText(source.caption);
-          const alignment = source.alignment === 'center' || source.alignment === 'left'
-            ? source.alignment
-            : undefined;
-
-          return {
-            id,
-            type: 'quote',
-            data: {
-              text,
-              ...(caption ? { caption } : {}),
-              ...(alignment ? { alignment } : {}),
-            },
-          };
+          return buildQuoteBlock(source, id);
         }
 
         case 'image': {
-          const file = source.file;
-          const url =
-            (file && typeof file === 'object' ? toPlainText((file as Record<string, unknown>).url) : '') ||
-            toPlainText(source.url);
-
-          if (!url) {
-            return null;
-          }
-
-          const caption = toPlainText(source.caption);
-
-          return {
-            id,
-            type: 'image',
-            data: {
-              file: { url },
-              ...(caption ? { caption } : {}),
-              ...(typeof source.withBorder === 'boolean' ? { withBorder: source.withBorder } : {}),
-              ...(typeof source.withBackground === 'boolean' ? { withBackground: source.withBackground } : {}),
-              ...(typeof source.stretched === 'boolean' ? { stretched: source.stretched } : {}),
-            },
-          };
+          return buildImageBlock(source, id);
         }
 
         default:
