@@ -93,7 +93,7 @@ export async function uploadFile({
       console.error('Upload error:', error);
       return {
         success: false,
-        error: 'File upload failed. Please try again.',
+        error: error.message || 'File upload failed. Please try again.',
       };
     }
 

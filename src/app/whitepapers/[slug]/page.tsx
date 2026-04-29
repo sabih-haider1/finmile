@@ -5,7 +5,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Metadata } from 'next';
 import { getAuthorProfileByName } from '@/data/authors';
 import { DetailPageTemplate } from '@/components/detail-template';
-import { UnifiedContent } from '@/types/content';
+import { ContentSection, UnifiedContent } from '@/types/content';
+import { isEditorSections } from '@/lib/editorjs';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -66,6 +67,18 @@ export default async function WhitepaperDetailPage({ params }: Props) {
     url: `/whitepapers/${item.slug}`,
   }));
 
+  const legacySections = (whitepaper.sections && typeof whitepaper.sections === 'object' && Array.isArray((whitepaper.sections as { sections?: unknown }).sections))
+    ? (whitepaper.sections as { sections: ContentSection[] }).sections
+    : null;
+
+  const editorSections = isEditorSections(whitepaper.sections)
+    ? whitepaper.sections.sections
+    : null;
+
+  const unifiedContent = (whitepaper.sections && typeof whitepaper.sections === 'object' && 'hero' in whitepaper.sections)
+    ? (whitepaper.sections as UnifiedContent)
+    : null;
+
   const fallbackContent: UnifiedContent = {
     hero: {
       title: whitepaper.title,
@@ -77,9 +90,10 @@ export default async function WhitepaperDetailPage({ params }: Props) {
         author: authorName,
       },
     },
-    sections: whitepaper.sections && typeof whitepaper.sections === 'object'
-      ? whitepaper.sections.sections?.length
-        ? whitepaper.sections.sections
+    sections: editorSections && editorSections.length > 0
+      ? editorSections
+      : legacySections && legacySections.length > 0
+        ? legacySections
         : [
             {
               id: 'whitepaper-summary',
@@ -101,33 +115,35 @@ export default async function WhitepaperDetailPage({ params }: Props) {
                 cta_button: { label: 'Download PDF', url: whitepaper.pdf_url },
               },
             },
-          ]
-      : [
-          {
-            id: 'whitepaper-summary',
-            type: 'content',
-            data: {
-              body: `<p>${whitepaper.summary}</p>`,
-            },
-          },
-          {
-            id: 'whitepaper-download',
-            type: 'cta',
-            data: {
-              cta_title: `Download ${whitepaper.title}`,
-              cta_points: [
-                'Get the full whitepaper PDF',
-                'Use it as a reference document',
-                'Share it with your team',
-              ],
-              cta_button: { label: 'Download PDF', url: whitepaper.pdf_url },
-            },
-          },
-        ],
+          ],
     sidebar: {
       related: sidebarRelated,
     },
   };
+
+  const content: UnifiedContent = unifiedContent
+    ? {
+        ...unifiedContent,
+        hero: {
+          ...unifiedContent.hero,
+          title: unifiedContent.hero.title || whitepaper.title,
+          image_url: unifiedContent.hero.image_url ?? whitepaper.cover_image_url,
+          description: whitepaper.summary,
+          metadata: {
+            ...unifiedContent.hero.metadata,
+            published_date: publishDate,
+            read_time: unifiedContent.hero.metadata?.read_time || 'Whitepaper',
+            author: authorName,
+          },
+        },
+        sections: editorSections && editorSections.length > 0
+          ? editorSections
+          : legacySections && legacySections.length > 0
+            ? legacySections
+            : unifiedContent.sections,
+        sidebar: fallbackContent.sidebar,
+      }
+    : fallbackContent;
 
   return (
     <main className="min-h-screen bg-white text-gray-900 flex flex-col relative overflow-hidden font-montserrat">
@@ -135,7 +151,7 @@ export default async function WhitepaperDetailPage({ params }: Props) {
       
       <div className="flex-grow flex flex-col relative z-10 w-full pt-6">
         <DetailPageTemplate 
-          content={fallbackContent} 
+          content={content} 
           author={authorDisplay} 
           downloadButton={whitepaper.pdf_url ? { url: whitepaper.pdf_url, label: 'Download PDF' } : undefined}
         />

@@ -2,6 +2,7 @@ export { DetailPageTemplate } from './DetailPageTemplate';
 export type { DetailPageTemplateProps, AuthorInfo } from './DetailPageTemplate';
 export { HeroSection } from './HeroSection';
 export { ContentSection } from './ContentSection';
+export { EditorJsSection } from './EditorJsSection';
 export { CTASection } from './CTASection';
 export { FeaturesSection } from './FeaturesSection';
 export { ComparisonSection } from './ComparisonSection';

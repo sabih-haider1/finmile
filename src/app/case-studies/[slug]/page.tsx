@@ -4,8 +4,9 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Metadata } from 'next';
 import { DetailPageTemplate } from '@/components/detail-template';
-import { UnifiedContent } from '@/types/content';
+import { ContentSection, UnifiedContent } from '@/types/content';
 import { getAuthorProfileByName } from '@/data/authors';
+import { isEditorSections } from '@/lib/editorjs';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -68,37 +69,16 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     ? caseStudy.sections as Partial<UnifiedContent>
     : null;
 
-  const content: UnifiedContent = sectionsData
+  const legacySections = (caseStudy.sections && typeof caseStudy.sections === 'object' && Array.isArray((caseStudy.sections as { sections?: unknown }).sections))
+    ? (caseStudy.sections as { sections: ContentSection[] }).sections
+    : null;
+
+  const editorSections = isEditorSections(caseStudy.sections)
+    ? caseStudy.sections.sections
+    : null;
+
+  const content: UnifiedContent = editorSections
     ? {
-        ...sectionsData,
-        hero: {
-          ...(sectionsData.hero || {}),
-          title: sectionsData.hero?.title || caseStudy.title,
-          image_url: sectionsData.hero?.image_url ?? caseStudy.cover_image_url,
-          description: caseStudy.summary,
-          metadata: {
-            ...(sectionsData.hero?.metadata || {}),
-            published_date: publishDate,
-            read_time: sectionsData.hero?.metadata?.read_time || 'Case study',
-            author: authorName || sectionsData.hero?.metadata?.author,
-          },
-        },
-        sections: Array.isArray(sectionsData.sections) && sectionsData.sections.length > 0
-          ? sectionsData.sections
-          : [
-              {
-                id: 'case-study-body',
-                type: 'content' as const,
-                data: {
-                  body: caseStudy.content || `<p>${caseStudy.summary}</p>`,
-                },
-              },
-            ],
-        sidebar: {
-          related: sidebarRelated,
-        },
-      }
-    : {
         hero: {
           title: caseStudy.title,
           image_url: caseStudy.cover_image_url,
@@ -109,21 +89,73 @@ export default async function CaseStudyDetailPage({ params }: Props) {
             author: authorName,
           },
         },
-        sections: [
-          {
-            id: 'case-study-body',
-            type: 'content' as const,
-            data: {
-              body: caseStudy.content || `<p>${caseStudy.summary}</p>`,
-            },
-          },
-        ],
+        sections: editorSections,
         sidebar: {
           related: sidebarRelated,
         },
-      };
+      }
+    : sectionsData
+      ? {
+          ...sectionsData,
+          hero: {
+            ...(sectionsData.hero || {}),
+            title: sectionsData.hero?.title || caseStudy.title,
+            image_url: sectionsData.hero?.image_url ?? caseStudy.cover_image_url,
+            description: caseStudy.summary,
+            metadata: {
+              ...(sectionsData.hero?.metadata || {}),
+              published_date: publishDate,
+              read_time: sectionsData.hero?.metadata?.read_time || 'Case study',
+              author: authorName || sectionsData.hero?.metadata?.author,
+            },
+          },
+          sections: Array.isArray(sectionsData.sections) && sectionsData.sections.length > 0
+            ? sectionsData.sections
+            : legacySections && legacySections.length > 0
+              ? legacySections
+              : [
+                  {
+                    id: 'case-study-body',
+                    type: 'content' as const,
+                    data: {
+                      body: caseStudy.content || `<p>${caseStudy.summary}</p>`,
+                    },
+                  },
+                ],
+          sidebar: {
+            related: sidebarRelated,
+          },
+        }
+      : {
+          hero: {
+            title: caseStudy.title,
+            image_url: caseStudy.cover_image_url,
+            description: caseStudy.summary,
+            metadata: {
+              published_date: publishDate,
+              read_time: 'Case study',
+              author: authorName,
+            },
+          },
+          sections: legacySections && legacySections.length > 0
+            ? legacySections
+            : [
+                {
+                  id: 'case-study-body',
+                  type: 'content' as const,
+                  data: {
+                    body: caseStudy.content || `<p>${caseStudy.summary}</p>`,
+                  },
+                },
+              ],
+          sidebar: {
+            related: sidebarRelated,
+          },
+        };
 
-  const ctaSection = content.sections.find((section) => section.type === 'cta');
+  const ctaSection = content.sections.find(
+    (section): section is ContentSection => section.type === 'cta'
+  );
   const ctaButton = ctaSection?.data?.cta_button as { label?: string; url?: string } | undefined;
   const downloadButton = ctaButton?.url
     ? { url: ctaButton.url, label: ctaButton.label || 'Download PDF' }

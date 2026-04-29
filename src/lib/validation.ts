@@ -61,7 +61,13 @@ const editorJsListBlockSchema = z.object({
   type: z.literal('list'),
   data: z.object({
     style: z.union([z.literal('ordered'), z.literal('unordered')]),
-    items: z.array(z.string()),
+    items: z.array(z.union([
+      z.string(),
+      z.object({
+        content: z.string().optional(),
+      }).passthrough(),
+      z.null(),
+    ])),
   }),
 });
 

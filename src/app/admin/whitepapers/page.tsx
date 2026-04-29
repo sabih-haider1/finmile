@@ -38,21 +38,27 @@ export default function WhitepapersPage() {
   const fetchWhitepapers = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (searchQuery) params.set('search', searchQuery);
-      if (featuredFilter !== null) params.set('featured', String(featuredFilter));
-      if (publishedFilter !== null) params.set('published', String(publishedFilter));
+      let query = supabase
+        .from('whitepapers')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-      const response = await fetch(`/api/whitepapers?${params.toString()}`, {
-        credentials: 'include',
-      });
-
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to fetch whitepapers');
+      if (searchQuery) {
+        query = query.ilike('title', `%${searchQuery}%`);
+      }
+      if (featuredFilter !== null) {
+        query = query.eq('is_featured', featuredFilter);
+      }
+      if (publishedFilter !== null) {
+        query = query.eq('is_published', publishedFilter);
       }
 
-      setWhitepapers(result.data?.items || []);
+      const { data, error } = await query;
+      if (error) {
+        throw error;
+      }
+
+      setWhitepapers(data || []);
     } catch (error: unknown) {
       console.error('Error fetching whitepapers:', error);
       alert('Failed to fetch whitepapers: ' + (error instanceof Error ? error.message : String(error)));
@@ -214,7 +220,7 @@ export default function WhitepapersPage() {
     { name: 'title', label: 'Title', type: 'text', required: true, placeholder: 'Enter whitepaper title' },
     { name: 'slug', label: 'Slug', type: 'text', required: true, helpText: 'URL-friendly identifier' },
     { name: 'summary', label: 'Short Description', type: 'textarea', rows: 3, placeholder: 'Brief summary...' },
-    { name: 'sections', label: 'Sections JSON', type: 'json', helpText: 'Optional unified template structure' },
+    { name: 'sections', label: 'Sections', type: 'editorjs-sections', helpText: 'Build content with structured blocks (no HTML/CSS)' },
     { name: 'pdf_url', label: 'PDF File', type: 'file', required: true, accept: '.pdf', bucket: 'whitepapers', folder: 'pdfs' },
     { name: 'cover_image_url', label: 'Cover Image', type: 'file', accept: 'image/*', bucket: 'whitepaper-covers', folder: 'covers' },
     { 

@@ -4,8 +4,9 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Metadata } from 'next';
 import { DetailPageTemplate } from '@/components/detail-template';
-import { UnifiedContent } from '@/types/content';
+import { ContentSection, UnifiedContent } from '@/types/content';
 import { getAuthorProfileByName } from '@/data/authors';
+import { isEditorSections } from '@/lib/editorjs';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -71,7 +72,7 @@ export default async function ResourceDetailPage({ params }: Props) {
       description: resource.description,
       metadata: {
         published_date: publishDate,
-        read_time: resource.file_type.toUpperCase(),
+        read_time: resource.file_type ? resource.file_type.toUpperCase() : 'Resource',
         author: authorName,
       },
     },
@@ -80,12 +81,12 @@ export default async function ResourceDetailPage({ params }: Props) {
         id: 'resource-body',
         type: 'content',
         data: {
-          body: `<p>${resource.description}</p><p><a href="${resource.file_url}" target="_blank" rel="noopener noreferrer">Download the resource</a></p>`,
+          body: `<p>${resource.description}</p>${resource.file_url ? `<p><a href="${resource.file_url}" target="_blank" rel="noopener noreferrer">Download the resource</a></p>` : ''}`,
         },
       },
-      {
+      ...(resource.file_url ? [{
         id: 'resource-cta',
-        type: 'cta',
+        type: 'cta' as const,
         data: {
           cta_title: `Download ${resource.title}`,
           cta_points: [
@@ -95,16 +96,55 @@ export default async function ResourceDetailPage({ params }: Props) {
           ],
           cta_button: { label: 'Download File', url: resource.file_url },
         },
-      },
+      }] : []),
     ],
     sidebar: {
       related: sidebarRelated,
     },
   };
 
-  const content = (resource.sections && typeof resource.sections === 'object')
+  const legacySections = (resource.sections && typeof resource.sections === 'object' && Array.isArray((resource.sections as { sections?: unknown }).sections))
+    ? (resource.sections as { sections: ContentSection[] }).sections
+    : null;
+
+  const editorSections = isEditorSections(resource.sections)
+    ? resource.sections.sections
+    : null;
+
+  const unifiedContent = (resource.sections && typeof resource.sections === 'object' && 'hero' in resource.sections)
     ? (resource.sections as UnifiedContent)
-    : fallbackContent;
+    : null;
+
+  const content = editorSections && editorSections.length > 0
+    ? {
+        hero: fallbackContent.hero,
+        sections: editorSections,
+        sidebar: fallbackContent.sidebar,
+      }
+    : unifiedContent
+      ? {
+          ...unifiedContent,
+          hero: {
+            ...unifiedContent.hero,
+            title: unifiedContent.hero.title || resource.title,
+            image_url: unifiedContent.hero.image_url ?? resource.thumbnail_url,
+            description: resource.description,
+            metadata: {
+              ...unifiedContent.hero.metadata,
+              published_date: publishDate,
+              read_time: resource.file_type ? resource.file_type.toUpperCase() : 'Resource',
+              author: authorName,
+            },
+          },
+          sidebar: fallbackContent.sidebar,
+        }
+      : legacySections && legacySections.length > 0
+        ? {
+            hero: fallbackContent.hero,
+            sections: legacySections,
+            sidebar: fallbackContent.sidebar,
+          }
+        : fallbackContent;
 
   return (
     <main className="min-h-screen bg-white text-gray-900 flex flex-col relative overflow-hidden font-montserrat">

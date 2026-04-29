@@ -2,6 +2,7 @@ import { UnifiedContent } from '@/types/content';
 import { HeroSection } from './HeroSection';
 import { ContentSection } from './ContentSection';
 import { CustomSection } from './CustomSection';
+import { EditorJsSection } from './EditorJsSection';
 import { CTASection } from './CTASection';
 import { FeaturesSection } from './FeaturesSection';
 import { ComparisonSection } from './ComparisonSection';
@@ -53,6 +54,14 @@ export function DetailPageTemplate({
                       <ContentSection
                         key={section.id}
                         data={section.data}
+                      />
+                    );
+
+                  case 'editorjs':
+                    return (
+                      <EditorJsSection
+                        key={section.id}
+                        section={section}
                       />
                     );
 
