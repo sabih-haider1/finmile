@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   DndContext,
+  type DragEndEvent,
   PointerSensor,
   closestCenter,
   useSensor,
@@ -41,12 +42,36 @@ type EditorJsInstance = {
   };
 } & Record<string, unknown>;
 
+type EditorJsToolClass = new (...args: never[]) => unknown;
+
+type EditorJsImageUploader = {
+  uploadByUrl: (url: string) => Promise<{ success: 0 | 1; file?: { url: string } }>;
+  uploadByFile: () => Promise<{ success: 0 | 1 }>;
+};
+
+type EditorJsEditorConfig = {
+  holder: HTMLDivElement;
+  data: { blocks: EditorJsBlock[] };
+  defaultBlock: 'paragraph';
+  inlineToolbar: false;
+  minHeight: number;
+  tools: {
+    header: { class: EditorJsToolClass; config: { levels: number[]; defaultLevel: number } };
+    list: { class: EditorJsToolClass; inlineToolbar: false };
+    table: { class: EditorJsToolClass; inlineToolbar: false };
+    image: { class: EditorJsToolClass; config: { uploader: EditorJsImageUploader } };
+  };
+  onChange: () => void | Promise<void>;
+};
+
+type EditorJsConstructor = new (config: EditorJsEditorConfig) => EditorJsInstance;
+
 type EditorJsTools = {
-  EditorJS: any;
-  Header: any;
-  List: any;
-  Table: any;
-  ImageTool: any;
+  EditorJS: EditorJsConstructor;
+  Header: EditorJsToolClass;
+  List: EditorJsToolClass;
+  Table: EditorJsToolClass;
+  ImageTool: EditorJsToolClass;
 };
 
 function generateId(prefix: string) {
@@ -140,9 +165,14 @@ function EditorJsSectionEditor({
   const editorRef = useRef<EditorJsInstance | null>(null);
   const holderRef = useRef<HTMLDivElement | null>(null);
   const lastBlocksRef = useRef<EditorJsBlock[]>(section.blocks);
+  const sectionBlocksRef = useRef<EditorJsBlock[]>(section.blocks);
   const toolsRef = useRef<EditorJsTools | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [toolsReady, setToolsReady] = useState(false);
+
+  useEffect(() => {
+    sectionBlocksRef.current = section.blocks;
+  }, [section.blocks]);
 
   useEffect(() => {
     let isActive = true;
@@ -187,7 +217,8 @@ function EditorJsSectionEditor({
       return () => undefined;
     }
 
-    const { bodyBlocks } = splitBlocks(section.blocks || [], section.id);
+    const currentBlocks = sectionBlocksRef.current || [];
+    const { bodyBlocks } = splitBlocks(currentBlocks, section.id);
     const editor = new toolsRef.current.EditorJS({
       holder: holderRef.current,
       data: { blocks: bodyBlocks || [] },
@@ -240,9 +271,10 @@ function EditorJsSectionEditor({
           try {
             const output = await editor.save();
             const sanitizedBlocks = normalizeBlocks(output.blocks as EditorJsBlock[]).filter(isRenderableBlock);
-            const nextBlocks = applyTitleToBlocks(sanitizedBlocks, getTitleFromBlocks(section.blocks || [], section.id), section.id);
+            const currentBlocks = sectionBlocksRef.current || [];
+            const nextBlocks = applyTitleToBlocks(sanitizedBlocks, getTitleFromBlocks(currentBlocks, section.id), section.id);
             
-            if (JSON.stringify(nextBlocks) !== JSON.stringify(section.blocks)) {
+            if (JSON.stringify(nextBlocks) !== JSON.stringify(currentBlocks)) {
               lastBlocksRef.current = nextBlocks;
               onUpdateBlocks(section.id, nextBlocks);
             }
@@ -274,7 +306,8 @@ function EditorJsSectionEditor({
         return;
       }
 
-      const serialized = JSON.stringify(section.blocks || []);
+      const currentBlocks = sectionBlocksRef.current || [];
+      const serialized = JSON.stringify(currentBlocks);
       const lastSerialized = JSON.stringify(lastBlocksRef.current || []);
 
       if (serialized === lastSerialized) {
@@ -283,20 +316,20 @@ function EditorJsSectionEditor({
 
       try {
         await editorRef.current.isReady;
-        const { bodyBlocks } = splitBlocks(section.blocks || [], section.id);
+        const { bodyBlocks } = splitBlocks(currentBlocks, section.id);
         const nextBlocks = normalizeBlocks(bodyBlocks || []).filter(isRenderableBlock);
         
         if (editorRef.current.blocks && typeof editorRef.current.blocks.render === 'function') {
           await editorRef.current.blocks.render(nextBlocks);
         }
-        lastBlocksRef.current = section.blocks;
+        lastBlocksRef.current = currentBlocks;
       } catch {
         // Ignore render sync errors; editor will refresh on next change.
       }
     };
 
     void syncBlocks();
-  }, [section.blocks, section.id]);
+  }, [section.id]);
 
   return <div ref={holderRef} className="editorjs-shell" />;
 }
@@ -370,23 +403,31 @@ function SortableSectionCard({
 }
 
 export default function EditorJsSectionManager({ value, onChange }: EditorJsSectionManagerProps) {
-  const [sections, setSections] = useState<EditorJsSection[]>([]);
+  const [sections, setSections] = useState<EditorJsSection[]>(() =>
+    value?.sections
+      ? value.sections.map((section) => ({
+          ...section,
+          blocks: normalizeBlocks(section.blocks || []),
+        }))
+      : []
+  );
   const sectionsRef = useRef<EditorJsSection[]>([]);
   const sensors = useSensors(useSensor(PointerSensor));
 
   useEffect(() => {
-    if (value?.sections) {
-      const nextSections = value.sections.map((section) => ({
-        ...section,
-        blocks: normalizeBlocks(section.blocks || []),
-      }));
+    const nextSections = value?.sections
+      ? value.sections.map((section) => ({
+          ...section,
+          blocks: normalizeBlocks(section.blocks || []),
+        }))
+      : [];
 
-      sectionsRef.current = nextSections;
+    sectionsRef.current = nextSections;
+    const timeoutId = window.setTimeout(() => {
       setSections(nextSections);
-    } else {
-      sectionsRef.current = [];
-      setSections([]);
-    }
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, [value]);
 
   const updateSections = useCallback((nextSections: EditorJsSection[]) => {
@@ -412,7 +453,7 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
 
     const next = sectionsRef.current.filter((s) => s.id !== id);
     updateSections(next);
-  }, [onChange]);
+  }, [updateSections]);
 
   const handleUpdateBlocks = useCallback((id: string, blocks: EditorJsBlock[]) => {
     const next = sectionsRef.current.map((s) =>
@@ -430,7 +471,7 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
     updateSections(next);
   }, [updateSections]);
 
-  const handleDragEnd = useCallback((event: any) => {
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
     if (!event.over || event.active.id === event.over.id) {
       return;
     }
@@ -468,7 +509,7 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
 
       {sections.length === 0 ? (
         <div className="rounded-3xl border border-dashed border-white/20 bg-white/[0.02] p-6 text-sm text-white/50">
-          No sections yet. Click "Add section" to start.
+          No sections yet. Click Add section to start.
         </div>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

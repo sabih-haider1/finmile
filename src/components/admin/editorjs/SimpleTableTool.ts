@@ -33,8 +33,16 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
+type EditorJsToolApi = Record<string, unknown>;
+
+type EditorJsToolConstructorArgs = {
+  data?: TableData;
+  api: EditorJsToolApi;
+  readOnly: boolean;
+};
+
 export default class SimpleTableTool {
-  api: any;
+  api: EditorJsToolApi;
 
   readOnly: boolean;
 
@@ -46,7 +54,7 @@ export default class SimpleTableTool {
 
   selection: TableSelection = { row: 0, column: 0 };
 
-  constructor({ data, api, readOnly }: { data: TableData; api: any; readOnly: boolean }) {
+  constructor({ data, api, readOnly }: EditorJsToolConstructorArgs) {
     this.api = api;
     this.readOnly = readOnly;
     this.data = {
