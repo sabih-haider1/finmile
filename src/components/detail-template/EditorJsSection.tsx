@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { EditorJsBlock, EditorJsSection } from '@/types/content';
 import { sanitizeRichHtml } from '@/lib/security';
 
@@ -123,7 +124,14 @@ function ImageBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'i
 
   return (
     <figure key={`image-${index}`} className="my-8 space-y-3">
-      <img src={url} alt={caption || 'Content image'} className="block h-auto w-full rounded-2xl border border-slate-200 shadow-sm" />
+      <Image
+        src={url}
+        alt={caption || 'Content image'}
+        width={1200}
+        height={800}
+        sizes="100vw"
+        className="block h-auto w-full rounded-2xl border border-slate-200 shadow-sm"
+      />
       {caption && <figcaption className="text-center text-sm text-slate-500" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(caption) }} />}
     </figure>
   );
