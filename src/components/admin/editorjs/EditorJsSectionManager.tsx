@@ -36,42 +36,20 @@ interface SortableSectionCardProps {
 type EditorJsInstance = {
   isReady: Promise<void>;
   destroy?: () => void;
-  save: () => Promise<{ blocks: EditorJsBlock[] }>;
+  save: () => Promise<unknown>;
   blocks?: {
-    render: (blocks: EditorJsBlock[]) => Promise<void>;
+    render: (blocks: unknown) => Promise<void>;
   };
 } & Record<string, unknown>;
 
-type EditorJsToolClass = new (...args: never[]) => unknown;
-
-type EditorJsImageUploader = {
-  uploadByUrl: (url: string) => Promise<{ success: 0 | 1; file?: { url: string } }>;
-  uploadByFile: () => Promise<{ success: 0 | 1 }>;
-};
-
-type EditorJsEditorConfig = {
-  holder: HTMLDivElement;
-  data: { blocks: EditorJsBlock[] };
-  defaultBlock: 'paragraph';
-  inlineToolbar: false;
-  minHeight: number;
-  tools: {
-    header: { class: EditorJsToolClass; config: { levels: number[]; defaultLevel: number } };
-    list: { class: EditorJsToolClass; inlineToolbar: false };
-    table: { class: EditorJsToolClass; inlineToolbar: false };
-    image: { class: EditorJsToolClass; config: { uploader: EditorJsImageUploader } };
-  };
-  onChange: () => void | Promise<void>;
-};
-
-type EditorJsConstructor = new (config: EditorJsEditorConfig) => EditorJsInstance;
+type EditorJsConstructor = new (configuration?: unknown) => unknown;
 
 type EditorJsTools = {
   EditorJS: EditorJsConstructor;
-  Header: EditorJsToolClass;
-  List: EditorJsToolClass;
-  Table: EditorJsToolClass;
-  ImageTool: EditorJsToolClass;
+  Header: unknown;
+  List: unknown;
+  Table: unknown;
+  ImageTool: unknown;
 };
 
 function generateId(prefix: string) {
@@ -269,8 +247,8 @@ function EditorJsSectionEditor({
         timeoutRef.current = setTimeout(async () => {
           if (!isMounted) return;
           try {
-            const output = await editor.save();
-            const sanitizedBlocks = normalizeBlocks(output.blocks as EditorJsBlock[]).filter(isRenderableBlock);
+            const output = (await editor.save()) as { blocks?: EditorJsBlock[] };
+            const sanitizedBlocks = normalizeBlocks(output.blocks || []).filter(isRenderableBlock);
             const currentBlocks = sectionBlocksRef.current || [];
             const nextBlocks = applyTitleToBlocks(sanitizedBlocks, getTitleFromBlocks(currentBlocks, section.id), section.id);
             
@@ -283,7 +261,7 @@ function EditorJsSectionEditor({
           }
         }, 250);
       },
-    });
+    } as never) as EditorJsInstance;
 
     editorRef.current = editor;
 
