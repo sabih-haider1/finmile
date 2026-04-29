@@ -367,9 +367,14 @@ function EditorJsSectionEditor({
   const holderRef = useRef<HTMLDivElement | null>(null);
   const lastBlocksRef = useRef<EditorJsBlock[]>(section.blocks);
   const sectionBlocksRef = useRef<EditorJsBlock[]>(section.blocks);
+  const onUpdateBlocksRef = useRef(onUpdateBlocks);
   const toolsRef = useRef<EditorJsTools | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [toolsReady, setToolsReady] = useState(false);
+
+  useEffect(() => {
+    onUpdateBlocksRef.current = onUpdateBlocks;
+  }, [onUpdateBlocks]);
 
   useEffect(() => {
     sectionBlocksRef.current = section.blocks;
@@ -499,7 +504,7 @@ function EditorJsSectionEditor({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [onUpdateBlocks, section.id, toolsReady]);
+  }, [section.id, toolsReady]);
 
   useEffect(() => {
     const syncBlocks = async () => {
