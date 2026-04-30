@@ -70,6 +70,26 @@ function generateId(prefix: string) {
   return `${prefix}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+function ensureUniqueSectionIds(sections: EditorJsSection[]) {
+  const seen = new Set<string>();
+  return sections.map((s) => {
+    const originalId = typeof s.id === 'string' && s.id.trim() ? s.id.trim() : undefined;
+    let id = originalId || generateId('section');
+    if (seen.has(id)) {
+      // duplicate id detected, generate a new one
+      console.warn('Duplicate section id detected, generating new id for section', id);
+      id = generateId('section');
+    }
+    seen.add(id);
+    return { ...s, id };
+  });
+}
+
+function validateSectionsShape(sections: unknown) {
+  if (!Array.isArray(sections)) return false;
+  return sections.every((s) => s && typeof s === 'object' && typeof (s as any).id === 'string' && Array.isArray((s as any).blocks));
+}
+
 function stripTags(value: unknown) {
   return String(value ?? '').replace(/<[^>]*>/g, '');
 }
@@ -609,24 +629,24 @@ function SortableSectionCard({
 }
 
 export default function EditorJsSectionManager({ value, onChange }: EditorJsSectionManagerProps) {
-  const [sections, setSections] = useState<EditorJsSection[]>(() =>
-    value?.sections
-      ? value.sections.map((section) => ({
-          ...section,
-          blocks: normalizeBlocks(section.blocks || []),
-        }))
-      : []
-  );
+  const [sections, setSections] = useState<EditorJsSection[]>(() => {
+    const incoming = value?.sections || [];
+    const normalized = incoming.map((section) => ({ ...section, blocks: normalizeBlocks(section.blocks || []) } as EditorJsSection));
+    return ensureUniqueSectionIds(normalized);
+  });
   const sectionsRef = useRef<EditorJsSection[]>([]);
   const sensors = useSensors(useSensor(PointerSensor));
 
   useEffect(() => {
-    const nextSections = value?.sections
-      ? value.sections.map((section) => ({
-          ...section,
-          blocks: normalizeBlocks(section.blocks || []),
-        }))
-      : [];
+    const raw = value?.sections || [];
+    if (!validateSectionsShape(raw)) {
+      if (raw && (raw as any).length) {
+        console.warn('Received malformed sections payload for EditorJS; ignoring invalid entries.');
+      }
+    }
+
+    const mapped = (raw as EditorJsSection[]).map((section) => ({ ...section, blocks: normalizeBlocks(section.blocks || []) }));
+    const nextSections = ensureUniqueSectionIds(mapped);
 
     sectionsRef.current = nextSections;
     const timeoutId = window.setTimeout(() => {
@@ -637,9 +657,15 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
   }, [value]);
 
   const updateSections = useCallback((nextSections: EditorJsSection[]) => {
-    sectionsRef.current = nextSections;
-    setSections(nextSections);
-    onChange({ sections: nextSections });
+    // Ensure immutability and unique ids before emitting change
+    const next = ensureUniqueSectionIds(nextSections.map((s) => ({ ...s, blocks: normalizeBlocks(s.blocks || []) })));
+    sectionsRef.current = next;
+    setSections(next);
+    try {
+      onChange({ sections: next });
+    } catch (err) {
+      console.error('onChange callback error in EditorJsSectionManager:', err);
+    }
   }, [onChange]);
 
   const handleAddSection = () => {
@@ -649,7 +675,8 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
       blocks: [],
     };
 
-    updateSections([...sections, nextSection]);
+    // Protect against accidental mutation of sections array
+    updateSections([...sectionsRef.current, nextSection]);
   };
 
   const handleDelete = useCallback((id: string) => {

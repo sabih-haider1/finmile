@@ -81,12 +81,12 @@ function TableBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 't
     <div key={`table-${index}`} className="my-8 overflow-x-auto rounded-3xl border border-[#E6D9FF] bg-[#FCFBFF] shadow-[0_10px_32px_rgba(106,39,212,0.08)]">
       <table className="w-full border-collapse text-left text-sm text-[#4b5563]">
         {showHeadings && (
-          <thead className="bg-[#F5F0FF]">
+          <thead className="bg-[#2f1c8c]">
             <tr>
               {headRow.map((cell, cellIndex) => (
                 <th
                   key={`table-head-${index}-${cellIndex}`}
-                  className="border-b border-[#E6D9FF] px-4 py-3 font-semibold text-[#111827]"
+                  className="border-b border-[#E6D9FF] px-4 py-3 font-semibold text-white"
                   dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(cell || '') }}
                 />
               ))}

@@ -201,23 +201,51 @@ export default class SimpleTableTool {
         this.selection = { row, column };
       });
 
+      // Robust paste handling: prevent duplicate insertions and stop propagation
       cell.addEventListener('paste', (event) => {
-        event.preventDefault();
-        const text = event.clipboardData?.getData('text/plain') ?? '';
+        try {
+          // Prevent other handlers (including EditorJS) from processing this paste
+          event.preventDefault();
+          // Stop bubbling to avoid other listeners on ancestors
+          event.stopPropagation();
+          // Stop other listeners on the same element
+          if (typeof (event as unknown as { stopImmediatePropagation?: () => void }).stopImmediatePropagation === 'function') {
+            (event as unknown as { stopImmediatePropagation: () => void }).stopImmediatePropagation();
+          }
 
-        if (text && document.queryCommandSupported?.('insertText')) {
-          document.execCommand('insertText', false, text);
-          return;
+          // Guard against double-handling within a short time window
+          const last = Number(cell.dataset.__lastPasteAt || '0');
+          const now = Date.now();
+          if (now - last < 300) {
+            return;
+          }
+          cell.dataset.__lastPasteAt = String(now);
+
+          const text = event.clipboardData?.getData('text/plain') ?? '';
+
+          if (text && document.queryCommandSupported?.('insertText')) {
+            // Use execCommand as the preferred insertion method for compatibility
+            document.execCommand('insertText', false, text);
+            return;
+          }
+
+          const selection = window.getSelection();
+          if (!selection || selection.rangeCount === 0) {
+            cell.textContent = text;
+            return;
+          }
+
+          selection.deleteFromDocument();
+          selection.getRangeAt(0).insertNode(document.createTextNode(text));
+        } catch (err) {
+          // If anything goes wrong, fallback to a safe assignment
+          try {
+            const text = (event as ClipboardEvent).clipboardData?.getData('text/plain') ?? '';
+            cell.textContent = text;
+          } catch {
+            /* ignore */
+          }
         }
-
-        const selection = window.getSelection();
-        if (!selection || selection.rangeCount === 0) {
-          cell.textContent = text;
-          return;
-        }
-
-        selection.deleteFromDocument();
-        selection.getRangeAt(0).insertNode(document.createTextNode(text));
       });
     }
 
