@@ -92,20 +92,39 @@ export default function ResourcesPage() {
 
   const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
-      const readApiErrorMessage = async (response: Response, fallbackMessage: string) => {
-        const contentType = response.headers.get('content-type') || '';
-
-        try {
-          if (contentType.includes('application/json')) {
-            const data = await response.json() as Record<string, unknown>;
-            return (data.error as string) || (data.message as string) || fallbackMessage;
-          }
-
-          const text = await response.text();
-          return text.trim().length > 0 ? text : fallbackMessage;
-        } catch {
+      const getApiErrorMessage = (
+        result: Record<string, unknown> | null,
+        fallbackMessage: string
+      ) => {
+        if (!result) {
           return fallbackMessage;
         }
+
+        const errorMessage = result.error;
+        if (typeof errorMessage === 'string' && errorMessage.trim().length > 0) {
+          return errorMessage;
+        }
+
+        const message = result.message;
+        if (typeof message === 'string' && message.trim().length > 0) {
+          return message;
+        }
+
+        const details = result.details;
+        if (typeof details === 'string' && details.trim().length > 0) {
+          return details;
+        }
+
+        return fallbackMessage;
+      };
+
+      const normalizeTextValue = (value: unknown): string | null => {
+        if (typeof value !== 'string') {
+          return null;
+        }
+
+        const trimmed = value.trim();
+        return trimmed.length > 0 ? trimmed : null;
       };
 
       const normalizeUrlValue = (value: unknown): string | null => {
@@ -182,15 +201,15 @@ export default function ResourcesPage() {
       if (editingResource) {
         // Update existing resource
         const updateData: Record<string, unknown> = {
-          title: formData.title as string,
+          title: normalizeTextValue(formData.title) || editingResource.title,
           slug: resourceData.slug,
-          description: formData.description as string | null,
+          description: normalizeTextValue(formData.description),
           file_url: resourceData.file_url || null,
           file_type: (resourceData.file_type as string) || null,
           thumbnail_url: resourceData.thumbnail_url,
-          author_name: (formData.author_name as string) || null,
-          topic: (formData.topic as string) || null,
-          industry: (formData.industry as string) || null,
+          author_name: normalizeTextValue(formData.author_name),
+          topic: normalizeTextValue(formData.topic),
+          industry: normalizeTextValue(formData.industry),
           tags: resourceData.tags || null,
           is_featured: formData.is_featured,
           is_published: formData.is_published,
@@ -219,7 +238,7 @@ export default function ResourcesPage() {
         console.log('[Resources] API Response:', { status: response.status, ok: response.ok, result });
         
         if (!response.ok) {
-          const errorMessage = await readApiErrorMessage(response, 'Failed to update resource');
+          const errorMessage = getApiErrorMessage(result, 'Failed to update resource');
           console.error('[Resources] Update error:', errorMessage, result);
           throw new Error(errorMessage);
         }
@@ -227,15 +246,15 @@ export default function ResourcesPage() {
       } else {
         // Create new resource
         const insertData: Record<string, unknown> = {
-          title: formData.title as string,
+          title: normalizeTextValue(formData.title),
           slug: resourceData.slug,
-          description: formData.description as string | null,
+          description: normalizeTextValue(formData.description),
           file_url: resourceData.file_url || null,
           file_type: (resourceData.file_type as string) || null,
           thumbnail_url: resourceData.thumbnail_url,
-          author_name: (formData.author_name as string) || null,
-          topic: (formData.topic as string) || null,
-          industry: (formData.industry as string) || null,
+          author_name: normalizeTextValue(formData.author_name),
+          topic: normalizeTextValue(formData.topic),
+          industry: normalizeTextValue(formData.industry),
           tags: resourceData.tags || null,
           is_featured: formData.is_featured,
           is_published: formData.is_published,
@@ -265,7 +284,7 @@ export default function ResourcesPage() {
         console.log('[Resources] API Response:', { status: response.status, ok: response.ok, result });
         
         if (!response.ok) {
-          const errorMessage = await readApiErrorMessage(response, 'Failed to create resource');
+          const errorMessage = getApiErrorMessage(result, 'Failed to create resource');
           console.error('[Resources] Create error:', errorMessage, result);
           throw new Error(errorMessage);
         }
