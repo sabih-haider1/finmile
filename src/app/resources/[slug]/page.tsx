@@ -44,6 +44,10 @@ export default async function ResourceDetailPage({ params }: Props) {
     notFound();
   }
 
+  const resourceFileUrl = typeof resource.file_url === 'string' && resource.file_url.trim().length > 0
+    ? resource.file_url.trim()
+    : null;
+
   const authorName = (resource as { author_name?: string }).author_name || 'Finmile Editorial Team';
   const publishDate = resource.created_at;
 
@@ -81,10 +85,10 @@ export default async function ResourceDetailPage({ params }: Props) {
         id: 'resource-body',
         type: 'content',
         data: {
-          body: `<p>${resource.description}</p>${resource.file_url ? `<p><a href="${resource.file_url}" target="_blank" rel="noopener noreferrer">Download the resource</a></p>` : ''}`,
+          body: `<p>${resource.description}</p>${resourceFileUrl ? `<p><a href="${resourceFileUrl}" target="_blank" rel="noopener noreferrer">Download the resource</a></p>` : ''}`,
         },
       },
-      ...(resource.file_url ? [{
+      ...(resourceFileUrl ? [{
         id: 'resource-cta',
         type: 'cta' as const,
         data: {
@@ -94,7 +98,7 @@ export default async function ResourceDetailPage({ params }: Props) {
             'Use it for internal sharing',
             'Reference it in your team workflow',
           ],
-          cta_button: { label: 'Download File', url: resource.file_url },
+          cta_button: { label: 'Download File', url: resourceFileUrl },
         },
       }] : []),
     ],
@@ -154,7 +158,7 @@ export default async function ResourceDetailPage({ params }: Props) {
         <DetailPageTemplate
           content={content}
           author={authorDisplay}
-          downloadButton={resource.file_url ? { url: resource.file_url, label: resource.file_type === 'pdf' ? 'Download PDF' : 'Download File' } : undefined}
+          downloadButton={resourceFileUrl ? { url: resourceFileUrl, label: resource.file_type === 'pdf' ? 'Download PDF' : 'Download File' } : undefined}
         />
       </div>
 

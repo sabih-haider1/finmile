@@ -315,7 +315,7 @@ export default function ResourcesPage() {
             fields={resourceFormFields}
             initialData={editingResource
               ? editingResource
-              : { is_featured: false, is_published: true, file_type: 'pdf' }}
+              : { is_featured: false, is_published: true }}
             onSubmit={handleFormSubmit}
             onCancel={() => {
               setShowCreateForm(false);

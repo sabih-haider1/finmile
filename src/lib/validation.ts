@@ -228,11 +228,11 @@ export const resourceSchema = z.object({
   description: z.string().max(2000).optional(),
   file_url: z.preprocess(
     coerceUrlInput,
-    z.string().url('Valid file URL is required')
+    z.string().url('Valid file URL is required').optional().nullable()
   ),
   file_type: z.enum(allowedFileTypes as [string, ...string[]], {
     message: `File type must be one of: ${allowedFileTypes.join(', ')}`,
-  }),
+  }).optional().nullable(),
   thumbnail_url: urlPattern,
   author_name: z.string().max(200).optional().nullable(),
   topic: z.string().max(200).optional().nullable(),
