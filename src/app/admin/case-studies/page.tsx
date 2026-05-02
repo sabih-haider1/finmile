@@ -112,7 +112,10 @@ export default function CaseStudiesPage() {
       };
 
       let coverImageUrl = normalizeUrlValue(formData.cover_image_url);
-
+      // Preserve existing URL on update if no new file provided
+      if (editingCaseStudy && !files.cover_image_url && !coverImageUrl) {
+        coverImageUrl = editingCaseStudy.cover_image_url;
+      }
       // Upload cover image if provided
       if (files.cover_image_url) {
         const uploadResult = await uploadFile({

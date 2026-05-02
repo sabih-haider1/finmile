@@ -114,6 +114,16 @@ export default function ResourcesPage() {
       let fileUrl = normalizeUrlValue(formData.file_url);
       let thumbnailUrl = normalizeUrlValue(formData.thumbnail_url);
 
+      // Preserve existing URLs on update if no new file provided
+      if (editingResource) {
+        if (!files.file_url && !fileUrl) {
+          fileUrl = editingResource.file_url;
+        }
+        if (!files.thumbnail_url && !thumbnailUrl) {
+          thumbnailUrl = editingResource.thumbnail_url;
+        }
+      }
+
       // Upload file if provided
       if (files.file_url) {
         const fileUploadResult = await uploadFile({
@@ -144,7 +154,7 @@ export default function ResourcesPage() {
       const resourceData = {
         ...formData,
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
-        file_url: fileUrl || null,
+        file_url: fileUrl || '',
         file_type: formData.file_type || 'pdf',
         thumbnail_url: thumbnailUrl || null,
         created_at: formData.created_at

@@ -112,7 +112,10 @@ export default function BlogsPage() {
       };
 
       let coverImageUrl = normalizeUrlValue(formData.cover_image_url);
-
+      // Preserve existing URL on update if no new file provided
+      if (editingBlog && !files.cover_image_url && !coverImageUrl) {
+        coverImageUrl = editingBlog.cover_image_url;
+      }
       // Upload cover image if provided
       if (files.cover_image_url) {
         const uploadResult = await uploadFile({

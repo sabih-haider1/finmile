@@ -63,6 +63,11 @@ export default function GuidesPage() {
     try {
       let pdfUrl = formData.pdf_url;
 
+      // Preserve existing URL on update if no new file provided
+      if (editingGuide && !files.pdf_url && !pdfUrl) {
+        pdfUrl = editingGuide.pdf_url;
+      }
+
       // Upload PDF if provided
       if (files.pdf_url) {
         const uploadResult = await uploadFile({

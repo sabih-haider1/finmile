@@ -86,7 +86,7 @@ export async function uploadFile({
       .from(bucket)
       .upload(filePath, file, {
         cacheControl: '3600',
-        upsert: false, // Prevent overwriting existing files
+        upsert: true, // Allow re-uploads of same file
       });
 
     if (error) {

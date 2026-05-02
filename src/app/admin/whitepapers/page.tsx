@@ -118,6 +118,16 @@ export default function WhitepapersPage() {
       let coverImageUrl = normalizeUrlValue(formData.cover_image_url);
       let pdfUrl = normalizeUrlValue(formData.pdf_url);
 
+      // Preserve existing URLs on update if no new files provided
+      if (editingWhitepaper) {
+        if (!files.cover_image_url && !coverImageUrl) {
+          coverImageUrl = editingWhitepaper.cover_image_url;
+        }
+        if (!files.pdf_url && !pdfUrl) {
+          pdfUrl = editingWhitepaper.pdf_url;
+        }
+      }
+
       // Upload cover image if provided
       if (files.cover_image_url) {
         const coverUploadResult = await uploadFile({
