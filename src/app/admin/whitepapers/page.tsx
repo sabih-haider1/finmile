@@ -226,7 +226,6 @@ export default function WhitepapersPage() {
           tags: whitepaperData.tags || null,
           is_featured: formData.is_featured,
           is_published: formData.is_published,
-          created_at: whitepaperData.created_at,
           sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();

@@ -201,14 +201,14 @@ export default function ResourcesPage() {
           file_url: resourceData.file_url,
           file_type: resourceData.file_type,
           thumbnail_url: resourceData.thumbnail_url,
-          author_name: resourceData.author_name || null,
-          topic: resourceData.topic || null,
-          industry: resourceData.industry || null,
+          author_name: (formData.author_name as string) || null,
+          topic: (formData.topic as string) || null,
+          industry: (formData.industry as string) || null,
           tags: resourceData.tags || null,
-          is_featured: resourceData.is_featured,
-          is_published: resourceData.is_published,
+          is_featured: formData.is_featured,
+          is_published: formData.is_published,
           created_at: resourceData.created_at,
-          sections: resourceData.sections || null,
+          sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/resources', {
