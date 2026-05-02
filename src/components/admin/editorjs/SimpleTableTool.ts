@@ -237,7 +237,7 @@ export default class SimpleTableTool {
 
           selection.deleteFromDocument();
           selection.getRangeAt(0).insertNode(document.createTextNode(text));
-        } catch (err) {
+        } catch {
           // If anything goes wrong, fallback to a safe assignment
           try {
             const text = (event as ClipboardEvent).clipboardData?.getData('text/plain') ?? '';

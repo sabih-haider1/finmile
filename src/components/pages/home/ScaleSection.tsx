@@ -28,10 +28,11 @@ export const ScaleSection = () => {
 
       <motion.section
         className="w-full bg-[#fcfcff] flex flex-col items-center px-4 md:px-6 py-10 lg:py-[clamp(32px,5vw,48px)] overflow-hidden relative"
+        style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 900px' }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.15 }}
       >
         {/* Section Header */}
         <motion.div
@@ -39,7 +40,7 @@ export const ScaleSection = () => {
           initial="hidden"
           whileInView="visible"
           variants={fadeInUp}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           <h2 className="text-[#2F1C8C] font-semibold tracking-normal md:tracking-tight mb-6 leading-tight text-balance text-[clamp(28px,4vw,48px)]">
             Built for scale. Designed for reality.

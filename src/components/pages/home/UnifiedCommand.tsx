@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { fadeInUp } from '@/lib/animations';
 
@@ -14,6 +14,8 @@ const slides = [
 
 export const UnifiedCommand = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const sectionRef = useRef<HTMLElement | null>(null);
+    const isInView = useInView(sectionRef, { amount: 0.3, once: false });
 
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -27,17 +29,22 @@ export const UnifiedCommand = () => {
         setCurrentSlide(index);
     };
 
-    // Auto-slide every 5 seconds
+    // Keep the autoplay idle until the section is on screen.
     useEffect(() => {
+        if (!isInView) {
+            return;
+        }
+
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
         }, 5000);
 
         return () => clearInterval(interval);
-        }, []);
+    }, [isInView]);
 
     return (
         <motion.section 
+          ref={sectionRef}
           className="w-full -mb-[1px] relative z-10 bg-white flex flex-col items-center px-4 md:px-6 py-6 lg:py-[clamp(40px,5vw,64px)] overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -57,7 +64,6 @@ export const UnifiedCommand = () => {
                     One Unified Command Interface
                 </h2>
                 <p className="text-[#848DA0] text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed px-4">
-                    All agents operate through a single control layer with full visibility across planning, live execution, and outcomes.
                 </p>
             </motion.div>
 
@@ -68,7 +74,7 @@ export const UnifiedCommand = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true, amount: 0.3 }}
-                            whileHover={{ y: -4 }}
+              whileHover={{ y: -4 }}
             >
                 <AnimatePresence mode="wait">
                     <motion.div
@@ -78,7 +84,7 @@ export const UnifiedCommand = () => {
                         exit={{ opacity: 0, x: -40 }}
                         transition={{ duration: 0.45, ease: 'easeInOut' }}
                         className="w-full h-full flex items-center justify-center"
-                                                whileHover={{ scale: 1.01 }}
+                        whileHover={{ scale: 1.01 }}
                     >
                         <Image
                             src={slides[currentSlide]}

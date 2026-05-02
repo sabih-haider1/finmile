@@ -1,11 +1,7 @@
 import dynamicImport from 'next/dynamic';
 import { Header } from "../components/layout/Header";
 import { Hero } from "../components/pages/home/Hero";
-
-const TrustSection = dynamicImport(
-  () => import('../components/pages/home/MainFeatures').then((mod) => mod.TrustSection),
-  { loading: () => <section className="w-full min-h-[220px] bg-white" aria-hidden="true" /> }
-);
+import { TrustSection } from "../components/pages/home/TrustSection";
 
 const Footer = dynamicImport(
   () => import('../components/layout/Footer').then((mod) => mod.Footer),

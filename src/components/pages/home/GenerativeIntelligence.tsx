@@ -9,10 +9,11 @@ export const GenerativeIntelligence = () => {
     return (
         <motion.section
             className="w-full bg-[#0B0616] py-10 md:py-[clamp(40px,5vw,64px)] flex flex-col items-center px-6 lg:px-24 relative overflow-hidden"
+            style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 900px' }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.15 }}
         >
 
             {/* Background Glow Effects */}
@@ -27,7 +28,7 @@ export const GenerativeIntelligence = () => {
                   initial="hidden"
                   whileInView="visible"
                   variants={staggerContainer}
-                  viewport={{ once: true, amount: 0.3 }}
+                                    viewport={{ once: true, amount: 0.15 }}
                 >
                     <motion.div className="w-full max-w-[800px]" variants={fadeInLeft}>
                         <Image
@@ -56,7 +57,7 @@ export const GenerativeIntelligence = () => {
                   initial="hidden"
                   whileInView="visible"
                   variants={staggerContainer}
-                  viewport={{ once: true, amount: 0.3 }}
+                                    viewport={{ once: true, amount: 0.15 }}
                 >
                     <motion.h2 variants={fadeInRight} className="text-white font-semibold leading-[1.05] tracking-normal md:tracking-tight text-balance text-[clamp(28px,4vw,48px)]">
                         Generative Intelligence

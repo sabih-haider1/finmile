@@ -18,10 +18,11 @@ export const TrustSection = () => {
   return (
     <motion.section 
       className="w-full py-[clamp(32px,4vw,40px)] pb-[41px] -mb-[1px] relative z-10 bg-white flex flex-col items-center px-6 lg:px-20"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 520px' }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.15 }}
     >
       <motion.h2 
         className='text-[#2F1C8C] font-bold text-[12px] tracking-[2px] uppercase mb-10 text-center leading-[15px] text-balance'
@@ -70,7 +71,7 @@ export const TrustSection = () => {
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.15 }}
       >
         {brands.map((brand, index) => {
           const isOddLastItem = brands.length % 2 !== 0 && index === brands.length - 1;
@@ -102,7 +103,10 @@ export const TrustSection = () => {
 
 export const FeaturesSection = () => {
   return (
-    <section className="w-full py-6 lg:py-6 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative">
+    <section
+      className="w-full py-6 lg:py-6 pb-6 bg-white flex flex-col items-center px-6 lg:px-20 relative"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 860px' }}
+    >
       <div className='max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-start'>
 
         {/* Left Column */}
@@ -111,7 +115,7 @@ export const FeaturesSection = () => {
           initial="hidden"
           whileInView="visible"
           variants={staggerContainer}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           <motion.h2
             variants={fadeInLeft}
@@ -156,7 +160,7 @@ export const FeaturesSection = () => {
           initial="hidden"
           whileInView="visible"
           variants={fadeInRight}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           {/* Background Highlight Glow */}
           <div aria-hidden="true" className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0' />
@@ -179,7 +183,7 @@ export const FeaturesSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.15 }}
               whileHover={{ y: -6, scale: 1.02 }}
             >
               <div className='text-[#2F1C8C] text-[36px] md:text-[40px] font-bold leading-none mb-1.5'>42%</div>
@@ -192,7 +196,7 @@ export const FeaturesSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.15 }}
               whileHover={{ y: -6, scale: 1.02 }}
             >
               <div className='text-white text-[36px] md:text-[40px] font-bold leading-none mb-1.5'>91%</div>

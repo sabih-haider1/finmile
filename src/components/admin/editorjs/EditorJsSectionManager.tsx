@@ -62,6 +62,11 @@ type EditorJsTools = {
   ImageTool: unknown;
 };
 
+type EditorJsSectionRecord = {
+  id: string;
+  blocks: unknown[];
+} & Record<string, unknown>;
+
 function generateId(prefix: string) {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
     return `${prefix}-${crypto.randomUUID()}`;
@@ -85,9 +90,18 @@ function ensureUniqueSectionIds(sections: EditorJsSection[]) {
   });
 }
 
-function validateSectionsShape(sections: unknown) {
+function isEditorJsSectionRecord(section: unknown): section is EditorJsSectionRecord {
+  if (!section || typeof section !== 'object' || Array.isArray(section)) {
+    return false;
+  }
+
+  const candidate = section as Record<string, unknown>;
+  return typeof candidate.id === 'string' && Array.isArray(candidate.blocks);
+}
+
+function validateSectionsShape(sections: unknown): sections is EditorJsSectionRecord[] {
   if (!Array.isArray(sections)) return false;
-  return sections.every((s) => s && typeof s === 'object' && typeof (s as any).id === 'string' && Array.isArray((s as any).blocks));
+  return sections.every((section) => isEditorJsSectionRecord(section));
 }
 
 function stripTags(value: unknown) {
@@ -502,7 +516,7 @@ function EditorJsSectionEditor({
             
             if (JSON.stringify(nextBlocks) !== JSON.stringify(currentBlocks)) {
               lastBlocksRef.current = nextBlocks;
-              onUpdateBlocks(section.id, nextBlocks);
+              onUpdateBlocksRef.current(section.id, nextBlocks);
             }
           } catch (err) {
             console.error('Failed to save EditorJS content:', err);
@@ -640,12 +654,15 @@ export default function EditorJsSectionManager({ value, onChange }: EditorJsSect
   useEffect(() => {
     const raw = value?.sections || [];
     if (!validateSectionsShape(raw)) {
-      if (raw && (raw as any).length) {
+      if (Array.isArray(raw) && raw.length) {
         console.warn('Received malformed sections payload for EditorJS; ignoring invalid entries.');
       }
     }
 
-    const mapped = (raw as EditorJsSection[]).map((section) => ({ ...section, blocks: normalizeBlocks(section.blocks || []) }));
+    const mapped: EditorJsSection[] = raw.map((section) => ({
+      ...section,
+      blocks: normalizeBlocks(section.blocks || []),
+    }));
     const nextSections = ensureUniqueSectionIds(mapped);
 
     sectionsRef.current = nextSections;

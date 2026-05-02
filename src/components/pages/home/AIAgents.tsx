@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -103,6 +101,7 @@ export const AIAgentsSection = () => {
   return (
     <section 
       className="w-full -mb-[1px] relative z-10 bg-white flex flex-col items-center px-4 lg:px-20 py-[clamp(40px,5vw,64px)]"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 2100px' }}
     >
       <div className='text-center mb-10 w-full max-w-[1400px]'>
         <h2 
