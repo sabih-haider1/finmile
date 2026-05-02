@@ -181,6 +181,9 @@ export default function ResourcesPage() {
           sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();
+        
+        console.log('[Resources] Updating resource:', editingResource.id, updateData);
+        
         const response = await fetch(`/api/resources/${editingResource.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', ...authHeader },
@@ -188,8 +191,13 @@ export default function ResourcesPage() {
           body: JSON.stringify(updateData),
         });
         const result = await response.json() as Record<string, unknown>;
+        
+        console.log('[Resources] API Response:', { status: response.status, ok: response.ok, result });
+        
         if (!response.ok) {
-          throw new Error((result.error as string) || 'Failed to update resource');
+          const errorMessage = (result.error as string) || (result.message as string) || 'Failed to update resource';
+          console.error('[Resources] Update error:', errorMessage, result);
+          throw new Error(errorMessage);
         }
         alert('Resource updated successfully!');
       } else {
@@ -211,6 +219,9 @@ export default function ResourcesPage() {
           sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();
+        
+        console.log('[Resources] Creating resource:', insertData);
+        
         const response = await fetch('/api/resources', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', ...authHeader },
@@ -218,8 +229,13 @@ export default function ResourcesPage() {
           body: JSON.stringify(insertData),
         });
         const result = await response.json() as Record<string, unknown>;
+        
+        console.log('[Resources] API Response:', { status: response.status, ok: response.ok, result });
+        
         if (!response.ok) {
-          throw new Error((result.error as string) || 'Failed to create resource');
+          const errorMessage = (result.error as string) || (result.message as string) || 'Failed to create resource';
+          console.error('[Resources] Create error:', errorMessage, result);
+          throw new Error(errorMessage);
         }
         alert('Resource created successfully!');
       }
@@ -228,7 +244,9 @@ export default function ResourcesPage() {
       setEditingResource(null);
       fetchResources();
     } catch (error: unknown) {
-      throw new Error(error instanceof Error ? error.message : 'Failed to save resource');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to save resource';
+      console.error('[Resources] Form submission error:', errorMessage, error);
+      throw new Error(errorMessage);
     }
   };
 
