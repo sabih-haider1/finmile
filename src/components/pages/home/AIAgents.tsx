@@ -10,7 +10,9 @@ const AgentCard = ({ title, description, benefits, index }: {
   index: number;
 }) => {
   const stickyTop = `calc(80px + ${index * 20}px)`;
-  const zIndex = (index + 1) * 10;
+  // Ensure Agent cards stack above nearby feature cards (e.g. the 91% card with z-40).
+  // Use a high base so these sticky cards reliably appear on top without changing structure.
+  const zIndex = 1000 + index;
 
   return (
     <div
@@ -100,8 +102,8 @@ export const AIAgentsSection = () => {
 
   return (
     <section 
-      className="w-full -mb-[1px] relative z-10 bg-white flex flex-col items-center px-4 lg:px-20 py-[clamp(40px,5vw,64px)]"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 2100px' }}
+      className="w-full -mb-[1px] relative isolate bg-white flex flex-col items-center px-4 lg:px-20 py-[clamp(40px,5vw,64px)]"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 2100px', zIndex: 100000 }}
     >
       <div className='text-center mb-10 w-full max-w-[1400px]'>
         <h2 
