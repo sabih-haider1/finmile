@@ -169,8 +169,8 @@ export default function ResourcesPage() {
           title: formData.title as string,
           slug: resourceData.slug,
           description: formData.description as string | null,
-          file_url: resourceData.file_url,
-          file_type: resourceData.file_type,
+          file_url: resourceData.file_url || null,
+          file_type: (resourceData.file_type as string) || null,
           thumbnail_url: resourceData.thumbnail_url,
           author_name: (formData.author_name as string) || null,
           topic: (formData.topic as string) || null,
@@ -180,6 +180,14 @@ export default function ResourcesPage() {
           is_published: formData.is_published,
           sections: (formData.sections as unknown) || null,
         };
+
+        // Normalize empty strings to null for optional fields
+        Object.keys(updateData).forEach((key) => {
+          if (updateData[key] === '') {
+            updateData[key] = null;
+          }
+        });
+
         const authHeader = await getAuthHeader();
         
         console.log('[Resources] Updating resource:', editingResource.id, updateData);
@@ -206,8 +214,8 @@ export default function ResourcesPage() {
           title: formData.title as string,
           slug: resourceData.slug,
           description: formData.description as string | null,
-          file_url: resourceData.file_url,
-          file_type: resourceData.file_type,
+          file_url: resourceData.file_url || null,
+          file_type: (resourceData.file_type as string) || null,
           thumbnail_url: resourceData.thumbnail_url,
           author_name: (formData.author_name as string) || null,
           topic: (formData.topic as string) || null,
@@ -218,6 +226,14 @@ export default function ResourcesPage() {
           created_at: resourceData.created_at,
           sections: (formData.sections as unknown) || null,
         };
+
+        // Normalize empty strings to null for optional fields
+        Object.keys(insertData).forEach((key) => {
+          if (insertData[key] === '') {
+            insertData[key] = null;
+          }
+        });
+
         const authHeader = await getAuthHeader();
         
         console.log('[Resources] Creating resource:', insertData);
