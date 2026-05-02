@@ -11,8 +11,8 @@ interface Resource {
   title: string;
   slug: string;
   description: string;
-  file_url: string;
-  file_type: 'pdf' | 'docx' | 'xlsx' | 'zip';
+  file_url: string | null;
+  file_type: 'pdf' | 'docx' | 'xlsx' | 'zip' | null;
   thumbnail_url: string | null;
   topic: string | null;
   industry: string | null;
@@ -40,7 +40,7 @@ function ResourceCard({ resource }: { resource: Resource }) {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-gray-400">
               <div className="text-4xl mb-2">📁</div>
-              <div className="text-sm font-medium">{resource.file_type.toUpperCase()}</div>
+              <div className="text-sm font-medium">{resource.file_type ? resource.file_type.toUpperCase() : 'RESOURCE'}</div>
             </div>
           </div>
         )}

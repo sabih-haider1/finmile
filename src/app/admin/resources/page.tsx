@@ -145,7 +145,7 @@ export default function ResourcesPage() {
         ...formData,
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
         file_url: fileUrl || null,
-        file_type: formData.file_type || (fileUrl ? 'pdf' : null),
+        file_type: formData.file_type || 'pdf',
         thumbnail_url: thumbnailUrl || null,
         created_at: formData.created_at
           ? new Date(formData.created_at as string).toISOString()
