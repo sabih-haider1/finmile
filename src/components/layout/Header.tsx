@@ -3,14 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Button } from "../ui/Button";
 
 export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [hoveredLink, setHoveredLink] = useState<string | null>(null);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
@@ -84,47 +82,9 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
     }, [isMobileMenuOpen]);
     const DEMO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScU-6l73tsAkZgXUH5YZtpVgDLw2LxRNfZRQCaarp46eqa33g/viewform';
 
-    const headerVariants: Variants = {
-        initial: { y: -100, opacity: 0 },
-        animate: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
-    };
-
-    const navItemVariants: Variants = {
-        hidden: { opacity: 0, y: 10 },
-        visible: (i: number) => ({
-            opacity: 1,
-            y: 0,
-            transition: { delay: i * 0.05 + 0.3, duration: 0.4, ease: "easeOut" }
-        })
-    };
-
-    const mobileMenuVariants: Variants = {
-        closed: { x: '100%', transition: { type: 'spring', stiffness: 300, damping: 30 } },
-        open: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } }
-    };
-
-    const dropdownVariants: Variants = {
-        hidden: { opacity: 0, y: 10, scale: 0.95 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            transition: { duration: 0.2, ease: "easeOut" }
-        },
-        exit: {
-            opacity: 0,
-            y: 10,
-            scale: 0.95,
-            transition: { duration: 0.15, ease: "easeIn" }
-        }
-    };
-
     return (
         <>
-            <motion.header
-                variants={headerVariants}
-                initial="initial"
-                animate="animate"
+            <header
                 className={`fixed left-0 right-0 z-[100] mx-auto flex items-center justify-between px-4 md:px-8 lg:px-10 rounded-full transition-all duration-500 ease-out 
                     w-[calc(100%-16px)] md:w-[calc(100%-40px)] lg:w-[calc(100%-48px)] xl:w-[calc(100%-32px)] 2xl:w-[calc(100%-60px)] max-w-[1600px] ${isMobileMenuOpen && 'xl:hidden'
                         ? 'bg-transparent border-transparent py-3 lg:py-4'
@@ -153,36 +113,23 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
 
                 {/* Center Nav Links - Desktop */}
                 <nav className="hidden xl:flex items-center justify-center min-w-0 flex-1 gap-1 2xl:gap-2 mx-2">
-                    {links.map((link, i) => {
+                    {links.map((link) => {
                         const isActive = link.href.startsWith('/') && (pathname === link.href || pathname?.startsWith(link.href + '/'));
                         const hasSubMenu = link.subMenu && link.subMenu.length > 0;
 
                         return (
-                            <motion.div
+                            <div
                                 key={link.name}
-                                custom={i}
-                                variants={navItemVariants}
-                                initial="hidden"
-                                animate="visible"
-                                className="relative rounded-full"
+                                className="relative group rounded-full"
                                 onMouseEnter={() => {
-                                    setHoveredLink(link.name);
                                     if (hasSubMenu) setActiveDropdown(link.name);
                                 }}
                                 onMouseLeave={() => {
-                                    setHoveredLink(null);
                                     if (hasSubMenu) setActiveDropdown(null);
                                 }}
                             >
-                                {hoveredLink === link.name && !hasSubMenu && (
-                                    <motion.div
-                                        layoutId="nav-hover"
-                                        className={`absolute inset-0 rounded-full pointer-events-none ${isLight ? 'bg-gray-100' : 'bg-white/10'}`}
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.95 }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    />
+                                {!hasSubMenu && (
+                                    <div className={`absolute inset-0 rounded-full pointer-events-none transition-colors duration-200 ${isLight ? 'bg-transparent group-hover:bg-gray-100' : 'bg-transparent group-hover:bg-white/10'}`} />
                                 )}
 
                                 <div className="relative z-10 flex items-center gap-1 px-3 py-2 cursor-pointer">
@@ -203,53 +150,34 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                                     )}
 
                                     {isActive && (
-                                        <motion.div
-                                            layoutId="nav-active"
-                                            className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-[2px] rounded-full ${isLight ? 'bg-[#6A27D4]' : 'bg-white'}`}
-                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                        />
+                                        <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-[2px] rounded-full ${isLight ? 'bg-[#6A27D4]' : 'bg-white'}`} />
                                     )}
                                 </div>
 
                                 {/* Dropdown Menu */}
-                                <AnimatePresence>
-                                    {activeDropdown === link.name && hasSubMenu && (
-                                        <motion.div
-                                            variants={dropdownVariants}
-                                            initial="hidden"
-                                            animate="visible"
-                                            exit="exit"
-                                            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 min-w-[200px]"
-                                        >
-                                            <div className={`${isLight ? 'bg-white border-gray-100 shadow-xl' : 'bg-[#1A0F2E]/95 backdrop-blur-xl border-white/10'} border rounded-2xl p-2 shadow-2xl`}>
-                                                {link.subMenu?.map((subItem) => (
-                                                    <Link
-                                                        key={subItem.name}
-                                                        href={subItem.href}
-                                                        className={`block px-4 py-2.5 text-[13px] rounded-xl transition-all ${isLight ? 'text-gray-600 hover:text-[#6A27D4] hover:bg-gray-50' : 'text-white/70 hover:text-white hover:bg-white/10'}`}
-                                                    >
-                                                        {subItem.name}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
+                                {activeDropdown === link.name && hasSubMenu && (
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 min-w-[200px]">
+                                        <div className={`${isLight ? 'bg-white border-gray-100 shadow-xl' : 'bg-[#1A0F2E]/95 backdrop-blur-xl border-white/10'} border rounded-2xl p-2 shadow-2xl`}>
+                                            {link.subMenu?.map((subItem) => (
+                                                <Link
+                                                    key={subItem.name}
+                                                    href={subItem.href}
+                                                    className={`block px-4 py-2.5 text-[13px] rounded-xl transition-all ${isLight ? 'text-gray-600 hover:text-[#6A27D4] hover:bg-gray-50' : 'text-white/70 hover:text-white hover:bg-white/10'}`}
+                                                >
+                                                    {subItem.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         );
                     })}
                 </nav>
 
                 {/* Actions - Desktop */}
                 <div className="hidden xl:flex items-center justify-center gap-3 shrink-0 ml-4">
-                    <motion.div
-                        variants={navItemVariants}
-                        custom={links.length}
-                        initial="hidden"
-                        animate="visible"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
+                    <div>
                         <Link href="/track-parcel" className="block">
                             <Button
                                 variant={isLight ? "outline" : "liquid-glass"}
@@ -259,16 +187,9 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                                 Track Parcel
                             </Button>
                         </Link>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        variants={navItemVariants}
-                        custom={links.length + 1}
-                        initial="hidden"
-                        animate="visible"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
+                    <div>
                         <Link href={DEMO_FORM_URL} target="_blank" rel="noopener noreferrer" className="block">
                             <Button
                                 variant="solid"
@@ -278,7 +199,7 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                                 Request A Demo
                             </Button>
                         </Link>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* Hamburger Menu Button - Mobile */}
@@ -293,90 +214,69 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                     <span className={`w-6 h-0.5 ${isLight ? 'bg-gray-900' : 'bg-white'} rounded-full transition-opacity duration-300 ease-out ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
                     <span className={`w-6 h-0.5 ${isLight ? 'bg-gray-900' : 'bg-white'} rounded-full transition-transform duration-300 ease-out origin-center ${isMobileMenuOpen ? '-rotate-45 -translate-y-[8px]' : ''}`} />
                 </button>
-            </motion.header>
+            </header>
 
             {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-[#0B0616]/80 backdrop-blur-sm z-[95] xl:hidden"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                    />
-                )}
-            </AnimatePresence>
+            <div
+                className={`fixed inset-0 bg-[#0B0616]/80 backdrop-blur-sm z-[95] xl:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-hidden="true"
+            />
 
             {/* Mobile Menu Sidebar */}
-            <motion.div
+            <div
                 id="mobile-menu"
-                variants={mobileMenuVariants}
-                initial="closed"
-                animate={isMobileMenuOpen ? "open" : "closed"}
-                className="fixed top-0 right-0 h-full w-[300px] bg-[#1A0F2E]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl"
+                className={`fixed top-0 right-0 h-full w-[300px] bg-[#1A0F2E]/95 backdrop-blur-xl border-l border-white/10 z-[105] xl:hidden flex flex-col shadow-2xl transform transition-transform duration-300 ease-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
             >
                 <div className="flex flex-col h-full pt-8 md:pt-12 md:pt-20 px-6 pb-8 overflow-y-auto custom-scrollbar">
                     {/* Mobile Navigation Links */}
                     <nav className="flex flex-col gap-1 mb-8">
-                        <AnimatePresence>
-                            {isMobileMenuOpen && links.map((link, i) => (
-                                <motion.div
-                                    key={link.name}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
-                                >
-                                    {link.subMenu ? (
-                                        <div className="flex flex-col">
-                                            <div className="text-[15px] font-[600] text-white/80 py-3 border-b border-white/5 flex items-center justify-between">
-                                                {link.name}
-                                            </div>
-                                            <div className="pl-4 flex flex-col gap-1 mt-1">
-                                                {link.subMenu.map((subLink) => (
-                                                    <Link
-                                                        key={subLink.name}
-                                                        href={subLink.href}
-                                                        onClick={() => setIsMobileMenuOpen(false)}
-                                                        className="text-[14px] font-[500] text-white/60 hover:text-white py-2 transition-colors"
-                                                    >
-                                                        {subLink.name}
-                                                    </Link>
-                                                ))}
-                                            </div>
+                        {isMobileMenuOpen && links.map((link) => (
+                            <div key={link.name}>
+                                {link.subMenu ? (
+                                    <div className="flex flex-col">
+                                        <div className="text-[15px] font-[600] text-white/80 py-3 border-b border-white/5 flex items-center justify-between">
+                                            {link.name}
                                         </div>
+                                        <div className="pl-4 flex flex-col gap-1 mt-1">
+                                            {link.subMenu.map((subLink) => (
+                                                <Link
+                                                    key={subLink.name}
+                                                    href={subLink.href}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className="text-[14px] font-[500] text-white/60 hover:text-white py-2 transition-colors"
+                                                >
+                                                    {subLink.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    link.href.startsWith('/') ? (
+                                        <Link
+                                            href={link.href}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                                        >
+                                            {link.name}
+                                        </Link>
                                     ) : (
-                                        link.href.startsWith('/') ? (
-                                            <Link
-                                                href={link.href}
-                                                onClick={() => setIsMobileMenuOpen(false)}
-                                                className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
-                                            >
-                                                {link.name}
-                                            </Link>
-                                        ) : (
-                                            <a
-                                                href={link.href}
-                                                onClick={() => setIsMobileMenuOpen(false)}
-                                                className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
-                                            >
-                                                {link.name}
-                                            </a>
-                                        )
-                                    )}
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
+                                        <a
+                                            href={link.href}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block text-[15px] font-[600] text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                                        >
+                                            {link.name}
+                                        </a>
+                                    )
+                                )}
+                            </div>
+                        ))}
                     </nav>
 
                     {/* Mobile Action Buttons */}
                     <div className="flex flex-col gap-3 mt-auto">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                            transition={{ delay: 0.5, duration: 0.3 }}
-                        >
+                        <div>
                             <Link href="/track-parcel" onClick={() => setIsMobileMenuOpen(false)} className="block w-full">
                                 <Button
                                     variant="liquid-glass"
@@ -386,12 +286,8 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                                     Track Parcel
                                 </Button>
                             </Link>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                            transition={{ delay: 0.6, duration: 0.3 }}
-                        >
+                        </div>
+                        <div>
                             <Link
                                 href={DEMO_FORM_URL}
                                 target="_blank"
@@ -407,10 +303,10 @@ export const Header = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
                                     Request A Demo
                                 </Button>
                             </Link>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
-            </motion.div>
+            </div>
         </>
     );
 };
