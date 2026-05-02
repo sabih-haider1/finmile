@@ -115,7 +115,19 @@ export async function PUT(
     }
 
     const updateData: Record<string, unknown> = {
-      ...validatedData,
+      title: validatedData.title,
+      slug: validatedData.slug,
+      description: validatedData.description ?? null,
+      file_url: validatedData.file_url ?? null,
+      file_type: validatedData.file_type ?? null,
+      thumbnail_url: validatedData.thumbnail_url ?? null,
+      author_name: validatedData.author_name ?? null,
+      topic: validatedData.topic ?? null,
+      industry: validatedData.industry ?? null,
+      tags: validatedData.tags ?? null,
+      is_featured: validatedData.is_featured ?? false,
+      is_published: validatedData.is_published ?? true,
+      sections: validatedData.sections ?? null,
       updated_at: new Date().toISOString(),
     };
 

@@ -92,6 +92,22 @@ export default function ResourcesPage() {
 
   const handleFormSubmit = async (formData: Record<string, unknown>, files: Record<string, File | null>) => {
     try {
+      const readApiErrorMessage = async (response: Response, fallbackMessage: string) => {
+        const contentType = response.headers.get('content-type') || '';
+
+        try {
+          if (contentType.includes('application/json')) {
+            const data = await response.json() as Record<string, unknown>;
+            return (data.error as string) || (data.message as string) || fallbackMessage;
+          }
+
+          const text = await response.text();
+          return text.trim().length > 0 ? text : fallbackMessage;
+        } catch {
+          return fallbackMessage;
+        }
+      };
+
       const normalizeUrlValue = (value: unknown): string | null => {
         if (typeof value === 'string') {
           const trimmed = value.trim();
@@ -203,7 +219,7 @@ export default function ResourcesPage() {
         console.log('[Resources] API Response:', { status: response.status, ok: response.ok, result });
         
         if (!response.ok) {
-          const errorMessage = (result.error as string) || (result.message as string) || 'Failed to update resource';
+          const errorMessage = await readApiErrorMessage(response, 'Failed to update resource');
           console.error('[Resources] Update error:', errorMessage, result);
           throw new Error(errorMessage);
         }
@@ -249,7 +265,7 @@ export default function ResourcesPage() {
         console.log('[Resources] API Response:', { status: response.status, ok: response.ok, result });
         
         if (!response.ok) {
-          const errorMessage = (result.error as string) || (result.message as string) || 'Failed to create resource';
+          const errorMessage = await readApiErrorMessage(response, 'Failed to create resource');
           console.error('[Resources] Create error:', errorMessage, result);
           throw new Error(errorMessage);
         }
