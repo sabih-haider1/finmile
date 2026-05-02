@@ -148,20 +148,20 @@ export default function CaseStudiesPage() {
       if (editingCaseStudy) {
         // Update existing case study
         const updateData: Record<string, unknown> = {
-          title: caseStudyData.title,
+          title: formData.title as string,
           slug: caseStudyData.slug,
-          summary: caseStudyData.summary,
-          content: caseStudyData.content,
-          cover_image_url: caseStudyData.cover_image_url,
-          author_name: caseStudyData.author_name || null,
-          company_name: caseStudyData.company_name || null,
-          topic: caseStudyData.topic || null,
+          summary: formData.summary as string | null,
+          content: formData.content as string | null,
+          cover_image_url: coverImageUrl || null,
+          author_name: (caseStudyData.author_name as string) || null,
+          company_name: (caseStudyData.company_name as string) || null,
+          topic: (formData.topic as string) || null,
           industry: caseStudyData.industry || null,
           tags: caseStudyData.tags || null,
-          is_featured: caseStudyData.is_featured,
-          is_published: caseStudyData.is_published,
+          is_featured: formData.is_featured,
+          is_published: formData.is_published,
           published_at: caseStudyData.published_at,
-          sections: caseStudyData.sections || null,
+          sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/case-studies/${editingCaseStudy.id}`, {
@@ -177,10 +177,22 @@ export default function CaseStudiesPage() {
         alert('Case study updated successfully!');
       } else {
         // Create new case study
-        const insertData = { ...(caseStudyData as Record<string, unknown>) };
-        delete insertData.id;
-        delete insertData.created_at;
-        delete insertData.updated_at;
+        const insertData: Record<string, unknown> = {
+          title: formData.title as string,
+          slug: caseStudyData.slug,
+          summary: formData.summary as string | null,
+          content: formData.content as string | null,
+          cover_image_url: coverImageUrl || null,
+          author_name: (caseStudyData.author_name as string) || null,
+          company_name: (caseStudyData.company_name as string) || null,
+          topic: (formData.topic as string) || null,
+          industry: caseStudyData.industry || null,
+          tags: caseStudyData.tags || null,
+          is_featured: formData.is_featured,
+          is_published: formData.is_published,
+          published_at: caseStudyData.published_at,
+          sections: (formData.sections as unknown) || null,
+        };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/case-studies', {
           method: 'POST',

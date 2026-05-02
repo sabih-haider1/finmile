@@ -184,20 +184,20 @@ export default function WhitepapersPage() {
 
       if (editingWhitepaper) {
         const updateData: Record<string, unknown> = {
-          title: whitepaperData.title,
+          title: formData.title as string,
           slug: whitepaperData.slug,
-          summary: whitepaperData.summary,
-          cover_image_url: whitepaperData.cover_image_url,
-          pdf_url: whitepaperData.pdf_url,
-          author_name: whitepaperData.author_name || null,
-          author: whitepaperData.author || null,
+          summary: formData.summary as string | null,
+          cover_image_url: coverImageUrl || null,
+          pdf_url: pdfUrl || null,
+          author_name: (formData.author_name as string) || null,
+          author: (formData.author as string) || null,
           published_date: whitepaperData.published_date,
-          topic: whitepaperData.topic || null,
-          industry: whitepaperData.industry || null,
+          topic: (formData.topic as string) || null,
+          industry: (formData.industry as string) || null,
           tags: whitepaperData.tags || null,
-          is_featured: whitepaperData.is_featured,
-          is_published: whitepaperData.is_published,
-          sections: whitepaperData.sections || null,
+          is_featured: formData.is_featured,
+          is_published: formData.is_published,
+          sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/whitepapers/${editingWhitepaper.id}`, {
@@ -213,21 +213,21 @@ export default function WhitepapersPage() {
         alert('Whitepaper updated successfully!');
       } else {
         const insertData: Record<string, unknown> = {
-          title: whitepaperData.title,
+          title: formData.title as string,
           slug: whitepaperData.slug,
-          summary: whitepaperData.summary,
-          cover_image_url: whitepaperData.cover_image_url,
-          pdf_url: whitepaperData.pdf_url,
-          author_name: whitepaperData.author_name || null,
-          author: whitepaperData.author || null,
+          summary: formData.summary as string | null,
+          cover_image_url: coverImageUrl || null,
+          pdf_url: pdfUrl || null,
+          author_name: (formData.author_name as string) || null,
+          author: (formData.author as string) || null,
           published_date: whitepaperData.published_date,
-          topic: whitepaperData.topic || null,
-          industry: whitepaperData.industry || null,
+          topic: (formData.topic as string) || null,
+          industry: (formData.industry as string) || null,
           tags: whitepaperData.tags || null,
-          is_featured: whitepaperData.is_featured,
-          is_published: whitepaperData.is_published,
+          is_featured: formData.is_featured,
+          is_published: formData.is_published,
           created_at: whitepaperData.created_at,
-          sections: whitepaperData.sections || null,
+          sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/whitepapers', {

@@ -142,20 +142,20 @@ export default function BlogsPage() {
       if (editingBlog) {
         // Update existing blog
         const updateData: Record<string, unknown> = {
-          title: blogData.title,
+          title: formData.title as string,
           slug: blogData.slug,
-          summary: blogData.summary,
-          body: blogData.body,
-          cover_image_url: blogData.cover_image_url,
-          author_name: blogData.author_name || null,
-          category: blogData.category || null,
-          topic: blogData.topic || null,
-          industry: blogData.industry || null,
+          summary: formData.summary as string | null,
+          body: formData.body as string | null,
+          cover_image_url: coverImageUrl || null,
+          author_name: (formData.author_name as string) || null,
+          category: (formData.category as string) || null,
+          topic: (formData.topic as string) || null,
+          industry: (formData.industry as string) || null,
           tags: blogData.tags || null,
-          is_featured: blogData.is_featured,
-          is_published: blogData.is_published,
+          is_featured: formData.is_featured,
+          is_published: formData.is_published,
           published_at: blogData.published_at,
-          sections: blogData.sections || null,
+          sections: (formData.sections as unknown) || null,
         };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/blogs/${editingBlog.id}`, {
@@ -171,10 +171,22 @@ export default function BlogsPage() {
         alert('Blog updated successfully!');
       } else {
         // Create new blog
-        const insertData = { ...(blogData as Record<string, unknown>) };
-        delete insertData.id;
-        delete insertData.created_at;
-        delete insertData.updated_at;
+        const insertData: Record<string, unknown> = {
+          title: formData.title as string,
+          slug: blogData.slug,
+          summary: formData.summary as string | null,
+          body: formData.body as string | null,
+          cover_image_url: coverImageUrl || null,
+          author_name: (formData.author_name as string) || null,
+          category: (formData.category as string) || null,
+          topic: (formData.topic as string) || null,
+          industry: (formData.industry as string) || null,
+          tags: blogData.tags || null,
+          is_featured: formData.is_featured,
+          is_published: formData.is_published,
+          published_at: blogData.published_at,
+          sections: (formData.sections as unknown) || null,
+        };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/blogs', {
           method: 'POST',

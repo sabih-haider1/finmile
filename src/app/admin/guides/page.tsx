@@ -91,12 +91,12 @@ export default function GuidesPage() {
       if (editingGuide) {
         // Update existing guide
         const updateData: Record<string, unknown> = {
-          title: guideData.title,
+          title: formData.title as string,
           slug: guideData.slug,
-          description: guideData.description,
-          pdf_url: guideData.pdf_url,
-          cover_image_url: guideData.cover_image_url || null,
-          sections: guideData.sections || null,
+          description: formData.description as string | null,
+          pdf_url: pdfUrl || null,
+          cover_image_url: coverImageUrl || null,
+          sections: (formData.sections as unknown) || null,
         };
         const { error } = await supabase
           .from('guides')
@@ -106,15 +106,18 @@ export default function GuidesPage() {
         alert('Guide updated successfully!');
       } else {
         // Create new guide
-        const now = (guideData.created_at as string) || new Date().toISOString();
-        const insertData = { ...(guideData as Record<string, unknown>) };
-        delete insertData.id;
-        delete insertData.updated_at;
-        const { error } = await supabase.from('guides').insert([{
-          ...insertData,
+        const now = new Date().toISOString();
+        const insertData: Record<string, unknown> = {
+          title: formData.title as string,
+          slug: guideData.slug,
+          description: formData.description as string | null,
+          pdf_url: pdfUrl || null,
+          cover_image_url: coverImageUrl || null,
+          sections: (formData.sections as unknown) || null,
           created_at: now,
           updated_at: now,
-        }]);
+        };
+        const { error } = await supabase.from('guides').insert([insertData]);
         if (error) throw error;
         alert('Guide created successfully!');
       }
