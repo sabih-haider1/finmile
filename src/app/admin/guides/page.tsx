@@ -90,8 +90,14 @@ export default function GuidesPage() {
 
       if (editingGuide) {
         // Update existing guide
-        const updateData = { ...(guideData as Record<string, unknown>) };
-        delete updateData.id;
+        const updateData: Record<string, unknown> = {
+          title: guideData.title,
+          slug: guideData.slug,
+          description: guideData.description,
+          pdf_url: guideData.pdf_url,
+          cover_image_url: guideData.cover_image_url || null,
+          sections: guideData.sections || null,
+        };
         const { error } = await supabase
           .from('guides')
           .update({ ...updateData, updated_at: new Date().toISOString() })

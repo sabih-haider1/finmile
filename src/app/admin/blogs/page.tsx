@@ -141,10 +141,22 @@ export default function BlogsPage() {
 
       if (editingBlog) {
         // Update existing blog
-        const updateData = { ...(blogData as Record<string, unknown>) };
-        delete updateData.id;
-        delete updateData.created_at;
-        delete updateData.updated_at;
+        const updateData: Record<string, unknown> = {
+          title: blogData.title,
+          slug: blogData.slug,
+          summary: blogData.summary,
+          body: blogData.body,
+          cover_image_url: blogData.cover_image_url,
+          author_name: blogData.author_name || null,
+          category: blogData.category || null,
+          topic: blogData.topic || null,
+          industry: blogData.industry || null,
+          tags: blogData.tags || null,
+          is_featured: blogData.is_featured,
+          is_published: blogData.is_published,
+          published_at: blogData.published_at,
+          sections: blogData.sections || null,
+        };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/blogs/${editingBlog.id}`, {
           method: 'PUT',

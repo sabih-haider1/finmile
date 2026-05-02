@@ -165,10 +165,21 @@ export default function ResourcesPage() {
 
       if (editingResource) {
         // Update existing resource
-        const updateData = { ...(resourceData as Record<string, unknown>) };
-        delete updateData.id;
-        delete updateData.created_at;
-        delete updateData.updated_at;
+        const updateData: Record<string, unknown> = {
+          title: resourceData.title,
+          slug: resourceData.slug,
+          description: resourceData.description,
+          file_url: resourceData.file_url,
+          file_type: resourceData.file_type,
+          thumbnail_url: resourceData.thumbnail_url,
+          author_name: resourceData.author_name || null,
+          topic: resourceData.topic || null,
+          industry: resourceData.industry || null,
+          tags: resourceData.tags || null,
+          is_featured: resourceData.is_featured,
+          is_published: resourceData.is_published,
+          sections: resourceData.sections || null,
+        };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/resources/${editingResource.id}`, {
           method: 'PUT',
@@ -183,9 +194,22 @@ export default function ResourcesPage() {
         alert('Resource updated successfully!');
       } else {
         // Create new resource
-        const insertData = { ...(resourceData as Record<string, unknown>) };
-        delete insertData.id;
-        delete insertData.updated_at;
+        const insertData: Record<string, unknown> = {
+          title: resourceData.title,
+          slug: resourceData.slug,
+          description: resourceData.description,
+          file_url: resourceData.file_url,
+          file_type: resourceData.file_type,
+          thumbnail_url: resourceData.thumbnail_url,
+          author_name: resourceData.author_name || null,
+          topic: resourceData.topic || null,
+          industry: resourceData.industry || null,
+          tags: resourceData.tags || null,
+          is_featured: resourceData.is_featured,
+          is_published: resourceData.is_published,
+          created_at: resourceData.created_at,
+          sections: resourceData.sections || null,
+        };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/resources', {
           method: 'POST',

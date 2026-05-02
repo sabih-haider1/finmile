@@ -183,10 +183,22 @@ export default function WhitepapersPage() {
       };
 
       if (editingWhitepaper) {
-        const updateData = { ...(whitepaperData as Record<string, unknown>) };
-        delete updateData.id;
-        delete updateData.created_at;
-        delete updateData.updated_at;
+        const updateData: Record<string, unknown> = {
+          title: whitepaperData.title,
+          slug: whitepaperData.slug,
+          summary: whitepaperData.summary,
+          cover_image_url: whitepaperData.cover_image_url,
+          pdf_url: whitepaperData.pdf_url,
+          author_name: whitepaperData.author_name || null,
+          author: whitepaperData.author || null,
+          published_date: whitepaperData.published_date,
+          topic: whitepaperData.topic || null,
+          industry: whitepaperData.industry || null,
+          tags: whitepaperData.tags || null,
+          is_featured: whitepaperData.is_featured,
+          is_published: whitepaperData.is_published,
+          sections: whitepaperData.sections || null,
+        };
         const authHeader = await getAuthHeader();
         const response = await fetch(`/api/whitepapers/${editingWhitepaper.id}`, {
           method: 'PUT',
@@ -200,10 +212,23 @@ export default function WhitepapersPage() {
         }
         alert('Whitepaper updated successfully!');
       } else {
-        const insertData = { ...(whitepaperData as Record<string, unknown>) };
-        delete insertData.id;
-        delete insertData.created_at;
-        delete insertData.updated_at;
+        const insertData: Record<string, unknown> = {
+          title: whitepaperData.title,
+          slug: whitepaperData.slug,
+          summary: whitepaperData.summary,
+          cover_image_url: whitepaperData.cover_image_url,
+          pdf_url: whitepaperData.pdf_url,
+          author_name: whitepaperData.author_name || null,
+          author: whitepaperData.author || null,
+          published_date: whitepaperData.published_date,
+          topic: whitepaperData.topic || null,
+          industry: whitepaperData.industry || null,
+          tags: whitepaperData.tags || null,
+          is_featured: whitepaperData.is_featured,
+          is_published: whitepaperData.is_published,
+          created_at: whitepaperData.created_at,
+          sections: whitepaperData.sections || null,
+        };
         const authHeader = await getAuthHeader();
         const response = await fetch('/api/whitepapers', {
           method: 'POST',
