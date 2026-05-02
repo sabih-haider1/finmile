@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
       title: validatedData.title,
       slug: validatedData.slug,
       description: validatedData.description || '',
-      file_url: validatedData.file_url,
+      file_url: validatedData.file_url || '',
       file_type: validatedData.file_type,
       thumbnail_url: validatedData.thumbnail_url || null,
       author_name: validatedData.author_name || null,
