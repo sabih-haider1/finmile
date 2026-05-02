@@ -163,7 +163,7 @@ export const FeaturesSection = () => {
           viewport={{ once: true, amount: 0.15 }}
         >
           {/* Background Highlight Glow */}
-          <div aria-hidden="true" className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0 z-30' />
+          <div aria-hidden="true" className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0' />
 
           <div className='relative z-10 w-full max-w-[800px]'>
             <motion.div variants={scaleIn}>
@@ -192,7 +192,7 @@ export const FeaturesSection = () => {
 
             {/* 91% Card - Bottom Right */}
             <motion.div 
-              className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-40 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px] transform-gpu will-change-transform'
+              className='absolute -bottom-6 right-0 md:-bottom-16 md:-right-[-8] z-50 bg-[#2D1B69] rounded-[24px] p-6 w-[200px] md:w-[300px] transform-gpu will-change-transform'
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
