@@ -79,6 +79,24 @@ export default function GuidesPage() {
         pdfUrl = uploadResult.url;
       }
 
+      let coverImageUrl = formData.cover_image_url;
+
+      // Preserve existing URL on update if no new file provided
+      if (editingGuide && !files.cover_image_url && !coverImageUrl) {
+        coverImageUrl = editingGuide.cover_image_url;
+      }
+
+      // Upload cover image if provided
+      if (files.cover_image_url) {
+        const uploadResult = await uploadFile({
+          bucket: 'guide-covers',
+          folder: 'cover-images',
+          file: files.cover_image_url,
+        });
+        if (!uploadResult.success) throw new Error(uploadResult.error || 'Failed to upload cover image');
+        coverImageUrl = uploadResult.url;
+      }
+
       const guideData = {
         ...formData,
         slug: generateSlug((formData.slug as string) || (formData.title as string)),
