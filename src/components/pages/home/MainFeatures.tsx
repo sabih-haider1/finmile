@@ -163,7 +163,7 @@ export const FeaturesSection = () => {
           viewport={{ once: true, amount: 0.15 }}
         >
           {/* Background Highlight Glow */}
-          <div aria-hidden="true" className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0' />
+          <div aria-hidden="true" className='absolute inset-0 bg-blue-50/50 rounded-full blur-[120px] pointer-events-none transform-gpu translate-z-0 z-30' />
 
           <div className='relative z-10 w-full max-w-[800px]'>
             <motion.div variants={scaleIn}>
