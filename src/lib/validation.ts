@@ -17,7 +17,9 @@ const whitepaperAuthors = [
 
 function coerceUrlInput(value: unknown): unknown {
   if (typeof value === 'string') {
-    return value;
+    const trimmed = value.trim();
+    // Convert empty strings to null for optional fields
+    return trimmed.length > 0 ? trimmed : null;
   }
 
   if (value && typeof value === 'object') {
@@ -25,7 +27,8 @@ function coerceUrlInput(value: unknown): unknown {
     for (const key of keys) {
       const candidate = (value as Record<string, unknown>)[key];
       if (typeof candidate === 'string') {
-        return candidate;
+        const trimmed = candidate.trim();
+        return trimmed.length > 0 ? trimmed : null;
       }
     }
   }
@@ -228,7 +231,7 @@ export const resourceSchema = z.object({
   description: z.string().max(2000).optional(),
   file_url: z.preprocess(
     coerceUrlInput,
-    z.string().url('Valid file URL is required').optional().nullable()
+    z.union([z.string().url('Valid file URL is required'), z.null()]).optional()
   ),
   file_type: z.enum(allowedFileTypes as [string, ...string[]], {
     message: `File type must be one of: ${allowedFileTypes.join(', ')}`,
