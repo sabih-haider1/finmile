@@ -29,7 +29,7 @@ export const OutcomesAtScale = () => {
                 {/* Stat 2 */}
                 <div className="bg-white rounded-[20px] md:rounded-[24px] p-6 md:p-10 flex flex-col items-center text-center shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-50 transition-transform hover:-translate-y-1">
                     <h3 className="text-[#2F1C8C] font-semibold text-[36px] md:text-[48px] lg:text-[56px] leading-none mb-4 md:mb-6">
-                        91%
+                        99.9%
                     </h3>
                     <div className="w-2/3 h-[1px] bg-gray-100 mb-6" />
                     <p className="text-[#6C757D] font-medium text-[14px]">
@@ -40,7 +40,7 @@ export const OutcomesAtScale = () => {
                 {/* Stat 3 */}
                 <div className="bg-white rounded-[20px] md:rounded-[24px] p-6 md:p-10 flex flex-col items-center text-center shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-50 transition-transform hover:-translate-y-1">
                     <h3 className="text-[#2F1C8C] font-semibold text-[36px] md:text-[48px] lg:text-[56px] leading-none mb-4 md:mb-6">
-                        10M+
+                        100M+
                     </h3>
                     <div className="w-2/3 h-[1px] bg-gray-100 mb-6" />
                     <p className="text-[#6C757D] font-medium text-[14px]">
