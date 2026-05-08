@@ -10,8 +10,8 @@ export const AiDataSustainability = () => {
                 {/* Left Column: Text Content */}
                 <div className='flex flex-col items-center text-center md:items-start md:text-left space-y-10 pt-4'>
                     <h2 className='text-[#2F1C8C] font-semibold leading-[1.1] tracking-normal md:tracking-tight text-balance text-[clamp(28px,4vw,48px)]'>
-                        AI. Data. Sustainability.<br className='hidden md:block' />
-                        Efficiency. The intelligence that<br className='hidden md:block' />
+                        AI. Data. Sustainability. <br className='hidden md:block' />
+                        Efficiency. The intelligence that <br className='hidden md:block' />
                         drives the future of delivery.
                     </h2>
 
