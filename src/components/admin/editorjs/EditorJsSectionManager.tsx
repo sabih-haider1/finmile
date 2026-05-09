@@ -361,7 +361,7 @@ function buildParagraphBlock(source: Record<string, unknown>, id: string | undef
 
 function buildListBlock(source: Record<string, unknown>, id: string | undefined): EditorJsListBlock | null {
   const style = source.style === 'ordered' || source.style === 'checklist' ? source.style : 'unordered';
-  const normalizeListItem = (
+    const normalizeListItem = (
     item: unknown,
   ): string | { content: string; items?: Array<string | { content?: string } | null>; meta?: Record<string, unknown> } | null => {
     if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
@@ -376,9 +376,7 @@ function buildListBlock(source: Record<string, unknown>, id: string | undefined)
     const candidate = item as Record<string, unknown>;
     const content = toPlainText(candidate.content ?? candidate.text ?? candidate.value ?? candidate.html).trim();
     const children = Array.isArray(candidate.items)
-      ? candidate.items
-          .map((child) => normalizeListItem(child))
-          .filter((child): child is string | { content?: string } => Boolean(child))
+      ? (candidate.items.map((child) => normalizeListItem(child)).filter(Boolean) as Array<string | { content?: string; items?: Array<string | { content?: string } | null>; meta?: Record<string, unknown> }>)
       : [];
 
     if (!content && children.length === 0) {
@@ -405,9 +403,7 @@ function buildListBlock(source: Record<string, unknown>, id: string | undefined)
   };
 
   const items = Array.isArray(source.items)
-    ? source.items
-        .map((item) => normalizeListItem(item))
-        .filter((item): item is string | { content?: string } => Boolean(item))
+    ? (source.items.map((item) => normalizeListItem(item)).filter(Boolean) as Array<string | { content?: string; items?: Array<string | { content?: string } | null>; meta?: Record<string, unknown> }>)
     : [];
 
   if (items.length === 0) {
