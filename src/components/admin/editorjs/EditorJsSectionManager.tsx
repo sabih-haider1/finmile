@@ -110,7 +110,7 @@ function stripTags(value: unknown) {
 
 function toPlainText(value: unknown) {
   if (typeof value === 'string') {
-    return value;
+    return stripTags(value);
   }
 
   if (typeof value === 'number' || typeof value === 'boolean') {
@@ -118,7 +118,7 @@ function toPlainText(value: unknown) {
   }
 
   if (Array.isArray(value)) {
-    return value.map((item) => toPlainText(item)).join('');
+    return value.map((item) => toPlainText(item)).join(' ').trim();
   }
 
   if (value && typeof value === 'object') {
@@ -127,12 +127,201 @@ function toPlainText(value: unknown) {
     for (const key of ['text', 'content', 'html', 'value']) {
       const nestedValue = candidate[key];
       if (typeof nestedValue === 'string' || typeof nestedValue === 'number' || typeof nestedValue === 'boolean') {
-        return String(nestedValue);
+        return stripTags(String(nestedValue));
       }
+
+      if (nestedValue && typeof nestedValue === 'object') {
+        const normalized = toPlainText(nestedValue).trim();
+        if (normalized) {
+          return normalized;
+        }
+      }
+    }
+
+    const fallback = Object.values(candidate)
+      .map((item) => toPlainText(item))
+      .join(' ')
+      .trim();
+
+    if (fallback) {
+      return fallback;
     }
   }
 
   return '';
+}
+
+function parsePlainTextGrid(text: string) {
+  const normalizedText = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
+  if (!normalizedText) {
+    return null;
+  }
+
+  const lines = normalizedText
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+
+  if (lines.length === 0 || !lines.some((line) => line.includes('\t'))) {
+    return null;
+  }
+
+  return lines
+    .map((line) => line.split('\t').map((cell) => stripTags(cell).trim()))
+    .filter((row) => row.length > 0);
+}
+
+function parseHtmlTable(html: string) {
+  const markup = String(html || '').trim();
+  if (!markup || !markup.toLowerCase().includes('<table')) {
+    return null;
+  }
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(markup, 'text/html');
+  const table = doc.querySelector('table');
+
+  if (!table) {
+    return null;
+  }
+
+  const rows = Array.from(table.querySelectorAll('tr'))
+    .map((row) => Array.from(row.querySelectorAll('th,td')).map((cell) => stripTags(cell.textContent || '').trim()))
+    .filter((row) => row.length > 0);
+
+  return rows.length > 0 ? rows : null;
+}
+
+type ParsedListItem = {
+  content: string;
+  meta: Record<string, unknown>;
+  items: ParsedListItem[];
+};
+
+function parseHtmlList(html: string): { style: 'ordered' | 'unordered'; items: ParsedListItem[] } | null {
+  const markup = String(html || '').trim();
+  if (!markup || !/<(ul|ol)\b/i.test(markup)) {
+    return null;
+  }
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(markup, 'text/html');
+  const rootList = doc.querySelector('ul,ol');
+
+  if (!rootList) {
+    return null;
+  }
+
+  const parseListElement = (listEl: Element): ParsedListItem[] => {
+    return Array.from(listEl.children)
+      .filter((child): child is HTMLLIElement => child.tagName.toLowerCase() === 'li')
+      .map((li) => {
+        const childList = Array.from(li.children).find((child) => child.tagName.toLowerCase() === 'ul' || child.tagName.toLowerCase() === 'ol');
+        const clone = li.cloneNode(true) as HTMLElement;
+
+        Array.from(clone.querySelectorAll('ul,ol')).forEach((nested) => nested.remove());
+
+        const content = stripTags(clone.innerHTML || clone.textContent || '').replace(/\s+/g, ' ').trim();
+        const items = childList ? parseListElement(childList) : [];
+
+        if (!content && items.length === 0) {
+          return null;
+        }
+
+        return {
+          content,
+          meta: {},
+          items,
+        };
+      })
+      .filter((item): item is ParsedListItem => Boolean(item));
+  };
+
+  const items = parseListElement(rootList);
+  if (items.length === 0) {
+    return null;
+  }
+
+  return {
+    style: rootList.tagName.toLowerCase() === 'ol' ? 'ordered' : 'unordered',
+    items,
+  };
+}
+
+function parseHtmlListText(html: string) {
+  const markup = String(html || '').trim();
+  if (!markup) {
+    return null;
+  }
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(markup, 'text/html');
+  const text = stripTags(doc.body.textContent || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  if (!text.trim()) {
+    return null;
+  }
+
+  return text
+    .split('\n')
+    .map((line) => line.replace(/^[\s\u00a0]*(?:[•*\-\u2022\u25E6\u2043]|\d+[.)])\s*/,'').trim())
+    .filter(Boolean);
+}
+
+function parseListFromText(text: string): { style: 'ordered' | 'unordered'; items: string[] } | null {
+  const lines = String(text || '')
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length < 2) {
+    return null;
+  }
+
+  const unorderedPattern = /^[\u2022\-*\u25E6\u2043]\s+(.+)$/;
+  const orderedPattern = /^\d+[.)]\s+(.+)$/;
+
+  const unorderedMatches = lines.map((line) => line.match(unorderedPattern));
+  if (unorderedMatches.every(Boolean)) {
+    return {
+      style: 'unordered',
+      items: unorderedMatches.map((match) => stripTags(match?.[1] || '').trim()).filter(Boolean),
+    };
+  }
+
+  const orderedMatches = lines.map((line) => line.match(orderedPattern));
+  if (orderedMatches.every(Boolean)) {
+    return {
+      style: 'ordered',
+      items: orderedMatches.map((match) => stripTags(match?.[1] || '').trim()).filter(Boolean),
+    };
+  }
+
+  const cleaned = lines
+    .map((line) => line.replace(/^[\s\u00a0]*(?:[•*\-\u2022\u25E6\u2043]|\d+[.)])\s*/, '').trim())
+    .filter(Boolean);
+
+  if (cleaned.length >= 2) {
+    return {
+      style: 'unordered',
+      items: cleaned,
+    };
+  }
+
+  return null;
+}
+
+function toListToolItems(items: string[]) {
+  return items
+    .map((item) => stripTags(item).trim())
+    .filter(Boolean)
+    .map((content) => ({
+      content,
+      meta: {},
+      items: [],
+    }));
 }
 
 function buildHeaderBlock(source: Record<string, unknown>, id: string | undefined): EditorJsHeaderBlock | null {
@@ -171,21 +360,54 @@ function buildParagraphBlock(source: Record<string, unknown>, id: string | undef
 }
 
 function buildListBlock(source: Record<string, unknown>, id: string | undefined): EditorJsListBlock | null {
-  const style = source.style === 'ordered' ? 'ordered' : 'unordered';
+  const style = source.style === 'ordered' || source.style === 'checklist' ? source.style : 'unordered';
+  const normalizeListItem = (
+    item: unknown,
+  ): string | { content: string; items?: Array<string | { content?: string } | null>; meta?: Record<string, unknown> } | null => {
+    if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
+      const value = String(item).trim();
+      return value || null;
+    }
+
+    if (!item || typeof item !== 'object') {
+      return null;
+    }
+
+    const candidate = item as Record<string, unknown>;
+    const content = toPlainText(candidate.content ?? candidate.text ?? candidate.value ?? candidate.html).trim();
+    const children = Array.isArray(candidate.items)
+      ? candidate.items
+          .map((child) => normalizeListItem(child))
+          .filter((child): child is string | { content?: string } => Boolean(child))
+      : [];
+
+    if (!content && children.length === 0) {
+      return null;
+    }
+
+    const normalizedItem: {
+      content: string;
+      items?: Array<string | { content?: string } | null>;
+      meta?: Record<string, unknown>;
+    } = {
+      content,
+    };
+
+    if (children.length > 0) {
+      normalizedItem.items = children;
+    }
+
+    if (candidate.meta && typeof candidate.meta === 'object' && !Array.isArray(candidate.meta)) {
+      normalizedItem.meta = candidate.meta as Record<string, unknown>;
+    }
+
+    return normalizedItem;
+  };
+
   const items = Array.isArray(source.items)
     ? source.items
-        .map((item) => {
-          if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
-            return String(item);
-          }
-
-          if (item && typeof item === 'object' && 'content' in item) {
-            return toPlainText((item as { content?: unknown }).content);
-          }
-
-          return '';
-        })
-        .filter(Boolean)
+        .map((item) => normalizeListItem(item))
+        .filter((item): item is string | { content?: string } => Boolean(item))
     : [];
 
   if (items.length === 0) {
@@ -404,6 +626,8 @@ function EditorJsSectionEditor({
   const onUpdateBlocksRef = useRef(onUpdateBlocks);
   const toolsRef = useRef<EditorJsTools | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const selectedTextRef = useRef('');
+  const selectedRangeRef = useRef<Range | null>(null);
   const [toolsReady, setToolsReady] = useState(false);
 
   useEffect(() => {
@@ -459,6 +683,120 @@ function EditorJsSectionEditor({
 
     const currentBlocks = sectionBlocksRef.current || [];
     const { bodyBlocks } = splitBlocks(normalizeBlocks(currentBlocks), section.id);
+    const HeaderWithSelectionText = class {
+      private readonly inner: {
+        render?: () => HTMLElement;
+        save?: (blockContent: HTMLElement) => unknown;
+        validate?: (savedData: unknown) => boolean;
+        destroy?: () => void;
+        merge?: (data: unknown) => unknown;
+        onPaste?: (event: unknown) => void;
+        rendered?: () => void;
+      };
+
+      constructor(args: unknown) {
+        const constructorArgs = args && typeof args === 'object'
+          ? { ...(args as Record<string, unknown>) }
+          : {};
+        const currentData = constructorArgs.data && typeof constructorArgs.data === 'object'
+          ? { ...(constructorArgs.data as Record<string, unknown>) }
+          : {};
+        const hasText = typeof currentData.text === 'string' && currentData.text.trim().length > 0;
+
+        if (!hasText) {
+          const selected = stripTags(selectedTextRef.current || '').trim();
+          if (selected) {
+            const selectedRange = selectedRangeRef.current;
+            if (selectedRange) {
+              try {
+                selectedRange.deleteContents();
+              } catch {
+                // If selection can't be mutated, keep fallback behavior and only prefill heading text.
+              }
+            }
+
+            constructorArgs.data = {
+              ...currentData,
+              text: selected,
+            };
+          }
+        }
+
+        const HeaderTool = toolsRef.current?.Header as new (params: unknown) => {
+          render?: () => HTMLElement;
+          save?: (blockContent: HTMLElement) => unknown;
+          validate?: (savedData: unknown) => boolean;
+          destroy?: () => void;
+          merge?: (data: unknown) => unknown;
+          onPaste?: (event: unknown) => void;
+          rendered?: () => void;
+        };
+
+        this.inner = new HeaderTool(constructorArgs);
+        selectedTextRef.current = '';
+        selectedRangeRef.current = null;
+      }
+
+      render() {
+        return this.inner.render ? this.inner.render() : document.createElement('div');
+      }
+
+      save(blockContent: HTMLElement) {
+        return this.inner.save ? this.inner.save(blockContent) : { text: '', level: 2 };
+      }
+
+      validate(savedData: unknown) {
+        return this.inner.validate ? this.inner.validate(savedData) : true;
+      }
+
+      destroy() {
+        if (this.inner.destroy) {
+          this.inner.destroy();
+        }
+      }
+
+      merge(data: unknown) {
+        return this.inner.merge ? this.inner.merge(data) : data;
+      }
+
+      onPaste(event: unknown) {
+        if (this.inner.onPaste) {
+          this.inner.onPaste(event);
+        }
+      }
+
+      rendered() {
+        if (this.inner.rendered) {
+          this.inner.rendered();
+        }
+      }
+
+      static get toolbox() {
+        const headerTool = toolsRef.current?.Header as { toolbox?: unknown } | undefined;
+        return headerTool?.toolbox;
+      }
+
+      static get pasteConfig() {
+        const headerTool = toolsRef.current?.Header as { pasteConfig?: unknown } | undefined;
+        return headerTool?.pasteConfig;
+      }
+
+      static get sanitize() {
+        const headerTool = toolsRef.current?.Header as { sanitize?: unknown } | undefined;
+        return headerTool?.sanitize;
+      }
+
+      static get conversionConfig() {
+        const headerTool = toolsRef.current?.Header as { conversionConfig?: unknown } | undefined;
+        return headerTool?.conversionConfig;
+      }
+
+      static get isReadOnlySupported() {
+        const headerTool = toolsRef.current?.Header as { isReadOnlySupported?: unknown } | undefined;
+        return Boolean(headerTool?.isReadOnlySupported);
+      }
+    };
+
     const editor = new toolsRef.current.EditorJS({
       holder: holderRef.current,
       data: { blocks: bodyBlocks || [] },
@@ -467,7 +805,7 @@ function EditorJsSectionEditor({
       minHeight: 0,
       tools: {
         header: {
-          class: toolsRef.current.Header,
+          class: HeaderWithSelectionText,
           config: {
             levels: [1, 2, 3, 4],
             defaultLevel: 2,
@@ -539,6 +877,160 @@ function EditorJsSectionEditor({
       }
     };
   }, [section.id, toolsReady]);
+
+  useEffect(() => {
+    const holder = holderRef.current;
+
+    if (!holder || typeof window === 'undefined') {
+      return () => undefined;
+    }
+
+    const captureSelection = () => {
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+        return;
+      }
+
+      const range = selection.getRangeAt(0);
+      const anchorNode = range.commonAncestorContainer;
+      if (!holder.contains(anchorNode)) {
+        return;
+      }
+
+      const text = selection.toString().trim();
+      if (text) {
+        selectedTextRef.current = text;
+        selectedRangeRef.current = range.cloneRange();
+      }
+    };
+
+    document.addEventListener('selectionchange', captureSelection);
+
+    return () => {
+      document.removeEventListener('selectionchange', captureSelection);
+    };
+  }, []);
+
+  useEffect(() => {
+    const holder = holderRef.current;
+
+    if (!holder || typeof window === 'undefined') {
+      return () => undefined;
+    }
+
+    const handlePaste = (event: ClipboardEvent) => {
+      const editor = editorRef.current as {
+        blocks?: {
+          insert?: (
+            type?: string,
+            data?: Record<string, unknown>,
+            config?: unknown,
+            index?: number,
+            needToFocus?: boolean,
+            replace?: boolean,
+          ) => unknown;
+          getCurrentBlockIndex?: () => number;
+        };
+      } | null;
+
+      if (!editor || !editor.blocks || !event.clipboardData) {
+        return;
+      }
+
+      const target = event.target;
+      if (!(target instanceof Node) || !holder.contains(target)) {
+        return;
+      }
+
+      if (target instanceof HTMLElement && target.closest('.editorjs-table-tool__cell')) {
+        return;
+      }
+
+      const html = event.clipboardData.getData('text/html') || '';
+      const text = event.clipboardData.getData('text/plain') || '';
+
+      const tableGrid = parseHtmlTable(html) || parsePlainTextGrid(text);
+      if (tableGrid && tableGrid.length > 0 && tableGrid.some((row) => row.length > 1)) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const insertAt = typeof editor.blocks.getCurrentBlockIndex === 'function'
+          ? editor.blocks.getCurrentBlockIndex() + 1
+          : undefined;
+
+        if (typeof editor.blocks.insert === 'function') {
+          editor.blocks.insert(
+            'table',
+            {
+              withHeadings: false,
+              content: tableGrid,
+            },
+            undefined,
+            insertAt,
+            true,
+            false,
+          );
+        }
+        return;
+      }
+
+      const htmlList = parseHtmlList(html);
+      if (htmlList && htmlList.items.length > 0 && typeof editor.blocks.insert === 'function') {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const insertAt = typeof editor.blocks.getCurrentBlockIndex === 'function'
+          ? editor.blocks.getCurrentBlockIndex() + 1
+          : undefined;
+
+        editor.blocks.insert(
+          'list',
+          {
+            style: htmlList.style,
+            items: htmlList.items,
+          },
+          undefined,
+          insertAt,
+          true,
+          false,
+        );
+        return;
+      }
+
+      const listData = parseListFromText(text) || (html ? (() => {
+        const htmlTextLines = parseHtmlListText(html);
+        return htmlTextLines && htmlTextLines.length >= 2
+          ? { style: 'unordered' as const, items: htmlTextLines }
+          : null;
+      })() : null);
+      if (listData && listData.items.length > 0 && typeof editor.blocks.insert === 'function') {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const insertAt = typeof editor.blocks.getCurrentBlockIndex === 'function'
+          ? editor.blocks.getCurrentBlockIndex() + 1
+          : undefined;
+
+        editor.blocks.insert(
+          'list',
+          {
+            style: listData.style,
+            items: toListToolItems(listData.items),
+          },
+          undefined,
+          insertAt,
+          true,
+          false,
+        );
+      }
+    };
+
+    holder.addEventListener('paste', handlePaste, true);
+
+    return () => {
+      holder.removeEventListener('paste', handlePaste, true);
+    };
+  }, []);
 
   useEffect(() => {
     const syncBlocks = async () => {

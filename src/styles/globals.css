@@ -197,7 +197,7 @@ body {
 
 .editorjs-shell .ce-paragraph,
 .editorjs-shell .ce-header {
-  color: #2d126b;
+  color: #ffffff;
   line-height: 1.75;
 }
 
@@ -208,6 +208,28 @@ body {
 .editorjs-shell .ce-toolbar__actions,
 .editorjs-shell .ce-toolbar__plus {
   color: #ffffff;
+}
+
+.editorjs-shell .cdx-list {
+  color: #ffffff;
+  padding-left: 1.5rem;
+}
+
+.editorjs-shell .cdx-list__item,
+.editorjs-shell .cdx-list__item-content,
+.editorjs-shell .cdx-list__item-content[contenteditable='true'] {
+  color: #ffffff;
+}
+
+.editorjs-shell .cdx-list__item-content *,
+.editorjs-shell .cdx-list__item-content[contenteditable='true'] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.editorjs-shell .cdx-list__item::marker {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .editorjs-shell .cdx-input {

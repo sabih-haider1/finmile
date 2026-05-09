@@ -63,8 +63,8 @@ export interface EditorJsListBlock {
   id?: string;
   type: 'list';
   data: {
-    style: 'ordered' | 'unordered';
-    items: Array<string | { content?: string } | null>;
+    style: 'ordered' | 'unordered' | 'checklist';
+    items: Array<string | { content?: string; items?: Array<string | { content?: string } | null>; meta?: Record<string, unknown> } | null>;
   };
 }
 

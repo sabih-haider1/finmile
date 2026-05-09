@@ -25,6 +25,54 @@ function normalizeContent(content?: string[][]) {
   });
 }
 
+function normalizeGridRow(row: string[]) {
+  return row.map((cell) => String(cell ?? '').replace(/\u00a0/g, ' ').trim());
+}
+
+function parsePlainTextGrid(text: string) {
+  const normalizedText = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
+  if (!normalizedText) {
+    return null;
+  }
+
+  const lines = normalizedText
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+
+  if (lines.length === 0) {
+    return null;
+  }
+
+  const containsTabs = lines.some((line) => line.includes('\t'));
+  if (!containsTabs) {
+    return null;
+  }
+
+  return lines.map((line) => normalizeGridRow(line.split('\t')));
+}
+
+function parseHtmlTable(html: string) {
+  const markup = String(html || '').trim();
+  if (!markup || !markup.toLowerCase().includes('<table')) {
+    return null;
+  }
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(markup, 'text/html');
+  const table = doc.querySelector('table');
+
+  if (!table) {
+    return null;
+  }
+
+  const rows = Array.from(table.querySelectorAll('tr')).map((row) =>
+    normalizeGridRow(Array.from(row.querySelectorAll('th,td')).map((cell) => cell.textContent || '')),
+  );
+
+  return rows.filter((row) => row.length > 0);
+}
+
 function cloneContent(content: string[][]) {
   return content.map((row) => row.slice());
 }
@@ -75,6 +123,15 @@ export default class SimpleTableTool {
     return true;
   }
 
+  static get pasteConfig() {
+    return {
+      tags: ['TABLE'],
+      patterns: {
+        tabular: /\t/,
+      },
+    };
+  }
+
   render() {
     this.wrapper.className = 'editorjs-table-tool';
     this.wrapper.innerHTML = '';
@@ -103,6 +160,39 @@ export default class SimpleTableTool {
       withHeadings: this.data.withHeadings,
       content: this.data.content,
     };
+  }
+
+  onPaste(event: { type?: string; detail?: { data?: unknown } }) {
+    if (this.readOnly) {
+      return;
+    }
+
+    const eventType = event?.type;
+    let nextGrid: string[][] | null = null;
+
+    if (eventType === 'tag') {
+      const data = event?.detail?.data;
+      if (data instanceof HTMLTableElement) {
+        const rows = Array.from(data.querySelectorAll('tr')).map((row) =>
+          normalizeGridRow(Array.from(row.querySelectorAll('th,td')).map((cell) => cell.textContent || '')),
+        );
+        nextGrid = rows.filter((row) => row.length > 0);
+      } else if (typeof data === 'string') {
+        nextGrid = parseHtmlTable(data);
+      }
+    }
+
+    if (eventType === 'pattern' && typeof event?.detail?.data === 'string') {
+      nextGrid = parsePlainTextGrid(event.detail.data);
+    }
+
+    if (!nextGrid || nextGrid.length === 0) {
+      return;
+    }
+
+    this.data.content = normalizeContent(nextGrid);
+    this.selection = { row: 0, column: 0 };
+    this.renderTable();
   }
 
   renderControls() {
@@ -221,7 +311,14 @@ export default class SimpleTableTool {
           }
           cell.dataset.__lastPasteAt = String(now);
 
+          const html = event.clipboardData?.getData('text/html') ?? '';
           const text = event.clipboardData?.getData('text/plain') ?? '';
+          const grid = parseHtmlTable(html) || parsePlainTextGrid(text);
+
+          if (grid && grid.length > 0) {
+            this.pasteGridAt(row, column, grid);
+            return;
+          }
 
           if (text && document.queryCommandSupported?.('insertText')) {
             // Use execCommand as the preferred insertion method for compatibility
@@ -250,6 +347,50 @@ export default class SimpleTableTool {
     }
 
     return cell;
+  }
+
+  pasteGridAt(startRow: number, startColumn: number, grid: string[][]) {
+    this.syncFromDom();
+
+    const content = cloneContent(this.data.content);
+    const normalizedGrid = grid
+      .map((row) => normalizeGridRow(row))
+      .filter((row) => row.length > 0);
+
+    if (normalizedGrid.length === 0) {
+      return;
+    }
+
+    const requiredRows = startRow + normalizedGrid.length;
+    const currentWidth = content[0]?.length || 1;
+    const gridWidth = normalizedGrid.reduce((max, row) => Math.max(max, row.length), 0) || 1;
+    const requiredColumns = startColumn + gridWidth;
+    const targetWidth = Math.max(currentWidth, requiredColumns);
+
+    while (content.length < requiredRows) {
+      content.push(createEmptyRow(targetWidth));
+    }
+
+    content.forEach((row) => {
+      while (row.length < targetWidth) {
+        row.push('');
+      }
+    });
+
+    normalizedGrid.forEach((rowValues, rowOffset) => {
+      rowValues.forEach((cellValue, columnOffset) => {
+        const rowIndex = startRow + rowOffset;
+        const columnIndex = startColumn + columnOffset;
+        content[rowIndex][columnIndex] = cellValue;
+      });
+    });
+
+    this.data.content = normalizeContent(content);
+    this.selection = {
+      row: clamp(startRow + normalizedGrid.length - 1, 0, this.data.content.length - 1),
+      column: clamp(startColumn + gridWidth - 1, 0, this.data.content[0].length - 1),
+    };
+    this.renderTable();
   }
 
   syncFromDom() {

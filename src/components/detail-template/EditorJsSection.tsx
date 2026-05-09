@@ -41,33 +41,74 @@ function ParagraphBlock({ block, index }: { block: Extract<EditorJsBlock, { type
 }
 
 function ListBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'list' }>; index: number }) {
-  const items = (block.data.items || [])
-    .map((item) => {
-      if (item && typeof item === 'object' && 'content' in item) {
-        return String((item as { content?: unknown }).content || '');
-      }
-      return String(item || '');
-    })
-    .filter(Boolean);
+  type RenderableListItem = {
+    content: string;
+    children: RenderableListItem[];
+  };
+
+  const normalizeListItems = (
+    items: Array<string | { content?: string; items?: Array<string | { content?: string } | null> } | null>,
+  ): RenderableListItem[] => {
+    return items
+      .map((item) => {
+        if (typeof item === 'string') {
+          const content = item.trim();
+          return content ? { content, children: [] } : null;
+        }
+
+        if (!item || typeof item !== 'object') {
+          return null;
+        }
+
+        const content = String(item.content || '').trim();
+        const children = Array.isArray(item.items) ? normalizeListItems(item.items) : [];
+
+        if (!content && children.length === 0) {
+          return null;
+        }
+
+        return {
+          content,
+          children,
+        };
+      })
+      .filter((item): item is RenderableListItem => Boolean(item));
+  };
+
+  const items = normalizeListItems(block.data.items || []);
 
   if (items.length === 0) return null;
 
-  const ListTag = block.data.style === 'ordered' ? 'ol' : 'ul';
+  const isOrdered = block.data.style === 'ordered';
+  const isChecklist = block.data.style === 'checklist';
 
-  return (
-    <ListTag
-      key={`list-${index}`}
-      className={
-        block.data.style === 'ordered'
-          ? 'list-decimal space-y-3 pl-6 text-[#4b5563] marker:text-[#3a1d9e]'
-          : 'list-disc space-y-3 pl-6 text-[#4b5563] marker:text-[#3a1d9e]'
-      }
-    >
-      {items.map((item, itemIndex) => (
-        <li key={`list-${index}-${itemIndex}`} className="pl-1 leading-7" dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(item) }} />
-      ))}
-    </ListTag>
-  );
+  const renderListItems = (
+    listItems: RenderableListItem[],
+    depth: number,
+  ) => {
+    const NestedTag = isOrdered ? 'ol' : 'ul';
+    const nestedClassName = isOrdered
+      ? 'list-decimal space-y-3 text-[#4b5563] marker:text-[#3a1d9e]'
+      : isChecklist
+        ? 'list-none space-y-3 text-[#4b5563]'
+        : 'list-disc space-y-3 text-[#4b5563] marker:text-[#3a1d9e]';
+
+    return (
+      <NestedTag className={`${nestedClassName} ${depth === 0 ? 'pl-6' : 'mt-2 pl-6'}`}>
+        {listItems.map((item, itemIndex) => (
+          <li key={`list-${index}-${depth}-${itemIndex}`} className="pl-1 leading-7">
+            {isChecklist && depth === 0 ? (
+              <span className="mr-2 inline-flex h-4 w-4 translate-y-[2px] items-center justify-center rounded border border-[#CDB7F9] bg-white text-[10px] text-[#3a1d9e]">✓</span>
+            ) : null}
+            <span dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(item.content) }} />
+            {item.children.length > 0 ? renderListItems(item.children, depth + 1) : null}
+          </li>
+        ))}
+      </NestedTag>
+    );
+  };
+
+  return <div key={`list-${index}`}>{renderListItems(items, 0)}</div>;
 }
 
 function TableBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'table' }>; index: number }) {
