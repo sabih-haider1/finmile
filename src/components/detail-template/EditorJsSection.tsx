@@ -153,19 +153,21 @@ function ImageBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'i
 }
 
 function renderBlock(block: EditorJsBlock, index: number) {
+  const key = `${block.type}-${index}`;
+
   switch (block.type) {
     case 'header':
-      return <HeadingBlock block={block} index={index} />;
+      return <HeadingBlock key={key} block={block} index={index} />;
     case 'paragraph':
-      return <ParagraphBlock block={block} index={index} />;
+      return <ParagraphBlock key={key} block={block} index={index} />;
     case 'list':
-      return <ListBlock block={block} index={index} />;
+      return <ListBlock key={key} block={block} index={index} />;
     case 'table':
-      return <TableBlock block={block} index={index} />;
+      return <TableBlock key={key} block={block} index={index} />;
     case 'quote':
-      return <QuoteBlock block={block} index={index} />;
+      return <QuoteBlock key={key} block={block} index={index} />;
     case 'image':
-      return <ImageBlock block={block} index={index} />;
+      return <ImageBlock key={key} block={block} index={index} />;
     default:
       return null;
   }

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/supabaseClient';
+import { isInvalidRefreshTokenError, supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/Button';
 
 export default function AdminLoginPage() {
@@ -15,9 +15,15 @@ export default function AdminLoginPage() {
   // Check if already logged in
   useEffect(() => {
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        router.push('/admin/dashboard');
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          router.push('/admin/dashboard');
+        }
+      } catch (error) {
+        if (!isInvalidRefreshTokenError(error)) {
+          console.error('Login session check error:', error);
+        }
       }
     };
     checkSession();

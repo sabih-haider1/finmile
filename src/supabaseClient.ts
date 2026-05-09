@@ -11,10 +11,23 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+export const isInvalidRefreshTokenError = (error: unknown) => {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  return /Invalid Refresh Token|Refresh Token Not Found/i.test(error.message);
+};
+
 // Helper function to check if user is authenticated
 export const checkAuth = async () => {
   const { data: { session }, error } = await supabase.auth.getSession();
   if (error) {
+    if (isInvalidRefreshTokenError(error)) {
+      await supabase.auth.signOut().catch(() => undefined);
+      return null;
+    }
+
     console.error('Error checking auth:', error);
     return null;
   }

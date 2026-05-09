@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/supabaseClient';
+import { isInvalidRefreshTokenError, supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/Button';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import type { User } from '@supabase/supabase-js';
@@ -26,7 +26,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         router.push('/admin/login');
       }
     } catch (error) {
-      console.error('Auth check error:', error);
+      if (!isInvalidRefreshTokenError(error)) {
+        console.error('Auth check error:', error);
+      }
       router.push('/admin/login');
     } finally {
       setLoading(false);
