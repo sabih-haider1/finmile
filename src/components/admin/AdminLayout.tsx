@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isInvalidRefreshTokenError, supabase } from '@/supabaseClient';
+import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/Button';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import type { User } from '@supabase/supabase-js';
@@ -16,46 +16,29 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const checkAuth = useCallback(async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setUser(session.user);
-      } else {
-        // No session - redirect to login
-        router.push('/admin/login');
-      }
-    } catch (error) {
-      if (!isInvalidRefreshTokenError(error)) {
-        console.error('Auth check error:', error);
-      }
-      router.push('/admin/login');
-    } finally {
-      setLoading(false);
-    }
-  }, [router]);
-
   useEffect(() => {
-    checkAuth();
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+      if ((event === 'INITIAL_SESSION' || event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
         setUser(session.user);
         setLoading(false);
-      } else if (event === 'SIGNED_OUT') {
+        return;
+      }
+
+      if (event === 'INITIAL_SESSION' || event === 'SIGNED_OUT') {
         setUser(null);
-        router.push('/admin/login');
+        setLoading(false);
+        router.replace('/admin/login');
       }
     });
 
     return () => {
       subscription?.unsubscribe();
     };
-  }, [checkAuth, router]);
+  }, [router]);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    router.push('/admin/login');
+    router.replace('/admin/login');
   };
 
   if (loading) {
