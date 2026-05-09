@@ -34,7 +34,7 @@ function ParagraphBlock({ block, index }: { block: Extract<EditorJsBlock, { type
   return (
     <p
       key={`paragraph-${index}`}
-      className="text-[16px] leading-7 text-[#4b5563]"
+      className="text-[16px] leading-[1.5] text-[#4b5563]"
       dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(text) }}
     />
   );
@@ -88,15 +88,15 @@ function ListBlock({ block, index }: { block: Extract<EditorJsBlock, { type: 'li
   ) => {
     const NestedTag = isOrdered ? 'ol' : 'ul';
     const nestedClassName = isOrdered
-      ? 'list-decimal space-y-3 text-[#4b5563] marker:text-[#3a1d9e]'
+      ? 'list-decimal space-y-1 text-[#4b5563] marker:text-[#3a1d9e]'
       : isChecklist
-        ? 'list-none space-y-3 text-[#4b5563]'
-        : 'list-disc space-y-3 text-[#4b5563] marker:text-[#3a1d9e]';
+        ? 'list-none space-y-1 text-[#4b5563]'
+        : 'list-disc space-y-1 text-[#4b5563] marker:text-[#3a1d9e]';
 
     return (
       <NestedTag className={`${nestedClassName} ${depth === 0 ? 'pl-6' : 'mt-2 pl-6'}`}>
         {listItems.map((item, itemIndex) => (
-          <li key={`list-${index}-${depth}-${itemIndex}`} className="pl-1 leading-7">
+          <li key={`list-${index}-${depth}-${itemIndex}`} className="pl-1 leading-[1.5]">
             {isChecklist && depth === 0 ? (
               <span className="mr-2 inline-flex h-4 w-4 translate-y-[2px] items-center justify-center rounded border border-[#CDB7F9] bg-white text-[10px] text-[#3a1d9e]">✓</span>
             ) : null}
@@ -220,7 +220,7 @@ export function EditorJsSection({ section, className = '' }: EditorJsSectionProp
   }
 
   return (
-    <div className={`${wrapperClassName} space-y-8 ${className}`}>
+    <div className={`${wrapperClassName} space-y-3 ${className}`}>
       {section.blocks.map((block, index) => renderBlock(block, index))}
     </div>
   );

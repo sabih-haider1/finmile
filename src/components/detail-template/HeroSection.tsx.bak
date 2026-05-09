@@ -23,13 +23,13 @@ export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
         <div className={hasImage ? 'grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-6 items-center' : 'flex items-center justify-center min-h-[42vh] md:min-h-[48vh]'}>
           {/* Image - Left column */}
           {hasImage && (
-            <div className="relative w-full aspect-video rounded-[20px] overflow-hidden shadow-sm bg-white">
+            <div className="relative w-full aspect-[4/3] rounded-[20px] overflow-hidden shadow-sm bg-white">
               <Image
                 src={imageUrl}
                 alt={hero.title}
                 fill
                 unoptimized={isExternalImage}
-                className="object-cover object-center"
+                className="object-contain object-center"
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
