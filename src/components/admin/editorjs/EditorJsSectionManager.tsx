@@ -162,13 +162,36 @@ function parsePlainTextGrid(text: string) {
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
-  if (lines.length === 0 || !lines.some((line) => line.includes('\t'))) {
-    return null;
+  if (lines.length === 0) return null;
+
+  // Detect delimiter: prefer tabs, fall back to commas or semicolons when consistent
+  const hasTab = lines.some((line) => line.includes('\t'));
+  if (hasTab) {
+    return lines
+      .map((line) => line.split('\t').map((cell) => stripTags(cell).trim()))
+      .filter((row) => row.length > 0);
   }
 
-  return lines
-    .map((line) => line.split('\t').map((cell) => stripTags(cell).trim()))
-    .filter((row) => row.length > 0);
+  // Heuristic: check for consistent comma or semicolon-separated columns
+  const commaCounts = lines.map((line) => (line.match(/,/g) || []).length);
+  const semicolonCounts = lines.map((line) => (line.match(/;/g) || []).length);
+
+  const commaConsistent = commaCounts.every((c) => c === commaCounts[0]) && commaCounts[0] > 0;
+  const semicolonConsistent = semicolonCounts.every((c) => c === semicolonCounts[0]) && semicolonCounts[0] > 0;
+
+  if (commaConsistent) {
+    return lines
+      .map((line) => line.split(',').map((cell) => stripTags(cell).trim()))
+      .filter((row) => row.length > 0 && row.some((c) => c.length > 0));
+  }
+
+  if (semicolonConsistent) {
+    return lines
+      .map((line) => line.split(';').map((cell) => stripTags(cell).trim()))
+      .filter((row) => row.length > 0 && row.some((c) => c.length > 0));
+  }
+
+  return null;
 }
 
 function parseHtmlTable(html: string) {
