@@ -13,9 +13,9 @@ interface HeroSectionProps {
 export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
   const readTime = hero.metadata?.read_time || '10 minutes read';
   const publishDate = hero.metadata?.published_date;
-  const imageUrl = hero.image_url ?? undefined;
-  const isExternalImage = /^https?:\/\//i.test(imageUrl || '');
-  const hasImage = Boolean(imageUrl);
+  const imageUrl = hero.image_url ?? '';
+  const isExternalImage = /^https?:\/\//i.test(imageUrl);
+  const hasImage = imageUrl.length > 0;
 
   return (
     <section className="w-full bg-[#fcfcff] pt-20 pb-6 md:pt-16 md:pb-6">
