@@ -13,8 +13,9 @@ interface HeroSectionProps {
 export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
   const readTime = hero.metadata?.read_time || '10 minutes read';
   const publishDate = hero.metadata?.published_date;
-  const isExternalImage = /^https?:\/\//i.test(hero.image_url || '');
-  const hasImage = Boolean(hero.image_url);
+  const imageUrl = hero.image_url ?? undefined;
+  const isExternalImage = /^https?:\/\//i.test(imageUrl || '');
+  const hasImage = Boolean(imageUrl);
 
   return (
     <section className="w-full bg-[#fcfcff] pt-20 pb-6 md:pt-16 md:pb-6">
@@ -24,7 +25,7 @@ export function HeroSection({ hero, downloadButton }: HeroSectionProps) {
           {hasImage && (
             <div className="relative w-full aspect-[4/3] rounded-[20px] overflow-hidden shadow-sm bg-white">
               <Image
-                src={hero.image_url}
+                src={imageUrl}
                 alt={hero.title}
                 fill
                 unoptimized={isExternalImage}
