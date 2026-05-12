@@ -39,12 +39,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground flex flex-col">
       <Header />
-      <Hero />
+      {/* <Hero /> */}
       <TrustSection />
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
       <AIAgentsSection />
-      <GenerativeIntelligence />
-      <UnifiedCommand />
+      {/* <GenerativeIntelligence /> */}
+      {/* <UnifiedCommand /> */}
       <ScaleSection />
       <Footer />
     </main>
