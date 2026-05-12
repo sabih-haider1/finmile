@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/*
+
 :root {
   --background: #0B0616;
   --foreground: #ffffff;
@@ -42,7 +42,6 @@ body {
 }
 
 /* Apple Liquid Glass Effect */
-/*
 .liquid-glass {
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -325,7 +324,6 @@ body {
 }
 
 /* Fade in animations */
-/*
 @keyframes fadeIn {
   0% {
     opacity: 0;
